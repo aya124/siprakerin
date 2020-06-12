@@ -1,2 +1,3 @@
 # siprakerin
-Repo berisi source code PHP dengan framework Laravel untuk manajemen kegiatan Praktik Kerja Industri
+Halo gaes~
+Minta tolong bantuannya untuk koreksi fitur2nya yang belum kelar :D
