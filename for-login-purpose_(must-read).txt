@@ -53,6 +53,19 @@ Tgl 27 Februari 2020
 1. Nilai prakerin sepenuhnya dari industri dan akan tertera pada sertifikat.
 
 
+UPDATE
+Komunikasi dengan User Tgl 15 Juli 2020
+1. Sesuai dengan poin 1 tgl 27 Februari 2020, sertifikat prakerin dicetak oleh industri.
+2. Tambah 2 macam role, yaitu KPS (ketua program studi) dan wali kelas
+3. Wali kelas memiliki permission untuk entry data nilai prakerin yg diketahui dari sertifikat prakerin
+4. Sesuai dengan poin 1 dan 2 tgl 14 Februari 2020, guru yg berposisi sebagai petugas hanya menerima masukan/saran dari industri.
+5. Namun, jika guru jurusan berposisi sbg wali kelas maka guru tsb memiliki permission yg sudah dijelaskan di atas.
+6. Ada/tidaknya laporan prakerin tergantung permintaan industri. Jika ada, maka siswa harus meng-upload nya ke sistem.
+7. Dalam mengajukan pengajuan, tidak ada batas maks jumlah siswa dalam satu pengajuan.
+8. Sesuai dengan proposal mengenai user problem, sistem tidak melibatkan pihak industri.
+    Sehingga penilaian hanya bisa diketahui dari poin 3 di atas.
+
+
 System Specs
 
 - User terbagi menjadi tiga, yaitu admin, siswa dan guru pendamping (petugas)
@@ -62,13 +75,17 @@ System Specs
 - Siswa dapat membuat pengajuan dengan mengisi formulir pengajuan, 
     men-download formulir tersebut serta meng-upload berkas yang dibutuhkan *
 - Siswa dapat melihat informasi profil industri dan menambahkan informasi baru dengan persetujuan admin *
-- Siswa dapat meng-upload laporan prakerin **
+- Siswa dapat meng-upload laporan prakerin ** 
 - Siswa dapat melihat rangkuman penilaiannya ** -->
     Dugaan berdasarkan SIPRAKERIN kampus:
     Karena dosen bisa memberi nilai pada laporan, maka guru pendamping (petugas) dapat memberi nilai pada laporan **
 
 * : fitur wajib
 ** : masih perlu dikomunikasikan
+
+UPDATE Tgl 15 Juli 2020
+- Siswa dapat meng-upload laporan prakerin --> fitur wajib
+- Siswa dapat melihat rangkuman penilaiannya --> fitur wajib
 
 
 System Flow
@@ -95,3 +112,6 @@ jika sudah memperoleh surat tugas, siswa boleh berangkat prakerin.
 [5] selama masa prakerin, dari mulai diantar, monitoring hingga penarikan, 
 petugas wajib mempunyai masing2 berkas2nya.
 [6] dan [7] masih perlu dikomunikasikan
+
+UPDATE Tgl 15 Juli 2020
+[6] dan [7] sudah dikomunikasikan dan wajib ada.
