@@ -34,7 +34,7 @@ class UsersController extends Controller
         $data = DB::table('users as u')
           ->join('role_user as ru', 'ru.user_id', '=', 'u.id')
           ->join('roles as r', 'r.id', '=', 'ru.role_id')
-          ->select('u.name', 'u.email', 
+          ->select('u.name', 'u.email', 'u.username',
             DB:: raw('r.name as role'), 'u.id')
           ->get();
 
@@ -92,12 +92,14 @@ class UsersController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
+            'username' => ['required', 'unique:users']
         ], [
             'required' =>'Kolom :attribute tidak boleh kosong',
         ]);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'username' => $request->username,
             'password' => hash::make ($request->password),
         ]);
         $user->attachRole($request->role);
@@ -156,17 +158,18 @@ class UsersController extends Controller
      */
     public function update(Request $request)
     {
+        $user = User::findOrFail($request->hidden_id);
         $request-> validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 
-            // Rule::unique('users')->ignore($user)
+            'username' => ['required', Rule::unique('users')->ignore($user)]
         ],
             // 'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $user = User::findOrFail($request->hidden_id);
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'username' => $request->username,
         ]);
         $roles = $user->roles;
         foreach ($roles as $key => $value){

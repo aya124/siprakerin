@@ -20,6 +20,7 @@
         <thead>
             <tr>
                 <th style="text-align: right;">Nama</th>
+                <th style="text-align: right;">Username</th>
                 <th style="text-align: right;">E-mail</th>
                 <th style="text-align: right;">Role</th>
             </tr>
@@ -158,6 +159,10 @@ body {
 			{
 				data: 'name',
 				name: 'name',
+			},
+			{
+				data: 'username',
+				name: 'username',
 			},
 			{
 				data: 'email',

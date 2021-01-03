@@ -24,6 +24,7 @@
           <thead>
             <tr>
               <th>Nama</th>
+              <th>Username</th>
               <th>E-mail</th>
               <th>Role</th>
               <th>Aksi</th>
@@ -51,6 +52,13 @@
 						<label class="control-label col-md-4" >Nama: </label>
 						<div class="col-md-8">
 							<input type="text" name="name" id="name" class="form-control" />
+						</div>
+          </div>
+
+          <div class="form-group">
+						<label class="control-label col-md-4" >Username: </label>
+						<div class="col-md-8">
+							<input type="text" name="username" id="username" class="form-control" />
 						</div>
           </div>
           
@@ -166,6 +174,10 @@
 				data: 'name',
 				name: 'name',
 			},
+			{
+				data: 'username',
+				name: 'username',
+			},
       {
 				data: 'email',
 				name: 'email',
@@ -186,6 +198,7 @@
     $('#btn_add').click(function(){
       $('#createModal').modal('show');
       $('#name').val("");
+      $('#username').val("");
       $('#form_result').hide();
       $('#createModal .modal-title').text("Tambah User");
       $('#action').val("tambah");
@@ -205,6 +218,7 @@
         success:function(html){
           $('#name').val(html.data[0].name);
           $('#email').val(html.data[0].email);
+          $('#username').val(html.data[0].username);
           $('#role').val(html.data[0].role);
           $('#pass').hide();
           $('#hidden_id').val(html.data[0].id);
