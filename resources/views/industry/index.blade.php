@@ -23,8 +23,8 @@
         <tr>
           <th>Nama Industri</th>
           <th>Alamat</th>
+          <th>Status</th>
           <th>Aksi</th>
-          <th></th>
         </tr>
       </thead>
       </table>
@@ -38,7 +38,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title"></h4>
+				<h4 class="modal-title">Data industri</h4>
 			</div>
 			<div class="modal-body">
 				     
@@ -74,7 +74,19 @@
 						<div class="col-md-8">
 							<input type="text" name="detail" id="detail" class="form-control" rows="3"/>
 						</div>
-					</div>
+          </div>
+          @role('admin')
+          <div class="form-group">
+            <label class="control-label col-md-4" >Status: </label>
+            <div class="col-md-8">
+              <select class="form-control" name="status" id="status">
+                <option value="belum disetujui">Belum disetujui</option>
+                <option value="disetujui">Disetujui</option>
+                <option value="tidak disetujui">Tidak disetujui</option>
+              </select>
+            </div>
+          </div>
+          @endrole
 
 					<br />
 					<div class="form-group" align="center">
@@ -86,6 +98,50 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="modal fade" id="detailModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">Detail industri</h2>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <tbody>
+            <tr>
+              <th style="width: 20%">Nama</th>
+              <td id="name_detail"></td>
+            </tr>
+            <tr>
+              <th>Alamat</th>
+              <td id="address_detail"></td>
+            </tr>
+            <tr>
+              <th>Kota</th>
+              <td id="city_detail"></td>
+            </tr>
+            <tr>
+              <th>Phone</th>
+              <td id="phone_detail"></td> 
+            </tr>
+            <tr>
+              <th>Detail</th>
+              <td id="detail_detail"></td>
+            </tr>
+            <tr>
+              <th>Status</th>
+              <td id="status_detail"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div id="confirmModal" class="modal fade" role="dialog">
@@ -131,6 +187,10 @@
 				data: 'address',
         name: 'address',
 			},
+			{
+				data: 'status',
+        name: 'status',
+			},
       {
         data: 'action',
 				name: 'action',
@@ -163,14 +223,34 @@
           $('#phone').val(html.data.phone);
           $('#detail').val(html.data.detail);
           $('#hidden_id').val(html.data.id);
-          }
-          });
+          @role('admin')
+          $('#status').val(html.data.status);
+          @endrole
+        }
       });
-        var id_table;
+    });
+    var id_table;
     $(document).on('click','.delete',function(){
 			id_table = $(this).attr('id');
 			$('#confirmModal').modal('show');
 			$('#ok_button').text('OK');
+    });
+    
+    $(document).on('click','.detail',function(){
+      var id =$(this).attr('id');
+      $('#detailModal').modal('show');
+      $.ajax({
+        url:"/industry/"+id+"/edit",
+        dataType:"json",
+        success:function(html){
+          $('#name_detail').text(html.data.name);
+          $('#address_detail').text(html.data.address);
+          $('#city_detail').text(html.data.city);
+          $('#phone_detail').text(html.data.phone);
+          $('#detail_detail').text(html.data.detail);
+          $('#status_detail').text(html.data.status);
+        }
+      });
 		});
 
     $('#ok_button').click(function(){

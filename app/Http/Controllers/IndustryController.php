@@ -155,6 +155,7 @@ class IndustryController extends Controller
             'city' => ['required', 'max:255'],
             'phone' => ['required', 'integer'],
             'detail' => ['required', 'max:255'],
+            'status' => ['required'],
         ]);
 
         $industry = Industry::findOrFail($request->hidden_id);
@@ -164,6 +165,7 @@ class IndustryController extends Controller
             'city' => $request->city,
             'phone' => $request->phone,
             'detail'=> $request->detail,
+            'status'=> $request->status,
         ]);
 
         return response()->json(['success' => 'Industri berhasil diperbarui.']);

@@ -15,7 +15,7 @@ class SubmissionStudent extends Migration
     {
         Schema::create('submission_student', function (Blueprint $table) {
             $table->bigInteger('submission_id')->unsigned();
-            $table->char('username')->unsigned();
+            $table->string('username', 25);
 
             $table->foreign('submission_id')
                 ->references('id')->on('submissions')
