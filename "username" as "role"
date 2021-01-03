@@ -1,0 +1,16 @@
+"username" as "role"
+
+"admin@local.host" as "admin"
+Pass: password
+
+"shawnferryv@gmail.com" as "siswa"
+Pass: password
+
+"mrantazy@gmail.com" as "petugas"
+Pass: sugiarto
+
+"wks@gmail.com" as "wks"
+Pass: password
+
+"kepsek@gmail.com" as "kepsek"
+Pass: password

@@ -1,0 +1,44 @@
+Komunikasi dengan User
+Tgl 15 Juli 2020
+
+Berikut ini hasil wawancara yang telah direkam:
+
+1. Tidak ada pembimbing dari sekolah, hanya ada petugas mengantar, monitoring dan penarikan.
+2. Guru yang terlibat di sistem hanyalah KPS dan wali kelas yang ingin memantau siswa
+3. Penilaian kinerja siswa hanya dilakukan industri (tertera di sertifikat), berikut juga penilaian laporannya. 
+    Ada atau tidaknya laporannya tergantung permintaan industri. 
+    Jika ada, laporan diserahkan ke WKS 4.
+    Maka, perlu ada fitur upload laporan (dari siswa) yang bisa dipantau oleh KPS dan wali kelas. 
+4. Penilaian industri memiliki standarnya masing2, jadi perlu tanya komponen pokok dan konversi nilainya ke WKS 4
+    --> tunggu surat penelitian
+5. Karena tidak melibatkan industri, wali kelas yg entry nilai sertifikat.
+6. Ada track record mengenai jumlah siswa prakerin dan industri yang diajukan oleh siswa
+    --> rekap data bisa diakses KPS dan wali kelas
+
+
+
+
+*From Whatsapp*
+
+
+    UPDATE
+Tgl 15 Juli 2020
+
+- buat team (1 pengajuan bisa memiliki lebih dari 1 siswa) -> diganti dgn sistem link-sharing (siswa bisa share pengajuannya dgn link)
+- buat tampilan guru/petugas pendamping prakerin (penyerahan, monitoring, penarikan), ditentukan oleh KPS*
+- melengkapi query submission (function upload mengubah status submission) ✅, nambah notifikasi ✅, nambah preview saat upload*
+- siswa bisa entry data profil industri dengan persetujuan admin/kps***
+- tampilan resume nilai (siswa)
+- fitur upload laporan (siswa)***
+- Ganti halaman login***
+- Login dgn username**
+- tambah fitur multiple user*
+
+
+NEW
+
+- tambah 2 role: KPS (ketua program studi) & wali kelas*** ✅
+- fitur wali kelas entry data nilai siswa (wali kelas mengetahui nilai dari sertifikat prakerin yg dikeluarkan Industri)***
+
+***: must-do
+*: optional
