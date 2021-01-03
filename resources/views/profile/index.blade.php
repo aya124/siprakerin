@@ -11,13 +11,12 @@
 <div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>    
 @endif
 
-<div class="col-md-6">
 <div class="box box-primary">
     <div class="box-header">
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-        <table id="tab_data" class="table table-flip">
+        <table id="tab_data" class="table table-flip table-bordered">
         <thead>
             <tr>
                 <th style="text-align: right;">Nama</th>
@@ -32,7 +31,6 @@
     <!-- /.box-body -->
 </div>
 <!-- /.box -->
-</div>
 
 <div id="editModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
@@ -150,6 +148,9 @@ body {
  		$('#tab_data').DataTable({
 			processing: true,
 			serverSide: true,
+			paging: false,
+			searching: false,
+			info:false,
 			ajax:{
 				url: "{{ route('profile.index') }}",
 			},
