@@ -125,8 +125,9 @@ class SubmissionController extends Controller
         }
         $industry = DB::table('industries')
             ->select('name', 'id')
+            ->where('status','disetujui')
             ->get();
-       
+        
         return view('submission.index', compact('industry'));
         // $submissions = Submission::all();
         // return view('submission.index', compact('submissions'));

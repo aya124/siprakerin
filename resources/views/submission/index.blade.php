@@ -50,9 +50,9 @@
 						<label class="control-label col-md-4" >Nama Industri: </label>
 						<div class="col-md-8">
 							<select class="form-control" id="name" name="name">
-								@for($i=0; $i<=count($industry)-1;$i++)
-								<option value="{{$industry[$i]->id}}">{{$industry[$i]->name}}</option>
-								@endfor
+                @foreach ($industry as $item)
+								<option value="{{$item->id}}">{{$item->name}}</option>
+                @endforeach
 							</select>
 						</div>
           </div>
