@@ -24,6 +24,7 @@
             <th>Nama Industri</th>
             <th>Tanggal Mulai</th>
             <th>Tanggal Selesai</th>
+            <th>Status</th>
             <th>Aksi</th>
           </tr>
         </thead>
@@ -32,63 +33,58 @@
     <!-- /.box-body -->
   </div>
 
-  <div class="row">
-	<div class="col-md-8">
-		<div class="box box-success collapsed-box">
-      <div class="box-header with-border">
-        <h3 class="box-title">Pengajuan yang disetujui</h3>
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-          </button>
+  <div class="box box-success collapsed-box">
+    <div class="box-header with-border">
+      <h3 class="box-title">Pengajuan yang disetujui</h3>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+    <!-- /.box-header -->
+      <div class="box-body">
+        <div class="table-responsive">
+        <table id="tab_data2" class="table table-bordered table-striped  dt-responsive nowrap">
+        <thead>
+          <tr>
+            <th>Nama Siswa</th>
+            <th>Nama Industri</th>
+            <th>Tanggal Mulai</th>
+            <th>Tanggal Selesai</th>
+          </tr>
+        </thead>
+        </table>
         </div>
       </div>
-      <!-- /.box-header -->
-        <div class="box-body">
-          <div class="table-responsive">
-		      <table id="tab_data2" class="table table-bordered table-striped  dt-responsive nowrap">
-					<thead>
-						<tr>
-              <th>Nama Siswa</th>
-							<th>Nama Industri</th>
-							<th>Tanggal Mulai</th>
-							<th>Tanggal Selesai</th>
-              <th>Status</th>
-						</tr>
-					</thead>
-					</table>
-					</div>
-        </div>
-      <!-- /.box-body -->
-    </div>
+    <!-- /.box-body -->
   </div>
   
-  <div class="col-md-8">
-		<div class="box box-danger collapsed-box">
-      <div class="box-header with-border">
-        <h3 class="box-title">Pengajuan yang ditolak</h3>
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-          </button>
+  <div class="box box-danger collapsed-box">
+    <div class="box-header with-border">
+      <h3 class="box-title">Pengajuan yang ditolak</h3>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+    <!-- /.box-header -->
+      <div class="box-body">
+        <div class="table-responsive">
+        <table id="tab_data3" class="table table-bordered table-striped  dt-responsive nowrap">
+        <thead>
+          <tr>
+            <th>Nama Siswa</th>
+            <th>Nama Industri</th>
+            <th>Tanggal Mulai</th>
+            <th>Tanggal Selesai</th>
+          </tr>
+        </thead>
+        </table>
         </div>
       </div>
-      <!-- /.box-header -->
-        <div class="box-body">
-          <div class="table-responsive">
-		      <table id="tab_data3" class="table table-bordered table-striped  dt-responsive nowrap">
-					<thead>
-						<tr>
-              <th>Nama Siswa</th>
-							<th>Nama Industri</th>
-							<th>Tanggal Mulai</th>
-							<th>Tanggal Selesai</th>
-						</tr>
-					</thead>
-					</table>
-					</div>
-        </div>
-      <!-- /.box-body -->
-    </div>
+    <!-- /.box-body -->
   </div>
+
 </div>
 <!-- end row -->
 
