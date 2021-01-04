@@ -23,10 +23,6 @@ class ReportController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $data = Report::select('*');
-            if (auth()->user()->hasRole('siswa')) {
-                $data->where('user_id', auth()->user()->id);
-            }
             $data = DB::table('submissions as s')
                 ->join('industries as i', 'i.id', '=', 's.industry_id')
                 ->join('users as u', 'u.username', '=', 's.username');
