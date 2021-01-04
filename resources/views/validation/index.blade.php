@@ -17,14 +17,13 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <table id="tab_data" class="table table-bordered table-striped">
+      <table id="tab_data" class="table table-bordered table-striped" style="width:100%">
         <thead>
           <tr>
             <th>Nama Siswa</th>
             <th>Nama Industri</th>
             <th>Tanggal Mulai</th>
             <th>Tanggal Selesai</th>
-            <th>Status</th>
             <th>Aksi</th>
           </tr>
         </thead>
@@ -44,7 +43,7 @@
     <!-- /.box-header -->
       <div class="box-body">
         <div class="table-responsive">
-        <table id="tab_data2" class="table table-bordered table-striped  dt-responsive nowrap">
+        <table id="tab_data2" class="table table-bordered table-striped  dt-responsive nowrap" style="width:100%">
         <thead>
           <tr>
             <th>Nama Siswa</th>
@@ -70,7 +69,7 @@
     <!-- /.box-header -->
       <div class="box-body">
         <div class="table-responsive">
-        <table id="tab_data3" class="table table-bordered table-striped  dt-responsive nowrap">
+        <table id="tab_data3" class="table table-bordered table-striped  dt-responsive nowrap" style="width:100%">
         <thead>
           <tr>
             <th>Nama Siswa</th>
@@ -171,10 +170,10 @@ $(function() {
 				data: 'finish_date',
         name: 'finish_date',
       },
-      {
-        data: 'status_name',
-				name: 'status_name',
-      },
+      // {
+      //   data: 'status_name',
+			// 	name: 'status_name',
+      // },
 			]
       // $('#validasi').dataTable();
   });
@@ -261,6 +260,5 @@ $(function() {
     }
   });
 });
-
 </script>
 @stop

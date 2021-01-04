@@ -128,10 +128,10 @@ return [
     */
 
     'menu' => [
-        [
-            'text' => 'search',
-            'search' => true,
-        ],
+        // [
+        //     'text' => 'search',
+        //     'search' => true,
+        // ],
         ['header' => 'main_navigation'],
         //[
         //    'text' => 'Siswa',
@@ -154,7 +154,16 @@ return [
             'text' => 'Data Industri',
             'url' => 'industry',
             'icon' => 'fa fa-industry',
-            
+        ],
+        [
+            'text' => 'Laporan',
+            'url' => 'report',
+            'icon' => 'fa fa-file',
+        ],
+        [
+            'text' => 'Nilai',
+            'url' => 'score',
+            'icon' => 'fa fa-check-square',
         ],
         
         //[
