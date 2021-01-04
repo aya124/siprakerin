@@ -27,7 +27,7 @@ class ValidationController extends Controller
     if (request()->ajax()) {
       $user = Auth::user();
       $data = DB::table('submissions as sub')
-        ->join('users as u', 'u.id', '=', 'sub.username')
+        ->join('users as u', 'u.username', '=', 'sub.username')
         ->join('industries as i', 'i.id', '=', 'sub.industry_id')
         ->select(
           'sub.id',

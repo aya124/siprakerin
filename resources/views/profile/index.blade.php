@@ -108,7 +108,6 @@
 <style type="text/css">
 
 .table th {
-  font-size: 12px;
   text-align: left;
   text-transform: uppercase;
 }
@@ -130,13 +129,7 @@
   flex-direction: column;
   min-width: min-content;
   flex-shrink: 0;
-}
-
-body {
-  margin: 1px;
-  font-size: 12px;
-  line-height: 10px;
-  border: 0.5px solid;
+	line-height: 12px;
 }
 </style>
 @stop
@@ -149,9 +142,9 @@ body {
  		$('#tab_data').DataTable({
 			processing: true,
 			serverSide: true,
+			info:false,
 			paging: false,
 			searching: false,
-			info:false,
 			ajax:{
 				url: "{{ route('profile.index') }}",
 			},

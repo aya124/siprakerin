@@ -99,7 +99,7 @@
             </div>
             <div class="modal-footer">
               <input type="hidden" name="setuju" id="setuju" />
-              <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
+              <button type="button" name="ok_button" id="ok_button" class="btn btn-success">OK</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
         </div>
@@ -238,6 +238,8 @@ $(function() {
         setTimeout(function(){
           $('#confirmModal').modal('hide');
           $('#tab_data').DataTable().ajax.reload();
+          $('#tab_data2').DataTable().ajax.reload();
+          $('#tab_data3').DataTable().ajax.reload();
           }, 2000);
           toastr.success('Pengajuan telah disetujui!', 'Success', {timeOut: 5000});
         }
