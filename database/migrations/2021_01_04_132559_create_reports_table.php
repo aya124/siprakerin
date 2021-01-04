@@ -40,9 +40,10 @@ class CreateReportsTable extends Migration
     public function down()
     {
         Schema::table('submissions', function (Blueprint $table) {
+            $table->dropForeign('submissions_report_id_foreign');            
             $table->dropColumn('report_id');
         });
-
         Schema::dropIfExists('reports');
+
     }
 }

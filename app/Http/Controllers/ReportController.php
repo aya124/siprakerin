@@ -51,7 +51,7 @@ class ReportController extends Controller
                         $html .= '<button class="btn btn-default btn-sm edit" data-id="' . $data->id . '">
                     <i class="fas fa-file"></i> Upload/ganti laporan</button>';
                     }
-                    return $html;
+                    return $html ?: 'Laporan belum diupload';
                 })
                 ->rawColumns(['action'])
                 ->make(true);

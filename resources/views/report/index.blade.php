@@ -29,7 +29,7 @@
             <th>Nama siswa</th>
             @endrole
             <th>Industri</th>
-            <th width="20%">Aksi</th>
+            <th width="20%">Laporan</th>
           </tr>
         </thead>
       </table>
