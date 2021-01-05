@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 Route::get('/about', 'PagesController@showAbout');
@@ -68,3 +68,6 @@ Route::resource('/profile', 'ProfileController');
 Route::post('profile/update', 'ProfileController@update')->name('prof.update');
 Route::get('profile/change/{id}', 'UsersController@change');
 Route::post('profile/passchanged', 'ProfileController@passchanged')->name('pass.update');
+
+Route::resource('/report', 'ReportController');
+Route::resource('/score', 'ScoreController');

@@ -350,9 +350,9 @@ class SubmissionController extends Controller
         $date1 = tgl($x);
         $date2 = tgl($y);
         // dd($date1,$date2,$now);
-        $pdf = PDF::loadview('submission.print',compact('data','date1','date2','now'))
+        $pdf = PDF::loadview('submission.print',compact('data','date1','date2','now','user'))
         ->setPaper('legal', 'portrait');
-        $pdf->render();
+        // $pdf->render();
         return $pdf->stream('form-pengajuan.pdf');
         // view('submission.print',compact('data','now'));
     }

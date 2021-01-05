@@ -11,16 +11,16 @@
 <div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>    
 @endif
 
-<div class="col-md-6">
 <div class="box box-primary">
     <div class="box-header">
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-        <table id="tab_data" class="table table-flip">
+        <table id="tab_data" class="table table-flip table-bordered">
         <thead>
             <tr>
                 <th style="text-align: right;">Nama</th>
+                <th style="text-align: right;">Username</th>
                 <th style="text-align: right;">E-mail</th>
                 <th style="text-align: right;">Role</th>
             </tr>
@@ -32,7 +32,6 @@
     <!-- /.box-body -->
 </div>
 <!-- /.box -->
-</div>
 
 <div id="editModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
@@ -109,7 +108,6 @@
 <style type="text/css">
 
 .table th {
-  font-size: 12px;
   text-align: left;
   text-transform: uppercase;
 }
@@ -131,13 +129,7 @@
   flex-direction: column;
   min-width: min-content;
   flex-shrink: 0;
-}
-
-body {
-  margin: 1px;
-  font-size: 12px;
-  line-height: 10px;
-  border: 0.5px solid;
+	line-height: 12px;
 }
 </style>
 @stop
@@ -150,6 +142,9 @@ body {
  		$('#tab_data').DataTable({
 			processing: true,
 			serverSide: true,
+			info:false,
+			paging: false,
+			searching: false,
 			ajax:{
 				url: "{{ route('profile.index') }}",
 			},
@@ -157,6 +152,10 @@ body {
 			{
 				data: 'name',
 				name: 'name',
+			},
+			{
+				data: 'username',
+				name: 'username',
 			},
 			{
 				data: 'email',

@@ -17,7 +17,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <table id="tab_data" class="table table-bordered table-striped">
+      <table id="tab_data" class="table table-bordered table-striped" style="width:100%">
         <thead>
           <tr>
             <th>Nama Siswa</th>
@@ -32,63 +32,58 @@
     <!-- /.box-body -->
   </div>
 
-  <div class="row">
-	<div class="col-md-8">
-		<div class="box box-success collapsed-box">
-      <div class="box-header with-border">
-        <h3 class="box-title">Pengajuan yang disetujui</h3>
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-          </button>
+  <div class="box box-success collapsed-box">
+    <div class="box-header with-border">
+      <h3 class="box-title">Pengajuan yang disetujui</h3>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+    <!-- /.box-header -->
+      <div class="box-body">
+        <div class="table-responsive">
+        <table id="tab_data2" class="table table-bordered table-striped  dt-responsive nowrap" style="width:100%">
+        <thead>
+          <tr>
+            <th>Nama Siswa</th>
+            <th>Nama Industri</th>
+            <th>Tanggal Mulai</th>
+            <th>Tanggal Selesai</th>
+          </tr>
+        </thead>
+        </table>
         </div>
       </div>
-      <!-- /.box-header -->
-        <div class="box-body">
-          <div class="table-responsive">
-		      <table id="tab_data2" class="table table-bordered table-striped  dt-responsive nowrap">
-					<thead>
-						<tr>
-              <th>Nama Siswa</th>
-							<th>Nama Industri</th>
-							<th>Tanggal Mulai</th>
-							<th>Tanggal Selesai</th>
-              <th>Status</th>
-						</tr>
-					</thead>
-					</table>
-					</div>
-        </div>
-      <!-- /.box-body -->
-    </div>
+    <!-- /.box-body -->
   </div>
   
-  <div class="col-md-8">
-		<div class="box box-danger collapsed-box">
-      <div class="box-header with-border">
-        <h3 class="box-title">Pengajuan yang ditolak</h3>
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-          </button>
+  <div class="box box-danger collapsed-box">
+    <div class="box-header with-border">
+      <h3 class="box-title">Pengajuan yang ditolak</h3>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+    <!-- /.box-header -->
+      <div class="box-body">
+        <div class="table-responsive">
+        <table id="tab_data3" class="table table-bordered table-striped  dt-responsive nowrap" style="width:100%">
+        <thead>
+          <tr>
+            <th>Nama Siswa</th>
+            <th>Nama Industri</th>
+            <th>Tanggal Mulai</th>
+            <th>Tanggal Selesai</th>
+          </tr>
+        </thead>
+        </table>
         </div>
       </div>
-      <!-- /.box-header -->
-        <div class="box-body">
-          <div class="table-responsive">
-		      <table id="tab_data3" class="table table-bordered table-striped  dt-responsive nowrap">
-					<thead>
-						<tr>
-              <th>Nama Siswa</th>
-							<th>Nama Industri</th>
-							<th>Tanggal Mulai</th>
-							<th>Tanggal Selesai</th>
-						</tr>
-					</thead>
-					</table>
-					</div>
-        </div>
-      <!-- /.box-body -->
-    </div>
+    <!-- /.box-body -->
   </div>
+
 </div>
 <!-- end row -->
 
@@ -104,7 +99,7 @@
             </div>
             <div class="modal-footer">
               <input type="hidden" name="setuju" id="setuju" />
-              <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
+              <button type="button" name="ok_button" id="ok_button" class="btn btn-success">OK</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
         </div>
@@ -175,10 +170,10 @@ $(function() {
 				data: 'finish_date',
         name: 'finish_date',
       },
-      {
-        data: 'status_name',
-				name: 'status_name',
-      },
+      // {
+      //   data: 'status_name',
+			// 	name: 'status_name',
+      // },
 			]
       // $('#validasi').dataTable();
   });
@@ -243,6 +238,8 @@ $(function() {
         setTimeout(function(){
           $('#confirmModal').modal('hide');
           $('#tab_data').DataTable().ajax.reload();
+          $('#tab_data2').DataTable().ajax.reload();
+          $('#tab_data3').DataTable().ajax.reload();
           }, 2000);
           toastr.success('Pengajuan telah disetujui!', 'Success', {timeOut: 5000});
         }
@@ -265,6 +262,5 @@ $(function() {
     }
   });
 });
-
 </script>
 @stop

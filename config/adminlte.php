@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>SI</b>Prakerin',
 
-    'logo_mini' => '<b>A</b>LT',
+    'logo_mini' => '<b>SI</b>P',
 
     /*
     |--------------------------------------------------------------------------
@@ -128,10 +128,10 @@ return [
     */
 
     'menu' => [
-        [
-            'text' => 'search',
-            'search' => true,
-        ],
+        // [
+        //     'text' => 'search',
+        //     'search' => true,
+        // ],
         ['header' => 'main_navigation'],
         //[
         //    'text' => 'Siswa',
@@ -154,7 +154,16 @@ return [
             'text' => 'Data Industri',
             'url' => 'industry',
             'icon' => 'fa fa-industry',
-            
+        ],
+        [
+            'text' => 'Laporan',
+            'url' => 'report',
+            'icon' => 'fa fa-file',
+        ],
+        [
+            'text' => 'Nilai',
+            'url' => 'score',
+            'icon' => 'fa fa-check-square',
         ],
         
         //[

@@ -23,7 +23,7 @@ class ProfileController extends Controller
         $user = DB::table('users as u')
             ->join('role_user as ru','ru.user_id','=','u.id')
             ->join('roles as r','r.id','=','ru.role_id')
-            ->select('u.name','u.email',DB::raw('r.name as role'),'u.id')
+            ->select('u.name','u.email', 'u.username',DB::raw('r.name as role'),'u.id')
             ->where('u.id',$login->id)
             ->get();
                 return datatables()->of($user)
