@@ -13,7 +13,7 @@
 
   <div class="box">
     <div class="box-header">
-      @role(['admin'])
+      @role(['admin', 'petugas', 'kepsek', 'wks']) 
       <h3 class="box-title">Data laporan</h3>
       @endrole
       @role('siswa')
@@ -25,7 +25,7 @@
       <table id="tab_data" class="table table-bordered table-striped">
         <thead>
           <tr>
-            @role(['admin'])
+            @role(['admin', 'petugas', 'kepsek', 'wks']) 
             <th>Nama siswa</th>
             @endrole
             <th>Industri</th>
@@ -53,8 +53,9 @@
             <div class="form-group">
               <label class="control-label col-md-4">File laporan : </label>
               <div class="col-md-8">
-                <input type="file" name="report" id="report" accept=".doc,.docx,.pdf" />
+                <input type="file" name="report" id="report" accept=".docx,.pdf" />
               </div>
+              <small class="control-label col-md-4">Format laporan pdf/docx</small>
             </div>
 
             <div class="form-group" align="center">
@@ -105,7 +106,8 @@
           url: "{{ route('report.index') }}",
         },
         columns: [
-          @role(['admin']) {
+          @role(['admin', 'petugas', 'kepsek', 'wks']) 
+          {
             data: 'student_name',
             name: 'student_name',
           },

@@ -13,7 +13,7 @@
 
   <div class="box">
     <div class="box-header">
-      @role(['admin'])
+      @role(['admin', 'petugas', 'kepsek', 'wks']) 
       <h3 class="box-title">Data nilai</h3>
       @endrole
       @role('siswa')
@@ -25,7 +25,7 @@
       <table id="tab_data" class="table table-bordered table-striped">
         <thead>
           <tr>
-            @role(['admin'])
+            @role(['admin', 'petugas', 'kepsek', 'wks']) 
             <th>Nama siswa</th>
             @endrole
             <th>Industri</th>
@@ -35,7 +35,7 @@
             <th>Nilai 4</th>
             <th>Nilai 5</th>
             <th>Nilai 6</th>
-            @role(['admin'])
+            @role(['admin', 'petugas'])
             <th>Aksi</th>
             @endrole
           </tr>
@@ -46,7 +46,7 @@
   </div>
   <!-- /.box -->
 
-  @role(['admin'])
+  @role(['admin', 'petugas'])
   <div id="createModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -148,7 +148,8 @@
           url: "{{ route('score.index') }}",
         },
         columns: [
-          @role(['admin']) {
+          @role(['admin', 'petugas', 'kepsek', 'wks']) 
+          {
             data: 'student_name',
             name: 'student_name',
           },
@@ -198,7 +199,7 @@
               return h || 'Belum ada nilai'
             },
           },
-          @role(['admin']) {
+          @role(['admin', 'petugas']) {
             data: 'action',
             name: 'action',
             orderable: false
@@ -208,7 +209,7 @@
       });
       // $('#industri').dataTable();
 
-      @role(['admin'])
+      @role(['admin', 'petugas'])
       $('#btn_add').click(function() {
         $('#createModal').modal('show');
         $('#form_result').hide();
