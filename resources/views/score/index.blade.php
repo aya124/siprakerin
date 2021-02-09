@@ -266,7 +266,7 @@
 
               }, 1000);
               $('#tab_data').DataTable().ajax.reload();
-              toastr.success('Industri berhasil diperbarui!', 'Success', {
+              toastr.success('Nilai berhasil diperbarui!', 'Success', {
                 timeOut: 5000
               });
             }

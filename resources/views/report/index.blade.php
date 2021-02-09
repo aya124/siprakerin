@@ -51,7 +51,7 @@
           <form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-              <label class="control-label col-md-4">File laporan : </label>
+              <label class="control-label col-md-4">File laporan: </label>
               <div class="col-md-8">
                 <input type="file" name="report" id="report" accept=".docx,.pdf" />
               </div>
@@ -122,13 +122,13 @@
           }
         ]
       });
-      // $('#industri').dataTable();
+      // $('#laporan').dataTable();
 
       @role('siswa')
       $('#btn_add').click(function() {
         $('#createModal').modal('show');
         $('#form_result').hide();
-        $('#createModal .modal-title').text("Tambah Industri");
+        $('#createModal .modal-title').text("Tambah Laporan");
         $('#action').val("tambah");
       });
       @endrole
@@ -170,7 +170,7 @@
 
               }, 1000);
               $('#tab_data').DataTable().ajax.reload();
-              toastr.success('Industri berhasil diperbarui!', 'Success', {
+              toastr.success('Data laporan berhasil diperbarui!', 'Success', {
                 timeOut: 5000
               });
             }
