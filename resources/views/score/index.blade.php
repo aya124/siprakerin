@@ -13,7 +13,7 @@
 
   <div class="box">
     <div class="box-header">
-      @role(['admin', 'petugas', 'kepsek', 'wks']) 
+      @role(['admin', 'wali-kelas', 'kepsek', 'wks']) 
       <h3 class="box-title">Data nilai</h3>
       @endrole
       @role('siswa')
@@ -25,7 +25,7 @@
       <table id="tab_data" class="table table-bordered table-striped">
         <thead>
           <tr>
-            @role(['admin', 'petugas', 'kepsek', 'wks']) 
+            @role(['admin', 'wali-kelas', 'kepsek', 'wks']) 
             <th>Nama siswa</th>
             @endrole
             <th>Industri</th>
@@ -35,7 +35,7 @@
             <th>Nilai 4</th>
             <th>Nilai 5</th>
             <th>Nilai 6</th>
-            @role(['admin', 'petugas'])
+            @role(['admin', 'wali-kelas'])
             <th>Aksi</th>
             @endrole
           </tr>
@@ -46,7 +46,7 @@
   </div>
   <!-- /.box -->
 
-  @role(['admin', 'petugas'])
+  @role(['admin', 'wali-kelas'])
   <div id="createModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -59,37 +59,37 @@
           <form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-              <label class="control-label col-md-4">Nilai 1 : </label>
+              <label class="control-label col-md-4">Nilai 1: </label>
               <div class="col-md-8">
                 <input class="form-control" id="score_1" name="score_1" type="number" min="0" max="100" />
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-4">Nilai 2 : </label>
+              <label class="control-label col-md-4">Nilai 2: </label>
               <div class="col-md-8">
                 <input class="form-control" id="score_2" name="score_2" type="number" min="0" max="100" />
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-4">Nilai 3 : </label>
+              <label class="control-label col-md-4">Nilai 3: </label>
               <div class="col-md-8">
                 <input class="form-control" id="score_3" name="score_3" type="number" min="0" max="100" />
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-4">Nilai 4 : </label>
+              <label class="control-label col-md-4">Nilai 4: </label>
               <div class="col-md-8">
                 <input class="form-control" id="score_4" name="score_4" type="number" min="0" max="100" />
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-4">Nilai 5 : </label>
+              <label class="control-label col-md-4">Nilai 5: </label>
               <div class="col-md-8">
                 <input class="form-control" id="score_5" name="score_5" type="number" min="0" max="100" />
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-4">Nilai 6 : </label>
+              <label class="control-label col-md-4">Nilai 6: </label>
               <div class="col-md-8">
                 <input class="form-control" id="score_6" name="score_6" type="number" min="0" max="100" />
               </div>
@@ -148,7 +148,7 @@
           url: "{{ route('score.index') }}",
         },
         columns: [
-          @role(['admin', 'petugas', 'kepsek', 'wks']) 
+          @role(['admin', 'wali-kelas', 'kepsek', 'wks']) 
           {
             data: 'student_name',
             name: 'student_name',
@@ -199,7 +199,7 @@
               return h || 'Belum ada nilai'
             },
           },
-          @role(['admin', 'petugas']) {
+          @role(['admin', 'wali-kelas']) {
             data: 'action',
             name: 'action',
             orderable: false
@@ -207,13 +207,13 @@
           @endrole
         ]
       });
-      // $('#industri').dataTable();
+      // $('#nilai').dataTable();
 
-      @role(['admin', 'petugas'])
+      @role(['admin', 'wali-kelas'])
       $('#btn_add').click(function() {
         $('#createModal').modal('show');
         $('#form_result').hide();
-        $('#createModal .modal-title').text("Tambah Industri");
+        $('#createModal .modal-title').text("Tambah Nilai");
         $('#action').val("tambah");
       });
       @endrole

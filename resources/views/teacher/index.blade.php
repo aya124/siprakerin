@@ -3,8 +3,8 @@
 @section('title', 'Guru Pembimbing')
 
 @section('content_header')
-<h1>Petugas <a id="btn_add" 
-  class="btn btn-flat btn-primary">Tambah petugas</a></h1>
+<h1>Guru <a id="btn_add" 
+  class="btn btn-flat btn-primary">Tambah guru</a></h1>
 @stop
 
 @section('content')
@@ -14,7 +14,7 @@
 
 <div class="box">
     <div class="box-header">
-        <h3 class="box-title">Petugas</h3>
+        <h3 class="box-title">Guru</h3>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
