@@ -90,6 +90,7 @@ class IndustryController extends Controller
             'required' =>'Kolom :attribute tidak boleh kosong',
         ]);
 
+        // dd($user->id);
         $industry = Industry::create([
             'name' => $request->name,
             'address' => $request->address,
@@ -97,8 +98,9 @@ class IndustryController extends Controller
             'phone' => $request->phone,
             'detail' => $request->detail,
             'username' => $user->id,
+            'status'=> $request->status ?: '',
         ]);
-        return response()->json(['success' => 'Industri berhasil diperbarui.']);
+        return response()->json(['success' => 'Industri berhasil ditambah.']);
         // return redirect()->route('industry.index')
         // ->withStatus([
         //     'message' => 'Industri berhasil ditambahkan.',
@@ -154,7 +156,7 @@ class IndustryController extends Controller
             'address' => ['required', 'max:255'], 
             'city' => ['required', 'max:255'],
             'phone' => ['required', 'integer'],
-            'detail' => ['required', 'max:255'],
+            'detail' => ['max:255'],
             'status' => ['required'],
         ]);
 
@@ -169,11 +171,6 @@ class IndustryController extends Controller
         ]);
 
         return response()->json(['success' => 'Industri berhasil diperbarui.']);
-
-        // return redirect()->route('industry.index')->withStatus([
-        //     'message' => 'Data industri berhasil diperbarui.',
-        //     'color' => 'success'
-        // ]);
     }
 
      /**

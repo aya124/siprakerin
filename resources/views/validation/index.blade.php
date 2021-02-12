@@ -24,6 +24,8 @@
             <th>Nama Industri</th>
             <th>Tanggal Mulai</th>
             <th>Tanggal Selesai</th>
+            <th>Status</th>
+            <th>Persuratan</th>
             <th>Aksi</th>
           </tr>
         </thead>
@@ -50,6 +52,8 @@
             <th>Nama Industri</th>
             <th>Tanggal Mulai</th>
             <th>Tanggal Selesai</th>
+            <th>Status</th>
+            <th>Persuratan</th>
           </tr>
         </thead>
         </table>
@@ -76,6 +80,8 @@
             <th>Nama Industri</th>
             <th>Tanggal Mulai</th>
             <th>Tanggal Selesai</th>
+            <th>Status</th>
+            <th>Persuratan</th>
           </tr>
         </thead>
         </table>
@@ -139,6 +145,14 @@ $(function() {
         name: 'finish_date',
       },
       {
+        data: 'status_name',
+				name: 'status_name',
+      },
+      {
+        data: 'correspondence',
+				name: 'correspondence',
+      },
+      {
         data: 'action',
 				name: 'action',
 				orderable: false
@@ -154,7 +168,7 @@ $(function() {
 				url: "{{ route('tab.setuju') }}",
       },
       columns:[
-			{
+        {
 				data: 'user_name',
 				name: 'user_name',
       },
@@ -170,10 +184,14 @@ $(function() {
 				data: 'finish_date',
         name: 'finish_date',
       },
-      // {
-      //   data: 'status_name',
-			// 	name: 'status_name',
-      // },
+      {
+        data: 'status_name',
+				name: 'status_name',
+      },
+      {
+        data: 'correspondence',
+				name: 'correspondence',
+      },
 			]
       // $('#validasi').dataTable();
   });
@@ -185,9 +203,9 @@ $(function() {
 				url: "{{ route('tab.tolak') }}",
       },
       columns:[
-			{
-				data: 'username',
-				name: 'username',
+        {
+				data: 'user_name',
+				name: 'user_name',
       },
       {
 				data: 'name',
@@ -200,6 +218,14 @@ $(function() {
       {
 				data: 'finish_date',
         name: 'finish_date',
+      },
+      {
+        data: 'status_name',
+				name: 'status_name',
+      },
+      {
+        data: 'correspondence',
+				name: 'correspondence',
       },
 			]
       // $('#validasi').dataTable();
