@@ -158,7 +158,7 @@ class SubmissionController extends Controller
             'finishdate' => ['required', 'date', 'after:startdate'],
         ], [
             'required' => 'Kolom :attribute tidak boleh kosong!',
-            'after' => 'Tanggal selesai tidak boleh sebelum tanggal mulai!'
+            'after' => 'Tanggal selesai tidak boleh sebelum tanggal mulai!',
         ]);
 
         $submission = Submission::create([

@@ -145,6 +145,13 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'Nama',
+        'email' => 'Email',
+        'password' => 'Password',
+        'username' => 'Username',
+        'startdate' => 'Tanggal Mulai',
+        'finishdate' => 'Tanggal Selesai',
+    ],
 
 ];
