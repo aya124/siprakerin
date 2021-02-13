@@ -29,12 +29,14 @@ class ValidationController extends Controller
       $data = DB::table('submissions as sub')
         ->join('users as u', 'u.username', '=', 'sub.username')
         ->join('industries as i', 'i.id', '=', 'sub.industry_id')
+        ->join('statuses as st', 'st.id', '=', 'sub.status_id')
         ->select(
           'sub.id',
           DB::raw('u.name as username'),
           'i.name',
           'sub.start_date',
-          'sub.finish_date'
+          'sub.finish_date',
+          DB::raw('st.name as status_name')
         )
         ->where('sub.status_id', 1)
         ->get();
@@ -50,7 +52,39 @@ class ValidationController extends Controller
           <i class="fa fa-thumbs-down"></i> Tolak</button>';
           return $button;
         })
-        ->rawColumns(['action'])
+        ->addColumn('correspondence', function ($data) {
+          if ($data->status_name == 'Pengajuan disetujui') {
+            $button = '<span class="pengantar label label-danger">
+                  Surat Pengantar belum diunggah</span>';
+            $button .= '&nbsp;&nbsp;';
+            $button .= '<span class="balasan label label-danger">
+                  Surat Balasan belum diunggah</span>';
+          } elseif ($data->status_name == 'Surat dari Industri belum diunggah') {
+
+            $button = '<a href="setuju/lihat1/' . $data->id . '" 
+                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
+                  <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
+            $button .= '&nbsp;&nbsp;';
+            $button .= '<span class="balasan label label-danger">
+                  Surat Balasan belum diunggah</span>';
+          } else {
+
+            $button = '<a href="setuju/lihat1/' . $data->id . '"
+                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
+                  <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
+            $button .= '&nbsp;&nbsp;';
+            $button .= '<a href="setuju/lihat2/' . $data->id . '"
+                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
+                  <i class="fas fa-file-image"></i> Lihat Surat Balasan</a>';
+          }
+          $button .= '&nbsp;&nbsp;';
+          $button .= '<a href= "validation/print/' . $data->id . '" 
+                target="_blank" type="button" name="print" 
+                class="btn btn-default btn-sm">
+                <i class="fas fa-print"></i> Cetak Surat Pengantar</a>';
+          return $button;
+        })
+        ->rawColumns(['action', 'correspondence'])
         ->make(true);
     }
 
@@ -97,7 +131,7 @@ class ValidationController extends Controller
         ->get();
 
       return datatables()->of($data)
-        ->editColumn('status_name', function ($data) {
+        ->addColumn('correspondence', function ($data) {
           if ($data->status_name == 'Pengajuan disetujui') {
             $button = '<span class="pengantar label label-danger">
                   Surat Pengantar belum diunggah</span>';
@@ -129,7 +163,7 @@ class ValidationController extends Controller
                 <i class="fas fa-print"></i> Cetak Surat Pengantar</a>';
           return $button;
         })
-        ->rawColumns(['status_name'])
+        ->rawColumns(['correspondence'])
         ->make(true);
     }
   }
@@ -155,7 +189,39 @@ class ValidationController extends Controller
         ->get();
 
       return datatables()->of($data)
-        ->rawColumns(['status_name'])
+        ->addColumn('correspondence', function ($data) {
+          if ($data->status_name == 'Pengajuan disetujui') {
+            $button = '<span class="pengantar label label-danger">
+                  Surat Pengantar belum diunggah</span>';
+            $button .= '&nbsp;&nbsp;';
+            $button .= '<span class="balasan label label-danger">
+                  Surat Balasan belum diunggah</span>';
+          } elseif ($data->status_name == 'Surat dari Industri belum diunggah') {
+
+            $button = '<a href="setuju/lihat1/' . $data->id . '" 
+                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
+                  <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
+            $button .= '&nbsp;&nbsp;';
+            $button .= '<span class="balasan label label-danger">
+                  Surat Balasan belum diunggah</span>';
+          } else {
+
+            $button = '<a href="setuju/lihat1/' . $data->id . '"
+                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
+                  <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
+            $button .= '&nbsp;&nbsp;';
+            $button .= '<a href="setuju/lihat2/' . $data->id . '"
+                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
+                  <i class="fas fa-file-image"></i> Lihat Surat Balasan</a>';
+          }
+          $button .= '&nbsp;&nbsp;';
+          $button .= '<a href= "validation/print/' . $data->id . '" 
+                target="_blank" type="button" name="print" 
+                class="btn btn-default btn-sm">
+                <i class="fas fa-print"></i> Cetak Surat Pengantar</a>';
+          return $button;
+        })
+        ->rawColumns(['correspondence'])
         ->make(true);
     }
   }
