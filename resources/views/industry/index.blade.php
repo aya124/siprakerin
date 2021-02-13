@@ -38,7 +38,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Data industri</h4>
+				<h4 class="modal-title">Data Industri</h4>
 			</div>
 			<div class="modal-body">
 				     
@@ -46,7 +46,7 @@
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
-						<label class="control-label col-md-4" >Nama Industri : </label>
+						<label class="control-label col-md-4" >Nama Industri: </label>
 						<div class="col-md-8">
 							<input type="text" name="name" id="name" class="form-control" />
 						</div>
@@ -105,7 +105,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h2 class="modal-title">Detail industri</h2>
+        <h2 class="modal-title">Detail Industri</h2>
       </div>
       <div class="modal-body">
         <table class="table">
@@ -149,7 +149,7 @@
       <div class="modal-content">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h2 class="modal-title">Hapus data</h2>
+              <h2 class="modal-title">Hapus Data</h2>
           </div>
           <div class="modal-body">
               <h4 align="center" style="margin:0;">Apakah anda yakin ingin menghapus data ini?</h4>

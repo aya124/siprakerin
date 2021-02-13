@@ -43,32 +43,6 @@ class SubmissionController extends Controller
 
             return datatables()->of($data)
                 ->addColumn('action', function($data){
-
-                    // switch ($data) {
-                    //     case 'wait':
-                    //         if($data->status_name == '1')
-                    //         $button= '<button type="button" name="edit" 
-                    //         id="'.$data->id.'" class="edit btn btn-info btn-sm">
-                    //         <i class="fa fa-edit"></i> Edit</button>';
-                    //         $button .= '&nbsp;&nbsp;';
-                    //         $button .= '<button type="button" name="delete" 
-                    //         id="'.$data->id.'" class="delete btn btn-danger btn-sm">
-                    //         <i class="fa fa-trash"></i> Hapus</button>';
-                    //         return $button;
-                    //         break;
-                        
-                    //     case 'suratpengantar':
-                    //         # code...
-                    //         break;
-
-                    //     case 'suratindustri':
-                    //         # code...
-                    //         break;
-
-                    //     default:
-                    //     # code...
-                    //     break;
-                    // }
                     
                 if($data->status_name == 'Menunggu persetujuan'){
                     $button= '<button type="button" name="edit" 

@@ -87,7 +87,7 @@ class IndustryController extends Controller
             'phone' => ['integer'],
             'detail' => ['max:255'],
         ], [
-            'required' =>'Kolom :attribute tidak boleh kosong',
+            'required' => 'Kolom :attribute tidak boleh kosong!'
         ]);
 
         // dd($user->id);

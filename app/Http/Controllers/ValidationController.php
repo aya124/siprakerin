@@ -53,32 +53,7 @@ class ValidationController extends Controller
           return $button;
         })
         ->addColumn('correspondence', function ($data) {
-          if ($data->status_name == 'Pengajuan disetujui') {
-            $button = '<span class="pengantar label label-danger">
-                  Surat Pengantar belum diunggah</span>';
-            $button .= '&nbsp;&nbsp;';
-            $button .= '<span class="balasan label label-danger">
-                  Surat Balasan belum diunggah</span>';
-          } elseif ($data->status_name == 'Surat dari Industri belum diunggah') {
-
-            $button = '<a href="setuju/lihat1/' . $data->id . '" 
-                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
-                  <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
-            $button .= '&nbsp;&nbsp;';
-            $button .= '<span class="balasan label label-danger">
-                  Surat Balasan belum diunggah</span>';
-          } else {
-
-            $button = '<a href="setuju/lihat1/' . $data->id . '"
-                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
-                  <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
-            $button .= '&nbsp;&nbsp;';
-            $button .= '<a href="setuju/lihat2/' . $data->id . '"
-                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
-                  <i class="fas fa-file-image"></i> Lihat Surat Balasan</a>';
-          }
-          $button .= '&nbsp;&nbsp;';
-          $button .= '<a href= "validation/print/' . $data->id . '" 
+          $button = '<a href= "validation/print/' . $data->id . '" 
                 target="_blank" type="button" name="print" 
                 class="btn btn-default btn-sm">
                 <i class="fas fa-print"></i> Cetak Surat Pengantar</a>';
