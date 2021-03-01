@@ -194,15 +194,14 @@
                 error:function(xhr)
                 {
                   console.log(xhr);
-                  // $('#form_result').show();
-
-                  // 	html = '<div class="alert alert-danger">';
-                  //  $.each(xhr.responseJSON.errors, function (key, item) 
-                  //       {	
-                  //       	html+='<p>' +item+'</p>';
-                  //       });
-                  // 	html += '</div>';
-                  // 	$('#form_result').html(html);
+                  $('#form_result').show();
+                  html = '<div class="alert alert-danger">';
+                  $.each(xhr.responseJSON.errors, function (key, item) 
+                  {	
+                    html+='<p>' +item+'</p>';
+                  });
+                  html += '</div>';
+                  $('#form_result').html(html);
                 } //end error
               });
             }else{
@@ -242,15 +241,14 @@
                 error:function(xhr)
                 {
                   console.log(xhr);
-                  // $('#form_result').show();
-
-                  // 	html = '<div class="alert alert-danger">';
-                  //  $.each(xhr.responseJSON.errors, function (key, item) 
-                  //  {	
-                  //  html+='<p>' +item+'</p>';
-                  //  });
-                  // 	html += '</div>';
-                  // 	$('#form_result').html(html);
+                  $('#form_result').show();
+                  html = '<div class="alert alert-danger">';
+                  $.each(xhr.responseJSON.errors, function (key, item) 
+                  {	
+                    html+='<p>' +item+'</p>';
+                  });
+                  html += '</div>';
+                  $('#form_result').html(html);
                 }//end error
               });
             }

@@ -53,7 +53,7 @@ class TeacherController extends Controller
         $request-> validate([
             'name' => ['required', 'string', 'max:255'],
         ], [
-            'required' =>'Kolom :attribute tidak boleh kosong',
+            'required' =>'Kolom :attribute tidak boleh kosong!',
         ]);
 
         $teacher = Teacher::create([

@@ -89,16 +89,16 @@
 				<h4 class="modal-title"></h4>
 			</div>
 			<div class="modal-body">
-
         <span id="form_result"></span>
 				<form  method="post" class="form-horizontal" id="ups" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-          {{-- <label class="control-label col-md-4" >: </label> --}}
-          <div class="col-md-12">
+          <label class="control-label col-md-4" >File Surat Pengantar: </label>
+          <div class="col-md-8">
             <div class="file-preview">
-              <input type="file" name="upload" id="upload" class="form-control" />
+              <input type="file" name="upload" id="upload" accept=".jpeg,.jpg,.png,.pdf" class="form-control" />
             </div>
+            <small class="control-label col-md-10">Format file berupa jpg/png/pdf maks 512kB</small>
           </div>
         </div>
 
@@ -127,11 +127,12 @@
 				<form method="post" class="form-horizontal" id="upss" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-          {{-- <label class="control-label col-md-4" >: </label> --}}
-          <div class="col-md-12">
+          <label class="control-label col-md-4" >File Surat Balasan: </label>
+          <div class="col-md-8">
             <div class="file-preview">
-              <input type="file" name="upload" id="upload2" class="form-control" />
+              <input type="file" name="upload" id="upload2" accept=".jpeg,.jpg,.png,.pdf" class="form-control" />
             </div>
+            <small class="control-label col-md-10">Format file berupa jpg/png/pdf maks 512kB</small>
           </div>
         </div>
 
@@ -267,16 +268,16 @@
       processData: false,
       dataType:"json",
       data: new FormData(this),
-      // beforeSend:function(){
-      //     $('#ups').text('Uploading...');
-      //   },
-        success:function(data){
-          setTimeout(function(){
-            $('#confirmModal').modal('hide');
-            $('#tab_data').DataTable().ajax.reload();
-            }, 2000);
-            toastr.success('File berhasil di-upload', 'Success', {timeOut: 5000});
-        }
+      //beforeSend:function(){
+      //$('#ups').text('Uploading...');
+      //},
+        // // success:function(data){
+        //   setTimeout(function(){
+        //     $('#confirmModal').modal('hide');
+        //     $('#tab_data').DataTable().ajax.reload();
+        //     }, 2000);
+        //     toastr.success('File berhasil di-upload', 'Success', {timeOut: 5000});
+        // }
       })
     });
 
@@ -293,13 +294,41 @@
       // beforeSend:function(){
       //     $('#ups').text('Uploading...');
       //   },
-      //   success:function(data){
-      //     setTimeout(function(){
-      //       $('#confirmModal').modal('hide');
-      //       $('#tab_data').DataTable().ajax.reload();
-      //       }, 2000);
-      //       toastr.success('File berhasil di-upload', 'Success', {timeOut: 5000});
-      //   }
+      // success:function(data)
+      //   {
+      //     $('#form_result').show();
+      //       if(data.errors)
+      //         {
+      //           html = '<div class="alert alert-danger">';
+      //           for(var count = 0; count < data.errors.length; count++)
+      //             {
+      //               html += '<p>' + data.errors[count] + '</p>';
+      //             }
+      //               html += '</div>';
+      //               $('#form_result').html(html);
+      //         }
+      //         if(data.success)
+      //         {
+      //           html = '<div class="alert alert-success">' + data.success + '</div>';
+      //           setTimeout(function(){
+      //             $('#confirmModal').modal('hide');
+      //           $('#tab_data').DataTable().ajax.reload();
+      //           }, 2000);
+      //           toastr.success('File berhasil di-upload', 'Success', {timeOut: 5000});
+      //         }
+      //     },
+      //     error:function(xhr)
+      //       {
+      //           console.log(xhr);
+      //           $('#form_result').show();
+      //           html = '<div class="alert alert-danger">';
+      //           $.each(xhr.responseJSON.errors, function (key, item) 
+      //           {	
+      //             html+='<p>' +item+'</p>';
+      //           });
+      //           html += '</div>';
+      //           $('#form_result').html(html);
+      //       }//end error
     });
   });
 
@@ -414,7 +443,6 @@
                 {
                   console.log(xhr);
                   $('#form_result').show();
-
                   html = '<div class="alert alert-danger">';
                   $.each(xhr.responseJSON.errors, function (key, item) 
                   {	

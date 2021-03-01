@@ -53,7 +53,7 @@ class StatusController extends Controller
         $request-> validate([
             'status' => ['required', 'string', 'max:255'],
         ], [
-            'required' =>'Kolom :attribute tidak boleh kosong',
+            'required' =>'Kolom :attribute tidak boleh kosong!',
         ]);
 
         $status = Status::create([
@@ -109,6 +109,8 @@ class StatusController extends Controller
     {
         $request-> validate([
             'status' => ['required', 'string', 'max:255'],
+        ],[
+            'required' =>'Kolom :attribute tidak boleh kosong!',
         ]);
         $status = Status::findOrFail($request->hidden_id);
         $status->update([

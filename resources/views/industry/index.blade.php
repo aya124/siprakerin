@@ -299,7 +299,6 @@
                       html = '<div class="alert alert-success">' + data.success + '</div>';
                       setTimeout(function(){
                         $('#createModal').modal('hide');
-
                     },1000);
                     $('#tab_data').DataTable().ajax.reload();
                       toastr.success('Industri berhasil ditambahkan!', 'Success', {timeOut: 5000});
@@ -309,16 +308,15 @@
                 error:function(xhr)
                 {
                   console.log(xhr);
-                  // $('#form_result').show();
+                  $('#form_result').show();
 
-                  // 	html = '<div class="alert alert-danger">';
-                  //  $.each(xhr.responseJSON.errors, function (key, item) 
-                  //       {	
-                  //       	html+='<p>' +item+'</p>';
-                  //       });
-                  // 	html += '</div>';
-                  // 	$('#form_result').html(html);
-                
+                  html = '<div class="alert alert-danger">';
+                  $.each(xhr.responseJSON.errors, function (key, item) 
+                  {	
+                    html+='<p>' +item+'</p>';
+                  });
+                  html += '</div>';
+                  $('#form_result').html(html);
                 }//end error
               });
             }else{
@@ -335,7 +333,6 @@
                   $('#form_result').show();
                     if(data.errors)
                     {
-
                       html = '<div class="alert alert-danger">';
                       for(var count = 0; count < data.errors.length; count++)
                       {
@@ -359,15 +356,14 @@
                 error:function(xhr)
                 {
                   console.log(xhr);
-                  // $('#form_result').show();
-
-                  // 	html = '<div class="alert alert-danger">';
-                  //  $.each(xhr.responseJSON.errors, function (key, item) 
-                  //       {	
-                  //       	html+='<p>' +item+'</p>';
-                  //       });
-                  // 	html += '</div>';
-                  // 	$('#form_result').html(html); 
+                  $('#form_result').show();
+                  html = '<div class="alert alert-danger">';
+                  $.each(xhr.responseJSON.errors, function (key, item) 
+                  {	
+                    html+='<p>' +item+'</p>';
+                  });
+                  html += '</div>';
+                  $('#form_result').html(html); 
                 }//end error
               });
             }

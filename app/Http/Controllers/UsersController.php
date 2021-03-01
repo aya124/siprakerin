@@ -94,7 +94,7 @@ class UsersController extends Controller
             'password' => ['required', 'string', 'min:8'],
             'username' => ['required', 'unique:users']
         ], [
-            'required' =>'Kolom :attribute tidak boleh kosong',
+            'required' =>'Kolom :attribute tidak boleh kosong!',
         ]);
         $user = User::create([
             'name' => $request->name,
@@ -216,9 +216,9 @@ class UsersController extends Controller
            'inputnew' => 'required|same:input' 
         ];
         $msg = [
-            'input.required' => 'Password tidak boleh kosong',
-            'inputnew.required' => 'Password tidak boleh kosong',
-            'inputnew.same' => 'Password tidak sama',
+            'input.required' => 'Password tidak boleh kosong!',
+            'inputnew.required' => 'Password tidak boleh kosong!',
+            'inputnew.same' => 'Password harus sama',
         ];
         $this->validate($request,$rules,$msg);
         

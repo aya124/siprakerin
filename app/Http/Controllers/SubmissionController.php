@@ -189,7 +189,7 @@ class SubmissionController extends Controller
             'startdate' => ['required', 'date'],
             'finishdate' => ['required', 'date', 'after:startdate'],
         ], [
-            'required' => 'Kolom :attribute tidak boleh kosong',
+            'required' => 'Kolom :attribute tidak boleh kosong!',
             'after' => 'Tanggal selesai tidak boleh sebelum tanggal mulai!'
         ]);
 
@@ -221,7 +221,7 @@ class SubmissionController extends Controller
         $this->validate($request,  [
             'upload' => 'required|mimes:jpeg,jpg,png,pdf|max:512'
         ],[
-            'required' => 'Kolom :attribute tidak boleh kosong',
+            'required' => 'Wajib upload file!',
         ]);
 
         // menyimpan data file yang diupload ke variabel $file

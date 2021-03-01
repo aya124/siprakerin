@@ -98,7 +98,7 @@ class IndustryController extends Controller
             'phone' => $request->phone,
             'detail' => $request->detail,
             'username' => $user->id,
-            'status'=> $request->status ?: '',
+            'status'=> $request->status ?: 'Belum disetujui',
         ]);
         return response()->json(['success' => 'Industri berhasil ditambah.']);
         // return redirect()->route('industry.index')
@@ -138,7 +138,7 @@ class IndustryController extends Controller
         if(request()->ajax())
         {
         $data = Industry::findOrFail($id);
-            return response()->json(compact('data'));
+        return response()->json(compact('data'));
         }
     }
 
@@ -157,7 +157,8 @@ class IndustryController extends Controller
             'city' => ['required', 'max:255'],
             'phone' => ['required', 'integer'],
             'detail' => ['max:255'],
-            'status' => ['required'],
+        ], [
+            'required' => 'Kolom :attribute tidak boleh kosong!',
         ]);
 
         $industry = Industry::findOrFail($request->hidden_id);
@@ -167,7 +168,7 @@ class IndustryController extends Controller
             'city' => $request->city,
             'phone' => $request->phone,
             'detail'=> $request->detail,
-            'status'=> $request->status,
+            'status'=> $request->status ?: 'Belum disetujui', 'Disetujui', 'Tidak Disetujui',
         ]);
 
         return response()->json(['success' => 'Industri berhasil diperbarui.']);
