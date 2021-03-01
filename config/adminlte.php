@@ -139,6 +139,11 @@ return [
         //    'icon' => 'fa fa-graduation-cap'
         //],
         [
+            'text' => 'Data Industri',
+            'url' => 'industry',
+            'icon' => 'fa fa-industry',
+        ],
+        [
             'text' => 'Pengajuan',
             'url' => 'submission',
             'icon' => 'fa fa-archive',
@@ -151,11 +156,6 @@ return [
             'permission' => 'validasi-pengajuan',
         ],
         [
-            'text' => 'Data Industri',
-            'url' => 'industry',
-            'icon' => 'fa fa-industry',
-        ],
-        [
             'text' => 'Laporan',
             'url' => 'report',
             'icon' => 'fa fa-file',
@@ -165,7 +165,7 @@ return [
             'url' => 'score',
             'icon' => 'fa fa-check-square',
         ],
-        
+
         //[
         //    'text' => 'blog',
         //    'url'  => 'admin/blog',
@@ -178,7 +178,7 @@ return [
         //    'label'       => 4,
         //    'label_color' => 'success',
         //],
-        
+
         ['header' => 'MANAGEMENT',
             'permission' => 'menu-role-permission',
         ],

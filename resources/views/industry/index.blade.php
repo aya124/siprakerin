@@ -9,7 +9,7 @@
 
 @section('content')
 @if (session('status'))
-<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>    
+<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>
 @endif
 
 <div class="box">
@@ -41,7 +41,7 @@
 				<h4 class="modal-title">Data Industri</h4>
 			</div>
 			<div class="modal-body">
-				     
+
 				<span id="form_result"></span>
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
@@ -124,7 +124,7 @@
             </tr>
             <tr>
               <th>Phone</th>
-              <td id="phone_detail"></td> 
+              <td id="phone_detail"></td>
             </tr>
             <tr>
               <th>Detail</th>
@@ -235,7 +235,7 @@
 			$('#confirmModal').modal('show');
 			$('#ok_button').text('OK');
     });
-    
+
     $(document).on('click','.detail',function(){
       var id =$(this).attr('id');
       $('#detailModal').modal('show');
@@ -271,6 +271,7 @@
 		});
 
           $('#add').on('submit',function(event){
+        $('.notifError').remove();
           event.preventDefault();
           if($('#action').val() == 'tambah'){
               $.ajax({
@@ -283,17 +284,7 @@
                 data: new FormData(this),
                 success:function(data)
                 {
-                  $('#form_result').show();
-                    if(data.errors)
-                    {
-                      html = '<div class="alert alert-danger">';
-                      for(var count = 0; count < data.errors.length; count++)
-                      {
-                        html += '<p>' + data.errors[count] + '</p>';
-                      }
-                      html += '</div>';
-                      $('#form_result').html(html);
-                    }
+                  $('#form_result').hide();
                     if(data.success)
                     {
                       html = '<div class="alert alert-success">' + data.success + '</div>';
@@ -303,7 +294,7 @@
                     $('#tab_data').DataTable().ajax.reload();
                       toastr.success('Industri berhasil ditambahkan!', 'Success', {timeOut: 5000});
                     }
-                    
+
                 },
                 error:function(xhr)
                 {
@@ -311,12 +302,15 @@
                   $('#form_result').show();
 
                   html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) 
-                  {	
+                  $.each(xhr.responseJSON.errors, function (key, item)
+                  {
                     html+='<p>' +item+'</p>';
                   });
                   html += '</div>';
                   $('#form_result').html(html);
+                    $.each(xhr.responseJSON.errors,function(field_name,error){
+                        $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                    });
                 }//end error
               });
             }else{
@@ -351,19 +345,19 @@
                     $('#tab_data').DataTable().ajax.reload();
                       toastr.success('Industri berhasil diperbarui!', 'Success', {timeOut: 5000});
                     }
-                    
+
                 },
                 error:function(xhr)
                 {
                   console.log(xhr);
                   $('#form_result').show();
                   html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) 
-                  {	
+                  $.each(xhr.responseJSON.errors, function (key, item)
+                  {
                     html+='<p>' +item+'</p>';
                   });
                   html += '</div>';
-                  $('#form_result').html(html); 
+                  $('#form_result').html(html);
                 }//end error
               });
             }
