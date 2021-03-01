@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
         $this->command->info('Make admin user');
         $admin = User::create([
             'name' => 'admin',
-            'email' => 'admin@local.host',
+            'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),

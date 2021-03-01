@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IndustryRequest;
 use App\Industry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Auth;
 
 class IndustryController extends Controller
 {
@@ -29,25 +30,25 @@ class IndustryController extends Controller
             return datatables()->of(Industry::latest()->get())
                 ->addColumn('action', function($data){
                     if(Auth::user()->hasRole('admin')){
-                        $button = '<button type="button" 
+                        $button = '<button type="button"
                         name="detail" id="'.$data->id.'" class="detail btn btn-success btn-sm">
                         <i class="fa fa-info-circle"></i> Detail</button>';
                         $button .= '&nbsp;&nbsp;';
-                        $button .= '<button type="button" 
+                        $button .= '<button type="button"
                         name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">
                         <i class="fa fa-edit"></i> Edit</button>';
                         $button .= '&nbsp;&nbsp;';
-                        $button .= '<button type="button" 
+                        $button .= '<button type="button"
                         name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm">
                         <i class="fa fa-trash"></i> Hapus</button>';
                         $button .= '&nbsp;&nbsp;';
-                        return $button;  
+                        return $button;
                       }else {
-                        $button = '<button type="button" 
+                        $button = '<button type="button"
                         name="detail" id="'.$data->id.'" class="detail btn btn-success
                         btn-sm"><i class="fa fa-info-circle"></i> Detail</button>';
                         $button .= '&nbsp;&nbsp;';
-                        $button .= '<button type="button" 
+                        $button .= '<button type="button"
                         name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">
                         <i class="fa fa-edit"></i> Edit</button>';
                         $button .= '&nbsp;&nbsp;';
@@ -77,35 +78,17 @@ class IndustryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IndustryRequest $request)
     {
-        $user = Auth::user();
-        $request-> validate([
-            'name' => ['required', 'string', 'max:255'],
-            'address' => ['max:255'],
-            'city' => ['max:255'],
-            'phone' => ['integer'],
-            'detail' => ['max:255'],
-        ], [
-            'required' => 'Kolom :attribute tidak boleh kosong!'
-        ]);
-
-        // dd($user->id);
-        $industry = Industry::create([
-            'name' => $request->name,
-            'address' => $request->address,
-            'city' => $request->city,
-            'phone' => $request->phone,
-            'detail' => $request->detail,
-            'username' => $user->id,
-            'status'=> $request->status ?: 'Belum disetujui',
-        ]);
-        return response()->json(['success' => 'Industri berhasil ditambah.']);
-        // return redirect()->route('industry.index')
-        // ->withStatus([
-        //     'message' => 'Industri berhasil ditambahkan.',
-        //     'color' => 'success'
-        // ]);
+        try {
+            $data = $request->all();
+            $data['status'] = $request->status ?: 'Belum disetujui';
+            $data['username'] = Auth::user()->id;
+            Industry::create($data);
+            return response()->json(['success' => 'Industri berhasil ditambah.']);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Industri tambah gagal.'],500);
+        }
     }
 
     /**
@@ -118,7 +101,7 @@ class IndustryController extends Controller
     {
         $data = DB::table('industries as i')
         ->join('users as u', 'u.id', '=', 'i.username')
-        ->select('i.name', 'i.address', 'i.city', 'i.phone', 'i.detail', 
+        ->select('i.name', 'i.address', 'i.city', 'i.phone', 'i.detail',
         DB::raw('u.name as username'),'i.id')
         ->where('i.id', '=', $industry->id)
         ->get();
@@ -149,28 +132,11 @@ class IndustryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(IndustryRequest $request)
     {
-        $request-> validate([
-            'name' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'max:255'], 
-            'city' => ['required', 'max:255'],
-            'phone' => ['required', 'integer'],
-            'detail' => ['max:255'],
-        ], [
-            'required' => 'Kolom :attribute tidak boleh kosong!',
-        ]);
-
+        $data = $request->all();
         $industry = Industry::findOrFail($request->hidden_id);
-        $industry->update([
-            'name' => $request->name,
-            'address' => $request->address,
-            'city' => $request->city,
-            'phone' => $request->phone,
-            'detail'=> $request->detail,
-            'status'=> $request->status ?: 'Belum disetujui', 'Disetujui', 'Tidak Disetujui',
-        ]);
-
+        $industry->update($data);
         return response()->json(['success' => 'Industri berhasil diperbarui.']);
     }
 
@@ -185,10 +151,5 @@ class IndustryController extends Controller
         $industry = Industry::findOrFail($id);
         $industry->delete();
         return response()->json(['success' => 'Industri berhasil dihapus.']);
-
-        // return back()->withStatus([
-        // 'message' => 'Data industri telah terhapus.',
-        // 'color' => 'success'
-        // ]);
     }
 }
