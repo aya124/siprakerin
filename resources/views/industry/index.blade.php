@@ -270,7 +270,7 @@
 			})
 		});
 
-          $('#add').on('submit',function(event){
+    $('#add').on('submit',function(event){
         $('.notifError').remove();
           event.preventDefault();
           if($('#action').val() == 'tambah'){
@@ -294,13 +294,11 @@
                     $('#tab_data').DataTable().ajax.reload();
                       toastr.success('Industri berhasil ditambahkan!', 'Success', {timeOut: 5000});
                     }
-
                 },
                 error:function(xhr)
                 {
                   console.log(xhr);
                   $('#form_result').show();
-
                   html = '<div class="alert alert-danger">';
                   $.each(xhr.responseJSON.errors, function (key, item)
                   {
@@ -343,7 +341,7 @@
 
                     },1000);
                     $('#tab_data').DataTable().ajax.reload();
-                      toastr.success('Industri berhasil diperbarui!', 'Success', {timeOut: 5000});
+                      toastr.success('Data industri berhasil diperbarui!', 'Success', {timeOut: 5000});
                     }
 
                 },

@@ -207,7 +207,7 @@
     
     $(document).on('click','.edit',function(){
       id_table = $(this).attr('id');
-      console.log(id_table);
+      //console.log(id_table);
       $('#action').val("edit");
       $('#createModal').modal('show');
       $('#form_result').hide();
@@ -296,7 +296,7 @@
     var id_table;
     $(document).on('click','.delete',function(){
       id_table = $(this).attr('id');
-      console.log(id_table);
+      //console.log(id_table);
       $('#confirmModal').modal('show');
 			$('#ok_button').text('OK');
     });
@@ -318,6 +318,7 @@
     });
     
     $('#add').on('submit',function(event){
+      $('.notifError').remove();
       event.preventDefault();
       if($('#action').val() == 'tambah'){
         $.ajax({
@@ -328,17 +329,9 @@
           processData: false,
           dataType:"json",
           data: new FormData(this),
-          success:function(data){
-            $('#form_result').show();
-            if(data.errors){
-              html = '<div class="alert alert-danger">';
-              for(var count = 0; count < data.errors.length; count++)
-              {
-              html += '<p>' + data.errors[count] + '</p>';
-              }
-              html += '</div>';
-              $('#form_result').html(html);
-              }
+          success:function(data)
+          {
+            $('#form_result').hide();
               if(data.success)
               {
               html = '<div class="alert alert-success">' + data.success + '</div>';
@@ -349,7 +342,8 @@
                 toastr.success('User berhasil ditambahkan!', 'Success', {timeOut: 5000});
               }
           },
-          error:function(xhr){
+          error:function(xhr)
+          {
             console.log(xhr);
             $('#form_result').show();
             html = '<div class="alert alert-danger">';
@@ -359,7 +353,10 @@
             });
             	html += '</div>';
             	$('#form_result').html(html);
-            } //end error
+                $.each(xhr.responseJSON.errors,function(field_name,error){
+                  $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+              });
+            }
           });
         }else{
           $.ajax({

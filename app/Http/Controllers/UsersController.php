@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 use App\Role;
 use App\Permission;
 
-
 class UsersController extends Controller
 {
     public function __construct()
@@ -86,24 +85,16 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $request-> validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8'],
-            'username' => ['required', 'unique:users']
-        ], [
-            'required' =>'Kolom :attribute tidak boleh kosong!',
-        ]);
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'username' => $request->username,
-            'password' => hash::make ($request->password),
-        ]);
-        $user->attachRole($request->role);
-        return response()->json(['success' => 'Data user berhasil diperbarui.']);
+        try {
+            $data = $request->all();
+            $data ['role'] = $request->role ?: 'Siswa';
+            User::create($data);
+            return response()->json(['success' => 'Data user berhasil ditambah.']);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Gagal menambahkan data user.']);
+        }
     }
 
     /**
@@ -178,6 +169,7 @@ class UsersController extends Controller
         $role = Role::find($request->input('role'));
         $user->attachRole($role);
         return response()->json(['success' => 'Data user berhasil diperbarui.']);
+        
 
         // $user->name = $request->name;
         // $user->email = $request->email;

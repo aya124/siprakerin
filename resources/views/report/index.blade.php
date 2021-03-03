@@ -30,6 +30,7 @@
             @endrole
             <th>Industri</th>
             <th width="20%">Laporan</th>
+            <th width="20%">Sertifikat</th>
           </tr>
         </thead>
       </table>

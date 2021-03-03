@@ -34,16 +34,16 @@ class IndustryRequest extends FormRequest
     public function messages()
     {
         return[
-            'name.required'    => 'Kolom nama wajib diisi',
-            'name.string'      => 'Kolom nama berisi teks',
-            'name.max'         => 'Kolom nama maks 255 karakter',
-            'address.required' => 'Kolom alamat wajib diisi',
-            'address.max'      => 'Kolom alamat maks 255 karakter',
-            'city.required'    => 'Kolom kota wajib diisi',
-            'city.max'         => 'Kolom kota maks 255 karakter',
-            'phone.numeric'    => 'Kolom phone berisi angka',
-            'phone.digits_between'     => 'Kolom phone min 10 dan maks 14 digit',
-            'detail'           => 'Kolom detail maks 255 karakter',
+            'name.required'         => '*Kolom nama wajib diisi',
+            'name.string'           => '*Kolom nama berisi teks',
+            'name.max'              => '*Kolom nama maks 255 karakter',
+            'address.required'      => '*Kolom alamat wajib diisi',
+            'address.max'           => '*Kolom alamat maks 255 karakter',
+            'city.required'         => '*Kolom kota wajib diisi',
+            'city.max'              => '*Kolom kota maks 255 karakter',
+            'phone.numeric'         => '*Kolom phone berisi angka',
+            'phone.digits_between'  => '*Kolom phone berisi 10-14 digit',
+            'detail'                => '*Kolom detail maks 255 karakter',
         ];
     }
 }

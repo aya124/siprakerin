@@ -42,3 +42,22 @@ NEW
 
 ***: must-do
 *: optional
+
+
+UPDATE
+Tgl 28 Feb 2021 08:05-10:05
+
+Hasil Diskusi/Koreksi Demo Siprakerin
+
+1. Pengajuan cukup 1x dulu, ada pengajuan utama dan alternatif.
+    Jika tidak direspon, disertakan alasan "tidak ada respon dari .."
+2. Nama pejabat di form pengajuan diganti variabel (dinamis)
+3. Data Industri dipindah paling atas ✅
+4. Edit pada menu data industri yang sudah disetujui bisa diganti 'Saran',
+    jika diisi akan dikirimkan ke email tkj.sija.stembayo@gmail.com
+5. Buat rekap data (pdf/excel) progress pengajuan prakerin
+6. Sertakan panduan/pedoman pada dashboard, bisa berupa link
+7. Tambah upload sertifikat di menu Laporan
+8. Change db interactively, bukan lewat file env. ()
+. Sertakan referensi kakak kelas yang melakukan prakerin (pengembangan selanjutnya)
+. Backup data (pengembangan selanjutnya)
