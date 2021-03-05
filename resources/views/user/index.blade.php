@@ -44,40 +44,40 @@
 				<h4 class="modal-title"></h4>
 			</div>
 			<div class="modal-body">
-
         <span id="form_result"></span>
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
-						<label class="control-label col-md-4" >Nama: </label>
+						<label class="control-label col-md-3" >Nama <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="name" id="name" class="form-control" />
 						</div>
           </div>
 
           <div class="form-group">
-						<label class="control-label col-md-4" >Username: </label>
+						<label class="control-label col-md-3" >Username <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="username" id="username" class="form-control" />
 						</div>
           </div>
           
           <div class="form-group">
-						<label class="control-label col-md-4" >E-mail: </label>
+						<label class="control-label col-md-3" >E-mail <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="email" id="email" class="form-control" />
 						</div>
           </div>
 
           <div class="form-group" id="pass">
-						<label class="control-label col-md-4" >Password: </label>
+						<label class="control-label col-md-3" >Password <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
-							<input type="password" name="password" id="password" class="form-control" />
+							<input type="password" name="password" id="password" class="form-control" autocomplete="false"/>
+							{{-- <input type="password" name="fpassword" id="password" class="form-control" style="display:none"/> --}}
 						</div>
           </div>
           
           <div class="form-group">
-						<label class="control-label col-md-4" >Role : </label>
+						<label class="control-label col-md-3" >Role <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<select class="form-control" id="role" name="role">
 								@for($i=0; $i<= count($role)-1;$i++)
@@ -199,6 +199,7 @@
       $('#createModal').modal('show');
       $('#name').val("");
       $('#username').val("");
+      $('#password').val("");
       $('#form_result').hide();
       $('#createModal .modal-title').text("Tambah User");
       $('#action').val("tambah");
@@ -209,6 +210,7 @@
       id_table = $(this).attr('id');
       //console.log(id_table);
       $('#action').val("edit");
+      $('.notifError').remove();
       $('#createModal').modal('show');
       $('#form_result').hide();
       $('#createModal .modal-title').text("Edit User");

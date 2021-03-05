@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -105,17 +106,17 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        if(request()->ajax()){
-            $user = User::findOrFail($id);
-            $data = DB::table('users as u')
-            ->join('role_user as ru', 'ru.user_id', '=', 'u.id')
-            ->join('roles as r', 'r.id', '=', 'ru.role_id')
-            ->select('u.name', 'u.email', 
-                DB::raw('r.name as role'), 'u.id')
-            ->where('u.id', $id)
-            ->get();
-        }
-        return response()->json(compact('data'));
+        // if(request()->ajax()){
+        //     $user = User::findOrFail($id);
+        //     $data = DB::table('users as u')
+        //     ->join('role_user as ru', 'ru.user_id', '=', 'u.id')
+        //     ->join('roles as r', 'r.id', '=', 'ru.role_id')
+        //     ->select('u.name','u.username', 'u.email', 
+        //         DB::raw('r.name as role'), 'u.id')
+        //     ->where('u.id', $id)
+        //     ->get();
+        // }
+        // return response()->json(compact('data'));
     }
 
     /**
@@ -131,7 +132,7 @@ class UsersController extends Controller
         $data = DB::table('users as u')
             ->join('role_user as ru', 'ru.user_id', '=', 'u.id')
             ->join('roles as r', 'r.id', '=', 'ru.role_id')
-            ->select('u.name', 'u.email', 
+            ->select('u.name','u.username', 'u.email', 
                 DB::raw('r.id as role'), 'u.id')
             ->where('u.id', $id)
             ->get();

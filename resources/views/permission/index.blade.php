@@ -44,7 +44,7 @@
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
-						<label class="control-label col-md-4" >Permission : </label>
+						<label class="control-label col-md-4" >Permission <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="name" id="name" class="form-control" />
 						</div>
@@ -111,6 +111,7 @@
     });
 
     $('#btn_add').click(function(){
+        $('.notifError').remove();
         $('#createModal').modal('show');
         $('#name').val("");
         $('#form_result').hide();
@@ -163,6 +164,7 @@
 	});
 
     $('#add').on('submit',function(event){
+      $('.notifError').remove();
       event.preventDefault();
       if($('#action').val() == 'tambah'){
         $.ajax({
@@ -175,17 +177,7 @@
           data: new FormData(this),
           success:function(data)
           {
-            $('#form_result').show();
-            if(data.errors)
-            {
-              html = '<div class="alert alert-danger">';
-              for(var count = 0; count < data.errors.length; count++)
-              {
-                html += '<p>' + data.errors[count] + '</p>';
-              }
-              html += '</div>';
-              $('#form_result').html(html);
-            }
+            $('#form_result').hide();
             if(data.success)
             {
               html = '<div class="alert alert-success">' + data.success + '</div>';
@@ -194,8 +186,7 @@
                 },1000);
                 $('#tab_data').DataTable().ajax.reload();
                 toastr.success('Permission berhasil ditambahkan!', 'Success', {timeOut: 5000});
-            }
-            
+              }
             },
             error:function(xhr)
             {
@@ -208,7 +199,10 @@
               });
               html += '</div>';
               $('#form_result').html(html);
-            }//end error
+              $.each(xhr.responseJSON.errors,function(field_name,error){
+                  $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+              });
+            }
           });
         }else{
           $.ajax({
@@ -221,7 +215,7 @@
             data: new FormData(this),
             success:function(data)
             {
-              $('#form_result').show();
+              // $('#form_result').show();
               if(data.errors)
               {
                 html = '<div class="alert alert-danger">';

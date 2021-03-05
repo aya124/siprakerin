@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoleRequest;
 use App\Role;
 use Illuminate\Http\Request;
 use App\Permission;
@@ -53,21 +54,29 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        $request-> validate([
-            'name' => ['required', 'max:255'],
-            'display_name' => ['max:255'],
-        ], [
-            'required' =>'Kolom role :attribute tidak boleh kosong',
-        ]);
+        try {
+            $data = $request->all();
+            $data-> attachPermissions($request->p);
+            Role::create($data);
+            return response()->json(['success' => 'Role berhasil ditambah.']);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Role gagal ditambah.']);
+        }
+        // $request-> validate([
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'display_name' => ['required', 'string', 'max:255'],
+        // ], [
+        //     'required' =>'Kolom role :attribute tidak boleh kosong',
+        // ]);
 
-        $role = Role::create([
-            'name' => $request->name,
-            'display_name' => $request->display,
-        ]);
-        $role-> attachPermissions($request->p);
-        return response()->json(['success' => 'Role berhasil diperbarui.']);
+        // $role = Role::create([
+        //     'name' => $request->name,
+        //     'display_name' => $request->display,
+        // ]);
+        // $role-> attachPermissions($request->p);
+        // return response()->json(['success' => 'Role berhasil diperbarui.']);
     }
 
     /**
@@ -110,14 +119,15 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(RoleRequest $request)
     {
-        $request-> validate([
-            'name' => ['required', 'max:255'],
-            'display_name' => ['max:255'],
-        ], [
-            'required' =>'Kolom role :attribute tidak boleh kosong',
-        ]);
+        // $request-> validate([
+        //     'name' => ['required', 'max:255'],
+        //     'display_name' => ['max:255'],
+        // ], [
+        //     'required' =>'Kolom role :attribute tidak boleh kosong',
+        // ]);
+        $data = $request->all();
         $role = Role::findOrFail($request->hidden_id);
         $role->update([
             'name'=> $request->name,

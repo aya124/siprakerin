@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StatusRequest;
 use App\Status;
 use Illuminate\Http\Request;
 //use DB;
@@ -39,7 +40,7 @@ class StatusController extends Controller
      */
     public function create()
     {
-        return view('status.create');
+        //return view('status.create');
     }
 
     /**
@@ -48,24 +49,25 @@ class StatusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StatusRequest $request)
     {
-        $request-> validate([
-            'status' => ['required', 'string', 'max:255'],
-        ], [
-            'required' =>'Kolom :attribute tidak boleh kosong!',
-        ]);
-
-        $status = Status::create([
-            'name' => $request->status,
-        ]);
-        return response()->json(['success' => 'Data status berhasil diperbarui.']);
-
-        // return redirect()->route('status.index')
-        // ->withStatus([
-        //     'message' => 'Status berhasil ditambahkan.',
-        //     'color' => 'success'
+        try {
+            $data = $request->all();
+            Status::create($data);
+            return response()->json(['success' => 'Status berhasil ditambah.']);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Gagal menambah data.']);
+        }
+        // $request-> validate([
+        //     'status' => ['required', 'string', 'max:255'],
+        // ], [
+        //     'required' =>'Kolom :attribute tidak boleh kosong!',
         // ]);
+
+        // $status = Status::create([
+        //     'name' => $request->status,
+        // ]);
+        // return response()->json(['success' => 'Data status berhasil diperbarui.']);
     }
 
     /**
@@ -76,8 +78,7 @@ class StatusController extends Controller
      */
     public function show(Status $status)
     {
-        return view ('status.show', compact('status'));
-        // return view ('status.show', compact('status'));
+       // return view ('status.show', compact('status'));
     }
 
     /**
@@ -105,30 +106,22 @@ class StatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(StatusRequest $request)
     {
-        $request-> validate([
-            'status' => ['required', 'string', 'max:255'],
-        ],[
-            'required' =>'Kolom :attribute tidak boleh kosong!',
-        ]);
+        // $request-> validate([
+        //     'status' => ['required', 'string', 'max:255'],
+        // ],[
+        //     'required' =>'Kolom :attribute tidak boleh kosong!',
+        // ]);
+        $data = $request->all();
         $status = Status::findOrFail($request->hidden_id);
-        $status->update([
-            'name' => $request->status
-        ]);
-
-        return response()->json(['success' => 'Data status berhasil diperbarui.']);
+        // $status->update([
+        //     'name' => $request->status
+        // ]);
+        $status-> update($data);
+        return response()->json(['success' => 'Data berhasil diperbarui.']);
         // $statuses->detail = $request->status;
         // $statuses->save();
-        
-        //return redirect()->route('status.index')->withStatus([
-        //  'message' => 'Data status berhasil diperbarui.',
-        //  'color' => 'success'
-        //]);
-        // return back()->withStatus([
-        //     'message' => 'Data status berhasil diperbarui.',
-        //     'color' => 'success'
-        // ]);
     }
 
     /**

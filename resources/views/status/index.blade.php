@@ -44,7 +44,7 @@
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
-						<label class="control-label col-md-4" >Status : </label>
+						<label class="control-label col-md-4" >Status <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="status" id="status" class="form-control" />
 						</div>
@@ -110,6 +110,7 @@
   });
 
   $('#btn_add').click(function(){
+    $('.notifError').remove();
     $('#createModal').modal('show');
     $('#name').val("");
     $('#form_result').hide();
@@ -132,8 +133,8 @@
           }
         });
       });
-        var id_table;
-        $(document).on('click','.delete',function(){
+      var id_table;
+      $(document).on('click','.delete',function(){
 			  id_table = $(this).attr('id');
 			  $('#confirmModal').modal('show');
 			  $('#ok_button').text('OK');
@@ -157,6 +158,7 @@
 		});
 
     $('#add').on('submit',function(event){
+      $('.notifError').remove();
           event.preventDefault();
           if($('#action').val() == 'tambah'){
               $.ajax({
@@ -169,18 +171,7 @@
                 data: new FormData(this),
                 success:function(data)
                 {
-                  $('#form_result').show();
-                    if(data.errors)
-                    {
-
-                      html = '<div class="alert alert-danger">';
-                      for(var count = 0; count < data.errors.length; count++)
-                      {
-                        html += '<p>' + data.errors[count] + '</p>';
-                      }
-                      html += '</div>';
-                      $('#form_result').html(html);
-                    }
+                  $('#form_result').hide();
                     if(data.success)
                     {
                       html = '<div class="alert alert-success">' + data.success + '</div>';
@@ -191,13 +182,11 @@
                     $('#tab_data').DataTable().ajax.reload();
                       toastr.success('Status berhasil ditambahkan!', 'Success', {timeOut: 5000});
                     }
-                    
                 },
                 error:function(xhr)
                 {
                   console.log(xhr);
                   $('#form_result').show();
-
                   html = '<div class="alert alert-danger">';
                   $.each(xhr.responseJSON.errors, function (key, item) 
                   {	
@@ -205,6 +194,9 @@
                   });
                   html += '</div>';
                   $('#form_result').html(html);
+                  $.each(xhr.responseJSON.errors,function(field_name,error){
+                        $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                    });
                 } //end error
               });
             }else{
@@ -218,10 +210,9 @@
                 data: new FormData(this),
                 success:function(data)
                 {
-                  $('#form_result').show();
+                  // $('#form_result').show();
                   if(data.errors)
                     {
-
                       html = '<div class="alert alert-danger">';
                       for(var count = 0; count < data.errors.length; count++)
                       {

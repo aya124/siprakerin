@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PermissionRequest;
 use App\Permission;
 use Illuminate\Http\Request;
 
@@ -48,20 +49,27 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PermissionRequest $request)
     {
-        $request-> validate([
-            'name' => ['required', 'string', 'max:255'],
-            'display_name' => ['max:255'],
-        ], [
-            'required' =>'Kolom :attribute tidak boleh kosong',
-        ]);
+        try {
+            $data = $request->all();
+            Permission::create($data);
+            return response()->json(['success' => 'Permission berhasil ditambah.']);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Permission gagal ditambah.']);
+        }
+        // $request-> validate([
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'display_name' => ['required', 'max:255'],
+        // ], [
+        //     'required' =>'Kolom :attribute tidak boleh kosong',
+        // ]);
 
-        $permission = Permission::create([
-            'name' => $request->name,
-            'display_name' => $request->display_name,
-        ]);
-        return response()->json(['success' => 'Permission berhasil diperbarui.']);
+        // $permission = Permission::create([
+        //     'name' => $request->name,
+        //     'display_name' => $request->display_name,
+        // ]);
+        // return response()->json(['success' => 'Permission berhasil diperbarui.']);
     }
 
     /**
@@ -97,7 +105,7 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(PermissionRequest $request)
     {
         $request-> validate([
             'name' => ['required', 'string', 'max:255'],

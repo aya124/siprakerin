@@ -46,38 +46,38 @@
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
-						<label class="control-label col-md-4" >Nama Industri: </label>
+						<label class="control-label col-md-4" >Nama Industri <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="name" id="name" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-4" >Alamat: </label>
+						<label class="control-label col-md-4" >Alamat <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="address" id="address" class="form-control" />
 						</div>
           </div>
           <div class="form-group">
-						<label class="control-label col-md-4" >Kota: </label>
+						<label class="control-label col-md-4" >Kota <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="city" id="city" class="form-control" />
 						</div>
           </div>
           <div class="form-group">
-						<label class="control-label col-md-4" >Phone: </label>
+						<label class="control-label col-md-4" >Phone <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="phone" id="phone" class="form-control" />
 						</div>
           </div>
           <div class="form-group">
-						<label class="control-label col-md-4" >Detail: </label>
+						<label class="control-label col-md-4" >Detail </label>
 						<div class="col-md-8">
 							<input type="text" name="detail" id="detail" class="form-control" rows="3"/>
 						</div>
           </div>
           @role('admin')
           <div class="form-group">
-            <label class="control-label col-md-4" >Status: </label>
+            <label class="control-label col-md-4" >Status </label>
             <div class="col-md-8">
               <select class="form-control" name="status" id="status">
                 <option value="belum disetujui">Belum disetujui</option>
@@ -200,19 +200,22 @@
 		});
       // $('#industri').dataTable();
 
-      $('#btn_add').click(function(){
-          $('#createModal').modal('show');
-          $('#name').val("");
-          $('#form_result').hide();
-          $('#createModal .modal-title').text("Tambah Industri");
-          $('#action').val("tambah");
-
-		});
+    $('#btn_add').click(function(){
+      $('.notifError').remove();
+      $('#createModal').modal('show');
+      $('#name').val("");
+      $('#form_result').hide();
+      $('#createModal .modal-title').text("Tambah Industri");
+      $('#action').val("tambah");
+    });
+    
     $(document).on('click','.edit',function(){
+      // $('.notifError').remove();
       var x =$(this).attr('id');
       $('#action').val("edit");
       $('#createModal').modal('show');
       $('#form_result').hide();
+      $('#createModal .modal-title').text("Edit Industri");
       $.ajax({
         url:"/industry/"+x+"/edit",
         dataType:"json",
@@ -272,27 +275,27 @@
 
     $('#add').on('submit',function(event){
         $('.notifError').remove();
-          event.preventDefault();
-          if($('#action').val() == 'tambah'){
-              $.ajax({
-                url:"{{route('industry.store')}}",
-                method:"POST",
-                contentType: false,
-                cache:false,
-                processData: false,
-                dataType:"json",
-                data: new FormData(this),
-                success:function(data)
+        event.preventDefault();
+        if($('#action').val() == 'tambah'){
+            $.ajax({
+              url:"{{route('industry.store')}}",
+              method:"POST",
+              contentType: false,
+              cache:false,
+              processData: false,
+              dataType:"json",
+              data: new FormData(this),
+              success:function(data)
+              {
+                $('#form_result').hide();
+                if(data.success)
                 {
-                  $('#form_result').hide();
-                    if(data.success)
-                    {
-                      html = '<div class="alert alert-success">' + data.success + '</div>';
-                      setTimeout(function(){
-                        $('#createModal').modal('hide');
+                  html = '<div class="alert alert-success">' + data.success + '</div>';
+                  setTimeout(function(){
+                    $('#createModal').modal('hide');
                     },1000);
                     $('#tab_data').DataTable().ajax.reload();
-                      toastr.success('Industri berhasil ditambahkan!', 'Success', {timeOut: 5000});
+                    toastr.success('Industri berhasil ditambahkan!', 'Success', {timeOut: 5000});
                     }
                 },
                 error:function(xhr)
@@ -322,7 +325,7 @@
                 data: new FormData(this),
                 success:function(data)
                 {
-                  $('#form_result').show();
+                  // $('#form_result').show();
                     if(data.errors)
                     {
                       html = '<div class="alert alert-danger">';

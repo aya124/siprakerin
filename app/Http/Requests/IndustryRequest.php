@@ -27,7 +27,7 @@ class IndustryRequest extends FormRequest
             'name' => 'required|string|max:255',
             'address' => 'required|max:255',
             'city' => 'required||max:255',
-            'phone' => 'numeric|digits_between:10,14',
+            'phone' => 'required|numeric|digits_between:10,14',
             'detail' => 'max:255',
         ];
     }
@@ -41,6 +41,7 @@ class IndustryRequest extends FormRequest
             'address.max'           => '*Kolom alamat maks 255 karakter',
             'city.required'         => '*Kolom kota wajib diisi',
             'city.max'              => '*Kolom kota maks 255 karakter',
+            'phone.required'        => '*Kolom phone wajib diisi',
             'phone.numeric'         => '*Kolom phone berisi angka',
             'phone.digits_between'  => '*Kolom phone berisi 10-14 digit',
             'detail'                => '*Kolom detail maks 255 karakter',

@@ -87,7 +87,7 @@ class IndustryController extends Controller
             Industry::create($data);
             return response()->json(['success' => 'Industri berhasil ditambah.']);
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Industri tambah gagal.'],500);
+            return response()->json(['error' => 'Gagal menambah data.']);
         }
     }
 
@@ -99,15 +99,15 @@ class IndustryController extends Controller
      */
     public function show(Industry $industry)
     {
-        $data = DB::table('industries as i')
-        ->join('users as u', 'u.id', '=', 'i.username')
-        ->select('i.name', 'i.address', 'i.city', 'i.phone', 'i.detail',
-        DB::raw('u.name as username'),'i.id')
-        ->where('i.id', '=', $industry->id)
-        ->get();
-        // $d2 = Industry::findOrFail($industry);
-        // dd($data,$d2);
-        return view ('industry.show', compact('data'));
+        // $data = DB::table('industries as i')
+        // ->join('users as u', 'u.id', '=', 'i.username')
+        // ->select('i.name', 'i.address', 'i.city', 'i.phone', 'i.detail',
+        // DB::raw('u.name as username'),'i.id')
+        // ->where('i.id', '=', $industry->id)
+        // ->get();
+        // // $d2 = Industry::findOrFail($industry);
+        // // dd($data,$d2);
+        // return view ('industry.show', compact('data'));
     }
 
     /**

@@ -45,20 +45,20 @@
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
-						<label class="control-label col-md-4" >Role Name: </label>
+						<label class="control-label col-md-4" >Role Name <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="name" id="name" class="form-control" />
 						</div>
                     </div>
                     <div class="form-group">
-						<label class="control-label col-md-4" >Display Name: </label>
+						<label class="control-label col-md-4" >Display Name <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="display" id="display" class="form-control" />
 						</div>
                     </div>
                     
                     <div class="form-group">
-						<label class="control-label col-md-4" >Permission : </label>
+						<label class="control-label col-md-4" >Permission <small class="text danger">*</small> </label>
 						<div class="col-md-8">
                             
                             @foreach ($permit as $p)
@@ -135,6 +135,7 @@
         });
         
         $('#btn_add').click(function(){
+            $('.notifError').remove();
             $('#createModal').modal('show');
             $('#name').val("");
             $('#form_result').hide();
@@ -193,7 +194,6 @@
 							}
 						}
 					}
-
                     $('#name').val(html.data.name);
                     $('#display').val(html.data.display_name);
                     $('#hidden_id').val(html.data.id);
@@ -225,7 +225,6 @@
 				}
 			})
 		});
-
         $('#add').on('submit',function(event){
           event.preventDefault();
           if($('#action').val() == 'tambah'){
@@ -239,17 +238,7 @@
                 data: new FormData(this),
                 success:function(data)
                 {
-                  $('#form_result').show();
-                    if(data.errors)
-                    {
-                      html = '<div class="alert alert-danger">';
-                      for(var count = 0; count < data.errors.length; count++)
-                      {
-                        html += '<p>' + data.errors[count] + '</p>';
-                      }
-                      html += '</div>';
-                      $('#form_result').html(html);
-                    }
+                  $('#form_result').hide();
                     if(data.success)
                     {
                       html = '<div class="alert alert-success">' + data.success + '</div>';
@@ -260,7 +249,6 @@
                     $('#tab_data').DataTable().ajax.reload();
                       toastr.success('Role berhasil ditambahkan!', 'Success', {timeOut: 5000});
                     }
-                    
                 },
                 error:function(xhr)
                 {
@@ -273,7 +261,10 @@
                   });
                   html += '</div>';
                   $('#form_result').html(html);
-                }//end error
+                    $.each(xhr.responseJSON.errors,function(field_name,error){
+                    $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                  });
+                }
               });
           }else{
             $.ajax({

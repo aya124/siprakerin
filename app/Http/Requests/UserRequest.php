@@ -33,15 +33,15 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return[
-            'name.required'     => '*Kolom nama wajib diisi',
+            'name.required'     => '*Kolom wajib diisi',
             'name.string'       => '*Kolom nama berisi teks',
-            'name.max'          => '*Kolom nama maks 255 karakter',
-            'email.required'    => '*Kolom email wajib diisi',
+            'name.max'          => '*Kolom maks 255 karakter',
+            'email.required'    => '*Kolom wajib diisi',
             'email.string'      => '*Kolom email berisi teks',
-            'email.email'       => '*Kolom email wajib berformat email',
-            'email.max'         => '*Kolom email maks 255 karakter',
+            'email.email'       => '*Kolom wajib berformat email',
+            'email.max'         => '*Kolom maksimal 255 karakter',
             'email.unique'      => '*Email sudah terdaftar',
-            'password.required' => '*Kolom password wajib diisi',
+            'password.required' => '*Kolom wajib diisi',
             'password.string'   => '*Kolom password berisi teks',
             'password.min'      => '*Jumlah karakter minimal 8',
             'username.required' => '*Kolom wajib diisi',
