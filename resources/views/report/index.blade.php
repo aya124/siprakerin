@@ -3,7 +3,7 @@
 @section('title', 'Laporan')
 
 @section('content_header')
-  <h1>Laporan</h1>
+  <h1>Laporan/Sertifikat</h1>
 @stop
 
 @section('content')
@@ -14,10 +14,10 @@
   <div class="box">
     <div class="box-header">
       @role(['admin', 'petugas', 'kepsek', 'wks']) 
-      <h3 class="box-title">Data laporan</h3>
+      <h3 class="box-title">Data Laporan/Sertifikat</h3>
       @endrole
       @role('siswa')
-      <h3 class="box-title">Laporan</h3>
+      <h3 class="box-title">Laporan/Sertifikat</h3>
       @endrole
     </div>
     <!-- /.box-header -->
@@ -28,7 +28,7 @@
             @role(['admin', 'petugas', 'kepsek', 'wks']) 
             <th>Nama siswa</th>
             @endrole
-            <th>Industri</th>
+            <th>Nama Industri</th>
             <th width="20%">Laporan</th>
             <th width="20%">Sertifikat</th>
           </tr>
@@ -45,18 +45,18 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Upload laporan</h4>
+          <h4 class="modal-title">Upload Laporan</h4>
         </div>
         <div class="modal-body">
           <span id="form_result"></span>
           <form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-              <label class="control-label col-md-4">File laporan: </label>
+              <label class="control-label col-md-4">File laporan <small class="text-danger">*</small> </label>
               <div class="col-md-8">
                 <input type="file" name="report" id="report" accept=".docx,.pdf" />
               </div>
-              <small class="control-label col-md-4">Format laporan pdf/docx</small>
+              <small class="control-label col-md-4" class="text-danger">Format laporan pdf/docx</small>
             </div>
 
             <div class="form-group" align="center">
@@ -64,6 +64,39 @@
               <input type="hidden" name="submission_id" id="submission" />
               <input type="hidden" name="hidden_id" id="hidden_id" />
               <input type="submit" name="action_button" id="action_button" class="btn btn-primary" value="Submit" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <br />
+
+  <div id="createModal2" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Upload Sertifikat</h4>
+        </div>
+        <div class="modal-body">
+          <span id="form_result"></span>
+          <form method="post" id="add2" class="form-horizontal" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+              <label class="control-label col-md-4">File Sertifikat <small class="text-danger">*</small> </label>
+              <div class="col-md-8">
+                <input type="file" name="report" id="report2" accept=".jpg,.jpeg,.png,.pdf" />
+              </div>
+              <small class="control-label col-md-4" class="text-danger">Format File Sertifikat pdf/jpg/png maks 512kB</small>
+            </div>
+
+            <div class="form-group" align="center">
+              <input type="hidden" name="action2" id="action2" />
+              <input type="hidden" name="submission_id" id="submission" />
+              <input type="hidden" name="hidden_id" id="hidden_id2" />
+              <input type="submit" name="action2_button" id="action2_button" class="btn btn-primary" value="Submit" />
             </div>
           </form>
         </div>
@@ -120,29 +153,36 @@
             data: 'action',
             name: 'action',
             orderable: false
+          },
+          {
+            data: 'action2',
+            name: 'action2',
+            orderable: false
           }
         ]
       });
       // $('#laporan').dataTable();
-
       @role('siswa')
       $('#btn_add').click(function() {
+        $('.notifError').remove();
         $('#createModal').modal('show');
         $('#form_result').hide();
         $('#createModal .modal-title').text("Tambah Laporan");
         $('#action').val("tambah");
+        $('#action2').val("tambah");
       });
       @endrole
       let sub_id;
       $(document).on('click', '.edit', function() {
         sub_id = $(this).data('id');
         $('#action').val("edit");
+        $('#action2').val("edit");
         $('#submission').val(sub_id);
         $('#createModal').modal('show');
         $('#form_result').hide();
       });
-
       $('#add').on('submit', function(event) {
+        $('.notifError').remove();
         event.preventDefault();
         $.ajax({
           url: `/report`,
@@ -153,36 +193,87 @@
           dataType: "json",
           data: new FormData(this),
           success: function(data) {
-            $('#form_result').show();
-            if (data.errors) {
-
-              html = '<div class="alert alert-danger">';
-              for (var count = 0; count < data.errors.length; count++) {
-                html += '<p>' + data.errors[count] + '</p>';
-              }
-              html += '</div>';
-              $('#form_result').html(html);
-            }
+            $('#form_result').hide();
+            // if (data.errors) {
+            //   html = '<div class="alert alert-danger">';
+            //   for (var count = 0; count < data.errors.length; count++) {
+            //     html += '<p>' + data.errors[count] + '</p>';
+            //   }
+            //   html += '</div>';
+            //   $('#form_result').html(html);
+            // }
             if (data.success) {
-              html = '<div class="alert alert-success">' + data.success +
-                '</div>';
+              html = '<div class="alert alert-success">' + data.success + '</div>';
               setTimeout(function() {
                 $('#createModal').modal('hide');
-
               }, 1000);
               $('#tab_data').DataTable().ajax.reload();
-              toastr.success('Data laporan berhasil diperbarui!', 'Success', {
-                timeOut: 5000
-              });
+              toastr.success('Data berhasil diperbarui!', 'Success', {timeOut: 5000}
+              );
             }
-
           },
           error: function(xhr) {
             console.log(xhr);
+            $('#form_result').show();
+            html = '<div class="alert alert-danger">';
+            $.each(xhr.responseJSON.errors, function (key, item) {	
+              html+='<p>' +item+'</p>';
+            });
+              html += '</div>';
+              $('#form_result').html(html);
+              $.each(xhr.responseJSON.errors,function(field_name,error){
+              $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                });
+          } //end error
+        });
+      });
+
+      $('#add2').on('submit', function(event) {
+        $('.notifError').remove();
+        event.preventDefault();
+        $.ajax({
+          url: `/report2`,
+          method: "POST",
+          contentType: false,
+          cache: false,
+          processData: false,
+          dataType: "json",
+          data: new FormData(this),
+          success: function(data) {
+            $('#form_result').hide();
+            // if (data.errors) {
+            //   html = '<div class="alert alert-danger">';
+            //   for (var count = 0; count < data.errors.length; count++) {
+            //     html += '<p>' + data.errors[count] + '</p>';
+            //   }
+            //   html += '</div>';
+            //   $('#form_result').html(html);
+            // }
+            if (data.success) {
+              html = '<div class="alert alert-success">' + data.success + '</div>';
+              setTimeout(function() {
+                $('#createModal').modal('hide');
+              }, 1000);
+              $('#tab_data').DataTable().ajax.reload();
+              toastr.success('Data berhasil diperbarui!', 'Success', {timeOut: 5000}
+              );
+            }
+          },
+          error: function(xhr) {
+            console.log(xhr);
+            $('#form_result').show();
+            html = '<div class="alert alert-danger">';
+            $.each(xhr.responseJSON.errors, function (key, item) {	
+              html+='<p>' +item+'</p>';
+            });
+              html += '</div>';
+              $('#form_result').html(html);
+              $.each(xhr.responseJSON.errors,function(field_name,error){
+              $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                });
           } //end error
         });
       });
     });
-
   </script>
 @stop

@@ -148,7 +148,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(UserRequest $request)
     {
         $user = User::findOrFail($request->hidden_id);
         $request-> validate([

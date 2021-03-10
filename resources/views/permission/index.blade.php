@@ -97,7 +97,6 @@
         url: "{{ route('permission.index') }}",
       },
       columns:[
-
 	  {
 		data: 'name',
 		name: 'name',
@@ -118,7 +117,6 @@
         $('#createModal .modal-title').text("Tambah Permission");
         $('#action').val("tambah");
     });
-
     var id_table;
     var html = '';
     $(document).on('click','.edit',function(){

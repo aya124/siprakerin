@@ -129,10 +129,7 @@ class RoleController extends Controller
         // ]);
         $data = $request->all();
         $role = Role::findOrFail($request->hidden_id);
-        $role->update([
-            'name'=> $request->name,
-            'display_name' => $request->display,
-        ]);
+        $role->update($data);
         DB::table('permission_role')
         ->where('permission_role.role_id', $request->hidden_id)
         ->delete();

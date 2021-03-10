@@ -41,15 +41,29 @@ class ReportController extends Controller
                         $report = Report::findOrFail($data->report_id);
                         $html .= '<a href= "/report/' . $report->id . '" 
                     target="_blank" class="btn btn-default btn-sm">
-                    <i class="fas fa-file"></i> Lihat laporan</a>';
+                    <i class="fas fa-file"></i> Lihat Laporan</a>';
                     }
                     if (auth()->user()->hasRole('siswa')) {
-                        $html .= '<button class="btn btn-default btn-sm edit" data-id="' . $data->id . '">
-                    <i class="fas fa-file"></i> Upload/ganti laporan</button>';
+                        $html .= '<button name="report" class="btn btn-default btn-sm edit" data-id="' . $data->id . '">
+                    <i class="fas fa-file"></i> Upload/ganti Laporan</button>';
                     }
                     return $html ?: 'Laporan belum diupload';
                 })
-                ->rawColumns(['action'])
+                ->addColumn('action2', function ($data) {
+                    $html = '';
+                    if (!empty($data->report_id)) {
+                        $report = Report::findOrFail($data->report_id);
+                        $html .= '<a href= "/report2/' . $report->id . '" 
+                    target="_blank" class="btn btn-default btn-sm">
+                    <i class="fas fa-file"></i> Lihat Sertifikat</a>';
+                    }
+                    if (auth()->user()->hasRole('siswa')) {
+                        $html .= '<button name="report2" class="btn btn-default btn-sm edit" data-id="' . $data->id . '">
+                    <i class="fas fa-file"></i> Upload/ganti Sertifikat</button>';
+                    }
+                    return $html ?: 'Sertifikat belum diupload';
+                })
+                ->rawColumns(['action','action2'])
                 ->make(true);
         }
 
@@ -76,12 +90,17 @@ class ReportController extends Controller
     {
         $request->validate([
             'submission_id' => 'required',
-            'report' => 'required|file|mimes:doc,docx,pdf'
+            'report' => 'required|file|mimes:doc,docx,pdf|max:512',
+            'report2' => 'required|file|mimes:jpeg,jpg,png,pdf|max:512'
         ]);
 
         $original_name = $request->report->getClientOriginalName();
-        $saved_name = 'file_' . date('Ymd') . '_' . str_pad(Report::all()->count() + 1, 4, '0', STR_PAD_LEFT).'.'.$request->report->extension();
+        $saved_name = 'file_laporan' . date('Ymd') . '_' . str_pad(Report::all()->count() + 1, 4, '0', STR_PAD_LEFT).'.'.$request->report->extension();
         $path = $request->report->storeAs('reports', $saved_name);
+
+        $original_name = $request->report2->getClientOriginalName();
+        $saved_name = 'file_sertifikat' . date('Ymd') . '_' . str_pad(Report::all()->count() + 1, 4, '0', STR_PAD_LEFT).'.'.$request->report2->extension();
+        $path = $request->report2->storeAs('reports', $saved_name);
 
         $report = Report::create([
             'original_name' => $original_name, 
@@ -93,7 +112,7 @@ class ReportController extends Controller
         $submission->report_id = $report->id;
         $submission->save();
 
-        return response()->json(['success' => 'Laportan berhasil diunggah.']);
+        return response()->json(['success' => 'Berkas berhasil diunggah.']);
     }
 
     /**

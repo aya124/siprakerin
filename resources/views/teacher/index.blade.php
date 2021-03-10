@@ -4,7 +4,7 @@
 
 @section('content_header')
 <h1>Guru <a id="btn_add" 
-  class="btn btn-flat btn-primary">Tambah guru</a></h1>
+  class="btn btn-flat btn-primary">Tambah Guru</a></h1>
 @stop
 
 @section('content')
@@ -14,7 +14,7 @@
 
 <div class="box">
     <div class="box-header">
-        <h3 class="box-title">Guru</h3>
+        <h3 class="box-title">Manajemen Guru</h3>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -44,7 +44,7 @@
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
-						<label class="control-label col-md-4" >Nama guru: </label>
+						<label class="control-label col-md-4" >Nama guru <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="name" id="name" class="form-control" />
 						</div>
@@ -95,7 +95,6 @@
 				url: "{{ route('teacher.index') }}",
 			},
 			columns:[
-
 			{
 				data: 'name',
 				name: 'name',
@@ -110,11 +109,12 @@
     // $('#guru').dataTable();
 
     $('#btn_add').click(function(){
-        $('#createModal').modal('show');
-        $('#name').val("");
-        $('#form_result').hide();
-        $('#createModal .modal-title').text("Tambah Guru");
-        $('#action').val("tambah");
+      $('.notifError').remove();
+      $('#createModal').modal('show');
+      $('#name').val("");
+      $('#form_result').hide();
+      $('#createModal .modal-title').text("Tambah Guru");
+      $('#action').val("tambah");
 		});
     $(document).on('click','.edit',function(){
       var x =$(this).attr('id');
@@ -143,9 +143,8 @@
 				beforeSend:function(){
 					$('#ok_button').text('Deleting...');
 				},
-				success:function(data)
-				{
-					setTimeout(function(){
+				success:function(data) {
+					setTimeout(function() {
 						$('#confirmModal').modal('hide');
 						$('#tab_data').DataTable().ajax.reload();
 					}, 2000);
@@ -153,8 +152,8 @@
 				}
 			})
 		});
-
     $('#add').on('submit',function(event){
+      $('.notifError').remove();
           event.preventDefault();
           if($('#action').val() == 'tambah'){
               $.ajax({
@@ -165,43 +164,30 @@
                 processData: false,
                 dataType:"json",
                 data: new FormData(this),
-                success:function(data)
-                {
-                  $('#form_result').show();
-                    if(data.errors)
-                    {
-
-                      html = '<div class="alert alert-danger">';
-                      for(var count = 0; count < data.errors.length; count++)
-                      {
-                        html += '<p>' + data.errors[count] + '</p>';
-                      }
-                      html += '</div>';
-                      $('#form_result').html(html);
-                    }
-                    if(data.success)
-                    {
+                success:function(data) {
+                  $('#form_result').hide();
+                    if(data.success) {
                       html = '<div class="alert alert-success">' + data.success + '</div>';
                       setTimeout(function(){
                         $('#createModal').modal('hide');
-
                     },1000);
                     $('#tab_data').DataTable().ajax.reload();
-                      toastr.success('Guru berhasil ditambahkan!', 'Success', {timeOut: 5000});
+                      toastr.success('Guru berhasil ditambahkan!', 'Success', {timeOut: 5000}
+                      );
                     }
-                    
                 },
-                error:function(xhr)
-                {
+                error:function(xhr) {
                   console.log(xhr);
                   $('#form_result').show();
                   html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) 
-                  {	
+                  $.each(xhr.responseJSON.errors, function (key, item) {	
                     html+='<p>' +item+'</p>';
                   });
                   html += '</div>';
                   $('#form_result').html(html);
+                    $.each(xhr.responseJSON.errors,function(field_name,error){
+                    $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                  });
                 } //end error
               });
             }else{
@@ -213,12 +199,9 @@
                 processData: false,
                 dataType:"json",
                 data: new FormData(this),
-                success:function(data)
-                {
-                  $('#form_result').show();
-                  if(data.errors)
-                    {
-
+                success:function(data) {
+                  // $('#form_result').show();
+                  if(data.errors) {
                       html = '<div class="alert alert-danger">';
                       for(var count = 0; count < data.errors.length; count++)
                       {
@@ -227,8 +210,7 @@
                       html += '</div>';
                       $('#form_result').html(html);
                     }
-                    if(data.success)
-                    {
+                    if(data.success) {
                       html = '<div class="alert alert-success">' + data.success + '</div>';
                       setTimeout(function(){
                         $('#createModal').modal('hide');
@@ -238,13 +220,11 @@
                       toastr.success('Data guru berhasil diperbarui!', 'Success', {timeOut: 5000});
                     }
                 },
-                error:function(xhr)
-                {
+                error:function(xhr) {
                   console.log(xhr);
                   $('#form_result').show();
                   html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) 
-                  {	
+                  $.each(xhr.responseJSON.errors, function (key, item) {	
                     html+='<p>' +item+'</p>';
                   });
                   html += '</div>';

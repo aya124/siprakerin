@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TeacherRequest;
 use App\Teacher;
 use Illuminate\Http\Request;
 //use DB;
@@ -48,19 +49,26 @@ class TeacherController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TeacherRequest $request)
     {
-        $request-> validate([
-            'name' => ['required', 'string', 'max:255'],
-        ], [
-            'required' =>'Kolom :attribute tidak boleh kosong!',
-        ]);
+        try {
+            $data = $request->all();
+            Teacher::create($data);
+            return response()->json(['success' => 'Data guru berhasil ditambah.']);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Gagal menambahkan data guru.']);
+        }
+        // $request-> validate([
+        //     'name' => ['required', 'string', 'max:255'],
+        // ], [
+        //     'required' =>'Kolom :attribute tidak boleh kosong!',
+        // ]);
 
-        $teacher = Teacher::create([
-            'name' => $request->name,
-        ]);
+        // $teacher = Teacher::create([
+        //     'name' => $request->name,
+        // ]);
 
-        return response()->json(['success' => 'Data guru berhasil diperbarui.']);
+        // return response()->json(['success' => 'Data guru berhasil diperbarui.']);
         // ->withStatus([
         //    'message' => 'Guru berhasil ditambahkan.',
         //    'color' => 'success'
@@ -105,16 +113,18 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
-        $request-> validate([
-            'name' => ['required', 'string', 'max:255'],
-        ]);
+    public function update(TeacherRequest $request)
+    {  
+        $data = $request->all();
         $teacher = Teacher::findOrFail($request->hidden_id);
-        $teacher->update([
-            'name'=> $request->name
-        ]);
-
+        $teacher->update($data);
+        // $request-> validate([
+        //     'name' => ['required', 'string', 'max:255'],
+        // ]);
+        // $teacher = Teacher::findOrFail($request->hidden_id);
+        // $teacher->update([
+        //     'name'=> $request->name
+        // ]);
         return response()->json(['success' => 'Data guru berhasil diperbarui.']);
         //$teacher->name = $request->teacher;
         //$teacher->save();

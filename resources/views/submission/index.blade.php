@@ -47,7 +47,7 @@
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
-						<label class="control-label col-md-4" >Nama Industri: </label>
+						<label class="control-label col-md-4" >Nama Industri <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<select class="form-control" id="name" name="name">
                 @foreach ($industry as $item)
@@ -57,13 +57,13 @@
 						</div>
           </div>
           <div class="form-group">
-						<label class="control-label col-md-4" >Tanggal Mulai Prakerin: </label>
+						<label class="control-label col-md-4" >Tanggal Mulai Prakerin <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="date" name="startdate" id="startdate" class="form-control" />
 						</div>
           </div>
           <div class="form-group">
-						<label class="control-label col-md-4" >Tanggal Selesai Prakerin: </label>
+						<label class="control-label col-md-4" >Tanggal Selesai Prakerin <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="date" name="finishdate" id="finishdate" class="form-control" />
 						</div>
@@ -93,7 +93,7 @@
 				<form  method="post" class="form-horizontal" id="ups" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-          <label class="control-label col-md-4" >File Surat Pengantar: </label>
+          <label class="control-label col-md-4" >File Surat Pengantar <small class="text-danger">*</small> </label>
           <div class="col-md-8">
             <div class="file-preview">
               <input type="file" name="upload" id="upload" accept=".jpeg,.jpg,.png,.pdf" class="form-control" />
@@ -127,7 +127,7 @@
 				<form method="post" class="form-horizontal" id="upss" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-          <label class="control-label col-md-4" >File Surat Balasan: </label>
+          <label class="control-label col-md-4" >File Surat Balasan <small class="text-danger">*</small> </label>
           <div class="col-md-8">
             <div class="file-preview">
               <input type="file" name="upload" id="upload2" accept=".jpeg,.jpg,.png,.pdf" class="form-control" />
@@ -208,6 +208,7 @@
   });
 
   $('#btn_add').click(function(){
+    $('.notifError').remove();
     $('#createModal').modal('show');
     $('#name').val("");
     $('#form_result').hide();

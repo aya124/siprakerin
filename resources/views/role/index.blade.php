@@ -40,8 +40,7 @@
 				<h4 class="modal-title"></h4>
 			</div>
 			<div class="modal-body">
-
-                <span id="form_result"></span>
+            <span id="form_result"></span>
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
@@ -49,29 +48,26 @@
 						<div class="col-md-8">
 							<input type="text" name="name" id="name" class="form-control" />
 						</div>
-                    </div>
-                    <div class="form-group">
+                </div>
+                  <div class="form-group">
 						<label class="control-label col-md-4" >Display Name <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="display" id="display" class="form-control" />
 						</div>
-                    </div>
-                    
+                </div>
                     <div class="form-group">
 						<label class="control-label col-md-4" >Permission <small class="text danger">*</small> </label>
-						<div class="col-md-8">
+						  <div class="col-md-8">
+                @foreach ($permit as $p)
                             
-                            @foreach ($permit as $p)
-                            
-                            <label class="form-check-label">
+                  <label class="form-check-label">
 						        <input type="checkbox" class="form-check-input" value="{{$p->id}}" id="p" name="p[]">{{$p->name}}</input>
 						      </label>
 						    <br />
 						    @endforeach
 						</div>
-                    </div>
-                    
-                    <br />
+              </div>
+                <br />
 					<div class="form-group" align="center">
 						<input type="hidden" name="action" id="action" />
 						<input type="hidden" name="hidden_id" id="hidden_id" />
@@ -116,8 +112,7 @@
 		ajax:{
             url: "{{ route('role.index') }}",
             },
-            columns:[
-                
+            columns:[ 
             {
                 data: 'name',
 				name: 'name',
@@ -143,7 +138,6 @@
             $('#createModal .modal-title').text("Tambah Role");
             $('#action').val("tambah");
         });
-
         /*
 		replace(char old, char new)
 		*/
@@ -156,7 +150,6 @@
 			$('#display').val(display);
 			$('#name').val(role);
 		});
-
         var id_table;
         var html = '';
         $(document).on('click','.edit',function(){
@@ -167,26 +160,23 @@
             $('#action').val("edit");
             $('#createModal .modal-title').text("Edit role");
             $('input[name="p[]"]').prop("checked",false);
-
             $.ajax({
                 url:"/admin/role/"+id_table+"/edit",
                 dataType:"json",
                 success:function(html)
                 {
-                    //pertama ambil data awal
+              //pertama ambil data awal
 					var awal= [];
 					$('input[name="p[]"]').map(function() {
 						return awal.push(this.value);
 					});
-
-                    //ambil data compare
+              //ambil data compare
 					var compare=[];
 					var jmlh = html.role_permission.length;
 					for (var i =0; i<jmlh; i++) {
 						 compare.push(html.role_permission[i]);
 					}
-
-                    //banding awal dngn compare jika sama, checked
+              //banding awal dngn compare jika sama, checked
 					for(var i=0; i<awal.length;i++){
 						for(var j=0; j<jmlh; j++){
 							if(awal[i] == compare[j]){
@@ -194,21 +184,20 @@
 							}
 						}
 					}
-                    $('#name').val(html.data.name);
-                    $('#display').val(html.data.display_name);
-                    $('#hidden_id').val(html.data.id);
-                    console.log($('#hidden_id').val(),$('#action').val());
+                $('#name').val(html.data.name);
+                $('#display').val(html.data.display_name);
+                $('#hidden_id').val(html.data.id);
+                console.log($('#hidden_id').val(),$('#action').val());
                 }
             });
         });
 
-        $(document).on('click','.delete',function(){
+      $(document).on('click','.delete',function(){
 			id_table = $(this).attr('id');
 			$('#confirmModal').modal('show');
 			$('#ok_button').text('OK');
-		});
-
-        $('#ok_button').click(function(){
+      });
+      $('#ok_button').click(function(){
             console.log (id_table);
 			$.ajax({
 				url:"role/destroy/"+id_table,
@@ -226,6 +215,7 @@
 			})
 		});
         $('#add').on('submit',function(event){
+          $('.notifError').remove();
           event.preventDefault();
           if($('#action').val() == 'tambah'){
               $.ajax({
@@ -277,10 +267,9 @@
                 data: new FormData(this),
                 success:function(data)
                 {
-                  $('#form_result').show();
+                  // $('#form_result').show();
                     if(data.errors)
                     {
-
                       html = '<div class="alert alert-danger">';
                       for(var count = 0; count < data.errors.length; count++)
                       {

@@ -196,6 +196,7 @@
     // $('#siswa').dataTable();
 
     $('#btn_add').click(function(){
+      $('.notifError').remove();
       $('#createModal').modal('show');
       $('#name').val("");
       $('#username').val("");
