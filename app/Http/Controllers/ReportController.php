@@ -58,7 +58,7 @@ class ReportController extends Controller
                     <i class="fas fa-file"></i> Lihat Sertifikat</a>';
                     }
                     if (auth()->user()->hasRole('siswa')) {
-                        $html .= '<button name="report2" class="btn btn-default btn-sm edit" data-id="' . $data->id . '">
+                        $html .= '<button name="report2" class="btn btn-default btn-sm editCertif" data-id="' . $data->id . '">
                     <i class="fas fa-file"></i> Upload/ganti Sertifikat</button>';
                     }
                     return $html ?: 'Sertifikat belum diupload';

@@ -13,7 +13,7 @@
 
   <div class="box">
     <div class="box-header">
-      @role(['admin', 'petugas', 'kepsek', 'wks']) 
+      @role(['admin', 'wali-kelas', 'kepsek', 'wks']) 
       <h3 class="box-title">Data Laporan/Sertifikat</h3>
       @endrole
       @role('siswa')
@@ -25,7 +25,7 @@
       <table id="tab_data" class="table table-bordered table-striped">
         <thead>
           <tr>
-            @role(['admin', 'petugas', 'kepsek', 'wks']) 
+            @role(['admin', 'wali-kelas', 'kepsek', 'wks']) 
             <th>Nama siswa</th>
             @endrole
             <th>Nama Industri</th>
@@ -52,16 +52,17 @@
           <form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-              <label class="control-label col-md-4">File laporan <small class="text-danger">*</small> </label>
+              <label class="control-label col-md-4 certif">File laporan</label>
               <div class="col-md-8">
                 <input type="file" name="report" id="report" accept=".docx,.pdf" />
               </div>
-              <small class="control-label col-md-4" class="text-danger">Format laporan pdf/docx</small>
+              <small class="control-label col-md-4 file-format" class="text-danger">Format file pdf/docx</small>
             </div>
 
             <div class="form-group" align="center">
               <input type="hidden" name="action" id="action" />
               <input type="hidden" name="submission_id" id="submission" />
+              <input type="hidden" id="file_type" />
               <input type="hidden" name="hidden_id" id="hidden_id" />
               <input type="submit" name="action_button" id="action_button" class="btn btn-primary" value="Submit" />
             </div>
@@ -73,36 +74,6 @@
   
   <br />
 
-  <div id="createModal2" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Upload Sertifikat</h4>
-        </div>
-        <div class="modal-body">
-          <span id="form_result"></span>
-          <form method="post" id="add2" class="form-horizontal" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-              <label class="control-label col-md-4">File Sertifikat <small class="text-danger">*</small> </label>
-              <div class="col-md-8">
-                <input type="file" name="report" id="report2" accept=".jpg,.jpeg,.png,.pdf" />
-              </div>
-              <small class="control-label col-md-4" class="text-danger">Format File Sertifikat pdf/jpg/png maks 512kB</small>
-            </div>
-
-            <div class="form-group" align="center">
-              <input type="hidden" name="action2" id="action2" />
-              <input type="hidden" name="submission_id" id="submission" />
-              <input type="hidden" name="hidden_id" id="hidden_id2" />
-              <input type="submit" name="action2_button" id="action2_button" class="btn btn-primary" value="Submit" />
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
   @endrole
 
   <div id="confirmModal" class="modal fade" role="dialog">
@@ -140,7 +111,7 @@
           url: "{{ route('report.index') }}",
         },
         columns: [
-          @role(['admin', 'petugas', 'kepsek', 'wks']) 
+          @role(['admin', 'wali-kelas', 'kepsek', 'wks']) 
           {
             data: 'student_name',
             name: 'student_name',
@@ -167,7 +138,7 @@
         $('.notifError').remove();
         $('#createModal').modal('show');
         $('#form_result').hide();
-        $('#createModal .modal-title').text("Tambah Laporan");
+        // $('#createModal .modal-title').text("Tambah Laporan");
         $('#action').val("tambah");
         $('#action2').val("tambah");
       });
@@ -177,10 +148,28 @@
         sub_id = $(this).data('id');
         $('#action').val("edit");
         $('#action2').val("edit");
+        $('#file_type').val("report");
         $('#submission').val(sub_id);
+        $('#createModal .file-format').html('Format file pdf/docx');
+        $('#createModal .certif').html('File Laporan');
+        $('#createModal .modal-title').html('Upload Laporan');
         $('#createModal').modal('show');
         $('#form_result').hide();
       });
+
+      $(document).on('click', '.editCertif', function() {
+        sub_id = $(this).data('id');
+        $('#action').val("edit");
+        $('#action2').val("edit");
+        $('#file_type').val("certif");
+        $('#submission').val(sub_id);
+        $('#createModal .file-format').html('Format file pdf/jpg/png');
+        $('#createModal .certif').html('File Sertifikat');
+        $('#createModal .modal-title').html('Upload Sertifikat');
+        $('#createModal').modal('show');
+        $('#form_result').hide();
+      });
+
       $('#add').on('submit', function(event) {
         $('.notifError').remove();
         event.preventDefault();
