@@ -188,12 +188,12 @@ return [
             'icon' => 'fa fa-user-cog',
             'permission' => 'menu-user',
         ],
-        [
-            'text' => 'Daftar Guru',
-            'url' => 'teacher',
-            'icon' => 'fa fa-users',
-            'permission' => 'menu-guru-petugas',
-        ],
+        // [
+        //     'text' => 'Daftar Guru',
+        //     'url' => 'teacher',
+        //     'icon' => 'fa fa-users',
+        //     'permission' => 'menu-guru-petugas',
+        // ],
         [
             'text' => 'Status',
             'url' => 'status',

@@ -11,6 +11,7 @@ use Auth;
 use Illuminate\Support\Facades\DB;
 use App\Role;
 use App\Permission;
+use App\Teacher;
 
 class UsersController extends Controller
 {
@@ -34,7 +35,7 @@ class UsersController extends Controller
         $data = DB::table('users as u')
           ->join('role_user as ru', 'ru.user_id', '=', 'u.id')
           ->join('roles as r', 'r.id', '=', 'ru.role_id')
-          ->select('u.name', 'u.email', 'u.username',
+          ->select('u.name', 'u.email','u.gender', 'u.username',
             DB:: raw('r.name as role'), 'u.id')
           ->get();
 
@@ -71,16 +72,6 @@ class UsersController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        // return view('user.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -89,35 +80,23 @@ class UsersController extends Controller
     public function store(UserRequest $request)
     {
         try {
-            $data = $request->all();
-            $data ['role'] = $request->role ?: 'Siswa';
-            User::create($data);
+            DB::transaction(function() use($request){
+                $data = $request->all();
+                $data ['password'] = Hash::make($request->password);
+                $user = User::create($data);
+                $user->attachRole($request->role);
+
+                if ($this->ifNotTeachers($this->checkRole($request->role))) {
+                    $data['user_id'] = $user->id;
+                    Teacher::create($data);
+                }  
+            });
             return response()->json(['success' => 'Data user berhasil ditambah.']);
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Gagal menambahkan data user.']);
+            return response()->json(['error' => 'Gagal menambahkan data user.'],500);
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        // if(request()->ajax()){
-        //     $user = User::findOrFail($id);
-        //     $data = DB::table('users as u')
-        //     ->join('role_user as ru', 'ru.user_id', '=', 'u.id')
-        //     ->join('roles as r', 'r.id', '=', 'ru.role_id')
-        //     ->select('u.name','u.username', 'u.email', 
-        //         DB::raw('r.name as role'), 'u.id')
-        //     ->where('u.id', $id)
-        //     ->get();
-        // }
-        // return response()->json(compact('data'));
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -132,7 +111,7 @@ class UsersController extends Controller
         $data = DB::table('users as u')
             ->join('role_user as ru', 'ru.user_id', '=', 'u.id')
             ->join('roles as r', 'r.id', '=', 'ru.role_id')
-            ->select('u.name','u.username', 'u.email', 
+            ->select('u.name','u.username', 'u.gender', 'u.email', 
                 DB::raw('r.id as role'), 'u.id')
             ->where('u.id', $id)
             ->get();
@@ -150,19 +129,9 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request)
     {
+        $data = $request->all();
         $user = User::findOrFail($request->hidden_id);
-        $request-> validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 
-            'username' => ['required', Rule::unique('users')->ignore($user)]
-        ],
-            // 'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'username' => $request->username,
-        ]);
+        $user->update($data);
         $roles = $user->roles;
         foreach ($roles as $key => $value){
             $user->detachRole($value);
@@ -243,4 +212,20 @@ class UsersController extends Controller
             'color' => 'success'
             ]);
     }
+
+    protected function ifNotTeachers($data)
+    {
+        if ($data != 'siswa' && $data != 'admin') {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    protected function checkRole($id_role)
+    {
+        return Role::where('id',$id_role)->first()->display_name;
+    }
+
 }

@@ -51,8 +51,8 @@ class ReportController extends Controller
                 })
                 ->addColumn('action2', function ($data) {
                     $html = '';
-                    if (!empty($data->report_id)) {
-                        $report = Report::findOrFail($data->report_id);
+                    if (!empty($data->certif_id)) {
+                        $report = Certificate::findOrFail($data->certif_id);
                         $html .= '<a href= "/report2/' . $report->id . '" 
                     target="_blank" class="btn btn-default btn-sm">
                     <i class="fas fa-file"></i> Lihat Sertifikat</a>';

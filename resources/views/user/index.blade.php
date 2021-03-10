@@ -25,6 +25,7 @@
             <tr>
               <th>Nama</th>
               <th>Username</th>
+              <th>Jenis Kelamin</th>
               <th>E-mail</th>
               <th>Role</th>
               <th>Aksi</th>
@@ -62,9 +63,20 @@
           </div>
           
           <div class="form-group">
+            <label class="control-label col-md-3" >Jenis Kelamin <small class="text-danger">*</small> </label>
+            <div class="col-md-8">
+              <select class="form-control" name="gender" id="gender">
+                <option value="">Pilih jenis kelamin</option>
+                <option value="male">Laki-laki</option>
+                <option value="female">Perempuan</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
 						<label class="control-label col-md-3" >E-mail <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
-							<input type="text" name="email" id="email" class="form-control" />
+							<input type="email" name="email" id="email" class="form-control" />
 						</div>
           </div>
 
@@ -80,8 +92,9 @@
 						<label class="control-label col-md-3" >Role <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<select class="form-control" id="role" name="role">
-								@for($i=0; $i<= count($role)-1;$i++)
-								<option value="{{$role[$i]->id}}">{{$role[$i]->name}}</option>
+                <option value="">Pilih role</option>
+                @for($i=0; $i<= count($role)-1;$i++)
+                <option value="{{$role[$i]->id}}">{{$role[$i]->name}}</option>
 								@endfor
 							</select>
 						</div>
@@ -177,6 +190,18 @@
 			{
 				data: 'username',
 				name: 'username',
+      },
+      {
+				data: 'gender',
+        // name: 'gender',
+        render:function(data){
+          if (data == 'male') {
+            return 'Laki-laki'
+          }
+          else{
+            return 'Perempuan'
+          }
+        }
 			},
       {
 				data: 'email',
@@ -200,10 +225,14 @@
       $('#createModal').modal('show');
       $('#name').val("");
       $('#username').val("");
+      $('#gender').val("");
       $('#password').val("");
+      $('#role').val("");
+      $('#email').val("");
       $('#form_result').hide();
       $('#createModal .modal-title').text("Tambah User");
       $('#action').val("tambah");
+      $('#password').removeAttr('disabled');
       $('#pass').show();
     });
     
@@ -223,7 +252,9 @@
           $('#email').val(html.data[0].email);
           $('#username').val(html.data[0].username);
           $('#role').val(html.data[0].role);
+          $('#gender').val(html.data[0].gender);
           $('#pass').hide();
+          $('#password').attr('disabled','disabled');
           $('#hidden_id').val(html.data[0].id);
         }
       });
@@ -235,14 +266,8 @@
  			$('#changeModal').modal('show');
  			$('#change_result').hide();
  			$('#input').val('');
- 			$.ajax({
- 				url:"/user/change/"+id_table,
- 				dataType:"json",
- 				success:function(html)
- 				{
- 					$('#change_id').val(html.data.id);
- 				}
- 			});
+      $('#inputnew').val('');
+ 			$('#change_id').val(id_table);
  		});
     
      $('#changed').on('submit',function(event){
@@ -257,19 +282,8 @@
 					data: new FormData(this),
 					success:function(data)
 					{
-						$('#change_result').show();
+						$('#change_result').hide();
 						var html = '';
-							if(data.errors)
-							{
-
-								html = '<div class="alert alert-danger">';
-								for(var count = 0; count < data.errors.length; count++)
-								{
-									html += '<p>' + data.errors[count] + '</p>';
-								}
-								html += '</div>';
-								$('#change_result').html(html);
-							}
 							if(data.success)
 							{
 								html = '<div class="alert alert-success">' + data.success + '</div>';
@@ -372,7 +386,7 @@
             data: new FormData(this),
             success:function(data)
             {
-              $('#form_result').show();
+              $('#form_result').hide();
               if(data.errors)
               {
                 html = '<div class="alert alert-danger">';
