@@ -21,13 +21,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    // public function index()
-    // {
+    public function index()
+    {
     //     if (auth()->user()->hasRole('admin')) {
     //         return redirect('validation');
     //     } elseif (auth()->user()->hasRole('siswa')) {
     //         return redirect('submission');
     //     }
-    //     return view('home');
-    // }
+        return view('home');
+    }
 }
