@@ -40,7 +40,7 @@
 			</div>
 			<div class="modal-body">
 
-                <span id="form_result"></span>
+        <span id="form_result"></span>
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
@@ -48,9 +48,9 @@
 						<div class="col-md-8">
 							<input type="text" name="name" id="name" class="form-control" />
 						</div>
-                    </div>
+            </div>
                     
-                    <br />
+          <br />
 					<div class="form-group" align="center">
 						<input type="hidden" name="action" id="action" />
 						<input type="hidden" name="hidden_id" id="hidden_id" />
@@ -97,32 +97,33 @@
         url: "{{ route('permission.index') }}",
       },
       columns:[
-	  {
-		data: 'name',
-		name: 'name',
+	    {
+		    data: 'name',
+		    name: 'name',
       },
       {
         data: 'action',
-		name: 'action',
-		orderable: false
+		    name: 'action',
+		    orderable: false
       }
       ]
     });
 
     $('#btn_add').click(function(){
-        $('.notifError').remove();
-        $('#createModal').modal('show');
-        $('#name').val("");
-        $('#form_result').hide();
-        $('#createModal .modal-title').text("Tambah Permission");
-        $('#action').val("tambah");
+      $('.notifError').remove();
+      $('#createModal').modal('show');
+      $('#name').val("");
+      $('#form_result').hide();
+      $('#createModal .modal-title').text("Tambah Permission");
+      $('#action').val("tambah");
     });
+
     var id_table;
     var html = '';
     $(document).on('click','.edit',function(){
         id_table = $(this).attr('id');
         $('#action').val("edit");
-        // console.log (x);
+        $('.notifError').remove();
         $('#createModal').modal('show');
         $('#form_result').hide();
         $('#createModal .modal-title').text("Edit permission");

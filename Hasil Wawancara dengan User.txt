@@ -47,7 +47,7 @@ NEW
 UPDATE
 Tgl 28 Feb 2021 08:05-10:05
 
-Hasil Diskusi/Koreksi Demo Siprakerin
+Hasil Diskusi/Koreksi Demo Siprakerin via Google Meet
 
 1. Pengajuan cukup 1x dulu, ada pengajuan utama dan alternatif.
     Jika tidak direspon, disertakan alasan "tidak ada respon dari .."
@@ -61,3 +61,11 @@ Hasil Diskusi/Koreksi Demo Siprakerin
 8. Change db interactively, bukan lewat file env. ()
 . Sertakan referensi kakak kelas yang melakukan prakerin (pengembangan selanjutnya)
 . Backup data (pengembangan selanjutnya)
+
+
+Tgl 12 Mar 2021
+Hasil Cek Mandiri
+
+1. Jika ada pengajuan yang ditolak, 
+    seharusnya tidak muncul di upload laporan/input nilai
+2.

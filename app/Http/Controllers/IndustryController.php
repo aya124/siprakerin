@@ -58,7 +58,6 @@ class IndustryController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        // $industries = Industry::all();
         return view('industry.index');
     }
 
@@ -69,7 +68,7 @@ class IndustryController extends Controller
      */
     public function create()
     {
-        // return view('industry.create');
+    
     }
 
     /**
@@ -99,15 +98,7 @@ class IndustryController extends Controller
      */
     public function show(Industry $industry)
     {
-        // $data = DB::table('industries as i')
-        // ->join('users as u', 'u.id', '=', 'i.username')
-        // ->select('i.name', 'i.address', 'i.city', 'i.phone', 'i.detail',
-        // DB::raw('u.name as username'),'i.id')
-        // ->where('i.id', '=', $industry->id)
-        // ->get();
-        // // $d2 = Industry::findOrFail($industry);
-        // // dd($data,$d2);
-        // return view ('industry.show', compact('data'));
+       
     }
 
     /**
@@ -150,6 +141,6 @@ class IndustryController extends Controller
     {
         $industry = Industry::findOrFail($id);
         $industry->delete();
-        return response()->json(['success' => 'Industri berhasil dihapus.']);
+        return response()->json(['success' => 'Data industri berhasil dihapus.']);
     }
 }

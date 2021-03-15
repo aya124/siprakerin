@@ -65,10 +65,7 @@ class UsersController extends Controller
             ->select('name','id')
             ->get();
       $user = User::all();
-      
       return view('user.index', compact('role', 'user'));
-        // $users = User::all();
-        // return view('user.index', compact('users')); //fungsi compact = ['users' => $users]
     }
 
     /**
@@ -97,7 +94,6 @@ class UsersController extends Controller
         }
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -117,7 +113,6 @@ class UsersController extends Controller
             ->get();
         }
         return response()->json(compact('data'));
-        // return view ('user.edit', compact('user'));
     }
 
     /**
@@ -139,27 +134,6 @@ class UsersController extends Controller
         $role = Role::find($request->input('role'));
         $user->attachRole($role);
         return response()->json(['success' => 'Data user berhasil diperbarui.']);
-        
-
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-
-        // if (isset($request->avatar)){
-        //     $avatar_name = 'IMG_'.date('Ymd_Gis').'.'.$request->avatar->getClientOriginalExtension();
-        //     $request->avatar->storeAs('/public/avatars', $avatar_name);
-        //     $user->avatar = $avatar_name;
-        // }
-        // $user->save();
-
-        //return redirect()->route('user.index')->withStatus([
-        //  'message' => 'Data siswa berhasil diperbarui.',
-        //  'color' => 'success'
-        //]); // -> update data dan mengembalikan ke hal index
-        
-        // return back()->withStatus([
-        //     'message' => 'Data siswa berhasil diperbarui.',
-        //     'color' => 'success'
-        // ]);
     }
 
     public function change($id)

@@ -26,6 +26,7 @@ class RoleRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'display' => 'required|string|max:255',
+            'p' => 'required',
         ];
     }
     public function messages()
@@ -37,6 +38,7 @@ class RoleRequest extends FormRequest
             'display.required' => '*Kolom Display Name wajib diisi',
             'display.string'   => '*Kolom berisi teks',
             'display.max'      => '*Kolom maks 255 karakter',
+            'p.required'       => '*Permission wajib dipilih',
         ];
     }
 }

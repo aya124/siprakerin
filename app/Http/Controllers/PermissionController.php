@@ -19,7 +19,6 @@ class PermissionController extends Controller
         {
             return datatables()->of(Permission::latest()->get())
                     ->addColumn('action', function($data){
-                      
                         $button= '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-info btn-sm">
                         <i class="fa fa-edit"></i> Edit</button>';
                         $button .= '&nbsp;&nbsp;';
@@ -40,7 +39,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('permission.create');
+        //
     }
 
     /**
@@ -58,18 +57,6 @@ class PermissionController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['error' => 'Permission gagal ditambah.']);
         }
-        // $request-> validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'display_name' => ['required', 'max:255'],
-        // ], [
-        //     'required' =>'Kolom :attribute tidak boleh kosong',
-        // ]);
-
-        // $permission = Permission::create([
-        //     'name' => $request->name,
-        //     'display_name' => $request->display_name,
-        // ]);
-        // return response()->json(['success' => 'Permission berhasil diperbarui.']);
     }
 
     /**
@@ -107,18 +94,9 @@ class PermissionController extends Controller
      */
     public function update(PermissionRequest $request)
     {
-        $request-> validate([
-            'name' => ['required', 'string', 'max:255'],
-            'display_name' => ['string', 'max:255'],
-        ], [
-            'required' =>'Kolom :attribute tidak boleh kosong',
-        ]);
+        $data = $request->all();
         $permission = Permission::findOrFail($request->hidden_id);
-        $permission->update([
-            'name'=> $request->name,
-            'display_name'=> $request->display_name,
-        ]);
-
+        $permission->update($data);
         return response()->json(['success' => 'Permission berhasil diperbarui.']);
     }
 

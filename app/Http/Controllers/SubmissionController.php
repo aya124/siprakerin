@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubmissionRequest;
 use App\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -56,7 +57,7 @@ class SubmissionController extends Controller
 
                 }elseif ($data->status_name == 'Pengajuan disetujui') {
                 
-                    $button = '<button type="button" name="upload" 
+                    $button = '<button type="button" 
                     id="'.$data->id.'" class="upload btn btn-default btn-sm">
                     <i class="fas fa-upload"></i> Upload Surat Pengantar</button>';
                     $button .= '&nbsp;&nbsp;';
@@ -65,11 +66,11 @@ class SubmissionController extends Controller
                     // <i class="fas fa-upload"></i> Upload Surat Balasan</button>';
                     // return $button;
                 }else{
-                    $button = '<button type="button" name="upload" 
+                    $button = '<button type="button"  
                     id="'.$data->id.'" class="upload btn btn-default btn-sm">
                     <i class="fas fa-upload"></i> Upload Surat Pengantar</button>';
                     $button .= '&nbsp;&nbsp;';
-                    $button .= '<button type="button" name="upload2" 
+                    $button .= '<button type="button"
                     id="'.$data->id.'" class="upload2 btn btn-default btn-sm">
                     <i class="fas fa-upload"></i> Upload Surat Balasan</button>';
                 }
@@ -114,7 +115,7 @@ class SubmissionController extends Controller
      */
     public function create()
     {
-        // return view('submission.create');
+        //
     }
 
     /**
@@ -142,7 +143,6 @@ class SubmissionController extends Controller
             'username' => $user->username,
             'status_id' => 1
         ]);
-        // dd($request->all());
         return response()->json(['success' => 'Pengajuan berhasil diperbarui.']);
     }
 
@@ -203,7 +203,7 @@ class SubmissionController extends Controller
         return response()->json(['success' => 'Pengajuan berhasil diperbarui.']);
     }
 
-    public function uploadprocess(Request $request)
+    public function uploadprocess(SubmissionRequest $request)
     {
         $user = Auth::user();
         if (request()->ajax()){
@@ -216,13 +216,6 @@ class SubmissionController extends Controller
         $upload_dest = public_path().'/images';
         $loc1 = $upload_dest.'/suratpengantar/';
         $loc2 = $upload_dest.'/suratbalasan/';
-        
-        // dd($request->all(),$upload_dest);
-        $this->validate($request,  [
-            'upload' => 'required|mimes:jpeg,jpg,png,pdf|max:512'
-        ],[
-            'required' => 'Wajib upload file!',
-        ]);
 
         // menyimpan data file yang diupload ke variabel $file
         $file = $request->file('upload');
@@ -328,7 +321,6 @@ class SubmissionController extends Controller
         ->setPaper('legal', 'portrait');
         // $pdf->render();
         return $pdf->stream('form-pengajuan.pdf');
-        // view('submission.print',compact('data','now'));
     }
 
     /**

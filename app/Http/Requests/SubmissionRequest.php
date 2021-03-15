@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StatusRequest extends FormRequest
+class SubmissionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,16 @@ class StatusRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
+            'upload' => 'required|mimes:jpeg,jpg,png,pdf|max:2048',
+            
         ];
     }
     public function messages()
     {
         return[
-            'name.required'   => '*Kolom wajib diisi',
-            'name.string'     => '*Kolom berisi teks',
-            'name.max'        => '*Kolom maksimal 255 karakter',
+            'upload.required' => 'Wajib upload file!',
+            'upload.mimes'    => 'Format file berupa jpeg/jpg/png/pdf',
+            'upload.max'      => 'Ukuran file maksimal 2MB',
         ];
     }
 }

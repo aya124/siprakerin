@@ -96,9 +96,11 @@
           <label class="control-label col-md-4" >File Surat Pengantar <small class="text-danger">*</small> </label>
           <div class="col-md-8">
             <div class="file-preview">
-              <input type="file" name="upload" id="upload" accept=".jpeg,.jpg,.png,.pdf" class="form-control" />
+              {{-- <input type="file" name="upload" id="upload" accept=".jpeg,.jpg,.png,.pdf" class="form-control" /> --}}
+              <input type="file" name="upload" id="upload"  class="form-control" />
+              <small class="control-label col-md-8">Format file berupa jpg/png/pdf</small>
+              <br />
             </div>
-            <small class="control-label col-md-10">Format file berupa jpg/png/pdf maks 512kB</small>
           </div>
         </div>
 
@@ -130,9 +132,10 @@
           <label class="control-label col-md-4" >File Surat Balasan <small class="text-danger">*</small> </label>
           <div class="col-md-8">
             <div class="file-preview">
-              <input type="file" name="upload" id="upload2" accept=".jpeg,.jpg,.png,.pdf" class="form-control" />
+              {{-- <input type="file" name="upload" id="upload2" accept=".jpeg,.jpg,.png,.pdf" class="form-control" /> --}}
+              <input type="file" name="upload" id="upload2"  class="form-control" />
             </div>
-            <small class="control-label col-md-10">Format file berupa jpg/png/pdf maks 512kB</small>
+            <small class="control-label col-md-10">Format file berupa jpg/png/pdf</small>
           </div>
         </div>
 
@@ -207,7 +210,7 @@
       // $('#pengajuan').dataTable();
   });
 
-  $('#btn_add').click(function(){
+  $('#btn_add').click(function() {
     $('.notifError').remove();
     $('#createModal').modal('show');
     $('#name').val("");
@@ -218,7 +221,7 @@
     $('#finishdate').val("");
   });
 
-  $(document).on('click','.edit',function(){
+  $(document).on('click','.edit',function() {
     id_table = $(this).attr('id');
     console.log(id_table);
     $('#action').val("edit");
@@ -228,7 +231,7 @@
     $.ajax({
       url:"/submission/"+id_table+"/edit",
       dataType:"json",
-      success:function(html){
+      success:function(html) {
         $('#name').val(html.data[0].industry_id);
         $('#startdate').val(html.data[0].start_date);
         $('#finishdate').val(html.data[0].finish_date);
@@ -237,29 +240,28 @@
     });
   });
 
-  $(document).on('click','.upload',function(){
+  $(document).on('click','.upload',function() {
     id_table = $(this).attr('id');
     $('#hidden_id2').val(id_table);
     $('#hidden_name').val('suratpengantar');
-    // console.log($('#hidden_name').val());
     $('#action').val("upload");
     $('#createModalUpload').modal('show');
     $('#form_result').hide();
 	  $('#createModalUpload .modal-title').text("Upload Surat Pengantar");
   });
 
-  $(document).on('click','.upload2',function(){
+  $(document).on('click','.upload2',function() {
     id_table = $(this).attr('id');
     $('#hidden_id3').val(id_table);
     $('#hidden_name2').val('suratbalasan');
-    // console.log($('#hidden_name').val());
     $('#action').val("upload");
     $('#createModalUpload2').modal('show');
     $('#form_result').hide();
 	  $('#createModalUpload2 .modal-title').text("Upload Surat Balasan dari Industri");
   });
 
-  $('#ups').on('submit',function(event){
+  $('#ups').on('submit',function(event) {
+    $('.notifError').remove();
     event.preventDefault();
     $.ajax({
       url:"submission/uploadprocess",
@@ -269,20 +271,39 @@
       processData: false,
       dataType:"json",
       data: new FormData(this),
-      //beforeSend:function(){
-      //$('#ups').text('Uploading...');
-      //},
-        // // success:function(data){
-        //   setTimeout(function(){
-        //     $('#confirmModal').modal('hide');
-        //     $('#tab_data').DataTable().ajax.reload();
-        //     }, 2000);
-        //     toastr.success('File berhasil di-upload', 'Success', {timeOut: 5000});
-        // }
-      })
+      beforeSend:function() {
+      // $('#ups').text('Uploading...');
+      },
+        success:function(data) {
+          $('#form_result').hide();
+          if (data.success) {
+            html = '<div class="alert alert-success">' + data.success + '</div>';
+            setTimeout(function() {
+              $('#createModalUpload').modal('hide');
+              $('#tab_data').DataTable().ajax.reload();
+            }, 2000);
+            toastr.success('File berhasil di-upload', 'Success', {timeOut: 5000}
+            );
+          }
+        },
+        error: function(xhr) {
+            console.log(xhr);
+            $('#form_result').show();
+            html = '<div class="alert alert-danger">';
+            $.each(xhr.responseJSON.errors, function (key, item) {	
+              html+='<p>' +item+'</p>';
+            });
+              html += '</div>';
+              $('#form_result').html(html);
+              $.each(xhr.responseJSON.errors,function(field_name,error){
+              $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                });
+        }
+      });
     });
 
   $('#upss').on('submit',function(event){
+    $('.notifError').remove();
     event.preventDefault();
     $.ajax({
       url:"submission/uploadprocess",
@@ -292,56 +313,46 @@
       processData: false,
       dataType:"json",
       data: new FormData(this),
-      // beforeSend:function(){
+      beforeSend:function() {
       //     $('#ups').text('Uploading...');
-      //   },
-      // success:function(data)
-      //   {
-      //     $('#form_result').show();
-      //       if(data.errors)
-      //         {
-      //           html = '<div class="alert alert-danger">';
-      //           for(var count = 0; count < data.errors.length; count++)
-      //             {
-      //               html += '<p>' + data.errors[count] + '</p>';
-      //             }
-      //               html += '</div>';
-      //               $('#form_result').html(html);
-      //         }
-      //         if(data.success)
-      //         {
-      //           html = '<div class="alert alert-success">' + data.success + '</div>';
-      //           setTimeout(function(){
-      //             $('#confirmModal').modal('hide');
-      //           $('#tab_data').DataTable().ajax.reload();
-      //           }, 2000);
-      //           toastr.success('File berhasil di-upload', 'Success', {timeOut: 5000});
-      //         }
-      //     },
-      //     error:function(xhr)
-      //       {
-      //           console.log(xhr);
-      //           $('#form_result').show();
-      //           html = '<div class="alert alert-danger">';
-      //           $.each(xhr.responseJSON.errors, function (key, item) 
-      //           {	
-      //             html+='<p>' +item+'</p>';
-      //           });
-      //           html += '</div>';
-      //           $('#form_result').html(html);
-      //       }//end error
+      },
+      success:function(data) {
+          $('#form_result').show();
+          if(data.success) {
+            html = '<div class="alert alert-success">' + data.success + '</div>';
+            setTimeout(function(){
+              $('#createModalUpload2').modal('hide');
+              $('#tab_data').DataTable().ajax.reload();
+            }, 2000);
+              toastr.success('File berhasil di-upload', 'Success', {timeOut: 5000}
+              );
+            }
+          },
+          error:function(xhr) {
+            console.log(xhr);
+            $('#form_result').show();
+            html = '<div class="alert alert-danger">';
+            $.each(xhr.responseJSON.errors, function (key, item) {	
+              html+='<p>' +item+'</p>';
+            });
+              html += '</div>';
+              $('#form_result').html(html);
+              $.each(xhr.responseJSON.errors,function(field_name,error){
+              $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+            });//end error
+          }
     });
   });
 
   var id_table;
-    $(document).on('click','.delete',function(){
+    $(document).on('click','.delete',function() {
       id_table = $(this).attr('id');
       console.log(id_table);
       $('#confirmModal').modal('show');
 			$('#ok_button').text('OK');
     });
     
-    $('#ok_button').click(function(){
+    $('#ok_button').click(function() {
       $.ajax({
         url:"submission/destroy/"+id_table,
         beforeSend:function(){
@@ -358,6 +369,7 @@
     });
 
     $('#add').on('submit',function(event){
+      $('.notifError').remove();
       event.preventDefault();
       if($('#action').val() == 'tambah'){
         $.ajax({
@@ -368,11 +380,9 @@
           processData: false,
           dataType:"json",
           data: new FormData(this),
-          success:function(data)
-          {
+          success:function(data) {
             $('#form_result').show();
-            if(data.errors)
-              {
+            if(data.errors) {
                 html = '<div class="alert alert-danger">';
                 for(var count = 0; count < data.errors.length; count++)
                   {
@@ -391,14 +401,12 @@
                         toastr.success('Pengajuan berhasil ditambahkan!', 'Success', {timeOut: 5000});
                         }
               },
-                error:function(xhr)
-                {
+                error:function(xhr) {
                   console.log(xhr);
                   $('#form_result').show();
 
                   html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) 
-                  {	
+                  $.each(xhr.responseJSON.errors, function (key, item) {	
                     html+='<p>' +item+'</p>';
                   });
                   html += '</div>';
@@ -415,21 +423,17 @@
                 processData: false,
                 dataType:"json",
                 data: new FormData(this),
-                success:function(data)
-                {
+                success:function(data) {
                   $('#form_result').show();
-                    if(data.errors)
-                    {
+                    if(data.errors) {
                       html = '<div class="alert alert-danger">';
-                      for(var count = 0; count < data.errors.length; count++)
-                      {
+                      for(var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                       }
                       html += '</div>';
                       $('#form_result').html(html);
                     }
-                    if(data.success)
-                    {
+                    if(data.success) {
                       html = '<div class="alert alert-success">' + data.success + '</div>';
                       setTimeout(function(){
                         $('#createModal').modal('hide');
@@ -438,15 +442,12 @@
                     $('#tab_data').DataTable().ajax.reload();
                       toastr.success('Pengajuan berhasil diperbarui!', 'Success', {timeOut: 5000});
                     }
-                    
                 },
-                error:function(xhr)
-                {
+                error:function(xhr) {
                   console.log(xhr);
                   $('#form_result').show();
                   html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) 
-                  {	
+                  $.each(xhr.responseJSON.errors, function (key, item) {	
                   	html+='<p>' +item+'</p>';
                   });
                   html += '</div>';

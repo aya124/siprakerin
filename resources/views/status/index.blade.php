@@ -14,7 +14,7 @@
 
 <div class="box">
     <div class="box-header">
-        <h3 class="box-title">Status</h3>
+        <h3 class="box-title">Manajemen Status Pengajuan</h3>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -31,6 +31,7 @@
     <!-- /.box-body -->
 </div>
 <!-- /.box -->
+
 <div id="createModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -46,7 +47,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-4" >Status <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
-							<input type="text" name="status" id="status" class="form-control" />
+							<input type="text" name="name" id="name" class="form-control" />
 						</div>
 					</div>
           
@@ -89,13 +90,12 @@
 <script>
   $(function() {
     $('#tab_data').DataTable({
-        processing: true,
+      processing: true,
 			serverSide: true,
 			ajax:{
 				url: "{{ route('status.index') }}",
 			},
 			columns:[
-
 			{
 				data: 'name',
 				name: 'name',
@@ -106,7 +106,6 @@
 				orderable: false
       }
 			]
-    // $('#status').dataTable();
   });
 
   $('#btn_add').click(function(){
@@ -116,11 +115,12 @@
     $('#form_result').hide();
     $('#createModal .modal-title').text("Tambah Status");
     $('#action').val("tambah");
-    });
+  });
 
     $(document).on('click','.edit',function(){
-      var x =$(this).attr('id');
+      var x = $(this).attr('id');
       $('#action').val("edit");
+      $('.notifError').remove();
       $('#createModal').modal('show');
       $('#form_result').hide();
       $('#createModal .modal-title').text("Edit Status");
@@ -128,11 +128,12 @@
         url:"/status/"+x+"/edit",
         dataType:"json",
         success:function(html){
-          $('#status').val(html.data.name);
+          $('#name').val(html.data.name);
           $('#hidden_id').val(html.data.id);
           }
         });
       });
+
       var id_table;
       $(document).on('click','.delete',function(){
 			  id_table = $(this).attr('id');
@@ -195,7 +196,7 @@
                   html += '</div>';
                   $('#form_result').html(html);
                   $.each(xhr.responseJSON.errors,function(field_name,error){
-                        $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                      $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
                     });
                 } //end error
               });

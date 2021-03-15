@@ -23,14 +23,11 @@ class StatusController extends Controller
                         name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm">
                         <i class="fa fa-trash"></i> Hapus</button>';
                         return $button;
-
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        // $statuses = Status::all();
         return view('status.index');
-        // return view('status.index', compact('statuses')); //fungsi compact = ['users' => $users]
     }
 
     /**
@@ -40,7 +37,7 @@ class StatusController extends Controller
      */
     public function create()
     {
-        //return view('status.create');
+        //
     }
 
     /**
@@ -58,16 +55,6 @@ class StatusController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['error' => 'Gagal menambah data.']);
         }
-        // $request-> validate([
-        //     'status' => ['required', 'string', 'max:255'],
-        // ], [
-        //     'required' =>'Kolom :attribute tidak boleh kosong!',
-        // ]);
-
-        // $status = Status::create([
-        //     'name' => $request->status,
-        // ]);
-        // return response()->json(['success' => 'Data status berhasil diperbarui.']);
     }
 
     /**
@@ -78,7 +65,7 @@ class StatusController extends Controller
      */
     public function show(Status $status)
     {
-       // return view ('status.show', compact('status'));
+        //
     }
 
     /**
@@ -91,12 +78,9 @@ class StatusController extends Controller
     {
         if(request()->ajax())
         {
-        $data = Status::findOrFail($id);
+            $data = Status::findOrFail($id);
             return response()->json(compact('data'));
         }
-        // dd($statuses);
-        // $statuses = Status::findOrFail($id);
-        // return view ('status.edit', compact('statuses'));
     }
 
     /**
@@ -108,20 +92,10 @@ class StatusController extends Controller
      */
     public function update(StatusRequest $request)
     {
-        // $request-> validate([
-        //     'status' => ['required', 'string', 'max:255'],
-        // ],[
-        //     'required' =>'Kolom :attribute tidak boleh kosong!',
-        // ]);
         $data = $request->all();
         $status = Status::findOrFail($request->hidden_id);
-        // $status->update([
-        //     'name' => $request->status
-        // ]);
         $status-> update($data);
         return response()->json(['success' => 'Data berhasil diperbarui.']);
-        // $statuses->detail = $request->status;
-        // $statuses->save();
     }
 
     /**
@@ -135,9 +109,5 @@ class StatusController extends Controller
         $status = Status::findOrFail($id);
         $status->delete();
         return response()->json(['success' => 'Data status berhasil dihapus.']);
-        // return back()->withStatus([
-        // 'message' => 'Data status telah terhapus.',
-        // 'color' => 'success'
-        // ]);
     }
 }

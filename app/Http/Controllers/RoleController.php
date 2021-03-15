@@ -45,7 +45,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        // return view('role.create');
+        //
     }
 
     /**
@@ -58,25 +58,13 @@ class RoleController extends Controller
     {
         try {
             $data = $request->all();
-            $data-> attachPermissions($request->p);
-            Role::create($data);
+            $data['display_name'] = $request->display;
+            $role = Role::create($data);
+            $role->attachPermissions($request->p);
             return response()->json(['success' => 'Role berhasil ditambah.']);
         } catch (\Throwable $th) {
             return response()->json(['error' => 'Role gagal ditambah.']);
         }
-        // $request-> validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'display_name' => ['required', 'string', 'max:255'],
-        // ], [
-        //     'required' =>'Kolom role :attribute tidak boleh kosong',
-        // ]);
-
-        // $role = Role::create([
-        //     'name' => $request->name,
-        //     'display_name' => $request->display,
-        // ]);
-        // $role-> attachPermissions($request->p);
-        // return response()->json(['success' => 'Role berhasil diperbarui.']);
     }
 
     /**
@@ -87,7 +75,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        // return view ('role.show', compact('role'));
+        //
     }
 
     /**
@@ -121,13 +109,8 @@ class RoleController extends Controller
      */
     public function update(RoleRequest $request)
     {
-        // $request-> validate([
-        //     'name' => ['required', 'max:255'],
-        //     'display_name' => ['max:255'],
-        // ], [
-        //     'required' =>'Kolom role :attribute tidak boleh kosong',
-        // ]);
         $data = $request->all();
+        $data['display_name'] = $request->display;
         $role = Role::findOrFail($request->hidden_id);
         $role->update($data);
         DB::table('permission_role')

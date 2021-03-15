@@ -56,15 +56,16 @@
 						</div>
                 </div>
                     <div class="form-group">
-						<label class="control-label col-md-4" >Permission <small class="text danger">*</small> </label>
+						<label class="control-label col-md-4" >Permission <small class="text-danger">*</small> </label>
 						  <div class="col-md-8">
+                <div class="roleInput">
                 @foreach ($permit as $p)
-                            
                   <label class="form-check-label">
-						        <input type="checkbox" class="form-check-input" value="{{$p->id}}" id="p" name="p[]">{{$p->name}}</input>
+						        <input type="checkbox" class="form-check-input" value="{{$p->id}}" id="p" name="p[]">{{$p->name}}
 						      </label>
 						    <br />
-						    @endforeach
+                @endforeach
+              </div>
 						</div>
               </div>
                 <br />
@@ -110,34 +111,35 @@
 		processing: true,
 		serverSide: true,
 		ajax:{
-            url: "{{ route('role.index') }}",
-            },
-            columns:[ 
-            {
-                data: 'name',
+        url: "{{ route('role.index') }}",
+        },
+        columns:[ 
+      {
+        data: 'name',
 				name: 'name',
 			},
-            {
-                data: 'display_name',
+      {
+        data: 'display_name',
 				name: 'display_name',
 			},
-            {
-                data: 'action',
+      {
+        data: 'action',
 				name: 'action',
 				orderable: false
-            }
+      }
 			]
-        });
+    });
         
-        $('#btn_add').click(function(){
-            $('.notifError').remove();
-            $('#createModal').modal('show');
-            $('#name').val("");
-            $('#form_result').hide();
-            $('input[name="p[]"]').prop("checked",false);
-            $('#createModal .modal-title').text("Tambah Role");
-            $('#action').val("tambah");
-        });
+    $('#btn_add').click(function(){
+      $('.notifError').remove();
+      $('#createModal').modal('show');
+      $('#name').val("");
+      $('#display').val("");
+      $('#form_result').hide();
+      $('input[name="p[]"]').prop("checked",false);
+      $('#createModal .modal-title').text("Tambah Role");
+      $('#action').val("tambah");
+    });
         /*
 		replace(char old, char new)
 		*/
@@ -154,7 +156,6 @@
         var html = '';
         $(document).on('click','.edit',function(){
             id_table = $(this).attr('id');
-            // console.log (x);
             $('#form_result').hide();
             $('#createModal').modal('show');
             $('#action').val("edit");
@@ -176,7 +177,7 @@
 					for (var i =0; i<jmlh; i++) {
 						 compare.push(html.role_permission[i]);
 					}
-              //banding awal dngn compare jika sama, checked
+          //banding awal dngn compare jika sama, checked
 					for(var i=0; i<awal.length;i++){
 						for(var j=0; j<jmlh; j++){
 							if(awal[i] == compare[j]){
@@ -193,9 +194,9 @@
         });
 
       $(document).on('click','.delete',function(){
-			id_table = $(this).attr('id');
-			$('#confirmModal').modal('show');
-			$('#ok_button').text('OK');
+			  id_table = $(this).attr('id');
+			  $('#confirmModal').modal('show');
+			  $('#ok_button').text('OK');
       });
       $('#ok_button').click(function(){
             console.log (id_table);
@@ -252,7 +253,11 @@
                   html += '</div>';
                   $('#form_result').html(html);
                     $.each(xhr.responseJSON.errors,function(field_name,error){
-                    $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                      if(field_name!='p'){
+                        $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                      }else{
+                        $('.roleInput').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                      }
                   });
                 }
               });
@@ -267,7 +272,6 @@
                 data: new FormData(this),
                 success:function(data)
                 {
-                  // $('#form_result').show();
                     if(data.errors)
                     {
                       html = '<div class="alert alert-danger">';
