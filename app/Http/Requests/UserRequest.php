@@ -28,7 +28,8 @@ class UserRequest extends FormRequest
             'email' => 'required|string|email|max:255|unique:users,email,'.\Request::instance()->hidden_id,
             'password' => 'sometimes|required|string|min:8',
             'username' => 'required|unique:users,username,'.\Request::instance()->hidden_id,
-            'gender' => 'required|in:male,female'
+            'gender' => 'required|in:male,female',
+            'role' => 'required',
         ];
     }
     public function messages()
@@ -47,7 +48,8 @@ class UserRequest extends FormRequest
             'password.min'      => '*Jumlah karakter minimal 8',
             'username.required' => '*Kolom wajib diisi',
             'username.unique'   => '*Username sudah terdaftar',
-            'gender.required'   => '*Kolom wajib diisi',
+            'gender.required'   => '*Kolom wajib dipilih',
+            'role.required'     => '*Kolom wajib dipilih',
         ];
     }
 }

@@ -11,6 +11,8 @@ use App\Industry;
 use App\SubmissionDetail;
 use Illuminate\Support\Facades\Storage;
 use PDF;
+use App\User;
+use App\AddConfig;
 use App\Team;
 
 class SubmissionController extends Controller
@@ -124,25 +126,23 @@ class SubmissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubmissionRequest $request)
     {
-        $user = Auth::user();
-        $request-> validate([
-            'name' => ['required'],
-            'startdate' => ['required', 'date'],
-            'finishdate' => ['required', 'date', 'after:startdate'],
-        ], [
-            'required' => 'Kolom :attribute tidak boleh kosong!',
-            'after' => 'Tanggal selesai tidak boleh sebelum tanggal mulai!',
-        ]);
+        $check = Submission::where('username',Auth::user()->username)->count();
+        DB::transaction(function ()use($request, $check) {
+            $data = $request->all();
+            $data ['industry_id'] = $request->name;
+            $data ['start_date'] = $request->startdate;
+            $data ['finish_date'] = $request->finishdate;
+            $data ['username'] = Auth::user()->username;
+            $data ['status_id'] = $request->status ?: '1';
+            $data ['submit_type'] = ($check>0)?2:1;
+            $submission = Submission::create($data);
 
-        $submission = Submission::create([
-            'industry_id' => $request->name,
-            'start_date' => $request->startdate,
-            'finish_date' => $request->finishdate,
-            'username' => $user->username,
-            'status_id' => 1
-        ]);
+            $u = User::find(Auth::user()->id);
+            $u->submit_lock = 1;
+            $u->save();
+        });
         return response()->json(['success' => 'Pengajuan berhasil diperbarui.']);
     }
 
@@ -182,24 +182,18 @@ class SubmissionController extends Controller
      * @param  \App\Submission  $submission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
-        $request-> validate([
-            'name' => ['required'],
-            'startdate' => ['required', 'date'],
-            'finishdate' => ['required', 'date', 'after:startdate'],
-        ], [
-            'required' => 'Kolom :attribute tidak boleh kosong!',
-            'after' => 'Tanggal selesai tidak boleh sebelum tanggal mulai!'
-        ]);
-
-        $user = Auth::user();
-        $data = Submission::findOrFail($request->hidden_id);
-        $data->update([
-            'industry_id' => $request->name,
-            'start_date' => $request->startdate,
-            'finish_date' => $request->finishdate,
-        ]);
+    public function update(SubmissionRequest $request)
+    {   
+        $data = $request->all();
+        $data['industry_id'] = $request->name;
+        // $data['username'] = Auth::user()->id;
+        $submission = Submission::findOrFail($request->hidden_id);
+        $submission->update($data);
+        // $data->update([
+        //     'industry_id' => $request->name,
+        //     'start_date' => $request->startdate,
+        //     'finish_date' => $request->finishdate,
+        // ]);
         return response()->json(['success' => 'Pengajuan berhasil diperbarui.']);
     }
 
@@ -268,34 +262,9 @@ class SubmissionController extends Controller
 
     public function print_pdf($id)
     {
-        // $x = date('Y-m-d',strtotime($request->startdate));
-        // $y = date('Y-m-d',strtotime($request->finishdate));
-        function tgl($tanggal){
-            $bulan = array (
-                1 =>   'Januari',
-                'Februari',
-                'Maret',
-                'April',
-                'Mei',
-                'Juni',
-                'Juli',
-                'Agustus',
-                'September',
-                'Oktober',
-                'November',
-                'Desember'
-            );
-            $pecahkan = explode('-', $tanggal);
-            // variabel pecahkan 0 = tanggal
-            // variabel pecahkan 1 = bulan
-            // variabel pecahkan 2 = tahun
-            // $tg= $pecahkan[2].toString().replace(/^0/g,'');
-            return $pecahkan[2]. ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
-        }
         $user = Auth::user();
         $now = tgl(date('Y-m-d'));
 
-        // $data = Submission::findOrFail($request->id);
         $data = DB::table('submissions as sub')
             ->join ('users as u', 'u.username', '=', 'sub.username')
             ->join('industries as i', 'i.id', '=', 'sub.industry_id')
@@ -312,12 +281,16 @@ class SubmissionController extends Controller
         for ($i=0; $i <=count($data)-1 ; $i++) { 
             $x = date('Y-m-d',strtotime($data[$i]->start_date));
             $y = date('Y-m-d',strtotime($data[$i]->finish_date));
-            
-        }
+            }
         $date1 = tgl($x);
         $date2 = tgl($y);
+        
+        $wks1 = ['user' => userByRole(5),'teacher'=> nip(20)];
+        $wks4 = ['user' => userByRole(11),'teacher'=> nip(21)];
+        $kaur = ['user' => userByRole(21),'teacher'=> nip(22)];
+
         // dd($date1,$date2,$now);
-        $pdf = PDF::loadview('submission.print',compact('data','date1','date2','now','user'))
+        $pdf = PDF::loadview('submission.print',compact('data','date1','date2','now','user','wks1','wks4','kaur'))
         ->setPaper('legal', 'portrait');
         // $pdf->render();
         return $pdf->stream('form-pengajuan.pdf');

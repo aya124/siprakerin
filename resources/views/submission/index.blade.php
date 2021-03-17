@@ -3,8 +3,10 @@
 @section('title', 'Pengajuan')
 
 @section('content_header')
-<h1>Pengajuan <a id="btn_add" 
-  class="btn btn-flat btn-primary">Tambah Pengajuan</a></h1>
+<h1>Pengajuan 
+@if (Auth::user()->submit_lock != 1)
+<a id="btn_add" class="btn btn-flat btn-primary">Tambah Pengajuan</a></h1>
+@endif
 @stop
 
 @section('content')
@@ -59,13 +61,13 @@
           <div class="form-group">
 						<label class="control-label col-md-4" >Tanggal Mulai Prakerin <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
-							<input type="date" name="startdate" id="startdate" class="form-control" />
+							<input type="date" name="startdate" id="startdate" class="dateform form-control" />
 						</div>
           </div>
           <div class="form-group">
 						<label class="control-label col-md-4" >Tanggal Selesai Prakerin <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
-							<input type="date" name="finishdate" id="finishdate" class="form-control" />
+							<input type="date" name="finishdate" id="finishdate" class="dateform form-control" />
 						</div>
           </div>
 
@@ -96,8 +98,7 @@
           <label class="control-label col-md-4" >File Surat Pengantar <small class="text-danger">*</small> </label>
           <div class="col-md-8">
             <div class="file-preview">
-              {{-- <input type="file" name="upload" id="upload" accept=".jpeg,.jpg,.png,.pdf" class="form-control" /> --}}
-              <input type="file" name="upload" id="upload"  class="form-control" />
+              <input type="file" name="upload" id="upload" accept=".jpeg,.jpg,.png,.pdf" class="form-control" />
               <small class="control-label col-md-8">Format file berupa jpg/png/pdf</small>
               <br />
             </div>
@@ -132,8 +133,7 @@
           <label class="control-label col-md-4" >File Surat Balasan <small class="text-danger">*</small> </label>
           <div class="col-md-8">
             <div class="file-preview">
-              {{-- <input type="file" name="upload" id="upload2" accept=".jpeg,.jpg,.png,.pdf" class="form-control" /> --}}
-              <input type="file" name="upload" id="upload2"  class="form-control" />
+              <input type="file" name="upload" id="upload2" accept=".jpeg,.jpg,.png,.pdf" class="form-control" />
             </div>
             <small class="control-label col-md-10">Format file berupa jpg/png/pdf</small>
           </div>
@@ -220,6 +220,14 @@
     $('#startdate').val("");
     $('#finishdate').val("");
   });
+
+  $(document).on("change",".dateform",function() {
+    this.setAttribute(
+      "data-date",
+      moment(this.value, "YYYY-MM-DD")
+      .format(this.getAttribute("data-date-format"))
+    )
+  }).trigger("change")
 
   $(document).on('click','.edit',function() {
     id_table = $(this).attr('id');
@@ -381,37 +389,29 @@
           dataType:"json",
           data: new FormData(this),
           success:function(data) {
-            $('#form_result').show();
-            if(data.errors) {
-                html = '<div class="alert alert-danger">';
-                for(var count = 0; count < data.errors.length; count++)
-                  {
-                    html += '<p>' + data.errors[count] + '</p>';
-                    }
-                    html += '</div>';
-                    $('#form_result').html(html);
-                    }
-                    if(data.success)
-                    {
-                      html = '<div class="alert alert-success">' + data.success + '</div>';
-                      setTimeout(function(){
-                        $('#createModal').modal('hide');
-                        },1000);
-                        $('#tab_data').DataTable().ajax.reload();
-                        toastr.success('Pengajuan berhasil ditambahkan!', 'Success', {timeOut: 5000});
-                        }
+            $('#form_result').hide();
+              if(data.success) {
+                html = '<div class="alert alert-success">' + data.success + '</div>';
+                setTimeout(function(){
+                  $('#createModal').modal('hide');
+                  },1000);
+                  $('#tab_data').DataTable().ajax.reload();
+                  $('#btn_add').hide();
+                  toastr.success('Pengajuan berhasil ditambahkan!', 'Success', {timeOut: 5000});
+                }
               },
                 error:function(xhr) {
                   console.log(xhr);
                   $('#form_result').show();
-
                   html = '<div class="alert alert-danger">';
                   $.each(xhr.responseJSON.errors, function (key, item) {	
                     html+='<p>' +item+'</p>';
                   });
                   html += '</div>';
                   $('#form_result').html(html);
-                
+                  $.each(xhr.responseJSON.errors,function(field_name,error){
+                    $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                  });
                 }//end error
               });
             }else{
@@ -425,19 +425,10 @@
                 data: new FormData(this),
                 success:function(data) {
                   $('#form_result').show();
-                    if(data.errors) {
-                      html = '<div class="alert alert-danger">';
-                      for(var count = 0; count < data.errors.length; count++) {
-                        html += '<p>' + data.errors[count] + '</p>';
-                      }
-                      html += '</div>';
-                      $('#form_result').html(html);
-                    }
                     if(data.success) {
                       html = '<div class="alert alert-success">' + data.success + '</div>';
                       setTimeout(function(){
                         $('#createModal').modal('hide');
-
                     },1000);
                     $('#tab_data').DataTable().ajax.reload();
                       toastr.success('Pengajuan berhasil diperbarui!', 'Success', {timeOut: 5000});
@@ -451,7 +442,10 @@
                   	html+='<p>' +item+'</p>';
                   });
                   html += '</div>';
-                  $('#form_result').html(html); 
+                  $('#form_result').html(html);
+                  $.each(xhr.responseJSON.errors,function(field_name,error){
+                    $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                  });
                 }//end error
               });
             }

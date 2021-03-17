@@ -236,7 +236,7 @@
       $('#pass').show();
     });
     
-    $(document).on('click','.edit',function(){
+    $(document).on('click','.edit',function() {
       id_table = $(this).attr('id');
       //console.log(id_table);
       $('#action').val("edit");
@@ -247,7 +247,7 @@
       $.ajax({
         url:"/user/"+id_table+"/edit",
         dataType:"json",
-        success:function(html){
+        success:function(html) {
           $('#name').val(html.data[0].name);
           $('#email').val(html.data[0].email);
           $('#username').val(html.data[0].username);
@@ -260,7 +260,7 @@
       });
     });
 
-    $(document).on('click','.change',function(){
+    $(document).on('click','.change',function() {
  			id_table = $(this).attr('id');
  			// console.log(id_table);
  			$('#changeModal').modal('show');
@@ -270,7 +270,7 @@
  			$('#change_id').val(id_table);
  		});
     
-     $('#changed').on('submit',function(event){
+     $('#changed').on('submit',function(event) {
  			event.preventDefault();
  			$.ajax({
 					url:"{{route('uspass.update')}}",
@@ -280,23 +280,19 @@
 					processData: false,
 					dataType:"json",
 					data: new FormData(this),
-					success:function(data)
-					{
+					success:function(data) {
 						$('#change_result').hide();
 						var html = '';
-							if(data.success)
-							{
+							if(data.success) {
 								html = '<div class="alert alert-success">' + data.success + '</div>';
 								setTimeout(function(){
 									$('#changeModal').modal('hide');
-
 							},1000);
 								toastr.success('Password telah berhasil diganti!', 'Success', {timeOut: 5000});
 							}
 							console.log(html);
 					},
-					error:function(xhr)
-					{
+					error:function(xhr) {
 						$('#change_result').show();
 
 				 			html = '<div class="alert alert-danger">';
@@ -337,7 +333,7 @@
     $('#add').on('submit',function(event){
       $('.notifError').remove();
       event.preventDefault();
-      if($('#action').val() == 'tambah'){
+      if($('#action').val() == 'tambah') {
         $.ajax({
           url:"{{route('user.store')}}",
           method:"POST",
@@ -346,8 +342,7 @@
           processData: false,
           dataType:"json",
           data: new FormData(this),
-          success:function(data)
-          {
+          success:function(data) {
             $('#form_result').hide();
               if(data.success)
               {
@@ -359,8 +354,7 @@
                 toastr.success('User berhasil ditambahkan!', 'Success', {timeOut: 5000});
               }
           },
-          error:function(xhr)
-          {
+          error:function(xhr) {
             console.log(xhr);
             $('#form_result').show();
             html = '<div class="alert alert-danger">';
@@ -384,21 +378,17 @@
             processData: false,
             dataType:"json",
             data: new FormData(this),
-            success:function(data)
-            {
+            success:function(data) {
               $('#form_result').hide();
-              if(data.errors)
-              {
+              if(data.errors) {
                 html = '<div class="alert alert-danger">';
-                for(var count = 0; count < data.errors.length; count++)
-                {
+                for(var count = 0; count < data.errors.length; count++) {
                   html += '<p>' + data.errors[count] + '</p>';
                 }
                   html += '</div>';
                   $('#form_result').html(html);
               }
-              if(data.success)
-                {
+              if(data.success) {
                   html = '<div class="alert alert-success">' + data.success + '</div>';
                   setTimeout(function(){
                     $('#createModal').modal('hide');
@@ -407,17 +397,18 @@
                     toastr.success('Data user berhasil diperbarui!', 'Success', {timeOut: 5000});
                 }
             },
-            error:function(xhr)
-              {
+            error:function(xhr) {
                 console.log(xhr);
                 $('#form_result').show();
                 html = '<div class="alert alert-danger">';
-                $.each(xhr.responseJSON.errors, function (key, item) 
-                {	
+                $.each(xhr.responseJSON.errors, function (key, item) {	
                   html+='<p>' +item+'</p>';
                 });
                 html += '</div>';
                 $('#form_result').html(html);
+                $.each(xhr.responseJSON.errors,function(field_name,error){
+                    $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                  });
               }//end error
             });
           }

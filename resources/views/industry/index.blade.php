@@ -32,6 +32,51 @@
     <!-- /.box-body -->
 </div>
 <!-- /.box -->
+<!-- Modal -->
+<div class="modal fade" id="saranModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Saran</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+        <form method="post" id="tambahSaran" class="form-horizontal" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="industry_id" id="industry_id">
+      <div class="modal-body">
+      <div class="form-group ">
+        <textarea class="form-control" name="saran" id="saran" rows="3"></textarea>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="lihatSaranModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Lihat Saran</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div id="createModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
@@ -210,7 +255,7 @@
     });
     
     $(document).on('click','.edit',function(){
-      // $('.notifError').remove();
+      $('.notifError').remove();
       var x =$(this).attr('id');
       $('#action').val("edit");
       $('#createModal').modal('show');
@@ -256,15 +301,14 @@
       });
 		});
 
-    $('#ok_button').click(function(){
+    $('#ok_button').click(function() {
 			$.ajax({
 				url:"industry/destroy/"+id_table,
 				beforeSend:function(){
 					$('#ok_button').text('Deleting...');
 				},
-				success:function(data)
-				{
-					setTimeout(function(){
+				success:function(data) {
+					setTimeout(function() {
 						$('#confirmModal').modal('hide');
 						$('#tab_data').DataTable().ajax.reload();
 					}, 2000);
@@ -273,7 +317,54 @@
 			})
 		});
 
-    $('#add').on('submit',function(event){
+    $(document).on('click', '.saran', function(){
+      id = $(this).attr('id');
+      $('#industry_id').val(id);
+      $('#saranModal').modal('show');
+    });
+
+      $('#tambahSaran').on('submit',function(event) {
+        $('.notifError').remove();
+        event.preventDefault();
+          $.ajax({
+              url:"{{route('suggestion.add')}}",
+              method:"POST",
+              contentType: false,
+              cache:false,
+              processData: false,
+              dataType:"json",
+              data: new FormData(this),
+              success:function(data) {
+                console.log('success');
+                  setTimeout(function(){
+                    $('#saranModal').modal('hide');
+                    },1000);
+                    $('#tab_data').DataTable().ajax.reload();
+                    toastr.success('Saran berhasil ditambahkan!', 'Success', {timeOut: 5000});
+                },
+                error:function(xhr) {
+                  console.log(xhr);
+                  $('#form_result').show();
+                  html = '<div class="alert alert-danger">';
+                  $.each(xhr.responseJSON.errors, function (key, item) {
+                    html+='<p>' +item+'</p>';
+                  });
+                  html += '</div>';
+                  $('#form_result').html(html);
+                    $.each(xhr.responseJSON.errors,function(field_name,error){
+                        $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                    });
+                }
+            });
+        });
+
+        $(document).on('click', '.lihatsaran',function(){
+         $('#lihatSaranModal .modal-body').load($(this).attr('url'));
+         $('#lihatSaranModal').modal('show');
+        });
+
+
+    $('#add').on('submit',function(event) {
         $('.notifError').remove();
         event.preventDefault();
         if($('#action').val() == 'tambah'){
@@ -285,26 +376,22 @@
               processData: false,
               dataType:"json",
               data: new FormData(this),
-              success:function(data)
-              {
+              success:function(data) {
                 $('#form_result').hide();
-                if(data.success)
-                {
+                if(data.success) {
                   html = '<div class="alert alert-success">' + data.success + '</div>';
                   setTimeout(function(){
                     $('#createModal').modal('hide');
                     },1000);
                     $('#tab_data').DataTable().ajax.reload();
                     toastr.success('Industri berhasil ditambahkan!', 'Success', {timeOut: 5000});
-                    }
+                  }
                 },
-                error:function(xhr)
-                {
+                error:function(xhr) {
                   console.log(xhr);
                   $('#form_result').show();
                   html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item)
-                  {
+                  $.each(xhr.responseJSON.errors, function (key, item) {
                     html+='<p>' +item+'</p>';
                   });
                   html += '</div>';
@@ -323,42 +410,28 @@
                 processData: false,
                 dataType:"json",
                 data: new FormData(this),
-                success:function(data)
-                {
-                  // $('#form_result').show();
-                    if(data.errors)
-                    {
-                      html = '<div class="alert alert-danger">';
-                      for(var count = 0; count < data.errors.length; count++)
-                      {
-                        html += '<p>' + data.errors[count] + '</p>';
-                      }
-                      html += '</div>';
-                      $('#form_result').html(html);
-                    }
-                    if(data.success)
-                    {
+                success:function(data){
+                    if(data.success) {
                       html = '<div class="alert alert-success">' + data.success + '</div>';
                       setTimeout(function(){
                         $('#createModal').modal('hide');
-
                     },1000);
                     $('#tab_data').DataTable().ajax.reload();
                       toastr.success('Data industri berhasil diperbarui!', 'Success', {timeOut: 5000});
                     }
-
                 },
-                error:function(xhr)
-                {
+                error:function(xhr) {
                   console.log(xhr);
                   $('#form_result').show();
                   html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item)
-                  {
+                  $.each(xhr.responseJSON.errors, function (key, item) {
                     html+='<p>' +item+'</p>';
                   });
                   html += '</div>';
                   $('#form_result').html(html);
+                  $.each(xhr.responseJSON.errors,function(field_name,error){
+                    $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                  });
                 }//end error
               });
             }

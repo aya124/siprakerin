@@ -90,7 +90,7 @@ class UsersController extends Controller
             });
             return response()->json(['success' => 'Data user berhasil ditambah.']);
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Gagal menambahkan data user.'],500);
+            return response()->json(['errors' => ['input' => 'Gagal menambah data user.']],500);
         }
     }
 
@@ -201,5 +201,4 @@ class UsersController extends Controller
     {
         return Role::where('id',$id_role)->first()->display_name;
     }
-
 }

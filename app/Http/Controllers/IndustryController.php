@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\IndustryRequest;
 use App\Industry;
+use App\Suggestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -48,10 +49,25 @@ class IndustryController extends Controller
                         name="detail" id="'.$data->id.'" class="detail btn btn-success
                         btn-sm"><i class="fa fa-info-circle"></i> Detail</button>';
                         $button .= '&nbsp;&nbsp;';
-                        $button .= '<button type="button"
-                        name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">
-                        <i class="fa fa-edit"></i> Edit</button>';
+                        if($data->status!='disetujui'){
+                            $button .= '<button type="button"
+                            name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">
+                            <i class="fa fa-edit"></i> Edit</button>';
+                            $button .= '&nbsp;&nbsp;';
+                        }
+                        else {
+                            $button .= '<button type="button"
+                        name="saran" id="'.$data->id.'" class="saran btn btn-warning btn-sm">
+                        <i class="fa fa-edit"></i> Saran</button>';
                         $button .= '&nbsp;&nbsp;';
+                        if ($data->check == 1) {
+                            $button .= '<button type="button"
+                        name="lihatsaran" url="'.route('suggestion.show',$data->id).'" class="lihatsaran btn btn-info btn-sm">
+                        <i class="fa fa-eye"></i>Lihat Saran</button>';
+                        $button .= '&nbsp;&nbsp;';
+                        }
+                        }
+                        
                         return $button;
                       }
                     })
@@ -84,11 +100,18 @@ class IndustryController extends Controller
             $data['status'] = $request->status ?: 'Belum disetujui';
             $data['username'] = Auth::user()->id;
             Industry::create($data);
-            return response()->json(['success' => 'Industri berhasil ditambah.']);
+            return response()->json(['success' => 'Data industri berhasil ditambah.']);
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Gagal menambah data.']);
+            return response()->json(['error' => ['input' => 'Gagal menambah data industri.']],500);
         }
     }
+
+    public function showSuggestion($id)
+    {
+        $data = Suggestion::with('user')->where('industry_id', $id)->get();
+        return view('industry.saran',compact('data'));
+    }
+
 
     /**
      * Display the specified resource.
@@ -98,7 +121,7 @@ class IndustryController extends Controller
      */
     public function show(Industry $industry)
     {
-       
+       //
     }
 
     /**
@@ -128,7 +151,7 @@ class IndustryController extends Controller
         $data = $request->all();
         $industry = Industry::findOrFail($request->hidden_id);
         $industry->update($data);
-        return response()->json(['success' => 'Industri berhasil diperbarui.']);
+        return response()->json(['success' => 'Data industri berhasil diperbarui.']);
     }
 
      /**
@@ -142,5 +165,18 @@ class IndustryController extends Controller
         $industry = Industry::findOrFail($id);
         $industry->delete();
         return response()->json(['success' => 'Data industri berhasil dihapus.']);
+    }
+
+    public function tambahSaran(Request $request)
+    {
+        $data = $request->all();
+        return DB::transaction(function () Use($data, $request){
+            $data['user_id']= Auth::user()->id;
+            Suggestion::create($data);
+            $a = Industry::findOrFail($request->industry_id);
+            $a->check = true;
+            $a->save();
+            return response()->json('success', 200);
+        });
     }
 }

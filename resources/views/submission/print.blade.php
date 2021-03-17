@@ -170,12 +170,12 @@
               <td class="borderless"></td>
             </tr>
             <tr class="borderless">
-              <td class="borderless" align="justify"><u>Sulastri, M.Pd.</u></td>
+              <td class="borderless" align="justify"><u>{{$kaur['user']->name}}</u></td>
               <td class="borderless" style="width: 200px;"></td>
               <td class="borderless">..................................</td>
             </tr>
             <tr class="borderless">
-              <td class="borderless" align="justify" style="width: 240px;">NIP. 19741020 200501 2 008</td>
+              <td class="borderless" align="justify" style="width: 240px;">NIP. {{$kaur['teacher']->nip}} </td>
               <td class="borderless" style="width: 200px;"></td>
               <td class="borderless" align="justify"></td>
             </tr>
@@ -205,14 +205,14 @@
               <td class="borderless"></td>
             </tr>
             <tr class="borderless">
-              <td class="borderless" align="justify"><u>Drs. R. Totok Wisnutoro</u></td>
+              <td class="borderless" align="justify"><u>{{$wks4['user']->name}}</u></td>
               <td class="borderless" style="width: 200px;"></td>
-              <td class="borderless" align="justify"><u>Drs. Sriyana</u></td>
+              <td class="borderless" align="justify"><u>{{$wks1['user']->name}}</u></td>
             </tr>
             <tr class="borderless">
-              <td class="borderless" align="justify">NIP. 19650430 199003 1 005</td>
+              <td class="borderless" align="justify">NIP. {{$wks4['teacher']->nip}}</td>
               <td class="borderless" style="width: 200px;"></td>
-              <td class="borderless" align="justify" style="width: 240px;">NIP. 19591126 198603 1 008</td>
+              <td class="borderless" align="justify" style="width: 240px;">NIP. {{$wks1['teacher']->nip}}</td>
             </tr>
           </tbody>
         </table>

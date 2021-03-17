@@ -31,6 +31,7 @@ Route::resource('/student', 'StudentController');
 Route::resource('/industry', 'IndustryController');
 Route::post('industry/update', 'IndustryController@update')->name('ind.update');
 Route::get('industry/destroy/{id}', 'IndustryController@destroy');
+Route::get('industry/suggestion/{id}', 'IndustryController@showSuggestion')->name('suggestion.show');
 
 Route::resource('/teacher', 'TeacherController');
 Route::post('teacher/update', 'TeacherController@update')->name('teach.update');
@@ -71,3 +72,5 @@ Route::post('profile/passchanged', 'ProfileController@passchanged')->name('pass.
 
 Route::resource('/report', 'ReportController');
 Route::resource('/score', 'ScoreController');
+
+Route::post('tambah-saran', 'IndustryController@tambahSaran')->name('suggestion.add');
