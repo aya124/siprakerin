@@ -39,36 +39,31 @@ class SubmissionController extends Controller
             $data = DB::table('submissions as sub')
             ->join('industries as i', 'i.id', '=', 'sub.industry_id')
             ->join('statuses as st', 'st.id', '=', 'sub.status_id')
-            ->select('sub.id','i.name','sub.start_date','sub.finish_date', 
+            ->select('sub.id','i.name','sub.start_date','sub.finish_date','sub.submit_type',
             DB::raw('st.name as status_name'))
             ->where('sub.username',$user->username)
             ->get();
 
             return datatables()->of($data)
                 ->addColumn('action', function($data){
-                    
+
                 if($data->status_name == 'Menunggu persetujuan'){
-                    $button= '<button type="button" name="edit" 
+                    $button= '<button type="button" name="edit"
                     id="'.$data->id.'" class="edit btn btn-primary btn-sm">
                     <i class="fa fa-edit"></i> Edit</button>';
                     $button .= '&nbsp;&nbsp;';
-                    $button .= '<button type="button" name="delete" 
+                    $button .= '<button type="button" name="delete"
                     id="'.$data->id.'" class="delete btn btn-danger btn-sm">
                     <i class="fa fa-trash"></i> Hapus</button>';
-                    // return $button;
-
                 }elseif ($data->status_name == 'Pengajuan disetujui') {
-                
-                    $button = '<button type="button" 
+                    $button = '<button type="button"
                     id="'.$data->id.'" class="upload btn btn-default btn-sm">
                     <i class="fas fa-upload"></i> Upload Surat Pengantar</button>';
                     $button .= '&nbsp;&nbsp;';
-                    // $button .= '<button type="button" name="upload2" 
-                    // id="'.$data->id.'" class="upload2 btn btn-default btn-sm disabled">
-                    // <i class="fas fa-upload"></i> Upload Surat Balasan</button>';
-                    // return $button;
+                }elseif ($data->status_name == 'Pengajuan ditolak') {
+                    $button = '';
                 }else{
-                    $button = '<button type="button"  
+                    $button = '<button type="button"
                     id="'.$data->id.'" class="upload btn btn-default btn-sm">
                     <i class="fas fa-upload"></i> Upload Surat Pengantar</button>';
                     $button .= '&nbsp;&nbsp;';
@@ -77,12 +72,11 @@ class SubmissionController extends Controller
                     <i class="fas fa-upload"></i> Upload Surat Balasan</button>';
                 }
                     $button .= '&nbsp;&nbsp;';
-                    $button .= '<a href= "submission/print/'.$data->id.'" 
-                    target="_blank" type="button" name="print" 
+                    $button .= '<a href= "submission/print/'.$data->id.'"
+                    target="_blank" type="button" name="print"
                     class="btn btn-default btn-sm">
                     <i class="fas fa-print"></i> Cetak Form Pengajuan</a>';
                     return $button;
-  
                 })
 
             //menampilkan format tanggal d-m-Y
@@ -104,7 +98,7 @@ class SubmissionController extends Controller
             ->select('name', 'id')
             ->where('status','disetujui')
             ->get();
-        
+
         return view('submission.index', compact('industry'));
         // $submissions = Submission::all();
         // return view('submission.index', compact('submissions'));
@@ -183,17 +177,12 @@ class SubmissionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(SubmissionRequest $request)
-    {   
+    {
         $data = $request->all();
         $data['industry_id'] = $request->name;
         // $data['username'] = Auth::user()->id;
         $submission = Submission::findOrFail($request->hidden_id);
         $submission->update($data);
-        // $data->update([
-        //     'industry_id' => $request->name,
-        //     'start_date' => $request->startdate,
-        //     'finish_date' => $request->finishdate,
-        // ]);
         return response()->json(['success' => 'Pengajuan berhasil diperbarui.']);
     }
 
@@ -246,15 +235,15 @@ class SubmissionController extends Controller
             return response()->json(['success' => 'Surat Balasan berhasil di-upload.']);
             }
         }
-        
+
         // // nama file
 		// echo 'File Name: '.$file->getClientOriginalName();
 		// echo '<br>';
- 
+
       	// // real path
 		// echo 'File Real Path: '.$file->getRealPath();
 		// echo '<br>';
- 
+
       	// // ukuran file
 		// echo 'File Size: '.$file->getSize().' bytes';
         // echo '<br>';
@@ -269,7 +258,7 @@ class SubmissionController extends Controller
             ->join ('users as u', 'u.username', '=', 'sub.username')
             ->join('industries as i', 'i.id', '=', 'sub.industry_id')
             // ->join('statuses as st', 'st.id', '=', 'sub.status_id')
-            ->select('u.name','i.address','sub.start_date','sub.finish_date', 
+            ->select('u.name','i.address','sub.start_date','sub.finish_date',
             DB::raw('i.name as industry_name'))
             ->where('sub.username',$user->username)
             ->where('sub.id',$id)
@@ -277,14 +266,14 @@ class SubmissionController extends Controller
 
             $x = 0;
             $y = 0;
-            
-        for ($i=0; $i <=count($data)-1 ; $i++) { 
+
+        for ($i=0; $i <=count($data)-1 ; $i++) {
             $x = date('Y-m-d',strtotime($data[$i]->start_date));
             $y = date('Y-m-d',strtotime($data[$i]->finish_date));
             }
         $date1 = tgl($x);
         $date2 = tgl($y);
-        
+
         $wks1 = ['user' => userByRole(5),'teacher'=> nip(20)];
         $wks4 = ['user' => userByRole(11),'teacher'=> nip(21)];
         $kaur = ['user' => userByRole(21),'teacher'=> nip(22)];

@@ -64,7 +64,8 @@ Route::get('setuju/lihat2/{id}', 'ValidationController@getFile2');
 Route::get('setuju', 'ValidationController@tabsetuju')->name('tab.setuju');
 Route::get('tolak', 'ValidationController@tabtolak')->name('tab.tolak');
 Route::get('validation/print/{id}', 'ValidationController@pengantar_pdf');
-
+Route::get('validation/progress', 'ValidationController@show');
+Route::get('validation/recap/print', 'ValidationController@recap_pdf')->name('validation.recap');
 Route::resource('/profile', 'ProfileController');
 Route::post('profile/update', 'ProfileController@update')->name('prof.update');
 Route::get('profile/change/{id}', 'UsersController@change');
@@ -74,3 +75,4 @@ Route::resource('/report', 'ReportController');
 Route::resource('/score', 'ScoreController');
 
 Route::post('tambah-saran', 'IndustryController@tambahSaran')->name('suggestion.add');
+Route::post('tambah-detail', 'SubmissionController@tambahDetail')->name('detail.add');

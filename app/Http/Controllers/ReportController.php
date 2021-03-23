@@ -39,7 +39,7 @@ class ReportController extends Controller
                     $html = '';
                     if (!empty($data->report_id)) {
                         $report = Report::findOrFail($data->report_id);
-                        $html .= '<a href= "/report/' . $report->id . '" 
+                        $html .= '<a href= "/report/' . $report->id . '"
                     target="_blank" class="btn btn-default btn-sm">
                     <i class="fas fa-file"></i> Lihat Laporan</a>';
                     }
@@ -47,13 +47,13 @@ class ReportController extends Controller
                         $html .= '<button name="report" class="btn btn-default btn-sm edit" data-id="' . $data->id . '">
                     <i class="fas fa-file"></i> Upload/ganti Laporan</button>';
                     }
-                    return $html ?: 'Laporan belum diupload';
+                    return $html ?: 'Laporan belum diunggah';
                 })
                 ->addColumn('action2', function ($data) {
                     $html = '';
                     if (!empty($data->certif_id)) {
                         $report = Certificate::findOrFail($data->certif_id);
-                        $html .= '<a href= "/report2/' . $report->id . '" 
+                        $html .= '<a href= "/report2/' . $report->id . '"
                     target="_blank" class="btn btn-default btn-sm">
                     <i class="fas fa-file"></i> Lihat Sertifikat</a>';
                     }
@@ -61,7 +61,7 @@ class ReportController extends Controller
                         $html .= '<button name="report2" class="btn btn-default btn-sm editCertif" data-id="' . $data->id . '">
                     <i class="fas fa-file"></i> Upload/ganti Sertifikat</button>';
                     }
-                    return $html ?: 'Sertifikat belum diupload';
+                    return $html ?: 'Sertifikat belum diunggah';
                 })
                 ->rawColumns(['action','action2'])
                 ->make(true);
@@ -103,7 +103,7 @@ class ReportController extends Controller
         $path = $request->report2->storeAs('reports', $saved_name);
 
         $report = Report::create([
-            'original_name' => $original_name, 
+            'original_name' => $original_name,
             'saved_name' => $saved_name,
             'user_id' => auth()->user()->id
         ]);

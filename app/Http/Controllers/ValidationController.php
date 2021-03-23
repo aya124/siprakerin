@@ -36,18 +36,19 @@ class ValidationController extends Controller
           'i.name',
           'sub.start_date',
           'sub.finish_date',
-          DB::raw('st.name as status_name')
+          DB::raw('st.name as status_name'),
+          'sub.submit_type'
         )
         ->where('sub.status_id', 1)
         ->get();
 
       return datatables()->of($data)
         ->addColumn('action', function ($data) {
-          $button = '<button type="button" name="setuju" 
+          $button = '<button type="button" name="setuju"
           id="' . $data->id . '" class="setuju btn btn-success btn-sm">
           <i class="fa fa-thumbs-up"></i> Setuju</button>';
           $button .= '&nbsp;&nbsp;';
-          $button .= '<button type="button" name="tolak" 
+          $button .= '<button type="button" name="tolak"
           id="' . $data->id . '" class="tolak btn btn-danger btn-sm">
           <i class="fa fa-thumbs-down"></i> Tolak</button>';
           return $button;
@@ -59,16 +60,16 @@ class ValidationController extends Controller
             $button .= '&nbsp;&nbsp;';
             $button .= '<span class="balasan label label-danger">
                   Surat Balasan belum diunggah</span>';
+          } elseif ($data->status_name == 'Menunggu persetujuan') {
+            $button = '';
           } elseif ($data->status_name == 'Surat dari Industri belum diunggah') {
-
-            $button = '<a href="setuju/lihat1/' . $data->id . '" 
+            $button = '<a href="setuju/lihat1/' . $data->id . '"
                   target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
                   <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
             $button .= '&nbsp;&nbsp;';
             $button .= '<span class="balasan label label-danger">
                   Surat Balasan belum diunggah</span>';
           } else {
-
             $button = '<a href="setuju/lihat1/' . $data->id . '"
                   target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
                   <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
@@ -78,8 +79,8 @@ class ValidationController extends Controller
                   <i class="fas fa-file-image"></i> Lihat Surat Balasan</a>';
           }
           $button .= '&nbsp;&nbsp;';
-          $button .= '<a href= "validation/print/' . $data->id . '" 
-                target="_blank" type="button" name="print" 
+          $button .= '<a href= "validation/print/' . $data->id . '"
+                target="_blank" type="button" name="print"
                 class="btn btn-default btn-sm">
                 <i class="fas fa-print"></i> Cetak Surat Pengantar</a>';
           return $button;
@@ -90,7 +91,27 @@ class ValidationController extends Controller
 
     return view('validation.index');
   }
+ /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show()
+    {
+        return view('validation.progress');
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
 
   public function update($id) //setuju
   {
@@ -139,15 +160,12 @@ class ValidationController extends Controller
             $button .= '<span class="balasan label label-danger">
                   Surat Balasan belum diunggah</span>';
           } elseif ($data->status_name == 'Surat dari Industri belum diunggah') {
-
-            $button = '<a href="setuju/lihat1/' . $data->id . '" 
+            $button = '<a href="setuju/lihat1/' . $data->id . '"
                   target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
                   <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
             $button .= '&nbsp;&nbsp;';
-            $button .= '<span class="balasan label label-danger">
-                  Surat Balasan belum diunggah</span>';
+            $button .= '<span class="balasan label label-danger">Surat Balasan belum diunggah</span>';
           } else {
-
             $button = '<a href="setuju/lihat1/' . $data->id . '"
                   target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
                   <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
@@ -157,8 +175,8 @@ class ValidationController extends Controller
                   <i class="fas fa-file-image"></i> Lihat Surat Balasan</a>';
           }
           $button .= '&nbsp;&nbsp;';
-          $button .= '<a href= "validation/print/' . $data->id . '" 
-                target="_blank" type="button" name="print" 
+          $button .= '<a href= "validation/print/' . $data->id . '"
+                target="_blank" type="button" name="print"
                 class="btn btn-default btn-sm">
                 <i class="fas fa-print"></i> Cetak Surat Pengantar</a>';
           return $button;
@@ -190,35 +208,12 @@ class ValidationController extends Controller
 
       return datatables()->of($data)
         ->addColumn('correspondence', function ($data) {
-          if ($data->status_name == 'Pengajuan disetujui') {
-            $button = '<span class="pengantar label label-danger">
-                  Surat Pengantar belum diunggah</span>';
-            $button .= '&nbsp;&nbsp;';
-            $button .= '<span class="balasan label label-danger">
-                  Surat Balasan belum diunggah</span>';
-          } elseif ($data->status_name == 'Surat dari Industri belum diunggah') {
-
-            $button = '<a href="setuju/lihat1/' . $data->id . '" 
-                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
-                  <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
-            $button .= '&nbsp;&nbsp;';
-            $button .= '<span class="balasan label label-danger">
-                  Surat Balasan belum diunggah</span>';
-          } else {
-
-            $button = '<a href="setuju/lihat1/' . $data->id . '"
-                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
-                  <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
-            $button .= '&nbsp;&nbsp;';
-            $button .= '<a href="setuju/lihat2/' . $data->id . '"
-                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
-                  <i class="fas fa-file-image"></i> Lihat Surat Balasan</a>';
-          }
-          $button .= '&nbsp;&nbsp;';
-          $button .= '<a href= "validation/print/' . $data->id . '" 
-                target="_blank" type="button" name="print" 
-                class="btn btn-default btn-sm">
-                <i class="fas fa-print"></i> Cetak Surat Pengantar</a>';
+           if ($data->status_name == 'Pengajuan ditolak') {
+            $button = '<a href= "validation/print/' . $data->id . '"
+            target="_blank" type="button" name="print"
+            class="btn btn-default btn-sm">
+            <i class="fas fa-print"></i> Cetak Surat Pengantar</a>';
+           }
           return $button;
         })
         ->rawColumns(['correspondence'])
@@ -228,32 +223,6 @@ class ValidationController extends Controller
 
   public function pengantar_pdf($id)
   {
-    // $x = date('Y-m-d',strtotime($request->startdate));
-    // $y = date('Y-m-d',strtotime($request->finishdate));
-    function tgl($tanggal)
-    {
-      $bulan = array(
-        1 =>   'Januari',
-        'Februari',
-        'Maret',
-        'April',
-        'Mei',
-        'Juni',
-        'Juli',
-        'Agustus',
-        'September',
-        'Oktober',
-        'November',
-        'Desember'
-      );
-      $pecahkan = explode('-', $tanggal);
-      // variabel pecahkan 0 = tanggal
-      // variabel pecahkan 1 = bulan
-      // variabel pecahkan 2 = tahun
-      // $tg= $pecahkan[2].toString().replace(/^0/g,'');
-      return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
-    }
-
     $user = Auth::user();
     $now = tgl(date('Y-m-d'));
     $currentyear = date('Y');
@@ -261,7 +230,7 @@ class ValidationController extends Controller
     $data = DB::table('submissions as sub')
       ->join('users as u', 'u.username', '=', 'sub.username')
       ->join('industries as i', 'i.id', '=', 'sub.industry_id')
-      ->leftjoin('students as s', 's.username', '=', 'u.username')
+      ->leftjoin('students as s', 's.nis', '=', 'u.username')
       // ->join('statuses as st', 'st.id', '=', 'sub.status_id')
       ->select(
         'u.name',
@@ -278,20 +247,18 @@ class ValidationController extends Controller
     // dd($data);
 
     $x = 0;
-    // $xx = 0;
     $y = 0;
-
 
     for ($i = 0; $i <= count($data) - 1; $i++) {
       $x = date('Y-m-d', strtotime($data[$i]->start_date));
-      // $xx = date('m-d',strtotime($data[$i]->start_date));
       $y = date('Y-m-d', strtotime($data[$i]->finish_date));
     }
     $date1 = tgl($x);
     $date2 = tgl($y);
+    $kepsek = ['user' => userByRole(6),'teacher'=> nip(19)];
     // dd(date('m-d',strtotime($data[$i]->start_date)));
 
-    $pdf = PDF::loadview('validation.print', compact('data', 'date1', 'date2', 'now', 'currentyear'))
+    $pdf = PDF::loadview('validation.print', compact('data', 'date1', 'date2', 'now', 'currentyear', 'kepsek'))
       ->setPaper('legal', 'portrait');
     return $pdf->stream('surat-pengantar.pdf');
   }
@@ -316,7 +283,6 @@ class ValidationController extends Controller
       $file1 = base_path() . '/public/images/suratpengantar/' . $data;
       if (file_exists($file1)) {
         $ext = File::extension($file1);
-
         if ($ext == 'pdf') {
           $content_types = 'application/pdf';
         } elseif ($ext == 'doc') {
@@ -339,12 +305,11 @@ class ValidationController extends Controller
         return response(file_get_contents($file1), 200)
           ->header('Content-Type', $content_types);
       } else {
-        exit('Requested file does not exist on our server!');
+        exit('Berkas yang diminta tidak ada di server!');
       }
     } else {
       exit('Invalid Request');
     }
-    // dd($data,$departement->id,$file,$filea);
   }
 
   public function getFile2($id)
@@ -367,7 +332,6 @@ class ValidationController extends Controller
       $file2 = base_path() . '/public/images/suratbalasan/' . $data;
       if (file_exists($file2)) {
         $ext = File::extension($file2);
-
         if ($ext == 'pdf') {
           $content_types = 'application/pdf';
         } elseif ($ext == 'doc') {
@@ -389,11 +353,32 @@ class ValidationController extends Controller
         }
         return response(file_get_contents($file2), 200)->header('Content-Type', $content_types);
       } else {
-        exit('Requested file does not exist on our server!');
+        exit('Berkas yang diminta tidak ada di server!');
       }
     } else {
       exit('Invalid Request');
     }
-    // dd($data,$departement->id,$file,$filea);
+  }
+
+  public function recap_pdf(Request $request)
+  {
+    $data=Submission::whereBetween('submissions.created_at', [$request->start, $request->end])
+                    ->join('users','users.username','submissions.username')
+                    ->join('industries','industries.id','submissions.industry_id')
+                    ->join('statuses','statuses.id','submissions.status_id')
+                    ->select(
+                        'users.name as name',
+                        'industries.name as industry_name',
+                        'submissions.start_date',
+                        'submissions.finish_date',
+                        'submissions.submit_type',
+                        'statuses.name as status'
+                        )
+                    ->get();
+
+
+    $pdf = PDF::loadview('validation.recap', compact('data'))
+      ->setPaper('legal', 'landscape');
+    return $pdf->stream('rekap-pengajuan.pdf');
   }
 }

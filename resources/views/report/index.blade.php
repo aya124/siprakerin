@@ -13,7 +13,7 @@
 
   <div class="box">
     <div class="box-header">
-      @role(['admin', 'wali-kelas', 'kepsek', 'wks']) 
+      @role(['admin', 'wali-kelas', 'kepsek', 'wks'])
       <h3 class="box-title">Data Laporan/Sertifikat</h3>
       @endrole
       @role('siswa')
@@ -25,10 +25,12 @@
       <table id="tab_data" class="table table-bordered table-striped">
         <thead>
           <tr>
-            @role(['admin', 'wali-kelas', 'kepsek', 'wks']) 
+            @role(['admin', 'wali-kelas', 'kepsek', 'wks'])
             <th>Nama siswa</th>
             @endrole
             <th>Nama Industri</th>
+            <th>Tanggal Mulai</th>
+            <th>Tanggal Selesai</th>
             <th width="20%">Laporan</th>
             <th width="20%">Sertifikat</th>
           </tr>
@@ -71,7 +73,7 @@
       </div>
     </div>
   </div>
-  
+
   <br />
 
   @endrole
@@ -111,7 +113,7 @@
           url: "{{ route('report.index') }}",
         },
         columns: [
-          @role(['admin', 'wali-kelas', 'kepsek', 'wks']) 
+          @role(['admin', 'wali-kelas', 'kepsek', 'wks'])
           {
             data: 'student_name',
             name: 'student_name',
@@ -120,6 +122,14 @@
             data: 'industry_name',
             name: 'industry_name',
           },
+          {
+		    data: 'start_date',
+            name: 'start_date',
+	    },
+        {
+		    data: 'finish_date',
+            name: 'finish_date',
+        },
           {
             data: 'action',
             name: 'action',
@@ -197,7 +207,7 @@
             console.log(xhr);
             $('#form_result').show();
             html = '<div class="alert alert-danger">';
-            $.each(xhr.responseJSON.errors, function (key, item) {	
+            $.each(xhr.responseJSON.errors, function (key, item) {
               html+='<p>' +item+'</p>';
             });
               html += '</div>';
@@ -236,7 +246,7 @@
             console.log(xhr);
             $('#form_result').show();
             html = '<div class="alert alert-danger">';
-            $.each(xhr.responseJSON.errors, function (key, item) {	
+            $.each(xhr.responseJSON.errors, function (key, item) {
               html+='<p>' +item+'</p>';
             });
               html += '</div>';

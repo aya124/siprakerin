@@ -31,7 +31,7 @@
         .borderless1{
             border: 0px;
             text-indent: 0px;
-            
+
         }
         th{
             border: 1px solid black;
@@ -83,11 +83,11 @@
         }
     </style>
   </head>
-  
+
   <body>
   <header>
   <div width="100%" style="text-align: center">
-  
+
     <img src="{{ ('images/png/Coat_of_arms_of_Yogyakarta_640x480.svg.png') }}" width="10%" alt="image" style="border:black; float: center; padding: 5px; padding-left: 50px; margin: -5px;"/>
     <span class="header"><b>PEMERINTAH DAERAH DAERAH ISTIMEWA YOGYAKARTA</b></span><br>
     <span class="header"><b>DINAS PENDIDIKAN, PEMUDA, DAN OLAHRAGA</b></span><br>
@@ -140,17 +140,17 @@
     </table>
 	</div><br>
     <div width="100%" class="col-lg-6" style="width: 690px;">
-        
+
       <p>Dengan hormat,</p>
       <p align="justify">Dalam rangka memenuhi kurikulum Sekolah sebagaimana ditetapkan oleh Kementerian Pendidikan Nasional,
-         dengan ini kami mengajukan permohonan Praktik Kerja Industri / Prakerin untuk tahun {{$currentyear}}, 
-         bagi siswa-siswa kami kelas{{$data[0]->class}} XII SMK Negeri 2 Depok (STM Pembangunan Yogyakarta), 
+         dengan ini kami mengajukan permohonan Praktik Kerja Industri / Prakerin untuk tahun {{$currentyear}},
+         bagi siswa-siswa kami kelas{{$data[0]->class}} XII SMK Negeri 2 Depok (STM Pembangunan Yogyakarta),
          untuk mendapatkan tambahan kemampuan praktek melalui Program Praktik Kerja Industri / Prakerin di {{$data[0]->industry_name}},
          {{$data[0]->address}} {{$data[0]->city}}.
       </p>
       <p align="justify">Berikut kami sampaikan daftar nama siswa-siswa kami yang mengajukan Praktik Industri :</p>
-    
-    <table class="table-bordered" style="width: 690px;">  
+
+    <table class="table-bordered" style="width: 690px;">
     	<thead>
     		<tr>
               <td align="center" style="width: 40px;">No.</td>
@@ -175,13 +175,13 @@
          sehingga kegiatan dimaksud dapat terlaksana. Surat balasan bisa melalui telepon/faximile No. (0274) 546809,
          atau email: <u>bkk_smkn2depok@yahoo.co.id</u>.
       </p>
-      <p align="justify">Demikian hal ini kami sampaikan, besar harapan kami untuk dikabulkannya permohonan ini. Atas perkenan, 
+      <p align="justify">Demikian hal ini kami sampaikan, besar harapan kami untuk dikabulkannya permohonan ini. Atas perkenan,
       perhatian, dan kerja samanya kami sampaikan terima kasih.</p>
     </div><br><br>
     <div width="100%" class="container">
     <table align="left" class="borderless" style="width: 690px;">
     	<tbody>
-          
+
           <tr class="borderless">
             <td class="borderless" align="justify" style="width: 220px;">&nbsp;</td>
             <td class="borderless" style="width: 200px;">&nbsp;</td>
@@ -205,7 +205,7 @@
           <tr class="borderless">
             <td class="borderless"></td>
             <td class="borderless" style="width: 200px;"></td>
-            <td class="borderless">Drs. Agus Waluyo, M.Eng.</td>
+            <td class="borderless">{{$kepsek['user']->name}}</td>
           </tr>
           <tr class="borderless">
             <td class="borderless"></td>
@@ -215,7 +215,7 @@
           <tr class="borderless">
             <td class="borderless" align="justify" style="width: 220px;"></td>
             <td class="borderless" style="width: 200px;"></td>
-            <td class="borderless" align="justify">NIP. 19651227 1999412 1 002</td>
+            <td class="borderless" align="justify">NIP. {{$kepsek['user']->nip}}</td>
           </tr>
       </tbody>
       </table>

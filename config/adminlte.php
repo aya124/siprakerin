@@ -156,6 +156,12 @@ return [
             'permission' => 'validasi-pengajuan',
         ],
         [
+            'text' => 'Progress Pengajuan',
+            'url' => 'validation/progress',
+            'icon' => 'fa fa-download',
+            'permission' => 'validasi-pengajuan',
+        ],
+        [
             'text' => 'Laporan',
             'url' => 'report',
             'icon' => 'fa fa-file',

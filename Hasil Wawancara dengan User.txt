@@ -5,11 +5,11 @@ Berikut ini hasil wawancara yang telah direkam:
 
 1. Tidak ada pembimbing dari sekolah, hanya ada petugas mengantar, monitoring dan penarikan.
 2. Guru yang terlibat di sistem hanyalah KPS dan wali kelas yang ingin memantau siswa
-3. Penilaian kinerja siswa hanya dilakukan industri (tertera di sertifikat), dan juga nilai laporannya. 
-    --> Ada atau tidaknya laporannya tergantung permintaan industri. 
+3. Penilaian kinerja siswa hanya dilakukan industri (tertera di sertifikat), dan juga nilai laporannya.
+    --> Ada atau tidaknya laporannya tergantung permintaan industri.
     Jika ada, laporan diserahkan ke WKS 4.
-    Maka, perlu ada fitur upload laporan oleh siswa yang bisa dipantau oleh KPS dan wali kelas. 
-4. Penilaian industri memiliki standarnya masing2, perlu tanya komponen pokok dan 
+    Maka, perlu ada fitur upload laporan oleh siswa yang bisa dipantau oleh KPS dan wali kelas.
+4. Penilaian industri memiliki standarnya masing2, perlu tanya komponen pokok dan
     konversi nilainya ke WKS 4 --> tunggu surat penelitian
 5. Karena tidak melibatkan industri, wali kelas yg entry nilai sertifikat.
 6. Ada track record jumlah siswa prakerin dan industri yang diajukan oleh siswa
@@ -49,7 +49,7 @@ Tgl 28 Feb 2021 08:05-10:05
 
 Hasil Diskusi/Koreksi Demo Siprakerin via Google Meet
 
-1. Pengajuan cukup 1x dulu, ada pengajuan utama dan alternatif.
+1. Pengajuan cukup 1x dulu, ada pengajuan utama dan alternatif. ✅
     Jika tidak direspon, disertakan alasan "tidak ada respon dari .."
 2. Nama pejabat di form pengajuan diganti variabel (dinamis) ✅
 3. Data Industri dipindah paling atas ✅
@@ -66,7 +66,7 @@ Hasil Diskusi/Koreksi Demo Siprakerin via Google Meet
 Tgl 12 Mar 2021
 Hasil Cek Mandiri
 
-1. Jika ada pengajuan yang ditolak, 
+1. Jika ada pengajuan yang ditolak,
     seharusnya tidak muncul di upload laporan/input nilai
 
 

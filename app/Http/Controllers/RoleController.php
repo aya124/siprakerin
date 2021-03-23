@@ -21,7 +21,7 @@ class RoleController extends Controller
         {
             return datatables()->of(Role::latest()->get())
                     ->addColumn('action', function($data){
-                      
+
                         $button= '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-info btn-sm">
                         <i class="fa fa-edit"></i> Edit</button>';
                         $button .= '&nbsp;&nbsp;';
@@ -63,7 +63,7 @@ class RoleController extends Controller
             $role->attachPermissions($request->p);
             return response()->json(['success' => 'Role berhasil ditambah.']);
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Role gagal ditambah.']);
+            return response()->json(['error' => ['input' => 'Role gagal ditambah.']],500);
         }
     }
 

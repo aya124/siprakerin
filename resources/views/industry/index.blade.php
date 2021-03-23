@@ -132,7 +132,6 @@
             </div>
           </div>
           @endrole
-
 					<br />
 					<div class="form-group" align="center">
 						<input type="hidden" name="action" id="action" />
@@ -253,7 +252,7 @@
       $('#createModal .modal-title').text("Tambah Industri");
       $('#action').val("tambah");
     });
-    
+
     $(document).on('click','.edit',function(){
       $('.notifError').remove();
       var x =$(this).attr('id');
@@ -362,7 +361,6 @@
          $('#lihatSaranModal .modal-body').load($(this).attr('url'));
          $('#lihatSaranModal').modal('show');
         });
-
 
     $('#add').on('submit',function(event) {
         $('.notifError').remove();

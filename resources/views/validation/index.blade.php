@@ -4,11 +4,13 @@
 
 @section('content_header')
 <h1>Validasi Pengajuan</h1>
+@if (Auth::user()->submit_type == 1)
+@endif
 @stop
 
 @section('content')
 @if (session('status'))
-<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>    
+<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>
 @endif
 
 <div class="box">
@@ -25,6 +27,7 @@
             <th>Tanggal Mulai</th>
             <th>Tanggal Selesai</th>
             <th>Status</th>
+            <th>Pengajuan</th>
             <th>Persuratan</th>
             <th>Aksi</th>
           </tr>
@@ -53,6 +56,7 @@
             <th>Tanggal Mulai</th>
             <th>Tanggal Selesai</th>
             <th>Status</th>
+            <th>Pengajuan</th>
             <th>Persuratan</th>
           </tr>
         </thead>
@@ -61,7 +65,7 @@
       </div>
     <!-- /.box-body -->
   </div>
-  
+
   <div class="box box-danger collapsed-box">
     <div class="box-header with-border">
       <h3 class="box-title">Pengajuan yang ditolak</h3>
@@ -81,6 +85,7 @@
             <th>Tanggal Mulai</th>
             <th>Tanggal Selesai</th>
             <th>Status</th>
+            <th>Pengajuan</th>
             <th>Persuratan</th>
           </tr>
         </thead>
@@ -122,112 +127,145 @@
 <script>
 $(function() {
     $('#tab_data').DataTable({
-			processing: true,
-			serverSide: true,
-			ajax:{
-				url: "{{ route('validation.index') }}",
+		processing: true,
+		serverSide: true,
+		ajax:{
+		url: "{{ route('validation.index') }}",
       },
       columns:[
-			{
-				data: 'username',
-				name: 'username',
+	  {
+		data: 'username',
+		name: 'username',
       },
       {
-				data: 'name',
-				name: 'name',
-			},
-			{
-				data: 'start_date',
+		data: 'name',
+		name: 'name',
+	  },
+	  {
+		data: 'start_date',
         name: 'start_date',
-			},
+	  },
       {
-				data: 'finish_date',
+		data: 'finish_date',
         name: 'finish_date',
       },
       {
         data: 'status_name',
-				name: 'status_name',
+		name: 'status_name',
+      },
+      {
+        data: 'submit_type',
+        render:function(data){
+          if (data == 1) {
+            return 'Utama'
+          }
+          else{
+            return 'Alternatif'
+          }
+        }
       },
       {
         data: 'correspondence',
-				name: 'correspondence',
+		name: 'correspondence',
       },
       {
         data: 'action',
-				name: 'action',
-				orderable: false
+		name: 'action',
+		orderable: false
       }
-			]
+	]
       // $('#validasi').dataTable();
   });
 
   $('#tab_data2').DataTable({
-			processing: true,
-			serverSide: true,
-			ajax:{
-				url: "{{ route('tab.setuju') }}",
+		processing: true,
+		serverSide: true,
+		ajax:{
+			url: "{{ route('tab.setuju') }}",
       },
       columns:[
-        {
-				data: 'user_name',
-				name: 'user_name',
+      {
+		    data: 'user_name',
+		    name: 'user_name',
       },
       {
-				data: 'name',
-				name: 'name',
-			},
-			{
-				data: 'start_date',
+		    data: 'name',
+			name: 'name',
+	  },
+	  {
+		data: 'start_date',
         name: 'start_date',
-			},
+		},
       {
-				data: 'finish_date',
+		data: 'finish_date',
         name: 'finish_date',
       },
       {
         data: 'status_name',
-				name: 'status_name',
+		name: 'status_name',
+      },
+      {
+        data: 'submit_type',
+        render:function(data){
+          if (data == 1) {
+            return 'Utama'
+          }
+          else{
+            return 'Alternatif'
+          }
+        }
       },
       {
         data: 'correspondence',
-				name: 'correspondence',
+		name: 'correspondence',
       },
-			]
+	]
       // $('#validasi').dataTable();
   });
 
   $('#tab_data3').DataTable({
-			processing: true,
-			serverSide: true,
-			ajax:{
-				url: "{{ route('tab.tolak') }}",
+		processing: true,
+		serverSide: true,
+		ajax:{
+		url: "{{ route('tab.tolak') }}",
       },
       columns:[
         {
-				data: 'user_name',
-				name: 'user_name',
+			data: 'user_name',
+			name: 'user_name',
       },
       {
-				data: 'name',
-				name: 'name',
-			},
-			{
-				data: 'start_date',
-        name: 'start_date',
-			},
+			data: 'name',
+			name: 'name',
+	  },
+	  {
+			data: 'start_date',
+            name: 'start_date',
+		},
       {
-				data: 'finish_date',
-        name: 'finish_date',
+			data: 'finish_date',
+            name: 'finish_date',
       },
       {
-        data: 'status_name',
-				name: 'status_name',
+            data: 'status_name',
+			name: 'status_name',
       },
       {
-        data: 'correspondence',
-				name: 'correspondence',
+        data: 'submit_type',
+        render:function(data){
+          if (data == 1) {
+            return 'Utama'
+          }
+          else{
+            return 'Alternatif'
+          }
+        }
       },
-			]
+      {
+            data: 'correspondence',
+			name: 'correspondence',
+      },
+	]
       // $('#validasi').dataTable();
   });
 

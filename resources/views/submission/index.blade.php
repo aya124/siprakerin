@@ -3,7 +3,7 @@
 @section('title', 'Pengajuan')
 
 @section('content_header')
-<h1>Pengajuan 
+<h1>Pengajuan
 @if (Auth::user()->submit_lock != 1)
 <a id="btn_add" class="btn btn-flat btn-primary">Tambah Pengajuan</a></h1>
 @endif
@@ -11,7 +11,7 @@
 
 @section('content')
 @if (session('status'))
-<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>    
+<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>
 @endif
 
 <div class="box">
@@ -27,6 +27,7 @@
           <th>Tanggal Mulai</th>
           <th>Tanggal Selesai</th>
           <th>Status</th>
+          <th>Pengajuan</th>
           <th>Aksi</th>
         </tr>
       </thead>
@@ -41,22 +42,22 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title"></h4>
+				<h4 class="modal-title">Pengajuan </h4>
 			</div>
 			<div class="modal-body">
 
         <span id="form_result"></span>
-				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
-					@csrf
-					<div class="form-group">
-						<label class="control-label col-md-4" >Nama Industri <small class="text-danger">*</small> </label>
+			<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
+			@csrf
+			    <div class="form-group">
+					<label class="control-label col-md-4" >Nama Industri <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<select class="form-control" id="name" name="name">
-                @foreach ($industry as $item)
-								<option value="{{$item->id}}">{{$item->name}}</option>
-                @endforeach
+                        @foreach ($industry as $item)
+						<option value="{{$item->id}}">{{$item->name}}</option>
+                        @endforeach
 							</select>
-						</div>
+					</div>
           </div>
           <div class="form-group">
 						<label class="control-label col-md-4" >Tanggal Mulai Prakerin <small class="text-danger">*</small> </label>
@@ -70,7 +71,6 @@
 							<input type="date" name="finishdate" id="finishdate" class="dateform form-control" />
 						</div>
           </div>
-
           <br />
 					<div class="form-group" align="center">
 						<input type="hidden" name="action" id="action" />
@@ -179,34 +179,45 @@
 <script>
   $(function() {
     $('#tab_data').DataTable({
-			processing: true,
-			serverSide: true,
-			ajax:{
-				url: "{{ route('submission.index') }}",
+		processing: true,
+		serverSide: true,
+		ajax:{
+		url: "{{ route('submission.index') }}",
       },
       columns:[
-			{
-				data: 'name',
-				name: 'name',
-			},
-			{
-				data: 'start_date',
-        name: 'start_date',
-			},
-      {
-				data: 'finish_date',
-        name: 'finish_date',
-      },
-      {
-        data: 'status_name',
-				name: 'status_name',
-      },
-      {
-        data: 'action',
-				name: 'action',
-				orderable: false
-      }
-			]
+	    {
+			data: 'name',
+			name: 'name',
+		},
+		{
+			data: 'start_date',
+            name: 'start_date',
+		},
+        {
+			data: 'finish_date',
+            name: 'finish_date',
+        },
+        {
+            data: 'status_name',
+			name: 'status_name',
+        },
+        {
+            data: 'submit_type',
+            render:function(data){
+            if (data == 1) {
+            return 'Utama'
+            }
+            else{
+            return 'Alternatif'
+          }
+        }
+        },
+        {
+            data: 'action',
+			name: 'action',
+			orderable: false
+        }
+	]
       // $('#pengajuan').dataTable();
   });
 
@@ -298,7 +309,7 @@
             console.log(xhr);
             $('#form_result').show();
             html = '<div class="alert alert-danger">';
-            $.each(xhr.responseJSON.errors, function (key, item) {	
+            $.each(xhr.responseJSON.errors, function (key, item) {
               html+='<p>' +item+'</p>';
             });
               html += '</div>';
@@ -340,7 +351,7 @@
             console.log(xhr);
             $('#form_result').show();
             html = '<div class="alert alert-danger">';
-            $.each(xhr.responseJSON.errors, function (key, item) {	
+            $.each(xhr.responseJSON.errors, function (key, item) {
               html+='<p>' +item+'</p>';
             });
               html += '</div>';
@@ -359,7 +370,7 @@
       $('#confirmModal').modal('show');
 			$('#ok_button').text('OK');
     });
-    
+
     $('#ok_button').click(function() {
       $.ajax({
         url:"submission/destroy/"+id_table,
@@ -404,7 +415,7 @@
                   console.log(xhr);
                   $('#form_result').show();
                   html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) {	
+                  $.each(xhr.responseJSON.errors, function (key, item) {
                     html+='<p>' +item+'</p>';
                   });
                   html += '</div>';
@@ -438,7 +449,7 @@
                   console.log(xhr);
                   $('#form_result').show();
                   html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) {	
+                  $.each(xhr.responseJSON.errors, function (key, item) {
                   	html+='<p>' +item+'</p>';
                   });
                   html += '</div>';
@@ -451,6 +462,6 @@
             }
         });
   });
-  
+
 </script>
 @stop

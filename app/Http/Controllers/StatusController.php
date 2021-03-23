@@ -15,11 +15,11 @@ class StatusController extends Controller
         {
             return datatables()->of(Status::latest()->get())
                     ->addColumn('action', function($data){
-                        $button= '<button type="button" 
+                        $button= '<button type="button"
                         name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">
                         <i class="fa fa-edit"></i> Edit</button>';
                         $button .= '&nbsp;&nbsp;';
-                        $button .= '<button type="button" 
+                        $button .= '<button type="button"
                         name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm">
                         <i class="fa fa-trash"></i> Hapus</button>';
                         return $button;
@@ -53,7 +53,7 @@ class StatusController extends Controller
             Status::create($data);
             return response()->json(['success' => 'Status berhasil ditambah.']);
         } catch (\Throwable $th) {
-            return response()->json(['error' => 'Gagal menambah data.']);
+            return response()->json(['error' => ['input' =>'Gagal menambah data.'],500]);
         }
     }
 
