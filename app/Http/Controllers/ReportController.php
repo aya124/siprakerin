@@ -25,7 +25,8 @@ class ReportController extends Controller
         if (request()->ajax()) {
             $data = DB::table('submissions as s')
                 ->join('industries as i', 'i.id', '=', 's.industry_id')
-                ->join('users as u', 'u.username', '=', 's.username');
+                ->join('users as u', 'u.username', '=', 's.username')
+                ->join('statuses as st', 'st.id', '=', 's.status_id');
             $data->select('s.*');
             if (auth()->user()->hasRole('siswa')) {
                 $data->selectRaw('i.name as industry_name');
@@ -47,7 +48,10 @@ class ReportController extends Controller
                         $html .= '<button name="report" class="btn btn-default btn-sm edit" data-id="' . $data->id . '">
                     <i class="fas fa-file"></i> Upload/ganti Laporan</button>';
                     }
-                    return $html ?: 'Laporan belum diunggah';
+                    if ($data->status_id == 8) {
+                        $html = 'Pengajuan ditolak';
+                    }
+                    return $html ?: 'Laporan belum diupload';
                 })
                 ->addColumn('action2', function ($data) {
                     $html = '';
@@ -61,7 +65,10 @@ class ReportController extends Controller
                         $html .= '<button name="report2" class="btn btn-default btn-sm editCertif" data-id="' . $data->id . '">
                     <i class="fas fa-file"></i> Upload/ganti Sertifikat</button>';
                     }
-                    return $html ?: 'Sertifikat belum diunggah';
+                    if ($data->status_id == 8) {
+                        $html = 'Pengajuan ditolak';
+                    }
+                    return $html ?: 'Sertifikat belum diupload';
                 })
                 ->rawColumns(['action','action2'])
                 ->make(true);

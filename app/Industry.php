@@ -15,8 +15,13 @@ class Industry extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function suggestion(): HasMany       
+    public function suggestion()
     {
         return $this->hasMany(Suggestion::class, 'industry_id', 'id');
+    }
+
+    public function submission()
+    {
+        return $this->hasMany(Submission::class, 'industry_id', 'id');
     }
 }

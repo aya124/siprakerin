@@ -146,7 +146,8 @@ class ValidationController extends Controller
           'i.name',
           'sub.start_date',
           'sub.finish_date',
-          DB::raw('st.name as status_name')
+          DB::raw('st.name as status_name'),
+          'sub.submit_type'
         )
         ->whereIn('sub.status_id', [4, 6, 7])
         ->get();
@@ -201,7 +202,8 @@ class ValidationController extends Controller
           'i.name',
           'sub.start_date',
           'sub.finish_date',
-          DB::raw('st.name as status_name')
+          DB::raw('st.name as status_name'),
+          'sub.submit_type'
         )
         ->where('sub.status_id', 8)
         ->get();

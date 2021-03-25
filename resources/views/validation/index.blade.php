@@ -4,8 +4,7 @@
 
 @section('content_header')
 <h1>Validasi Pengajuan</h1>
-@if (Auth::user()->submit_type == 1)
-@endif
+
 @stop
 
 @section('content')

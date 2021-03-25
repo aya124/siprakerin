@@ -40,7 +40,7 @@
             </div>
             <div width="100%" style="text-align: center">
                 <span><b>REKAP DATA PENGAJUAN PRAKERIN JURUSAN TEKNIK KOMPUTER DAN JARINGAN</b></span><br>
-                <span><b>PERIODE {{tgl(request()->get('start'))}} – {{tgl(request()->get('end'))}} </b></span>
+                <span><b>Periode {{tgl(request()->get('start'))}} – {{tgl(request()->get('end'))}} </b></span>
             </div><br>
             </header>
             <div width="100%" class="container">

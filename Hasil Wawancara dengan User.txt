@@ -53,10 +53,10 @@ Hasil Diskusi/Koreksi Demo Siprakerin via Google Meet
     Jika tidak direspon, disertakan alasan "tidak ada respon dari .."
 2. Nama pejabat di form pengajuan diganti variabel (dinamis) ✅
 3. Data Industri dipindah paling atas ✅
-4. Edit pada menu data industri yang sudah disetujui bisa diganti 'Saran',
-    jika diisi akan dikirimkan ke email tkj.sija.stembayo@gmail.com ✅
-5. Buat rekap data (pdf/excel) progress pengajuan prakerin
-6. Sertakan panduan/pedoman pada dashboard, bisa berupa link
+4. Edit pada menu data industri yang disetujui diganti 'Saran',✅
+    jika diisi akan dikirimkan ke email tkj.sija.stembayo@gmail.com
+5. Buat rekap data (pdf/excel) progress pengajuan prakerin ✅
+6. Sertakan panduan/pedoman di dashboard, bisa berupa link
 7. Tambah upload sertifikat di menu Laporan ✅
 8. Change db interactively, bukan lewat file env. ()
 . Sertakan referensi kakak kelas yang melakukan prakerin (pengembangan selanjutnya)
@@ -67,7 +67,7 @@ Tgl 12 Mar 2021
 Hasil Cek Mandiri
 
 1. Jika ada pengajuan yang ditolak,
-    seharusnya tidak muncul di upload laporan/input nilai
+    seharusnya tidak muncul di upload laporan/input nilai ✅
 
 
 Tgl 17 Mar 2021
