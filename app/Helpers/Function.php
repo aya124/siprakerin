@@ -1,6 +1,7 @@
 <?php
 
 use App\Role;
+use App\Submission;
 use App\Teacher;
 
 function userByRole($id)
@@ -16,6 +17,15 @@ function nip($id)
     return Teacher::join('users','users.id','teachers.user_id')
                 ->where('teachers.id',$id)
                 ->first();
+}
+
+function YearSubmission($id)
+{
+    $count = Submission::where('year_id',$id)->count();
+    if($count == 0)
+    return true;
+    else
+    return false;
 }
 
 function tgl($tanggal){

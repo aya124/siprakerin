@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'gender', 'email', 'password', 
+        'name', 'username', 'gender', 'email', 'password',
     ];
 
     /**
@@ -40,9 +40,34 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'id');
+    }
+
+    public function permission()
+    {
+        return $this->hasMany(Permission::class, 'user_id', 'id');
+    }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class, 'user_id', 'id');
+    }
+
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class, 'user_id', 'id');
+    }
+
+    public function industry()
+    {
+        return $this->hasMany(Industry::class, 'user_id', 'id');
+    }
+
     public function suggestion()
     {
-            return $this->hasMany(Suggestion::class, 'user_id', 'id');
+        return $this->hasMany(Suggestion::class, 'user_id', 'id');
     }
-    
+
 }

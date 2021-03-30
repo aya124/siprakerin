@@ -4,19 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class StudentClass extends Model
 {
     protected $fillable = [
-        'name',
+        'name', 'accro',
     ];
 
     /**
-     * Get all of the comments for the Status
+     * Get all of the student for the StudentClass
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function submission()
+    public function student()
     {
-        return $this->hasMany(Submission::class, 'status_id', 'id');
+        return $this->hasOne(Student::class, 'user_id', 'id');
     }
 }

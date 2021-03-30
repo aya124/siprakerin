@@ -10,6 +10,12 @@ class Industry extends Model
         'name', 'address', 'city', 'phone', 'detail', 'username', 'status', 'check',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+
     /**
      * Get all of the suggestion for the Industry
      *

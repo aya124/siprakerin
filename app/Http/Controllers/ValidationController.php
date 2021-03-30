@@ -100,6 +100,71 @@ class ValidationController extends Controller
     public function show()
     {
         return view('validation.progress');
+
+    }
+
+    public function byYear()
+    {
+    if (request()->ajax()) {
+      $user = Auth::user();
+      $data = DB::table('submissions as sub')
+        ->join('users as u', 'u.username', '=', 'sub.username')
+        ->join('industries as i', 'i.id', '=', 'sub.industry_id')
+        ->join('statuses as st', 'st.id', '=', 'sub.status_id')
+        ->select(
+          'sub.id',
+          DB::raw('u.name as username'),
+          'i.name',
+          'sub.start_date',
+          'sub.finish_date',
+          DB::raw('st.name as status_name'),
+          'sub.submit_type'
+        )
+        ->where('sub.status_id', 1, 7, 8)
+        ->get();
+
+      return datatables()->of($data)
+        ->addColumn('correspondence', function ($data) {
+          if ($data->status_name == 'Pengajuan disetujui') {
+            $button = '<span class="pengantar label label-danger">
+                  Surat Pengantar belum diunggah</span>';
+            $button .= '&nbsp;&nbsp;';
+            $button .= '<span class="balasan label label-danger">
+                  Surat Balasan belum diunggah</span>';
+          } elseif ($data->status_name == 'Menunggu persetujuan') {
+            $button = '';
+          } elseif ($data->status_name == 'Surat dari Industri belum diunggah') {
+            $button = '<a href="setuju/lihat1/' . $data->id . '"
+                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
+                  <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
+            $button .= '&nbsp;&nbsp;';
+            $button .= '<span class="balasan label label-danger">
+                  Surat Balasan belum diunggah</span>';
+          } elseif ($data->status_name == 'Pengajuan ditolak') {
+            $button = '<a href= "validation/print/' . $data->id . '"
+            target="_blank" type="button" name="print"
+            class="btn btn-default btn-sm">
+            <i class="fas fa-print"></i> Cetak Surat Pengantar</a>';
+           } else {
+            $button = '<a href="setuju/lihat1/' . $data->id . '"
+                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
+                  <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
+            $button .= '&nbsp;&nbsp;';
+            $button .= '<a href="setuju/lihat2/' . $data->id . '"
+                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
+                  <i class="fas fa-file-image"></i> Lihat Surat Balasan</a>';
+          }
+          $button .= '&nbsp;&nbsp;';
+          $button .= '<a href= "validation/print/' . $data->id . '"
+                target="_blank" type="button" name="print"
+                class="btn btn-default btn-sm">
+                <i class="fas fa-print"></i> Cetak Surat Pengantar</a>';
+          return $button;
+        })
+        ->rawColumns(['action', 'correspondence'])
+        ->make(true);
+        }
+        return view('validation.year');
     }
 
     /**
@@ -364,18 +429,18 @@ class ValidationController extends Controller
 
   public function recap_pdf(Request $request)
   {
-    $data=Submission::whereBetween('submissions.created_at', [$request->start, $request->end])
-                    ->join('users','users.username','submissions.username')
-                    ->join('industries','industries.id','submissions.industry_id')
-                    ->join('statuses','statuses.id','submissions.status_id')
-                    ->select(
-                        'users.name as name',
-                        'industries.name as industry_name',
-                        'submissions.start_date',
-                        'submissions.finish_date',
-                        'submissions.submit_type',
-                        'statuses.name as status'
-                        )
+    $data = Submission::whereBetween('submissions.created_at', [$request->start, $request->end])
+                ->join('users','users.username','submissions.username')
+                ->join('industries','industries.id','submissions.industry_id')
+                ->join('statuses','statuses.id','submissions.status_id')
+                ->select(
+                    'users.name as name',
+                    'industries.name as industry_name',
+                    'submissions.start_date',
+                    'submissions.finish_date',
+                    'submissions.submit_type',
+                    'statuses.name as status'
+                    )
                     ->get();
 
 

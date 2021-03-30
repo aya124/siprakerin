@@ -4,19 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class Year extends Model
 {
     protected $fillable = [
-        'name',
+        'year',
     ];
 
     /**
-     * Get all of the comments for the Status
+     * Get all of the submission for the Year
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function submission()
     {
-        return $this->hasMany(Submission::class, 'status_id', 'id');
+        return $this->hasMany(Submission::class, 'year_id', 'id');
     }
 }

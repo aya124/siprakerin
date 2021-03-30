@@ -12,6 +12,7 @@ use App\SubmissionDetail;
 use Illuminate\Support\Facades\Storage;
 use PDF;
 use App\User;
+use App\Year;
 use App\AddConfig;
 use App\Team;
 
@@ -113,7 +114,7 @@ class SubmissionController extends Controller
     {
         //
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -130,6 +131,7 @@ class SubmissionController extends Controller
             $data ['finish_date'] = $request->finishdate;
             $data ['username'] = Auth::user()->username;
             $data ['status_id'] = $request->status ?: '1';
+            $data ['year_id'] = Year::where('active',1)->first()->id;
             $data ['submit_type'] = ($check>0)?2:1;
             $submission = Submission::create($data);
 

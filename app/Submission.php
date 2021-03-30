@@ -8,7 +8,7 @@ use PHPUnit\Framework\MockObject\Builder\Stub;
 class Submission extends Model
 {
     protected $fillable = [
-        'start_date', 'finish_date', 'username', 'industry_id', 'teacher_id', 'status_id', 'submit_type'
+        'start_date', 'finish_date','year_id', 'username', 'industry_id', 'teacher_id', 'status_id', 'submit_type'
     ];
 
     public function student()
@@ -44,5 +44,20 @@ class Submission extends Model
     public function certificate()
     {
         return $this->belongsTo(Certificate::class, 'certif_id', 'id');
+    }
+
+    public function year()
+    {
+        return $this->belongsTo(Year::class, 'year_id', 'id');
+    }
+
+    /**
+     * Get all of the comments for the Submission
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function subdetail()
+    {
+        return $this->hasMany(SubmissionDetail::class, 'submission_id', 'id');
     }
 }

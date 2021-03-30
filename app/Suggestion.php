@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Suggestion extends Model
 {
     protected $fillable = [
-        'user_id', 'industry_id', 'saran', 'status',
+        'user_id', 'industry_id', 'suggestion', 'status',
     ];
 
         /**
@@ -24,5 +24,5 @@ class Suggestion extends Model
         {
             return $this->belongsTo(Industry::class,'industry_id','id');
         }
-    
+
 }

@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Laporan')
+@section('title', 'Laporan & Sertifikat')
 
 @section('content_header')
-  <h1>Laporan/Sertifikat</h1>
+  <h1>Laporan & Sertifikat</h1>
 @stop
 
 @section('content')
@@ -14,10 +14,10 @@
   <div class="box">
     <div class="box-header">
       @role(['admin', 'wali-kelas', 'kepsek', 'wks'])
-      <h3 class="box-title">Data Laporan/Sertifikat</h3>
+      <h3 class="box-title">Data Laporan & Sertifikat</h3>
       @endrole
       @role('siswa')
-      <h3 class="box-title">Laporan/Sertifikat</h3>
+      <h3 class="box-title">Laporan & Sertifikat</h3>
       @endrole
     </div>
     <!-- /.box-header -->

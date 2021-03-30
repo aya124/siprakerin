@@ -57,7 +57,7 @@
 						<option value="{{$item->id}}">{{$item->name}}</option>
                         @endforeach
 							</select>
-					</div>
+					    </div>
           </div>
           <div class="form-group">
 						<label class="control-label col-md-4" >Tanggal Mulai Prakerin <small class="text-danger">*</small> </label>

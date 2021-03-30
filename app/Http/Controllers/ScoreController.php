@@ -101,7 +101,7 @@ class ScoreController extends Controller
             $submission->save();
         }
 
-        return response()->json(['success' => 'Nilai berhasil diupdate.']);
+        return response()->json(['success' => 'Nilai berhasil diperbarui.']);
     }
 
     /**

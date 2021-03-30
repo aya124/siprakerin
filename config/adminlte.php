@@ -156,13 +156,13 @@ return [
             'permission' => 'validasi-pengajuan',
         ],
         [
-            'text' => 'Progress Pengajuan',
+            'text' => 'Cetak Rekap Pengajuan',
             'url' => 'validation/progress',
-            'icon' => 'fa fa-download',
+            'icon' => 'fa fa-print',
             'permission' => 'validasi-pengajuan',
         ],
         [
-            'text' => 'Laporan',
+            'text' => 'Laporan & Sertifikat',
             'url' => 'report',
             'icon' => 'fa fa-file',
         ],
@@ -170,6 +170,12 @@ return [
             'text' => 'Nilai',
             'url' => 'score',
             'icon' => 'fa fa-check-square',
+        ],
+        [
+            'text' => 'Data Pengajuan',
+            'url' => 'validation/year',
+            // 'icon' => 'fa fa-download',
+            'permission' => 'validasi-pengajuan',
         ],
 
         //[
@@ -193,13 +199,25 @@ return [
             'url' => 'user',
             'icon' => 'fa fa-user-cog',
             'permission' => 'menu-user',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Siswa',
+        //             'url'  => 'student',
+        //             'icon' => 'fa fa-graduation-cap',
+        //     ],
+        //         [
+        //         'text' => 'Daftar Guru',
+        //         'url' => 'teacher',
+        //         'icon' => 'fa fa-users',
+        //     ],
+        // ]
         ],
-        // [
-        //     'text' => 'Daftar Guru',
-        //     'url' => 'teacher',
-        //     'icon' => 'fa fa-users',
-        //     'permission' => 'menu-guru-petugas',
-        // ],
+        [
+            'text' => 'Tahun Pengajuan',
+            'url' => 'year',
+            'icon' => 'fa fa-tasks',
+            'permission' => 'menu-status',
+        ],
         [
             'text' => 'Status',
             'url' => 'status',

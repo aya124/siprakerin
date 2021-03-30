@@ -94,7 +94,7 @@ class StatusController extends Controller
     {
         $data = $request->all();
         $status = Status::findOrFail($request->hidden_id);
-        $status-> update($data);
+        $status->update($data);
         return response()->json(['success' => 'Data berhasil diperbarui.']);
     }
 

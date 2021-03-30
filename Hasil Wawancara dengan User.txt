@@ -58,7 +58,7 @@ Hasil Diskusi/Koreksi Demo Siprakerin via Google Meet
 5. Buat rekap data (pdf/excel) progress pengajuan prakerin ✅
 6. Sertakan panduan/pedoman di dashboard, bisa berupa link
 7. Tambah upload sertifikat di menu Laporan ✅
-8. Change db interactively, bukan lewat file env. ()
+8. Change db interactively, bukan lewat file env. () X
 . Sertakan referensi kakak kelas yang melakukan prakerin (pengembangan selanjutnya)
 . Backup data (pengembangan selanjutnya)
 
@@ -75,3 +75,9 @@ Update progress no 4 -> Edit menu data industri yang sudah disetujui,
 kemudian berganti saran yang hasilnya bisa dilihat lebih detail seperti menambahkan komentar
 Sebab jika dibuat dan dikirim melalui e-mail terkesan kurang efisien.
 Bisa saja dibuat namun lebih kompleks (template email, SMTP, dsb), auto lebih lama.
+
+
+Tgl 29 Mar 2021
+Update progress no 8
+Daripada mengganti DB, lebih baik menambah table terutama jika ingin mengakses data lama.
+

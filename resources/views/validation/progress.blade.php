@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Progress Pengajuan')
+@section('title', 'Cetak Rekap Pengajuan')
 
 @section('content_header')
-<h1>Progress Pengajuan</h1>
+<h1>Cetak Rekap Data Pengajuan</h1>
 @stop
 
 @section('content')
@@ -11,14 +11,14 @@
 <div class="">
     @role(['admin', 'kps', 'wali-kelas'])
     <div class="panel panel-primary">
-      <div class="panel-heading">Cetak Progress Pengajuan</div>
+      <div class="panel-heading">Cetak Rekap Pengajuan</div>
         <div class="panel-body">
-            <form id="cetak" action="{{route('validasi.recap')}}" class="form-horizontal" >
+            <form id="cetak" action="{{route('validation.recap')}}" class="form-horizontal" >
                  <div class="form-group col-md-4">
                     <label>Cetak berdasarkan tanggal:</label></br>
                     <label class="control-label">Dari</label>
                     <input type="date" class="dateselect" id="startdate" required="required" name="start"/>
-                </div></br>
+                </div><br/>
                 <div class="form-group col-md-4">
                     <label class="control-label">Hingga</label>
                     <input type="date" class="dateselect" id="enddate" required="required" name="end"/>
@@ -56,8 +56,8 @@
     var a,b;
     $('form').on('submit',function(e){
         e.preventDefault();
-        a = new Date($('.dateselect1').val()).getTime();
-        b = new Date($('.dateselect2').val()).getTime();
+        a = new Date($('.startdate').val()).getTime();
+        b = new Date($('.enddate').val()).getTime();
         if(b < a){
              $('#test').html('Input tanggal tidak sesuai!');
         }else{

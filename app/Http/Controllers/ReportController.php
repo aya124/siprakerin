@@ -42,11 +42,11 @@ class ReportController extends Controller
                         $report = Report::findOrFail($data->report_id);
                         $html .= '<a href= "/report/' . $report->id . '"
                     target="_blank" class="btn btn-default btn-sm">
-                    <i class="fas fa-file"></i> Lihat Laporan</a>';
+                    <i class="fas fa-download"></i> Unduh Laporan</a>';
                     }
                     if (auth()->user()->hasRole('siswa')) {
                         $html .= '<button name="report" class="btn btn-default btn-sm edit" data-id="' . $data->id . '">
-                    <i class="fas fa-file"></i> Upload/ganti Laporan</button>';
+                    <i class="fas fa-upload"></i> Unggah Laporan</button>';
                     }
                     if ($data->status_id == 8) {
                         $html = 'Pengajuan ditolak';
@@ -59,11 +59,11 @@ class ReportController extends Controller
                         $report = Certificate::findOrFail($data->certif_id);
                         $html .= '<a href= "/report2/' . $report->id . '"
                     target="_blank" class="btn btn-default btn-sm">
-                    <i class="fas fa-file"></i> Lihat Sertifikat</a>';
+                    <i class="fas fa-download"></i> Unduh Sertifikat</a>';
                     }
                     if (auth()->user()->hasRole('siswa')) {
                         $html .= '<button name="report2" class="btn btn-default btn-sm editCertif" data-id="' . $data->id . '">
-                    <i class="fas fa-file"></i> Upload/ganti Sertifikat</button>';
+                    <i class="fas fa-upload"></i> Unggah Sertifikat</button>';
                     }
                     if ($data->status_id == 8) {
                         $html = 'Pengajuan ditolak';
