@@ -111,6 +111,7 @@ class ValidationController extends Controller
         ->join('users as u', 'u.username', '=', 'sub.username')
         ->join('industries as i', 'i.id', '=', 'sub.industry_id')
         ->join('statuses as st', 'st.id', '=', 'sub.status_id')
+        ->join('years as y', 'y.id', '=', 'sub.year_id')
         ->select(
           'sub.id',
           DB::raw('u.name as username'),
@@ -164,7 +165,10 @@ class ValidationController extends Controller
         ->rawColumns(['action', 'correspondence'])
         ->make(true);
         }
-        return view('validation.year');
+        $year = DB::table('years')
+            ->select('year', 'id')
+            ->get();
+        return view('validation.year', compact('year'));
     }
 
     /**

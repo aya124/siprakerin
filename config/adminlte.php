@@ -173,8 +173,8 @@ return [
         ],
         [
             'text' => 'Data Pengajuan',
-            'url' => 'validation/year',
-            // 'icon' => 'fa fa-download',
+            'url' => 'validation/year/data',
+            'icon' => 'fa fa-table',
             'permission' => 'validasi-pengajuan',
         ],
 
@@ -213,9 +213,15 @@ return [
         // ]
         ],
         [
+            'text' => 'Kelas',
+            'url' => 'class',
+            'icon' => 'fa fa-users',
+            'permission' => 'menu-status',
+        ],
+        [
             'text' => 'Tahun Pengajuan',
             'url' => 'year',
-            'icon' => 'fa fa-tasks',
+            'icon' => 'fa fa-list',
             'permission' => 'menu-status',
         ],
         [

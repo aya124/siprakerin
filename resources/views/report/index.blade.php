@@ -148,7 +148,6 @@
         $('.notifError').remove();
         $('#createModal').modal('show');
         $('#form_result').hide();
-        // $('#createModal .modal-title').text("Tambah Laporan");
         $('#action').val("tambah");
         $('#action2').val("tambah");
       });

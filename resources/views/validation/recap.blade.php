@@ -27,6 +27,23 @@
               border-style: solid;
               padding: 3px;
             }
+
+            span.header{
+            font: /*normal*/ sans-serif;
+            font-size:16pt;
+            /* text-align: center; */
+            line-height: 100%;
+            /* letter-spacing: 0.5px; */
+            margin-left: 20px;
+            }
+
+            .address{
+            font: /*normal*/ sans-serif;
+            font-size:11pt;
+            text-align: center;
+            /* margin-left: 20px; */
+            /* letter-spacing: 0.5px; */
+            }
             </style>
     </head>
 
@@ -64,7 +81,7 @@
                     @endphp
                     @foreach ($data as $d)
                     <tr>
-                        <td align="center">{{++$i}}</td>
+                        <td align="center">{{++$i}}.</td>
                         <td>{{$d->name}}</td>
                         <td>{{$d->industry_name }}</td>
                         <td>{{tgl($d->start_date)}}</td>
@@ -73,16 +90,16 @@
                         <td>{{$d->status}}</td>
                         <td>
                             @if ($d->status == 'Pengajuan disetujui' || $d->status == 'Menunggu persetujuan' || $d->status == 'Pengajuan ditolak')
-                            Surat Pengantar belum diunggah
+                            Belum diunggah
                             @else
-                            Surat Pengantar sudah diunggah
+                            Sudah diunggah
                             @endif
                         </td>
                         <td>
                             @if($d->status == 'Pengajuan disetujui' || $d->status == 'Menunggu persetujuan' || $d->status == 'Surat dari Industri belum diunggah' || $d->status == 'Pengajuan ditolak')
-                                Surat Balasan belum diunggah
+                                Belum diunggah
                             @else
-                                Surat Balasan sudah diunggah
+                                Sudah diunggah
                             @endif
 
                         </td>

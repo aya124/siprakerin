@@ -66,7 +66,7 @@ Route::get('tolak', 'ValidationController@tabtolak')->name('tab.tolak');
 Route::get('validation/print/{id}', 'ValidationController@pengantar_pdf');
 Route::get('validation/progress', 'ValidationController@show');
 Route::get('validation/recap/print', 'ValidationController@recap_pdf')->name('validation.recap');
-Route::get('validation/year', 'ValidationController@byYear')->name('validation.year');
+Route::get('validation/year/data', 'ValidationController@byYear')->name('validation.byyear');
 
 Route::resource('/profile', 'ProfileController');
 Route::post('profile/update', 'ProfileController@update')->name('prof.update');
@@ -75,9 +75,11 @@ Route::post('profile/passchanged', 'ProfileController@passchanged')->name('pass.
 
 Route::resource('/report', 'ReportController');
 Route::resource('/score', 'ScoreController');
+
 Route::resource('/year', 'YearController');
 Route::post('year/{id}/isactive','YearController@isActive')->name('year.isactive');
 
+Route::resource('/class', 'StudentClassController');
 
 Route::post('tambah-saran', 'IndustryController@tambahSaran')->name('suggestion.add');
 // Route::post('tambah-detail', 'SubmissionController@addDetail')->name('detail.add');

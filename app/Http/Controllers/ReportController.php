@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Certificate;
 use App\Industry;
 use App\Report;
 use App\Submission;
@@ -96,9 +97,9 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'submission_id' => 'required',
-            'report' => 'required|file|mimes:doc,docx,pdf|max:512',
-            'report2' => 'required|file|mimes:jpeg,jpg,png,pdf|max:512'
+            'submission_id' => 'required|sometimes',
+            'report' => 'required|file|mimes:doc,docx,pdf|max:512|sometimes',
+            'report2' => 'required|file|mimes:jpeg,jpg,png,pdf|max:512|sometimes'
         ]);
 
         $original_name = $request->report->getClientOriginalName();
@@ -115,8 +116,15 @@ class ReportController extends Controller
             'user_id' => auth()->user()->id
         ]);
 
+        $certif = Certificate::create([
+            'original_name' => $original_name,
+            'saved_name' => $saved_name,
+            'user_id' => auth()->user()->id
+        ]);
+
         $submission = Submission::find($request->submission_id);
         $submission->report_id = $report->id;
+        $submission->certif_id = $certif->id;
         $submission->save();
 
         return response()->json(['success' => 'Berkas berhasil diunggah.']);

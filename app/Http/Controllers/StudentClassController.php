@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Submission;
-use App\Year;
+use App\Student;
+use App\StudentClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class YearController extends Controller
+class StudentClassController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,30 +19,23 @@ class YearController extends Controller
         //
         if(request()->ajax())
         {
-            return datatables()->of(Year::latest()->get())
+            return datatables()->of(StudentClass::latest()->get())
                     ->addColumn('action', function($data){
                         $button= '<button type="button"
-                        name="edit" id="'.$data->id.'" tahun="'.$data->year.'" class="edit btn btn-primary btn-sm">
+                        name="edit" url="'.route('class.update',$data->id).'" nama="'.$data->name.'" accro="'.$data->accro.'" class="edit btn btn-primary btn-sm">
                         <i class="fa fa-edit"></i> Edit</button>';
-                        if($data->active != 1){
-                            $button .= '&nbsp;&nbsp;';
-                            $button .= '<button type="button" url="'.route("year.isactive",$data->id).'" class="isactive btn btn-info btn-sm">
-                            <i class="fa fa-check"></i> Active</button>';
-                            if(YearSubmission($data->id)){
-                                $button .= '&nbsp;&nbsp;';
-                                $button .= '<button type="button" url="'.route("year.destroy",$data->id).'" class="delete btn btn-danger btn-sm">
-                                <i class="fa fa-trash"></i> Hapus</button>';
-                            }
-                        }
+                        $button .= '&nbsp;&nbsp;';
+                        $button .= '<button type="button" url="'.route("class.destroy",$data->id).'" class="delete btn btn-danger btn-sm">
+                        <i class="fa fa-trash"></i> Hapus</button>';
                         return $button;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('submission.year');
+        return view('class.index');
     }
 
-    /**
+/**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -52,8 +45,8 @@ class YearController extends Controller
     {
         try{
             $data = $request->all();
-            Year::create($data);
-            return response()->json(['success' => 'Tahun berhasil ditambah.']);
+            StudentClass::create($data);
+            return response()->json(['success' => 'Kelas berhasil ditambah.']);
         } catch (\Throwable $th) {
             return response()->json(['error' => ['input' =>'Gagal menambah data.'],500]);
         }
@@ -69,8 +62,8 @@ class YearController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $year = Year::findOrFail($request->hidden_id);
-        $year-> update($data);
+        $class = StudentClass::findOrFail($id);
+        $class-> update($data);
         return response()->json(['success' => 'Data berhasil diperbarui.']);
     }
 
@@ -82,22 +75,10 @@ class YearController extends Controller
      */
     public function destroy($id)
     {
-        $data = Year::findOrFail($id);
+        $data = StudentClass::findOrFail($id);
         $data->delete();
         return response()->json(['success' => 'Data berhasil dihapus.']);
 
     }
 
-    public function isActive($id)
-    {
-        DB::transaction(function () use($id) {
-            $before = Year::where('active', 1)->first();
-            $before->active = 0;
-            $before->save();
-
-            $year = Year::findOrFail($id);
-            $year->active = 1;
-            $year->save();
-        });
-    }
 }

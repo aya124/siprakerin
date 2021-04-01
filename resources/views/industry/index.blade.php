@@ -4,7 +4,7 @@
 
 @section('content_header')
 <h1>Industri <a id="btn_add"
-  class="btn btn-flat btn-primary">Tambah profil industri</a></h1>
+  class="btn btn-flat btn-primary">Tambah industri</a></h1>
 @stop
 
 @section('content')
@@ -229,17 +229,17 @@
 			},
 			{
 				data: 'address',
-        name: 'address',
+                name: 'address',
 			},
 			{
 				data: 'status',
-        name: 'status',
+                name: 'status',
 			},
-      {
-        data: 'action',
+            {
+                data: 'action',
 				name: 'action',
 				orderable: false
-      }
+            }
 			]
 		});
       // $('#industri').dataTable();

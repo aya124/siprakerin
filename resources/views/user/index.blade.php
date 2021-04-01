@@ -3,7 +3,7 @@
 @section('title', 'User')
 
 @section('content_header')
-<h1> Daftar User 
+<h1> Daftar User
   <a id="btn_add" class="btn btn-flat btn-primary">Tambah User</a>
   {{-- <a id="btn_add" class="btn btn-flat btn-primary">Upload File</a> --}}
 </h1>
@@ -11,7 +11,7 @@
 
 @section('content')
 @if (session('status'))
-<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>    
+<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>
 @endif
 
 <div class="box">
@@ -53,7 +53,7 @@
 						<div class="col-md-8">
 							<input type="text" name="name" id="name" class="form-control" />
 						</div>
-          </div>
+                    </div>
 
           <div class="form-group">
 						<label class="control-label col-md-3" >Username <small class="text-danger">*</small> </label>
@@ -61,7 +61,7 @@
 							<input type="text" name="username" id="username" class="form-control" />
 						</div>
           </div>
-          
+
           <div class="form-group">
             <label class="control-label col-md-3" >Jenis Kelamin <small class="text-danger">*</small> </label>
             <div class="col-md-8">
@@ -87,7 +87,7 @@
 							{{-- <input type="password" name="fpassword" id="password" class="form-control" style="display:none"/> --}}
 						</div>
           </div>
-          
+
           <div class="form-group">
 						<label class="control-label col-md-3" >Role <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
@@ -99,7 +99,7 @@
 							</select>
 						</div>
           </div>
-          
+
           <br />
           <div class="form-group" align="center">
 						<input type="hidden" name="action" id="action" />
@@ -235,7 +235,7 @@
       $('#password').removeAttr('disabled');
       $('#pass').show();
     });
-    
+
     $(document).on('click','.edit',function() {
       id_table = $(this).attr('id');
       //console.log(id_table);
@@ -269,7 +269,7 @@
       $('#inputnew').val('');
  			$('#change_id').val(id_table);
  		});
-    
+
      $('#changed').on('submit',function(event) {
  			event.preventDefault();
  			$.ajax({
@@ -296,8 +296,8 @@
 						$('#change_result').show();
 
 				 			html = '<div class="alert alert-danger">';
-						 $.each(xhr.responseJSON.errors, function (key, item) 
-				          {	
+						 $.each(xhr.responseJSON.errors, function (key, item)
+				          {
 				          	html+='<p>' +item+'</p>';
 				          });
 				 			html += '</div>';
@@ -305,7 +305,7 @@
 					}//end error
 				});
  		});//edit function
-    
+
     var id_table;
     $(document).on('click','.delete',function(){
       id_table = $(this).attr('id');
@@ -313,7 +313,7 @@
       $('#confirmModal').modal('show');
 			$('#ok_button').text('OK');
     });
-    
+
     $('#ok_button').click(function(){
       $.ajax({
         url:"user/destroy/"+id_table,
@@ -329,7 +329,7 @@
         }
       })
     });
-    
+
     $('#add').on('submit',function(event){
       $('.notifError').remove();
       event.preventDefault();
@@ -358,8 +358,8 @@
             console.log(xhr);
             $('#form_result').show();
             html = '<div class="alert alert-danger">';
-            $.each(xhr.responseJSON.errors, function (key, item) 
-            {	
+            $.each(xhr.responseJSON.errors, function (key, item)
+            {
               html+='<p>' +item+'</p>';
             });
             	html += '</div>';
@@ -401,7 +401,7 @@
                 console.log(xhr);
                 $('#form_result').show();
                 html = '<div class="alert alert-danger">';
-                $.each(xhr.responseJSON.errors, function (key, item) {	
+                $.each(xhr.responseJSON.errors, function (key, item) {
                   html+='<p>' +item+'</p>';
                 });
                 html += '</div>';

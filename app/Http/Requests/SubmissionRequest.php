@@ -24,11 +24,11 @@ class SubmissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'startdate' => 'required|date',
-            'finishdate' => 'required|date|after:startdate',
-            'upload' => 'required|mimes:jpeg,jpg,png,pdf|max:2048|sometimes',
-            
+            'name' => 'required|sometimes',
+            'startdate' => 'required|date|sometimes',
+            'finishdate' => 'required|date|after:startdate|sometimes',
+            'upload' => 'required|mimes:jpeg,jpg,png,pdf|max:2048|file|sometimes',
+
         ];
     }
     public function messages()

@@ -101,8 +101,6 @@ class SubmissionController extends Controller
             ->get();
 
         return view('submission.index', compact('industry'));
-        // $submissions = Submission::all();
-        // return view('submission.index', compact('submissions'));
     }
 
     /**
@@ -114,7 +112,7 @@ class SubmissionController extends Controller
     {
         //
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -133,7 +131,7 @@ class SubmissionController extends Controller
             $data ['status_id'] = $request->status ?: '1';
             $data ['year_id'] = Year::where('active',1)->first()->id;
             $data ['submit_type'] = ($check>0)?2:1;
-            $submission = Submission::create($data);
+            Submission::create($data);
 
             $u = User::find(Auth::user()->id);
             $u->submit_lock = 1;
@@ -191,7 +189,7 @@ class SubmissionController extends Controller
     public function uploadprocess(SubmissionRequest $request)
     {
         $user = Auth::user();
-        if (request()->ajax()){
+        // if (request()->ajax()){
 
         $data = DB::table('submissions as sub')
         ->join('statuses as st', 'st.id', '=', 'sub.status_id')
@@ -203,7 +201,10 @@ class SubmissionController extends Controller
         $loc2 = $upload_dest.'/suratbalasan/';
 
         // menyimpan data file yang diupload ke variabel $file
+        if($request->hasFile('upload'))
         $file = $request->file('upload');
+            else
+            return response()->json(['errors' => ['upload'=>'Surat Pengantar kosong.']],422);
         $namaasli = $file->getClientOriginalName();
         $fileext = $file->getClientOriginalExtension();
         // $gantinama = $namaasli.$submission->username.$fileext;
@@ -236,7 +237,7 @@ class SubmissionController extends Controller
             ]);
             return response()->json(['success' => 'Surat Balasan berhasil di-upload.']);
             }
-        }
+        // }
 
         // // nama file
 		// echo 'File Name: '.$file->getClientOriginalName();

@@ -95,22 +95,21 @@
 				<form  method="post" class="form-horizontal" id="ups" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-          <label class="control-label col-md-4" >File Surat Pengantar <small class="text-danger">*</small> </label>
+          <label class="control-label col-md-4 balasan" >File Surat Pengantar <small class="text-danger">*</small> </label>
           <div class="col-md-8">
             <div class="file-preview">
-              <input type="file" name="upload" id="upload" accept=".jpeg,.jpg,.png,.pdf" class="form-control" />
+              <input type="file" name="upload" id="upload" class="form-control" />
               <small class="control-label col-md-8">Format file berupa jpg/png/pdf</small>
               <br />
             </div>
           </div>
         </div>
-
         <br />
-					<div class="form-group" align="center">
-						<input type="hidden" name="hidden_name" id="hidden_name" />
-						<input type="hidden" name="hidden_id" id="hidden_id2" />
-						<input type="submit" class="btn btn-primary" value="Submit" />
-					</div>
+			        <div class="form-group" align="center">
+				        <input type="hidden" name="hidden_name" id="hidden_name" />
+				        <input type="hidden" name="hidden_id" id="hidden_id2" />
+				        <input type="submit" class="btn btn-primary" value="Submit" />
+			        </div>
 				</form>
 			</div>
 		</div>
@@ -204,13 +203,12 @@
         {
             data: 'submit_type',
             render:function(data){
-            if (data == 1) {
-            return 'Utama'
+                if (data == 1) {
+                    return 'Utama'
+                }else{
+                    return 'Alternatif'
+                }
             }
-            else{
-            return 'Alternatif'
-          }
-        }
         },
         {
             data: 'action',
@@ -276,7 +274,7 @@
     $('#action').val("upload");
     $('#createModalUpload2').modal('show');
     $('#form_result').hide();
-	  $('#createModalUpload2 .modal-title').text("Upload Surat Balasan dari Industri");
+	  $('#createModalUpload2 .modal-title').text("Upload Surat Balasan Industri");
   });
 
   $('#ups').on('submit',function(event) {
@@ -290,12 +288,9 @@
       processData: false,
       dataType:"json",
       data: new FormData(this),
-      beforeSend:function() {
-      // $('#ups').text('Uploading...');
-      },
-        success:function(data) {
-          $('#form_result').hide();
-          if (data.success) {
+      success:function(data) {
+        $('#form_result').hide();
+        if (data.success) {
             html = '<div class="alert alert-success">' + data.success + '</div>';
             setTimeout(function() {
               $('#createModalUpload').modal('hide');
@@ -316,8 +311,8 @@
               $('#form_result').html(html);
               $.each(xhr.responseJSON.errors,function(field_name,error){
               $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
-                });
-        }
+             });
+            }
       });
     });
 
@@ -332,9 +327,6 @@
       processData: false,
       dataType:"json",
       data: new FormData(this),
-      beforeSend:function() {
-      //     $('#ups').text('Uploading...');
-      },
       success:function(data) {
           $('#form_result').show();
           if(data.success) {
@@ -368,7 +360,7 @@
       id_table = $(this).attr('id');
       console.log(id_table);
       $('#confirmModal').modal('show');
-			$('#ok_button').text('OK');
+	  $('#ok_button').text('OK');
     });
 
     $('#ok_button').click(function() {
@@ -387,10 +379,10 @@
       })
     });
 
-    $('#add').on('submit',function(event){
+    $('#add').on('submit',function(event) {
       $('.notifError').remove();
       event.preventDefault();
-      if($('#action').val() == 'tambah'){
+      if($('#action').val() == 'tambah') {
         $.ajax({
           url:"{{route('submission.store')}}",
           method:"POST",
@@ -461,7 +453,7 @@
               });
             }
         });
-  });
+    });
 
 </script>
 @stop

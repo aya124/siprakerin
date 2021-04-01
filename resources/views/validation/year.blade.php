@@ -4,7 +4,7 @@
 
 @section('content_header')
 <h1>Data Berdasarkan Tahun Pengajuan</h1>
-<a id="btn_add" class="btn btn-flat btn-primary">Tambah Tahun</a></h1>
+{{-- <a id="btn_add" class="btn btn-flat btn-primary">Tambah Tahun</a></h1> --}}
 @stop
 
 @section('content')
@@ -14,8 +14,18 @@
 
 <div class="box">
     <div class="box-header">
-        {{-- <h3 class="box-title">Validasi Pengajuan</h3> --}}
-    </div>
+        <label class="control-label">Pilih tahun: </label>
+        <form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
+			@csrf
+			    <div class="form-group">
+					<div class="col-md-2">
+							<select class="form-control" id="year" name="year">
+                        @foreach ($year as $item)
+						<option value="{{$item->id}}">{{$item->year}}</option>
+                        @endforeach
+							</select>
+					</div>
+                </div>
     <!-- /.box-header -->
     <div class="box-body">
       <table id="tab_data" class="table table-bordered table-striped" style="width:100%">
@@ -73,7 +83,7 @@ $(function() {
 		processing: true,
 		serverSide: true,
 		ajax:{
-		url: "{{ route('validation.year') }}",
+		url: "{{ route('validation.byyear') }}",
       },
       columns:[
 	  {

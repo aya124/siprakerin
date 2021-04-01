@@ -155,17 +155,23 @@
     		<tr>
               <td align="center" style="width: 40px;">No.</td>
               <td align="center">Nama</td>
-              <td align="center" style="width: 100px;">NIS</td>
+              <td align="center" style="width: 90px;">NIS</td>
               <td align="center" style="width: 140px;">Program Keahlian</td>
     		</tr>
     	</thead>
     	<tbody>
-    		<tr>
-            <td align="center"></td>
-            <td>&nbsp;</td>
-            <td align="center"></td>
-            <td align="center"></td>
+            @php
+                $i=0;
+            @endphp
+            @foreach ($data as $d)
+            <tr>
+                <td align="center">{{++$i}}.</td>
+                <td>&nbsp;</td>
+                <td align="center"></td>
+                <td align="center"></td>
     		</tr>
+            @endforeach
+
     	</tbody>
       </table>
     </div>
