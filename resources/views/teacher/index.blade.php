@@ -3,13 +3,13 @@
 @section('title', 'Guru Pembimbing')
 
 @section('content_header')
-<h1>Guru <a id="btn_add" 
+<h1>Guru <a id="btn_add"
   class="btn btn-flat btn-primary">Tambah Guru</a></h1>
 @stop
 
 @section('content')
 @if (session('status'))
-<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>    
+<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>
 @endif
 
 <div class="box">
@@ -39,8 +39,7 @@
 				<h4 class="modal-title"></h4>
 			</div>
 			<div class="modal-body">
-
-        <span id="form_result"></span>
+                <span id="form_result"></span>
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
@@ -49,8 +48,7 @@
 							<input type="text" name="name" id="name" class="form-control" />
 						</div>
 					</div>
-          
-          <br />
+                <br />
 					<div class="form-group" align="center">
 						<input type="hidden" name="action" id="action" />
 						<input type="hidden" name="hidden_id" id="hidden_id" />
@@ -99,11 +97,11 @@
 				data: 'name',
 				name: 'name',
 			},
-      {
-        data: 'action',
+            {
+                data: 'action',
 				name: 'action',
 				orderable: false
-      }
+            }
 			]
     });
     // $('#guru').dataTable();
@@ -180,7 +178,7 @@
                   console.log(xhr);
                   $('#form_result').show();
                   html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) {	
+                  $.each(xhr.responseJSON.errors, function (key, item) {
                     html+='<p>' +item+'</p>';
                   });
                   html += '</div>';
@@ -203,8 +201,7 @@
                   // $('#form_result').show();
                   if(data.errors) {
                       html = '<div class="alert alert-danger">';
-                      for(var count = 0; count < data.errors.length; count++)
-                      {
+                      for(var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                       }
                       html += '</div>';
@@ -214,7 +211,6 @@
                       html = '<div class="alert alert-success">' + data.success + '</div>';
                       setTimeout(function(){
                         $('#createModal').modal('hide');
-
                     },1000);
                     $('#tab_data').DataTable().ajax.reload();
                       toastr.success('Data guru berhasil diperbarui!', 'Success', {timeOut: 5000});
@@ -224,7 +220,7 @@
                   console.log(xhr);
                   $('#form_result').show();
                   html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) {	
+                  $.each(xhr.responseJSON.errors, function (key, item) {
                     html+='<p>' +item+'</p>';
                   });
                   html += '</div>';

@@ -38,19 +38,17 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title"></h4>
-      </div>
+            </div>
       <div class="modal-body">
-
         <span id="form_result"></span>
-				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
-					@csrf
-					<div class="form-group">
-						<label class="control-label col-md-4" >Status <small class="text-danger">*</small> </label>
-						<div class="col-md-8">
-							<input type="text" name="name" id="name" class="form-control" />
-						</div>
+			<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
+				@csrf
+				<div class="form-group">
+					<label class="control-label col-md-4" >Status <small class="text-danger">*</small> </label>
+					<div class="col-md-8">
+						<input type="text" name="name" id="name" class="form-control" />
 					</div>
-
+				</div>
           <br />
           <div class="form-group" align="center">
 						<input type="hidden" name="action" id="action" />
@@ -141,14 +139,14 @@
 			  $('#ok_button').text('OK');
 		  });
 
-      $('#ok_button').click(function(){
+      $('#ok_button').click(function() {
 		$.ajax({
 			url:"status/destroy/"+id_table,
 			beforeSend:function(){
 				$('#ok_button').text('Deleting...');
 			},
 			success:function(data) {
-				setTimeout(function(){
+				setTimeout(function() {
 					$('#confirmModal').modal('hide');
 					$('#tab_data').DataTable().ajax.reload();
 				}, 2000);
@@ -207,8 +205,7 @@
                   // $('#form_result').show();
                   if(data.errors) {
                       html = '<div class="alert alert-danger">';
-                      for(var count = 0; count < data.errors.length; count++)
-                      {
+                      for (var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                       }
                       html += '</div>';
@@ -218,7 +215,6 @@
                       html = '<div class="alert alert-success">' + data.success + '</div>';
                       setTimeout(function(){
                         $('#createModal').modal('hide');
-
                     },1000);
                     $('#tab_data').DataTable().ajax.reload();
                       toastr.success('Data status berhasil diperbarui!', 'Success', {timeOut: 5000});

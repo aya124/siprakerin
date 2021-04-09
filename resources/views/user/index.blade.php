@@ -45,7 +45,7 @@
 				<h4 class="modal-title"></h4>
 			</div>
 			<div class="modal-body">
-        <span id="form_result"></span>
+            <span id="form_result"></span>
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
@@ -55,12 +55,12 @@
 						</div>
                     </div>
 
-          <div class="form-group">
-						<label class="control-label col-md-3" >Username <small class="text-danger">*</small> </label>
+                <div class="form-group">
+					<label class="control-label col-md-3" >Username <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="username" id="username" class="form-control" />
 						</div>
-          </div>
+                </div>
 
           <div class="form-group">
             <label class="control-label col-md-3" >Jenis Kelamin <small class="text-danger">*</small> </label>
@@ -74,32 +74,31 @@
           </div>
 
           <div class="form-group">
-						<label class="control-label col-md-3" >E-mail <small class="text-danger">*</small> </label>
-						<div class="col-md-8">
-							<input type="email" name="email" id="email" class="form-control" />
-						</div>
+			<label class="control-label col-md-3" >E-mail <small class="text-danger">*</small> </label>
+				<div class="col-md-8">
+					<input type="email" name="email" id="email" class="form-control" />
+				</div>
           </div>
 
           <div class="form-group" id="pass">
-						<label class="control-label col-md-3" >Password <small class="text-danger">*</small> </label>
-						<div class="col-md-8">
-							<input type="password" name="password" id="password" class="form-control" autocomplete="false"/>
-							{{-- <input type="password" name="fpassword" id="password" class="form-control" style="display:none"/> --}}
-						</div>
+			<label class="control-label col-md-3" >Password <small class="text-danger">*</small> </label>
+				<div class="col-md-8">
+					<input type="password" name="password" id="password" class="form-control" autocomplete="false"/>
+					{{-- <input type="password" name="fpassword" id="password" class="form-control" style="display:none"/> --}}
+				</div>
           </div>
 
           <div class="form-group">
-						<label class="control-label col-md-3" >Role <small class="text-danger">*</small> </label>
-						<div class="col-md-8">
-							<select class="form-control" id="role" name="role">
-                <option value="">Pilih role</option>
-                @for($i=0; $i<= count($role)-1;$i++)
-                <option value="{{$role[$i]->id}}">{{$role[$i]->name}}</option>
-								@endfor
-							</select>
-						</div>
+			<label class="control-label col-md-3" >Role <small class="text-danger">*</small> </label>
+				<div class="col-md-8">
+				<select class="form-control" id="role" name="role">
+                    <option value="">Pilih role</option>
+                    @for($i=0; $i<= count($role)-1;$i++)
+                    <option value="{{$role[$i]->id}}">{{$role[$i]->name}}</option>
+					@endfor
+				</select>
+				</div>
           </div>
-
           <br />
           <div class="form-group" align="center">
 						<input type="hidden" name="action" id="action" />
@@ -139,7 +138,6 @@
 			</div>
 			<div class="modal-body">
 				<span id="change_result"></span>
-
 				<form method="post" id="changed" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
@@ -147,8 +145,8 @@
 						<div class="col-md-8">
 							<input type="password" name="input" id="input" class="form-control" placeholder="Masukkan password baru"/>
 						</div>
-          </div>
-          <div class="form-group">
+                    </div>
+                    <div class="form-group">
 						<label class="control-label col-md-4">Input ulang password baru: </label>
 						<div class="col-md-8">
 							<input type="password" name="inputnew" id="inputnew" class="form-control" placeholder="Masukkan lagi password baru"/>
@@ -190,8 +188,8 @@
 			{
 				data: 'username',
 				name: 'username',
-      },
-      {
+            },
+            {
 				data: 'gender',
         // name: 'gender',
         render:function(data){
@@ -203,21 +201,21 @@
           }
         }
 			},
-      {
+            {
 				data: 'email',
 				name: 'email',
 			},
-      {
+            {
 				data: 'role',
 				name: 'role',
 			},
-      {
-        data: 'action',
+            {
+                data: 'action',
 				name: 'action',
 				orderable: false
-      }
-			]
-    });
+            }
+		    ]
+        });
     // $('#siswa').dataTable();
 
     $('#btn_add').click(function(){
@@ -261,49 +259,47 @@
     });
 
     $(document).on('click','.change',function() {
- 			id_table = $(this).attr('id');
- 			// console.log(id_table);
- 			$('#changeModal').modal('show');
- 			$('#change_result').hide();
- 			$('#input').val('');
-      $('#inputnew').val('');
- 			$('#change_id').val(id_table);
- 		});
+ 		id_table = $(this).attr('id');
+ 		// console.log(id_table);
+ 		$('#changeModal').modal('show');
+ 		$('#change_result').hide();
+ 		$('#input').val('');
+        $('#inputnew').val('');
+ 		$('#change_id').val(id_table);
+ 	});
 
      $('#changed').on('submit',function(event) {
- 			event.preventDefault();
- 			$.ajax({
-					url:"{{route('uspass.update')}}",
-					method:"POST",
-					contentType: false,
-					cache:false,
-					processData: false,
-					dataType:"json",
-					data: new FormData(this),
-					success:function(data) {
-						$('#change_result').hide();
-						var html = '';
-							if(data.success) {
-								html = '<div class="alert alert-success">' + data.success + '</div>';
-								setTimeout(function(){
-									$('#changeModal').modal('hide');
-							},1000);
-								toastr.success('Password telah berhasil diganti!', 'Success', {timeOut: 5000});
-							}
-							console.log(html);
-					},
-					error:function(xhr) {
-						$('#change_result').show();
-
-				 			html = '<div class="alert alert-danger">';
-						 $.each(xhr.responseJSON.errors, function (key, item)
-				          {
-				          	html+='<p>' +item+'</p>';
-				          });
-				 			html += '</div>';
-							$('#change_result').html(html);
-					}//end error
-				});
+ 		event.preventDefault();
+ 		$.ajax({
+			url:"{{route('uspass.update')}}",
+			method:"POST",
+			contentType: false,
+			cache:false,
+			processData: false,
+			dataType:"json",
+			data: new FormData(this),
+			success:function(data) {
+				$('#change_result').hide();
+				var html = '';
+				if(data.success) {
+					html = '<div class="alert alert-success">' + data.success + '</div>';
+					setTimeout(function(){
+						$('#changeModal').modal('hide');
+						},1000);
+						toastr.success('Password telah berhasil diganti!', 'Success', {timeOut: 5000});
+						}
+						console.log(html);
+				},
+				error:function(xhr) {
+					$('#change_result').show();
+				 		html = '<div class="alert alert-danger">';
+					$.each(xhr.responseJSON.errors, function (key, item) {
+				        html+='<p>' +item+'</p>';
+				    });
+				 		html += '</div>';
+						$('#change_result').html(html);
+				}//end error
+			});
  		});//edit function
 
     var id_table;
@@ -311,7 +307,7 @@
       id_table = $(this).attr('id');
       //console.log(id_table);
       $('#confirmModal').modal('show');
-			$('#ok_button').text('OK');
+      $('#ok_button').text('OK');
     });
 
     $('#ok_button').click(function(){
@@ -344,8 +340,7 @@
           data: new FormData(this),
           success:function(data) {
             $('#form_result').hide();
-              if(data.success)
-              {
+              if(data.success) {
               html = '<div class="alert alert-success">' + data.success + '</div>';
               setTimeout(function(){
                 $('#createModal').modal('hide');
@@ -358,8 +353,7 @@
             console.log(xhr);
             $('#form_result').show();
             html = '<div class="alert alert-danger">';
-            $.each(xhr.responseJSON.errors, function (key, item)
-            {
+            $.each(xhr.responseJSON.errors, function (key, item) {
               html+='<p>' +item+'</p>';
             });
             	html += '</div>';

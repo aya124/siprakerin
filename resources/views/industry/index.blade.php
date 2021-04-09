@@ -86,7 +86,6 @@
 				<h4 class="modal-title">Data Industri</h4>
 			</div>
 			<div class="modal-body">
-
 				<span id="form_result"></span>
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
@@ -101,38 +100,37 @@
 						<div class="col-md-8">
 							<input type="text" name="address" id="address" class="form-control" />
 						</div>
-          </div>
-          <div class="form-group">
+                    </div>
+                    <div class="form-group">
 						<label class="control-label col-md-4" >Kota <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="city" id="city" class="form-control" />
 						</div>
-          </div>
-          <div class="form-group">
+                    </div>
+                    <div class="form-group">
 						<label class="control-label col-md-4" >Phone <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="phone" id="phone" class="form-control" />
 						</div>
-          </div>
-          <div class="form-group">
+                    </div>
+                    <div class="form-group">
 						<label class="control-label col-md-4" >Detail </label>
 						<div class="col-md-8">
 							<input type="text" name="detail" id="detail" class="form-control" rows="3"/>
 						</div>
-          </div>
-          @role('admin')
-          <div class="form-group">
-            <label class="control-label col-md-4" >Status </label>
-            <div class="col-md-8">
-              <select class="form-control" name="status" id="status">
-                <option value="belum disetujui">Belum disetujui</option>
-                <option value="disetujui">Disetujui</option>
-                <option value="tidak disetujui">Tidak disetujui</option>
-              </select>
-            </div>
-          </div>
-          @endrole
-					<br />
+                    </div>
+                    @role('admin')
+                    <div class="form-group">
+                        <label class="control-label col-md-4" >Status </label>
+                        <div class="col-md-8">
+                        <select class="form-control" name="status" id="status">
+                            <option value="belum disetujui">Belum disetujui</option>
+                            <option value="disetujui">Disetujui</option>
+                            <option value="tidak disetujui">Tidak disetujui</option>
+                        </select>
+                        </div>
+                    </div>
+                    @endrole <br />
 					<div class="form-group" align="center">
 						<input type="hidden" name="action" id="action" />
 						<input type="hidden" name="hidden_id" id="hidden_id" />
@@ -298,7 +296,7 @@
           $('#status_detail').text(html.data.status);
         }
       });
-		});
+	});
 
     $('#ok_button').click(function() {
 			$.ajax({

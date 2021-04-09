@@ -204,7 +204,7 @@ class SubmissionController extends Controller
         if($request->hasFile('upload'))
         $file = $request->file('upload');
             else
-            return response()->json(['errors' => ['upload'=>'Surat Pengantar kosong.']],422);
+            return response()->json(['errors' => ['upload'=>'Pilih file dulu.']],422);
         $namaasli = $file->getClientOriginalName();
         $fileext = $file->getClientOriginalExtension();
         // $gantinama = $namaasli.$submission->username.$fileext;

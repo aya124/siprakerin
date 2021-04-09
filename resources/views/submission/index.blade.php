@@ -98,10 +98,9 @@
           <label class="control-label col-md-4 balasan" >File Surat Pengantar <small class="text-danger">*</small> </label>
           <div class="col-md-8">
             <div class="file-preview">
-              <input type="file" name="upload" id="upload" class="form-control" />
-              <small class="control-label col-md-8">Format file berupa jpg/png/pdf</small>
-              <br />
+              <input type="file" name="upload" id="upload" accept=".jpeg,.jpg,.png,.pdf" class="form-control" />
             </div>
+            <small class="control-label col-md-8">Format file berupa jpg/png/pdf</small>
           </div>
         </div>
         <br />
@@ -124,9 +123,8 @@
 				<h4 class="modal-title"></h4>
 			</div>
 			<div class="modal-body">
-
         <span id="form_result"></span>
-				<form method="post" class="form-horizontal" id="upss" enctype="multipart/form-data">
+			<form method="post" class="form-horizontal" id="upss" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
           <label class="control-label col-md-4" >File Surat Balasan <small class="text-danger">*</small> </label>
@@ -134,10 +132,9 @@
             <div class="file-preview">
               <input type="file" name="upload" id="upload2" accept=".jpeg,.jpg,.png,.pdf" class="form-control" />
             </div>
-            <small class="control-label col-md-10">Format file berupa jpg/png/pdf</small>
+            <small class="control-label col-md-8">Format file berupa jpg/png/pdf</small>
           </div>
         </div>
-
         <br />
 					<div class="form-group" align="center">
 						<input type="hidden" name="hidden_name2" id="hidden_name2" />

@@ -68,6 +68,7 @@ Hasil Cek Mandiri
 
 1. Jika ada pengajuan yang ditolak,
     seharusnya tidak muncul di upload laporan/input nilai ✅
+2. Cara menambah banyak user, import excel?
 
 
 Tgl 17 Mar 2021
@@ -80,4 +81,7 @@ Bisa saja dibuat namun lebih kompleks (template email, SMTP, dsb), auto lebih la
 Tgl 29 Mar 2021
 Update progress no 8
 Daripada mengganti DB, lebih baik menambah table terutama jika ingin mengakses data lama.
+--> buat table 'years'
+
+Buat view untuk mengontrol submit-lock (siswa)
 

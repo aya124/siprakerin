@@ -105,6 +105,7 @@ class ValidationController extends Controller
 
     public function byYear()
     {
+        return Submission::join('industry')->where('status_id',1,7,8)->get();
     if (request()->ajax()) {
       $user = Auth::user();
       $data = DB::table('submissions as sub')

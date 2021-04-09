@@ -13,7 +13,7 @@
 
   <div class="box">
     <div class="box-header">
-      @role(['admin', 'wali-kelas', 'kepsek', 'wks']) 
+      @role(['admin', 'wali-kelas', 'kepsek', 'wks'])
       <h3 class="box-title">Data nilai</h3>
       @endrole
       @role('siswa')
@@ -25,7 +25,7 @@
       <table id="tab_data" class="table table-bordered table-striped">
         <thead>
           <tr>
-            @role(['admin', 'wali-kelas', 'kepsek', 'wks']) 
+            @role(['admin', 'wali-kelas', 'kepsek', 'wks'])
             <th>Nama siswa</th>
             @endrole
             <th>Industri</th>
@@ -148,7 +148,7 @@
           url: "{{ route('score.index') }}",
         },
         columns: [
-          @role(['admin', 'wali-kelas', 'kepsek', 'wks']) 
+          @role(['admin', 'wali-kelas', 'kepsek', 'wks'])
           {
             data: 'student_name',
             name: 'student_name',
@@ -226,7 +226,7 @@
         $.ajax({
         url:"/score/"+sub_id+"/edit",
         dataType:"json",
-        success:function(html){
+        success:function(html) {
           $('#score_1').val(html.data.score_1);
           $('#score_2').val(html.data.score_2);
           $('#score_3').val(html.data.score_3);
@@ -248,29 +248,18 @@
           dataType: "json",
           data: new FormData(this),
           success: function(data) {
-            $('#form_result').show();
-            if (data.errors) {
-
-              html = '<div class="alert alert-danger">';
-              for (var count = 0; count < data.errors.length; count++) {
-                html += '<p>' + data.errors[count] + '</p>';
-              }
-              html += '</div>';
-              $('#form_result').html(html);
-            }
+            $('#form_result').hide();
             if (data.success) {
               html = '<div class="alert alert-success">' + data.success +
                 '</div>';
               setTimeout(function() {
                 $('#createModal').modal('hide');
-
               }, 1000);
               $('#tab_data').DataTable().ajax.reload();
               toastr.success('Nilai berhasil diperbarui!', 'Success', {
                 timeOut: 5000
               });
             }
-
           },
           error: function(xhr) {
             console.log(xhr);
@@ -278,6 +267,5 @@
         });
       });
     });
-
   </script>
 @stop

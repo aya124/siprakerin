@@ -8,7 +8,7 @@
 
 @section('content')
 @if (session('status'))
-<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>    
+<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>
 @endif
 
 <div class="box box-primary">
@@ -47,13 +47,13 @@
 					<div class="form-group">
 						<label class="control-label col-md-4">Nama : </label>
 						<div class="col-md-8">
-							<input type="text" name="name" id="name" class="form-control"  /> 
+							<input type="text" name="name" id="name" class="form-control"  />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-4">Email : </label>
 						<div class="col-md-8">
-							<input type="text" name="email" id="email" class="form-control"   /> 
+							<input type="text" name="email" id="email" class="form-control"   />
 						</div>
 					</div>
 					<br />
@@ -76,7 +76,6 @@
 			</div>
 			<div class="modal-body">
 				<span id="change_result"></span>
-
 				<form method="post" id="changed" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
@@ -178,13 +177,12 @@
  			$.ajax({
  				url:"/profile/"+x+"/change",
  				dataType:"json",
- 				success:function(html)
- 				{
+ 				success:function(html) {
  					$('#change_id').val(html.data.id);
  				}
  			});
         });
-         
+
         $(document).on('click','#edit_profil',function(){
  			$('#editModal').modal('show');
  			$('#form_result').hide();
@@ -194,11 +192,11 @@
  				success:function(html){
  					$('#name').val(html.data.name);
  					$('#email').val(html.data.email);
- 					$('#hidden_id').val(html.data.id);	
+ 					$('#hidden_id').val(html.data.id);
  				}
  			});
         });
-         
+
         $('#edit').on('submit',function(event){
             event.preventDefault();
             $.ajax({
@@ -209,42 +207,27 @@
                 processData: false,
                 dataType:"json",
                 data: new FormData(this),
-                success:function(data)
-                {
+                success:function(data) {
                     $('#form_result').show();
                     var html = '';
-                        if(data.errors)
-                        {
-                            html = '<div class="alert alert-danger">';
-                            for(var count = 0; count < data.errors.length; count++)
-                            {
-                                html += '<p>' + data.errors[count] + '</p>';
-                            }
-                            html += '</div>';
-                            $('#form_result').html(html);
-                        }
-                        if(data.success)
-                        {
+                        if(data.success) {
                             html = '<div class="alert alert-success">' + data.success + '</div>';
                             setTimeout(function(){
                                 $('#editModal').modal('hide');
-
-                        },1000);
+                            },1000);
                             $('#tab_data').DataTable().ajax.reload();//ini yang penting karena tanpa reload page
                             toastr.success('profil telah berhasil diedit!', 'Success', {timeOut: 5000});
                         }
-                },
-                error:function(xhr)
-                {
+                    },
+                error:function(xhr) {
                     $('#form_result').show();
                     console.log(xhr);
                          html = '<div class="alert alert-danger">';
-                     $.each(xhr.responseJSON.errors, function (key, item) 
-                      {	
+                     $.each(xhr.responseJSON.errors, function (key, item) {
                           html+='<p>' +item+'</p>';
                       });
                          html += '</div>';
-                        $('#form_result').html(html);    
+                        $('#form_result').html(html);
                 }//end error
             });
         });//edit function
@@ -259,41 +242,34 @@
 				processData: false,
 				dataType:"json",
 				data: new FormData(this),
-				success:function(data)
-				{
+				success:function(data) {
 					$('#change_result').show();
 					var html = '';
-						if(data.errors)
-						{
+						if(data.errors) {
 							html = '<div class="alert alert-danger">';
-							for(var count = 0; count < data.errors.length; count++)
-							{
+							for(var count = 0; count < data.errors.length; count++) {
 								html += '<p>' + data.errors[count] + '</p>';
 							}
 							html += '</div>';
 							$('#change_result').html(html);
 						}
-						if(data.success)
-						{
+						if(data.success) {
 							html = '<div class="alert alert-success">' + data.success + '</div>';
 							setTimeout(function(){
 								$('#changeModal').modal('hide');
 							},1000);
 							toastr.success('Password telah berhasil diperbarui!', 'Success', {timeOut: 5000});
 						}
-							
 						console.log(html);
-				},
-				error:function(xhr)
-				{
+                    },
+				error:function(xhr) {
 					$('#change_result').show();
 				 	html = '<div class="alert alert-danger">';
-					$.each(xhr.responseJSON.errors, function (key, item) 
-				    {	
+					$.each(xhr.responseJSON.errors, function (key, item) {
 				        html+='<p>' +item+'</p>';
 				    });
 				 		html += '</div>';
-						$('#change_result').html(html);	
+						$('#change_result').html(html);
 				}//end error
 			});
  		});//edit function

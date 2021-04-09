@@ -45,8 +45,6 @@
     </div>
     <!-- /.box-body -->
   </div>
-
-
 </div>
 <!-- end row -->
 
@@ -128,157 +126,11 @@ $(function() {
       }
 	]
       // $('#validasi').dataTable();
-  });
 
-//   $('#tab_data2').DataTable({
-// 		processing: true,
-// 		serverSide: true,
-// 		ajax:{
-// 			url: "{{ route('tab.setuju') }}",
-//       },
-//       columns:[
-//       {
-// 		    data: 'user_name',
-// 		    name: 'user_name',
-//       },
-//       {
-// 		    data: 'name',
-// 			name: 'name',
-// 	  },
-// 	  {
-// 		data: 'start_date',
-//         name: 'start_date',
-// 		},
-//       {
-// 		data: 'finish_date',
-//         name: 'finish_date',
-//       },
-//       {
-//         data: 'submit_type',
-//         render:function(data){
-//           if (data == 1) {
-//             return 'Utama'
-//           }
-//           else{
-//             return 'Alternatif'
-//           }
-//         }
-//       },
-//       {
-//         data: 'status_name',
-// 		name: 'status_name',
-//       },
-
-//       {
-//         data: 'correspondence',
-// 		name: 'correspondence',
-//       },
-// 	]
-//       // $('#validasi').dataTable();
-//   });
-
-//   $('#tab_data3').DataTable({
-// 		processing: true,
-// 		serverSide: true,
-// 		ajax:{
-// 		url: "{{ route('tab.tolak') }}",
-//       },
-//       columns:[
-//         {
-// 			data: 'user_name',
-// 			name: 'user_name',
-//       },
-//       {
-// 			data: 'name',
-// 			name: 'name',
-// 	  },
-// 	  {
-// 			data: 'start_date',
-//             name: 'start_date',
-// 		},
-//       {
-// 			data: 'finish_date',
-//             name: 'finish_date',
-//       },
-//       {
-//         data: 'submit_type',
-//         render:function(data){
-//           if (data == 1) {
-//             return 'Utama'
-//           }
-//           else{
-//             return 'Alternatif'
-//           }
-//         }
-//       },
-//       {
-//             data: 'status_name',
-// 			name: 'status_name',
-//       },
-//       {
-//             data: 'correspondence',
-// 			name: 'correspondence',
-//       },
-// 	]
-//       // $('#validasi').dataTable();
   });
 
   var id_table;
 
-//   $(document).on('click','.setuju',function(){
-//     id_table = $(this).attr('id');
-//     console.log(id_table);
-//     $('#confirmModal').modal('show');
-//     $('#setuju').val("setuju");
-//     $('#confirmModal .modal-title').text("Setuju");
-//     $('#confirmModal .set').text("Apa anda yakin ingin menyetujui pengajuan ini?");
-//     $('#ok_button').text('OK');
-//     });
-
-//   $(document).on('click','.tolak',function(){
-//     id_table = $(this).attr('id');
-//     console.log(id_table);
-//     $('#confirmModal').modal('show');
-//     $('#setuju').val("tolak");
-//     $('#confirmModal .modal-title').text("Tolak");
-//     $('#confirmModal .set').text("Apa anda yakin ingin menolak pengajuan ini?");
-//     $('#ok_button').text('OK');
-//     });
-
-//   $('#ok_button').click(function(){
-//     if($('#setuju').val() == 'setuju'){
-//       $.ajax({
-//         url:"validation/update/"+id_table,
-//         beforeSend:function(){
-//         $('#ok_button').text('Menyetujui...');
-//       },
-//       success:function(data){
-//         setTimeout(function(){
-//           $('#confirmModal').modal('hide');
-//           $('#tab_data').DataTable().ajax.reload();
-//           $('#tab_data2').DataTable().ajax.reload();
-//           $('#tab_data3').DataTable().ajax.reload();
-//           }, 2000);
-//           toastr.success('Pengajuan telah disetujui!', 'Success', {timeOut: 5000});
-//         }
-//       })
-//     }else{
-//       console.log("tolak kesini");
-//       $.ajax({
-//         url:"validation/decline/"+id_table,
-//         beforeSend:function(){
-//         $('#ok_button').text('Menolak...');
-//       },
-//       success:function(data){
-//         setTimeout(function(){
-//           $('#confirmModal').modal('hide');
-//           $('#tab_data').DataTable().ajax.reload();
-//           }, 2000);
-//           toastr.success('Pengajuan telah ditolak!', 'Success', {timeOut: 5000});
-//         }
-//       })
-//     }
-//   });
 });
 </script>
 @stop

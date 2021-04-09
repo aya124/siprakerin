@@ -9,7 +9,7 @@
 
 @section('content')
 @if (session('status'))
-<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>    
+<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>
 @endif
 
 <div class="box">
@@ -39,8 +39,7 @@
 				<h4 class="modal-title"></h4>
 			</div>
 			<div class="modal-body">
-
-        <span id="form_result"></span>
+                <span id="form_result"></span>
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
@@ -48,9 +47,7 @@
 						<div class="col-md-8">
 							<input type="text" name="name" id="name" class="form-control" />
 						</div>
-            </div>
-                    
-          <br />
+                    </div><br />
 					<div class="form-group" align="center">
 						<input type="hidden" name="action" id="action" />
 						<input type="hidden" name="hidden_id" id="hidden_id" />
@@ -97,12 +94,12 @@
         url: "{{ route('permission.index') }}",
       },
       columns:[
-	    {
+        {
 		    data: 'name',
 		    name: 'name',
-      },
-      {
-        data: 'action',
+        },
+        {
+            data: 'action',
 		    name: 'action',
 		    orderable: false
       }
@@ -137,7 +134,7 @@
             }
         });
     });
-    
+
     $(document).on('click','.delete',function(){
       id_table = $(this).attr('id');
       $('#confirmModal').modal('show');
@@ -151,8 +148,7 @@
         beforeSend:function(){
             $('#ok_button').text('Deleting...');
           },
-          success:function(data)
-          {
+          success:function(data) {
             setTimeout(function(){
                 $('#confirmModal').modal('hide');
                 $('#tab_data').DataTable().ajax.reload();
@@ -174,11 +170,9 @@
           processData: false,
           dataType:"json",
           data: new FormData(this),
-          success:function(data)
-          {
+          success:function(data) {
             $('#form_result').hide();
-            if(data.success)
-            {
+            if(data.success) {
               html = '<div class="alert alert-success">' + data.success + '</div>';
               setTimeout(function(){
                 $('#createModal').modal('hide');
@@ -187,13 +181,11 @@
                 toastr.success('Permission berhasil ditambahkan!', 'Success', {timeOut: 5000});
               }
             },
-            error:function(xhr)
-            {
+            error:function(xhr) {
               console.log(xhr);
               $('#form_result').show();
               html = '<div class="alert alert-danger">';
-              $.each(xhr.responseJSON.errors, function (key, item) 
-              {	
+              $.each(xhr.responseJSON.errors, function (key, item) {
                 html+='<p>' +item+'</p>';
               });
               html += '</div>';
@@ -212,21 +204,17 @@
             processData: false,
             dataType:"json",
             data: new FormData(this),
-            success:function(data)
-            {
+            success:function(data) {
               // $('#form_result').show();
-              if(data.errors)
-              {
+              if(data.errors){
                 html = '<div class="alert alert-danger">';
-                for(var count = 0; count < data.errors.length; count++)
-                {
+                for(var count = 0; count < data.errors.length; count++) {
                   html += '<p>' + data.errors[count] + '</p>';
                 }
                 html += '</div>';
                 $('#form_result').html(html);
               }
-              if(data.success)
-              {
+              if(data.success) {
                 html = '<div class="alert alert-success">' + data.success + '</div>';
                 setTimeout(function(){
                   $('#createModal').modal('hide');
@@ -235,17 +223,15 @@
                 toastr.success('Permission berhasil diperbarui!', 'Success', {timeOut: 5000});
               }
             },
-            error:function(xhr)
-            {
+            error:function(xhr) {
               console.log(xhr);
               $('#form_result').show();
               html = '<div class="alert alert-danger">';
-              $.each(xhr.responseJSON.errors, function (key, item) 
-              {	
+              $.each(xhr.responseJSON.errors, function (key, item) {
                 html+='<p>' +item+'</p>';
               });
               html += '</div>';
-              $('#form_result').html(html); 
+              $('#form_result').html(html);
             }//end error
           });
         }

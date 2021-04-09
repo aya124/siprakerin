@@ -111,37 +111,37 @@
         serverSide: true,
         ajax: {
           url: "{{ route('report.index') }}",
-        },
-        columns: [
-          @role(['admin', 'wali-kelas', 'kepsek', 'wks'])
-          {
-            data: 'student_name',
-            name: 'student_name',
           },
-          @endrole {
-            data: 'industry_name',
-            name: 'industry_name',
-          },
-          {
-		    data: 'start_date',
-            name: 'start_date',
-	    },
-        {
-		    data: 'finish_date',
-            name: 'finish_date',
-        },
-          {
-            data: 'action',
-            name: 'action',
-            orderable: false
-          },
-          {
-            data: 'action2',
-            name: 'action2',
-            orderable: false
-          }
+          columns: [
+              @role(['admin', 'wali-kelas', 'kepsek', 'wks'])
+            {
+                data: 'student_name',
+                name: 'student_name',
+            },
+            @endrole {
+                data: 'industry_name',
+                name: 'industry_name',
+            },
+            {
+		        data: 'start_date',
+                name: 'start_date',
+	        },
+            {
+		        data: 'finish_date',
+                name: 'finish_date',
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false
+            },
+            {
+                data: 'action2',
+                name: 'action2',
+                orderable: false
+            }
         ]
-      });
+    });
       // $('#laporan').dataTable();
       @role('siswa')
       $('#btn_add').click(function() {

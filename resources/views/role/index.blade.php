@@ -3,13 +3,13 @@
 @section('title', 'Role')
 
 @section('content_header')
-<h1>Role <a id="btn_add" name="btn_add" 
+<h1>Role <a id="btn_add" name="btn_add"
     class="btn btn-flat btn-primary">Tambah Role</a></h1>
 @stop
 
 @section('content')
 @if (session('status'))
-<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>    
+<div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>
 @endif
 
 <div class="box">
@@ -48,27 +48,25 @@
 						<div class="col-md-8">
 							<input type="text" name="name" id="name" class="form-control" />
 						</div>
-                </div>
-                  <div class="form-group">
+                    </div>
+                    <div class="form-group">
 						<label class="control-label col-md-4" >Display Name <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="display" id="display" class="form-control" />
 						</div>
-                </div>
+                    </div>
                     <div class="form-group">
 						<label class="control-label col-md-4" >Permission <small class="text-danger">*</small> </label>
 						  <div class="col-md-8">
-                <div class="roleInput">
-                @foreach ($permit as $p)
-                  <label class="form-check-label">
+                            <div class="roleInput">
+                            @foreach ($permit as $p)
+                            <label class="form-check-label">
 						        <input type="checkbox" class="form-check-input" value="{{$p->id}}" id="p" name="p[]">{{$p->name}}
-						      </label>
-						    <br />
-                @endforeach
-              </div>
+				            </label><br />
+                            @endforeach
+                            </div>
 						</div>
-              </div>
-                <br />
+                    </div> <br />
 					<div class="form-group" align="center">
 						<input type="hidden" name="action" id="action" />
 						<input type="hidden" name="hidden_id" id="hidden_id" />
@@ -113,23 +111,23 @@
 		ajax:{
         url: "{{ route('role.index') }}",
         },
-        columns:[ 
-      {
-        data: 'name',
-				name: 'name',
-			},
-      {
-        data: 'display_name',
-				name: 'display_name',
-			},
-      {
-        data: 'action',
-				name: 'action',
-				orderable: false
-      }
-			]
+        columns:[
+        {
+            data: 'name',
+			name: 'name',
+	    },
+        {
+            data: 'display_name',
+			name: 'display_name',
+		},
+        {
+            data: 'action',
+			name: 'action',
+			orderable: false
+        }
+		]
     });
-        
+
     $('#btn_add').click(function(){
       $('.notifError').remove();
       $('#createModal').modal('show');
@@ -164,8 +162,7 @@
             $.ajax({
                 url:"/admin/role/"+id_table+"/edit",
                 dataType:"json",
-                success:function(html)
-                {
+                success:function(html) {
               //pertama ambil data awal
 					var awal= [];
 					$('input[name="p[]"]').map(function() {
@@ -198,15 +195,14 @@
 			  $('#confirmModal').modal('show');
 			  $('#ok_button').text('OK');
       });
-      $('#ok_button').click(function(){
+      $('#ok_button').click(function() {
             console.log (id_table);
 			$.ajax({
 				url:"role/destroy/"+id_table,
 				beforeSend:function(){
 					$('#ok_button').text('Deleting...');
 				},
-				success:function(data)
-				{
+				success:function(data) {
 					setTimeout(function(){
 						$('#confirmModal').modal('hide');
 						$('#tab_data').DataTable().ajax.reload();
@@ -227,27 +223,22 @@
                 processData: false,
                 dataType:"json",
                 data: new FormData(this),
-                success:function(data)
-                {
+                success:function(data) {
                   $('#form_result').hide();
-                    if(data.success)
-                    {
+                    if(data.success) {
                       html = '<div class="alert alert-success">' + data.success + '</div>';
                       setTimeout(function(){
                         $('#createModal').modal('hide');
-
                     },1000);
                     $('#tab_data').DataTable().ajax.reload();
                       toastr.success('Role berhasil ditambahkan!', 'Success', {timeOut: 5000});
                     }
                 },
-                error:function(xhr)
-                {
+                error:function(xhr) {
                   console.log(xhr);
                   $('#form_result').show();
                   html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) 
-                  {
+                  $.each(xhr.responseJSON.errors, function (key, item) {
                     html+='<p>' +item+'</p>';
                   });
                   html += '</div>';
@@ -270,41 +261,33 @@
                 processData: false,
                 dataType:"json",
                 data: new FormData(this),
-                success:function(data)
-                {
-                    if(data.errors)
-                    {
+                success:function(data) {
+                    if(data.errors) {
                       html = '<div class="alert alert-danger">';
-                      for(var count = 0; count < data.errors.length; count++)
-                      {
+                      for(var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                       }
                       html += '</div>';
                       $('#form_result').html(html);
                     }
-                    if(data.success)
-                    {
+                    if(data.success) {
                       html = '<div class="alert alert-success">' + data.success + '</div>';
                       setTimeout(function(){
                         $('#createModal').modal('hide');
-
                     },1000);
                     $('#tab_data').DataTable().ajax.reload();
                       toastr.success('Role berhasil diperbarui!', 'Success', {timeOut: 5000});
                     }
-                    
                 },
-                error:function(xhr)
-                {
+                error:function(xhr) {
                   console.log(xhr);
                   $('#form_result').show();
                   html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) 
-                  {
+                  $.each(xhr.responseJSON.errors, function (key, item) {
                     html+='<p>' +item+'</p>';
                   });
                   html += '</div>';
-                  $('#form_result').html(html); 
+                  $('#form_result').html(html);
                 }//end error
               });
             }
