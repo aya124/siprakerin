@@ -111,6 +111,19 @@ class IndustryController extends Controller
         }
     }
 
+    public function addSuggestion(Request $request)
+    {
+        $data = $request->all();
+        return DB::transaction(function () Use($data, $request){
+            $data['user_id']= Auth::user()->id;
+            Suggestion::create($data);
+            $a = Industry::findOrFail($request->industry_id);
+            $a->check = true;
+            $a->save();
+            return response()->json('success', 200);
+        });
+    }
+
     public function showSuggestion($id)
     {
         $data = Suggestion::with('user')->where('industry_id', $id)->get();
@@ -169,18 +182,5 @@ class IndustryController extends Controller
         $industry = Industry::findOrFail($id);
         $industry->delete();
         return response()->json(['success' => 'Data industri berhasil dihapus.']);
-    }
-
-    public function tambahSaran(Request $request)
-    {
-        $data = $request->all();
-        return DB::transaction(function () Use($data, $request){
-            $data['user_id']= Auth::user()->id;
-            Suggestion::create($data);
-            $a = Industry::findOrFail($request->industry_id);
-            $a->check = true;
-            $a->save();
-            return response()->json('success', 200);
-        });
     }
 }

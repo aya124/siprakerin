@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Suggestion extends Model
 {
     protected $fillable = [
-        'user_id', 'industry_id', 'suggestion', 'status',
+        'user_id', 'industry_id', 'saran', 'status',
     ];
 
         /**

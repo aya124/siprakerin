@@ -81,5 +81,5 @@ Route::post('year/{id}/isactive','YearController@isActive')->name('year.isactive
 
 Route::resource('/class', 'StudentClassController');
 
-Route::post('tambah-saran', 'IndustryController@tambahSaran')->name('suggestion.add');
-// Route::post('tambah-detail', 'SubmissionController@addDetail')->name('detail.add');
+Route::post('add-suggestion', 'IndustryController@addSuggestion')->name('suggestion.add');
+// Route::post('add-detail', 'SubmissionController@addDetail')->name('detail.add');

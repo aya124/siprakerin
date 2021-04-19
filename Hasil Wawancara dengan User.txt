@@ -59,8 +59,8 @@ Hasil Diskusi/Koreksi Demo Siprakerin via Google Meet
 6. Sertakan panduan/pedoman di dashboard, bisa berupa link
 7. Tambah upload sertifikat di menu Laporan ✅
 8. Change db interactively, bukan lewat file env. () X
-. Sertakan referensi kakak kelas yang melakukan prakerin (pengembangan selanjutnya)
-. Backup data (pengembangan selanjutnya)
+9. Sertakan referensi kakak kelas yang melakukan prakerin
+10. Backup data
 
 
 Tgl 12 Mar 2021
