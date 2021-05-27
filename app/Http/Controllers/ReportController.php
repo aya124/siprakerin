@@ -144,7 +144,7 @@ class ReportController extends Controller
         //
     }
 
-    public function progress(Report $report)
+    public function progress()
     {
         return view('report.progress');
     }
