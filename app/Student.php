@@ -13,16 +13,16 @@ class Student extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'name', 'nis', 'class_id',
+        'user_id', 'nis', 'name', 'class_id',
     ];
 
-    protected $primaryKey = 'username';
+    // protected $primaryKey = 'username';
 
-    
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-    }
+
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class, 'user_id', 'id');
+    // }
 
     public function class()
     {

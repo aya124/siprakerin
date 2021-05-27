@@ -21,10 +21,10 @@
       <table id="tab_data" class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>Nama Industri</th>
-          <th>Alamat</th>
-          <th>Status</th>
-          <th>Aksi</th>
+          <th style="width: 20%">Nama Industri</th>
+          <th style="width: 30%">Alamat</th>
+          <th style="width: 10%">Status</th>
+          <th style="width: 40%">Aksi</th>
         </tr>
       </thead>
       </table>
@@ -114,7 +114,7 @@
 						</div>
                     </div>
                     <div class="form-group">
-						<label class="control-label col-md-4" >Detail </label>
+						<label class="control-label col-md-4" >Link </label>
 						<div class="col-md-8">
 							<input type="text" name="detail" id="detail" class="form-control" rows="3"/>
 						</div>
@@ -169,7 +169,7 @@
               <td id="phone_detail"></td>
             </tr>
             <tr>
-              <th>Detail</th>
+              <th>Link</th>
               <td id="detail_detail"></td>
             </tr>
             <tr>

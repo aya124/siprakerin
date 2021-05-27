@@ -22,12 +22,12 @@ class CreateStudentsTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')
-                  ->references('id')->on('users')
-                  ->onDelete('cascade');
+            ->references('id')->on('users')
+            ->onDelete('cascade');
 
             $table->foreign('class_id')
-                  ->references('id')->on('student_classes')
-                  ->onDelete('cascade');
+            ->references('id')->on('student_classes')
+            ->onDelete('cascade');
         });
     }
 

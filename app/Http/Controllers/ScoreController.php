@@ -5,10 +5,19 @@ namespace App\Http\Controllers;
 use App\Score;
 use App\Submission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class ScoreController extends Controller
 {
+    public function __construct()
+    {
+    $this->middleware('auth'); // filter kondisi apakah sudah auth/login atau belum
+    //Param string / array
+    //$this->middleware('guest')->only(['index', 'create']); //hanya untuk user 'guest'
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +38,9 @@ class ScoreController extends Controller
                 'sc.score_4',
                 'sc.score_5',
                 'sc.score_6',
+                'sc.score_7',
+                'sc.score_8',
+                'sc.score_9',
             );
             if (auth()->user()->hasRole('siswa')) {
                 $data->selectRaw('i.name as industry_name');
@@ -39,25 +51,19 @@ class ScoreController extends Controller
 
             return datatables()->of($data->get())
                 ->addColumn('action', function ($data) {
-                    $html = '';
-                    $html .= '<button class="btn btn-default btn-sm edit" data-id="' . $data->id . '">
-                    <i class="fas fa-file"></i> Update nilai</button>';
-                    return $html;
+                    $button = '';
+                    $button = '<button class="btn btn-default btn-sm edit" data-id="' . $data->id . '">
+                    <i class="fas fa-file"></i> Ubah nilai</button>';
+                    $button .= '<a href= "score/print/'.$data->id.'"
+                    target="_blank" type="button" name="print"
+                    class="btn btn-default btn-sm">
+                    <i class="fas fa-print"></i> Cetak Nilai</a>';
+                    return $button;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
         return view('score.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -75,6 +81,9 @@ class ScoreController extends Controller
             'score_4' => 'required|numeric|between:0,100',
             'score_5' => 'required|numeric|between:0,100',
             'score_6' => 'required|numeric|between:0,100',
+            'score_7' => 'required|numeric|between:0,100',
+            'score_8' => 'required|numeric|between:0,100',
+            'score_9' => 'required|numeric|between:0,100',
             'submission_id' => 'required',
         ]);
 
@@ -87,6 +96,9 @@ class ScoreController extends Controller
             $score->score_4 = $request->score_4;
             $score->score_5 = $request->score_5;
             $score->score_6 = $request->score_6;
+            $score->score_7 = $request->score_7;
+            $score->score_8 = $request->score_8;
+            $score->score_9 = $request->score_9;
             $score->save();
         } else {
             $score = Score::create([
@@ -96,6 +108,9 @@ class ScoreController extends Controller
                 'score_4' => $request->score_4,
                 'score_5' => $request->score_5,
                 'score_6' => $request->score_6,
+                'score_7' => $request->score_7,
+                'score_8' => $request->score_8,
+                'score_9' => $request->score_9,
             ]);
             $submission->score_id = $score->id;
             $submission->save();
@@ -112,7 +127,7 @@ class ScoreController extends Controller
      */
     public function show(Score $score)
     {
-        //
+        return view('score.progress');
     }
 
     /**
@@ -135,6 +150,9 @@ class ScoreController extends Controller
             'sc.score_4',
             'sc.score_5',
             'sc.score_6',
+            'sc.score_7',
+            'sc.score_8',
+            'sc.score_9',
         );
         $data->where('s.id', $submission_id);
 
@@ -153,6 +171,59 @@ class ScoreController extends Controller
         //
     }
 
+    public function details_pdf($id)
+    {
+        $data = DB::table('submissions as s')
+                    ->join('users as u','u.username','=', 's.username')
+                    ->join('industries as i','i.id','=','s.industry_id')
+                    ->join('scores as sc','sc.id','=','s.score_id')
+                    ->select(
+                        'u.name as name',
+                        'i.name as industry_name',
+                        'sc.score_1 as s1',
+                        'sc.score_2 as s2',
+                        'sc.score_3 as s3',
+                        'sc.score_4 as s4',
+                        'sc.score_5 as s5',
+                        'sc.score_6 as s6',
+                        'sc.score_7 as s7',
+                        'sc.score_8 as s8',
+                        'sc.score_9 as s9'
+                        )
+                        ->get();
+
+        $kps = ['user' => userByRole(7)];
+        $pdf = PDF::loadview('score.print', compact('data', 'kps'))
+        ->setPaper('legal', 'portrait');
+        return $pdf->stream('nilai.pdf');
+    }
+
+    public function recap_pdf(Request $request)
+    {
+        $data = Submission::whereBetween('submissions.created_at', [$request->start, $request->end])
+                    ->join('users','users.username','submissions.username')
+                    ->join('industries','industries.id','=','submissions.industry_id')
+                    ->join('scores','scores.id','=','submissions.score_id')
+                    ->select(
+                        'users.name as name',
+                        'industries.name as industry_name',
+                        'scores.score_1 as s1',
+                        'scores.score_2 as s2',
+                        'scores.score_3 as s3',
+                        'scores.score_4 as s4',
+                        'scores.score_5 as s5',
+                        'scores.score_6 as s6',
+                        'scores.score_7 as s7',
+                        'scores.score_8 as s8',
+                        'scores.score_9 as s9'
+                        )
+                        ->get();
+
+        $kps = ['user' => userByRole(7)];
+        $pdf = PDF::loadview('score.recap', compact('data', 'kps'))
+        ->setPaper('legal', 'landscape');
+        return $pdf->stream('rekap-nilai.pdf');
+    }
     /**
      * Remove the specified resource from storage.
      *

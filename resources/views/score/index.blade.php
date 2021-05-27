@@ -14,7 +14,7 @@
   <div class="box">
     <div class="box-header">
       @role(['admin', 'wali-kelas', 'kepsek', 'wks'])
-      <h3 class="box-title">Data nilai</h3>
+      <h3 class="box-title">Data Nilai</h3>
       @endrole
       @role('siswa')
       <h3 class="box-title">Nilai</h3>
@@ -25,16 +25,19 @@
       <table id="tab_data" class="table table-bordered table-striped">
         <thead>
           <tr>
-            @role(['admin', 'wali-kelas', 'kepsek', 'wks'])
-            <th>Nama siswa</th>
+            @role(['admin', 'wali-kelas', 'kps', 'kepsek', 'wks1', 'wks4'])
+            <th>Nama Siswa</th>
             @endrole
-            <th>Industri</th>
-            <th>Nilai 1</th>
-            <th>Nilai 2</th>
-            <th>Nilai 3</th>
-            <th>Nilai 4</th>
-            <th>Nilai 5</th>
-            <th>Nilai 6</th>
+            <th>Nama Industri</th>
+            <th>SisKom</th>
+            <th>KomJar</th>
+            <th>PemDas</th>
+            <th>DDG</th>
+            <th>IaaS</th>
+            <th>PaaS</th>
+            <th>SaaS</th>
+            <th>SIoT</th>
+            <th>SKJ</th>
             @role(['admin', 'wali-kelas'])
             <th>Aksi</th>
             @endrole
@@ -52,46 +55,64 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Update nilai</h4>
+          <h4 class="modal-title">Ubah Nilai</h4>
         </div>
         <div class="modal-body">
           <span id="form_result"></span>
           <form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-              <label class="control-label col-md-4">Nilai 1: </label>
+              <label class="control-label col-md-4">Nilai SisKom <small class="text-danger">*</small></label>
               <div class="col-md-8">
                 <input class="form-control" id="score_1" name="score_1" type="number" min="0" max="100" />
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-4">Nilai 2: </label>
+              <label class="control-label col-md-4">Nilai KomJar <small class="text-danger">*</small></label>
               <div class="col-md-8">
                 <input class="form-control" id="score_2" name="score_2" type="number" min="0" max="100" />
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-4">Nilai 3: </label>
+              <label class="control-label col-md-4">Nilai PemDas <small class="text-danger">*</small></label>
               <div class="col-md-8">
                 <input class="form-control" id="score_3" name="score_3" type="number" min="0" max="100" />
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-4">Nilai 4: </label>
+              <label class="control-label col-md-4">Nilai DDG <small class="text-danger">*</small></label>
               <div class="col-md-8">
                 <input class="form-control" id="score_4" name="score_4" type="number" min="0" max="100" />
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-4">Nilai 5: </label>
+              <label class="control-label col-md-4">Nilai IaaS <small class="text-danger">*</small></label>
               <div class="col-md-8">
                 <input class="form-control" id="score_5" name="score_5" type="number" min="0" max="100" />
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-4">Nilai 6: </label>
+              <label class="control-label col-md-4">Nilai PaaS <small class="text-danger">*</small></label>
               <div class="col-md-8">
                 <input class="form-control" id="score_6" name="score_6" type="number" min="0" max="100" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-4">Nilai SaaS <small class="text-danger">*</small></label>
+              <div class="col-md-8">
+                <input class="form-control" id="score_7" name="score_7" type="number" min="0" max="100" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-4">Nilai Sistem IoT <small class="text-danger">*</small></label>
+              <div class="col-md-8">
+                <input class="form-control" id="score_8" name="score_8" type="number" min="0" max="100" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-4">Nilai SKJ <small class="text-danger">*</small></label>
+              <div class="col-md-8">
+                <input class="form-control" id="score_9" name="score_9" type="number" min="0" max="100" />
               </div>
             </div>
 
@@ -148,7 +169,7 @@
           url: "{{ route('score.index') }}",
         },
         columns: [
-          @role(['admin', 'wali-kelas', 'kepsek', 'wks'])
+          @role(['admin', 'wali-kelas', 'kps', 'kepsek', 'wks'])
           {
             data: 'student_name',
             name: 'student_name',
@@ -199,6 +220,27 @@
               return h || 'Belum ada nilai'
             },
           },
+          {
+            data: 'score_7',
+            name: 'score_7',
+            render(h) {
+              return h || 'Belum ada nilai'
+            },
+          },
+          {
+            data: 'score_8',
+            name: 'score_8',
+            render(h) {
+              return h || 'Belum ada nilai'
+            },
+          },
+          {
+            data: 'score_9',
+            name: 'score_9',
+            render(h) {
+              return h || 'Belum ada nilai'
+            },
+          },
           @role(['admin', 'wali-kelas']) {
             data: 'action',
             name: 'action',
@@ -233,6 +275,9 @@
           $('#score_4').val(html.data.score_4);
           $('#score_5').val(html.data.score_5);
           $('#score_6').val(html.data.score_6);
+          $('#score_7').val(html.data.score_7);
+          $('#score_8').val(html.data.score_8);
+          $('#score_9').val(html.data.score_9);
         }
       });
       });

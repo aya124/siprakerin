@@ -74,7 +74,13 @@ Route::get('profile/change/{id}', 'UsersController@change');
 Route::post('profile/passchanged', 'ProfileController@passchanged')->name('pass.update');
 
 Route::resource('/report', 'ReportController');
+Route::get('score/progress', 'ReportController@progress');
+Route::get('score/recap/print', 'ReportController@recap_pdf')->name('report.recap');
+
 Route::resource('/score', 'ScoreController');
+Route::get('score/print/{id}', 'ScoreController@details_pdf');
+Route::get('score/progress', 'ScoreController@show');
+Route::get('score/recap/print', 'ScoreController@recap_pdf')->name('score.recap');
 
 Route::resource('/year', 'YearController');
 Route::post('year/{id}/isactive','YearController@isActive')->name('year.isactive');

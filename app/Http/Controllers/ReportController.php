@@ -9,6 +9,7 @@ use App\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class ReportController extends Controller
 {
@@ -79,16 +80,6 @@ class ReportController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -142,17 +133,6 @@ class ReportController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Report  $report
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Report $report)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -162,6 +142,32 @@ class ReportController extends Controller
     public function update(Request $request, Report $report)
     {
         //
+    }
+
+    public function progress(Report $report)
+    {
+        return view('report.progress');
+    }
+
+    public function recap_pdf(Request $request)
+    {
+        $data = Submission::whereBetween('submissions.created_at', [$request->start, $request->end])
+                    ->join('users','users.username','submissions.username')
+                    ->join('industries','industries.id','=','submissions.industry_id')
+                    ->join('reports','reports.id','=','submissions.report_id')
+                    ->join('certificates','certif.id','=','submissions.certif_id')
+                    ->select(
+                        'users.name as name',
+                        'industries.name as industry_name',
+                        'reports.created_at as up_time1',
+                        'certificates.created_at as up_time2'
+                        )
+                        ->get();
+
+        $kps = ['user' => userByRole(7)];
+        $pdf = PDF::loadview('report.recap', compact('data', 'kps'))
+        ->setPaper('legal', 'landscape');
+        return $pdf->stream('rekap-laporan.pdf');
     }
 
     /**

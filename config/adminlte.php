@@ -147,7 +147,7 @@ return [
             'text' => 'Pengajuan',
             'url' => 'submission',
             'icon' => 'fa fa-archive',
-            'permission' => 'menu-pengajuan',
+            'permission' => 'buat-pengajuan',
         ],
         [
             'text' => 'Validasi Pengajuan',
@@ -156,10 +156,10 @@ return [
             'permission' => 'validasi-pengajuan',
         ],
         [
-            'text' => 'Cetak Rekap Pengajuan',
+            'text' => 'Rekap Pengajuan',
             'url' => 'validation/progress',
             'icon' => 'fa fa-print',
-            'permission' => 'validasi-pengajuan',
+            'permission' => 'rekap-pengajuan',
         ],
         [
             'text' => 'Laporan & Sertifikat',
@@ -167,15 +167,27 @@ return [
             'icon' => 'fa fa-file',
         ],
         [
+            'text' => 'Rekap Laporan & Sertifikat',
+            'url' => 'report/progress',
+            'icon' => 'fa fa-print',
+            'permission' => 'rekap-laporan-sertif',
+        ],
+        [
             'text' => 'Nilai',
             'url' => 'score',
             'icon' => 'fa fa-check-square',
         ],
         [
+            'text' => 'Rekap Nilai',
+            'url' => 'score/progress',
+            'icon' => 'fa fa-print',
+            'permission' => 'rekap-nilai',
+        ],
+        [
             'text' => 'Data Pengajuan',
             'url' => 'validation/year/data',
             'icon' => 'fa fa-table',
-            'permission' => 'validasi-pengajuan',
+            'permission' => 'data-pengajuan',
         ],
 
         //[
@@ -216,13 +228,13 @@ return [
             'text' => 'Kelas',
             'url' => 'class',
             'icon' => 'fa fa-users',
-            'permission' => 'menu-status',
+            'permission' => 'menu-tahun',
         ],
         [
             'text' => 'Tahun Pengajuan',
             'url' => 'year',
             'icon' => 'fa fa-list',
-            'permission' => 'menu-status',
+            'permission' => 'menu-tahun',
         ],
         [
             'text' => 'Status',

@@ -12,7 +12,7 @@
         .table-bordered, td{
             border-collapse: collapse;
             border: 1px solid black;
-            background-color: #a9a9a9;
+            /* background-color: #a9a9a9; */
             padding: 1px;
             margin: 1px;
             text-indent: 5px;
@@ -35,7 +35,7 @@
         }
         th{
             border: 1px solid black;
-            background-color: #dddddd;
+            /* background-color: #dddddd; */
         }
         tr{
             border: 1px solid black;
@@ -100,6 +100,7 @@
   <div width="100%" class="container">
     <table class="borderless" style="width: 725px;">
       <tbody>
+        @foreach ($data as $d)
       <tr>
           <td class="borderless"></td>
           <td class="borderless"></td>
@@ -122,31 +123,31 @@
           <td class="borderless" style="width:64px;">Lampiran</td>
           <td class="borderless" style="width:5px;">:</td>
           <td class="borderless">-</td>
-          <td class="borderless"><b>Yth. Direktur {{$data[0]->industry_name}}</b></td>
+          <td class="borderless"><b>Yth. Direktur {{$d->in_name}}</b></td>
     	</tr>
     	<tr>
           <td class="borderless">Hal</td>
           <td class="borderless">:</td>
           <td class="borderless" style="width:280px;">Permohonan Izin Praktik Kerja Industri /</td>
-          <td class="borderless"><b>{{$data[0]->address}}</b></td>
+          <td class="borderless"><b>{{$d->in_address}}</b></td>
     	</tr>
     	<tr>
           <td class="borderless"></td>
           <td class="borderless"></td>
           <td class="borderless">Prakerin untuk tahun {{$currentyear}}</td>
-          <td class="borderless"><b>{{$data[0]->city}}</b></td>
+          <td class="borderless"><b>{{$d->in_city}}</b></td>
     	</tr>
       </tbody>
     </table>
 	</div><br>
-    <div width="100%" class="col-lg-6" style="width: 690px;">
 
+    <div width="100%" class="col-lg-6" style="width: 690px;">
       <p>Dengan hormat,</p>
       <p align="justify">Dalam rangka memenuhi kurikulum Sekolah sebagaimana ditetapkan oleh Kementerian Pendidikan Nasional,
          dengan ini kami mengajukan permohonan Praktik Kerja Industri / Prakerin untuk tahun {{$currentyear}},
-         bagi siswa-siswa kami kelas{{$data[0]->class}} XII SMK Negeri 2 Depok (STM Pembangunan Yogyakarta),
-         untuk mendapatkan tambahan kemampuan praktek melalui Program Praktik Kerja Industri / Prakerin di {{$data[0]->industry_name}},
-         {{$data[0]->address}} {{$data[0]->city}}.
+         bagi siswa-siswa kami kelas XII SMK Negeri 2 Depok (STM Pembangunan Yogyakarta),
+         untuk mendapatkan tambahan kemampuan praktek melalui Program Praktik Kerja Industri / Prakerin di {{$d->in_name}},
+         {{$d->in_address}} {{$d->in_city}}.
       </p>
       <p align="justify">Berikut kami sampaikan daftar nama siswa-siswa kami yang mengajukan Praktik Industri :</p>
 
@@ -163,18 +164,17 @@
             @php
                 $i=0;
             @endphp
-            @foreach ($data as $d)
             <tr>
                 <td align="center">{{++$i}}.</td>
-                <td>&nbsp;</td>
-                <td align="center"></td>
-                <td align="center"></td>
+                <td>{{$d->name}}</td>
+                <td align="center">{{$d->nis}}</td>
+                <td align="center">{{$d->classname}}</td>
     		</tr>
             @endforeach
-
     	</tbody>
       </table>
     </div>
+
     <div width="100%" style="width: 690px;">
       <p align="justify">Adapun waktu pelaksanaan Praktik Kerja Industri / Prakerin direncanakan pada : <b>Tgl {{$date1}} s.d {{$date2}}</b>.
          Sehubungan dengan hal itu, kami mohon bantuan Bapak/Ibu agar berkenan menerima siswa-siswa kami tersebut
@@ -187,7 +187,6 @@
     <div width="100%" class="container">
     <table align="left" class="borderless" style="width: 690px;">
     	<tbody>
-
           <tr class="borderless">
             <td class="borderless" align="justify" style="width: 220px;">&nbsp;</td>
             <td class="borderless" style="width: 200px;">&nbsp;</td>

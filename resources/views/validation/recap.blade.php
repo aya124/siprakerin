@@ -106,8 +106,49 @@
                     </tr>
                     @endforeach
                 </tbody>
-            </table>
-            </div>
+            </table><br/>
+            </div><br/><br/>
+            <div width="100%" class="container">
+                <table align="right" class="borderless" style="width: 690px;">
+                    <tbody>
 
+                      <tr class="borderless">
+                        <td class="borderless" align="justify" style="width: 220px;">&nbsp;</td>
+                        <td class="borderless" style="width: 200px;">&nbsp;</td>
+                        <td class="borderless" align="justify">Kepala Program Studi</td>
+                      </tr>
+                      <tr class="borderless">
+                        <td class="borderless" style="width: 220px; height:25px;"></td>
+                        <td class="borderless" style="width: 200px;"></td>
+                        <td class="borderless"></td>
+                      </tr>
+                      <tr class="borderless">
+                        <td class="borderless" style="width: 220px; height:25px;"></td>
+                        <td class="borderless" style="width: 200px;"></td>
+                        <td class="borderless"></td>
+                      </tr>
+                      <tr class="borderless">
+                        <td class="borderless" style="width: 220px; height:25px;"></td>
+                        <td class="borderless" style="width: 200px;"></td>
+                        <td class="borderless"></td>
+                      </tr>
+                      <tr class="borderless">
+                        <td class="borderless"></td>
+                        <td class="borderless" style="width: 200px;"></td>
+                        <td class="borderless">{{$kps['user']->name}}</td>
+                      </tr>
+                      {{-- <tr class="borderless">
+                        <td class="borderless"></td>
+                        <td class="borderless" style="width: 200px;"></td>
+                        <td class="borderless">Pembina IV/a</td>
+                      </tr> --}}
+                      <tr class="borderless">
+                        <td class="borderless" align="justify" style="width: 220px;"></td>
+                        <td class="borderless" style="width: 200px;"></td>
+                        <td class="borderless" align="justify">NIP. {{$kps['user']->nip}}</td>
+                      </tr>
+                  </tbody>
+                  </table>
+              </div>
     </body>
 </html>

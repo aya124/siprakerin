@@ -302,16 +302,17 @@ class ValidationController extends Controller
     $data = DB::table('submissions as sub')
       ->join('users as u', 'u.username', '=', 'sub.username')
       ->join('industries as i', 'i.id', '=', 'sub.industry_id')
-      ->leftjoin('students as s', 's.nis', '=', 'u.username')
-      // ->join('statuses as st', 'st.id', '=', 'sub.status_id')
+      ->leftjoin('students as s', 's.id', '=', 'u.username')
+      ->leftjoin('student_classes as c','c.id','=','s.class_id')
       ->select(
-        'u.name',
-        'i.address',
-        'i.city',
-        's.class',
+        'u.name as name',
+        'i.name as in_name',
+        'i.address as in_address',
+        'i.city as in_city',
+        's.nis as nis',
+        'c.name as classname',
         'sub.start_date',
-        'sub.finish_date',
-        DB::raw('i.name as industry_name')
+        'sub.finish_date'
       )
       // ->where('sub.username',$user->id)
       ->where('sub.id', $id)
@@ -448,8 +449,8 @@ class ValidationController extends Controller
                     )
                     ->get();
 
-
-    $pdf = PDF::loadview('validation.recap', compact('data'))
+    $kps = ['user' => userByRole(7)];
+    $pdf = PDF::loadview('validation.recap', compact('data', 'kps'))
       ->setPaper('legal', 'landscape');
     return $pdf->stream('rekap-pengajuan.pdf');
   }

@@ -5,7 +5,6 @@
 @section('content_header')
 <h1> Daftar User
   <a id="btn_add" class="btn btn-flat btn-primary">Tambah User</a>
-  {{-- <a id="btn_add" class="btn btn-flat btn-primary">Upload File</a> --}}
 </h1>
 @stop
 
@@ -48,6 +47,17 @@
             <span id="form_result"></span>
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
+                    <div class="form-group">
+                        <label class="control-label col-md-3" >Role <small class="text-danger">*</small> </label>
+                            <div class="col-md-8">
+                            <select class="form-control" id="role" name="role">
+                                <option value="">Pilih role</option>
+                                @for($i=0; $i<= count($role)-1;$i++)
+                                <option value="{{$role[$i]->id}}">{{$role[$i]->name}}</option>
+                                @endfor
+                            </select>
+                            </div>
+                    </div>
 					<div class="form-group">
 						<label class="control-label col-md-3" >Nama <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
@@ -55,50 +65,38 @@
 						</div>
                     </div>
 
-                <div class="form-group">
-					<label class="control-label col-md-3" >Username <small class="text-danger">*</small> </label>
-						<div class="col-md-8">
-							<input type="text" name="username" id="username" class="form-control" />
-						</div>
-                </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3" >Username <small class="text-danger">*</small> </label>
+                            <div class="col-md-8">
+                                <input type="text" name="username" id="username" class="form-control" />
+                            </div>
+                    </div>
 
-          <div class="form-group">
-            <label class="control-label col-md-3" >Jenis Kelamin <small class="text-danger">*</small> </label>
-            <div class="col-md-8">
-              <select class="form-control" name="gender" id="gender">
-                <option value="">Pilih jenis kelamin</option>
-                <option value="male">Laki-laki</option>
-                <option value="female">Perempuan</option>
-              </select>
-            </div>
-          </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3" >Jenis Kelamin <small class="text-danger">*</small> </label>
+                        <div class="col-md-8">
+                        <select class="form-control" name="gender" id="gender">
+                            <option value="">Pilih jenis kelamin</option>
+                            <option value="male">Laki-laki</option>
+                            <option value="female">Perempuan</option>
+                        </select>
+                        </div>
+                    </div>
 
-          <div class="form-group">
-			<label class="control-label col-md-3" >E-mail <small class="text-danger">*</small> </label>
-				<div class="col-md-8">
-					<input type="email" name="email" id="email" class="form-control" />
-				</div>
-          </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3" >E-mail <small class="text-danger">*</small> </label>
+                            <div class="col-md-8">
+                                <input type="email" name="email" id="email" class="form-control" />
+                            </div>
+                    </div>
 
-          <div class="form-group" id="pass">
-			<label class="control-label col-md-3" >Password <small class="text-danger">*</small> </label>
-				<div class="col-md-8">
-					<input type="password" name="password" id="password" class="form-control" autocomplete="false"/>
-					{{-- <input type="password" name="fpassword" id="password" class="form-control" style="display:none"/> --}}
-				</div>
-          </div>
-
-          <div class="form-group">
-			<label class="control-label col-md-3" >Role <small class="text-danger">*</small> </label>
-				<div class="col-md-8">
-				<select class="form-control" id="role" name="role">
-                    <option value="">Pilih role</option>
-                    @for($i=0; $i<= count($role)-1;$i++)
-                    <option value="{{$role[$i]->id}}">{{$role[$i]->name}}</option>
-					@endfor
-				</select>
-				</div>
-          </div>
+                    <div class="form-group" id="pass">
+                        <label class="control-label col-md-3" >Password <small class="text-danger">*</small> </label>
+                            <div class="col-md-8">
+                                <input type="password" name="password" id="password" class="form-control" autocomplete="false"/>
+                                {{-- <input type="password" name="fpassword" id="password" class="form-control" style="display:none"/> --}}
+                            </div>
+                    </div>
           <br />
           <div class="form-group" align="center">
 						<input type="hidden" name="action" id="action" />
@@ -180,7 +178,6 @@
 				url: "{{ route('user.index') }}",
 			},
 			columns:[
-
 			{
 				data: 'name',
 				name: 'name',
