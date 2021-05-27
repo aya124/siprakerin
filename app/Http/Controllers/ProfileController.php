@@ -23,7 +23,16 @@ class ProfileController extends Controller
         $user = DB::table('users as u')
             ->join('role_user as ru','ru.user_id','=','u.id')
             ->join('roles as r','r.id','=','ru.role_id')
-            ->select('u.name','u.email', 'u.username',DB::raw('r.name as role'),'u.id')
+            // ->join('students as s','s.user_id','=','u.id')
+            // ->join('student_classes as sc','sc.id','=','s.class_id')
+            ->select('u.name',
+                    'u.email',
+                    'u.username',
+                    DB::raw('r.name as role'),
+                    // 's.nis',
+                    // DB::raw('sc.name as classname'),
+                    'u.id'
+                    )
             ->where('u.id',$login->id)
             ->get();
                 return datatables()->of($user)
@@ -33,7 +42,16 @@ class ProfileController extends Controller
         $data = DB::table('users as u')
             ->join('role_user as ru','ru.user_id','=','u.id')
             ->join('roles as r','r.id','=','ru.role_id')
-            ->select('u.name','u.email',DB::raw('r.name as role'),'u.id')
+            // ->join('students as s','s.user_id','=','u.id')
+            // ->join('student_classes as sc','sc.id','=','s.class_id')
+            ->select(
+                    'u.name',
+                    'u.email',
+                    DB::raw('r.name as role'),
+                    // 's.nis',
+                    // DB::raw('sc.name as classname'),
+                    'u.id'
+                    )
             ->where('u.id',$isLoggin->id)
             ->get();
         return view('profile.index',compact('data'));
@@ -74,8 +92,15 @@ class ProfileController extends Controller
             $data = DB::table('users as u')
             ->join('role_user as ru', 'ru.user_id', '=', 'u.id')
             ->join('roles as r', 'r.id', '=', 'ru.role_id')
-            ->select('u.name', 'u.email', 
-                DB::raw('r.name as role'), 'u.id')
+            // ->join('students as s','s.user_id','=','u.id')
+            // ->join('student_classes as sc','sc.id','=','s.class_id')
+            ->select('u.name',
+                    'u.email',
+                    DB::raw('r.name as role'),
+                    // 's.nis',
+                    // DB::raw('sc.name as classname'),
+                    'u.id'
+                    )
             ->where('u.id', $id)
             ->get();
         }
@@ -109,11 +134,9 @@ class ProfileController extends Controller
     {
         $request-> validate([
             'name' => ['required', 'string', 'regex:/^[a-zA-Z ]+$/'],
-            'email' => ['required', 'email', 
-            // Rule::unique('users')->ignore($user)
+            'email' => ['required', 'email',
         ],
             'required' =>'Kolom :attribute tidak boleh kosong',
-            // 'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $user = User::findOrFail($request->hidden_id);
         $user->update([
@@ -121,26 +144,6 @@ class ProfileController extends Controller
             'email' => $request->email,
         ]);
         return response()->json(['success' => 'Profil user berhasil diperbarui.']);
-
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-
-        // if (isset($request->avatar)){
-        //     $avatar_name = 'IMG_'.date('Ymd_Gis').'.'.$request->avatar->getClientOriginalExtension();
-        //     $request->avatar->storeAs('/public/avatars', $avatar_name);
-        //     $user->avatar = $avatar_name;
-        // }
-        // $user->save();
-
-        //return redirect()->route('user.index')->withStatus([
-        //  'message' => 'Data siswa berhasil diperbarui.',
-        //  'color' => 'success'
-        //]); // -> update data dan mengembalikan ke hal index
-        
-        // return back()->withStatus([
-        //     'message' => 'Data siswa berhasil diperbarui.',
-        //     'color' => 'success'
-        // ]);
     }
 
     public function change($id)
@@ -156,7 +159,7 @@ class ProfileController extends Controller
     {
         $rules = [
            'input' => 'required',
-           'inputnew' => 'required|same:input' 
+           'inputnew' => 'required|same:input'
         ];
         $msg = [
             'input.required' => 'Password tidak boleh kosong',

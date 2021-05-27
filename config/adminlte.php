@@ -144,7 +144,7 @@ return [
             'icon' => 'fa fa-industry',
         ],
         [
-            'text' => 'Pengajuan',
+            'text' => 'Pengajuan Prakerin',
             'url' => 'submission',
             'icon' => 'fa fa-archive',
             'permission' => 'buat-pengajuan',
@@ -183,12 +183,12 @@ return [
             'icon' => 'fa fa-print',
             'permission' => 'rekap-nilai',
         ],
-        [
-            'text' => 'Data Pengajuan',
-            'url' => 'validation/year/data',
-            'icon' => 'fa fa-table',
-            'permission' => 'data-pengajuan',
-        ],
+        // [
+        //     'text' => 'Data Pengajuan',
+        //     'url' => 'validation/year/data',
+        //     'icon' => 'fa fa-table',
+        //     'permission' => 'data-pengajuan',
+        // ],
 
         //[
         //    'text' => 'blog',
@@ -255,11 +255,15 @@ return [
             'permission' => 'menu-role-permission',
         ],
 
-        ['header' => 'account_settings'],
+        ['header' => 'account_settings',
+            'permission' => 'rekap-nilai','buat-pengajuan',
+        ],
+
         [
             'text' => 'profile',
             'url'  => 'profile',
             'icon' => 'fas fa-user-lock',
+            'permission' => 'rekap-nilai','buat-pengajuan',
             // 'submenu' => [
             //     [
             //         'text' => 'change_password',

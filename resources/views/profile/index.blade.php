@@ -23,6 +23,8 @@
                 <th style="text-align: right;">Username</th>
                 <th style="text-align: right;">E-mail</th>
                 <th style="text-align: right;">Role</th>
+                {{-- <th style="text-align: right;">No.Induk</th>
+                <th style="text-align: right;">Kelas</th> --}}
             </tr>
         </thead>
         </table>
@@ -45,17 +47,34 @@
 				<form method="post" id="edit" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
-						<label class="control-label col-md-4">Nama : </label>
+						<label class="control-label col-md-4">Nama <small class="text-danger">*</small></label>
 						<div class="col-md-8">
 							<input type="text" name="name" id="name" class="form-control"  />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-4">Email : </label>
+						<label class="control-label col-md-4">Email <small class="text-danger">*</small></label>
 						<div class="col-md-8">
 							<input type="text" name="email" id="email" class="form-control"   />
 						</div>
 					</div>
+                    {{-- <div class="form-group">
+                        <label class="control-label col-md-3" >No. Induk <small class="text-danger">*</small> </label>
+                            <div class="col-md-8">
+                                <input type="text" name="ni" id="ni" class="form-control" />
+                            </div>
+                    </div>
+                    <div class="form-group">
+						<label class="control-label col-md-4">Kelas <small class="text-danger">*</small></label>
+						<div class="col-md-8">
+							<select class="form-control" id="kelas" name="kelas">
+                                {{-- <option value="">Pilih kelas</option>
+                                @for($i=0; $i<= count($kelas)-1;$i++)
+                                <option value="{{$kelas[$i]->id}}">{{$kelas[$i]->name}}</option>
+                                @endfor --}}
+                            </select>
+						</div>
+					</div> --}}
 					<br />
 					<div class="form-group" align="center">
 						<input type="hidden" name="hidden_id" id="hidden_id" />
@@ -164,6 +183,14 @@
 				data: 'role',
 				name: 'role',
 			}
+            // {
+			// 	data: 'nis',
+			// 	name: 'nis',
+			// }
+            // {
+			// 	data: 'classname',
+			// 	name: 'classname',
+			// }
 			],
 			targets: 'no-sort',
 			bSort: false,

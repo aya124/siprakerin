@@ -13,7 +13,7 @@
 
   <div class="box">
     <div class="box-header">
-      @role(['admin', 'wali-kelas', 'kepsek', 'wks'])
+      @role(['admin', 'wali-kelas', 'kps', 'kepsek', 'wks1', 'wks4'])
       <h3 class="box-title">Data Nilai</h3>
       @endrole
       @role('siswa')
