@@ -125,7 +125,7 @@ class ScoreController extends Controller
      * @param  \App\Score  $score
      * @return \Illuminate\Http\Response
      */
-    public function show(Score $score)
+    public function show()
     {
         return view('score.progress');
     }

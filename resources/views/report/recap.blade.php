@@ -68,11 +68,10 @@
                     <th>Nama Siswa</th>
                     <th>Nama Industri</th>
                     <th>Pengajuan</th>
-                    <th>Status</th>
                     <th>Laporan</th>
+                    <th>Tanggal Upload</th>
                     <th>Sertifikat</th>
-                    <th>Tanggal Upload Laporan</th>
-                    <th>Tanggal Upload Sertifikat</th>
+                    <th>Tanggal Upload</th>
 
                 </tr>
                 </thead>
@@ -86,7 +85,6 @@
                         <td>{{$d->name}}</td>
                         <td>{{$d->industry_name }}</td>
                         <td>@if($d->submit_type == 1) Utama @else Alternatif @endif </td>
-                        <td>{{$d->status}}</td>
                         <td>
                             @if ($d->status == 'Pengajuan disetujui' || $d->status == 'Menunggu persetujuan')
                             Belum diunggah
@@ -96,6 +94,7 @@
                             Sudah diunggah
                             @endif
                         </td>
+                        <td>{{tgl($d->up_time1)}}</td>
                         <td>
                             @if($d->status == 'Pengajuan disetujui' || $d->status == 'Menunggu persetujuan' || $d->status == 'Surat dari Industri belum diunggah')
                             Belum diunggah
@@ -105,7 +104,6 @@
                             Sudah diunggah
                             @endif
                         </td>
-                        <td>{{tgl($d->up_time1)}}</td>
                         <td>{{tgl($d->up_time2)}}</td>
                     </tr>
                     @endforeach

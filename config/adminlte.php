@@ -168,7 +168,7 @@ return [
         ],
         [
             'text' => 'Rekap Laporan & Sertifikat',
-            'url' => 'report/progress',
+            'url' => 'report/progress/data',
             'icon' => 'fa fa-print',
             'permission' => 'rekap-laporan-sertif',
         ],

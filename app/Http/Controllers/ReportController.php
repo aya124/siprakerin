@@ -155,7 +155,7 @@ class ReportController extends Controller
                     ->join('users','users.username','submissions.username')
                     ->join('industries','industries.id','=','submissions.industry_id')
                     ->join('reports','reports.id','=','submissions.report_id')
-                    ->join('certificates','certif.id','=','submissions.certif_id')
+                    ->join('certificates','certificates.id','=','submissions.certif_id')
                     ->select(
                         'users.name as name',
                         'industries.name as industry_name',

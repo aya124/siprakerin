@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Role;
 use App\Permission;
 use App\Student;
+use App\Students;
 use App\Teacher;
 
 class UsersController extends Controller
@@ -195,6 +196,17 @@ class UsersController extends Controller
             'message' => 'Data user berhasil dihapus',
             'color' => 'success'
             ]);
+    }
+
+    public function isLocked($id)
+    {
+        DB::transaction(function () use($id){
+            $before = User::where('submit_lock', 1)->first();
+            $before->submit_lock = 0;
+            $before->save();
+
+            
+        });
     }
 
     protected function ifNotTeachers($data)

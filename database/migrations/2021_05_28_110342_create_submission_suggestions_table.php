@@ -15,7 +15,7 @@ class CreateSubmissionSuggestionsTable extends Migration
     {
         Schema::create('submission_suggestions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('student_id');
+            $table->integer('user_id');
             $table->integer('submission_id');
             $table->longText('suggestion');
             $table->string('status')->nullable();

@@ -58,12 +58,32 @@
             <th>Status</th>
             <th>Pengajuan</th>
             <th>Persuratan</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         </table>
         </div>
       </div>
     <!-- /.box-body -->
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="lihatInfoModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Lihat Info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="box box-danger collapsed-box">
@@ -87,6 +107,7 @@
             <th>Status</th>
             <th>Pengajuan</th>
             <th>Persuratan</th>
+            {{-- <th>Aksi</th> --}}
           </tr>
         </thead>
         </table>
@@ -95,8 +116,24 @@
     <!-- /.box-body -->
   </div>
 
-</div>
-<!-- end row -->
+  <!-- Modal -->
+  <div class="modal fade" id="lihatInfoModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Lihat Info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div id="confirmModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -219,6 +256,11 @@ $(function() {
         data: 'correspondence',
 		name: 'correspondence',
       },
+      {
+        data: 'action',
+		name: 'action',
+		orderable: false
+      }
 	]
       // $('#validasi').dataTable();
   });
@@ -265,6 +307,11 @@ $(function() {
             data: 'correspondence',
 			name: 'correspondence',
       },
+    //   {
+    //     data: 'action',
+	// 	name: 'action',
+	// 	orderable: false
+    //   }
 	]
       // $('#validasi').dataTable();
   });
@@ -319,12 +366,25 @@ $(function() {
         setTimeout(function(){
           $('#confirmModal').modal('hide');
           $('#tab_data').DataTable().ajax.reload();
+          $('#tab_data2').DataTable().ajax.reload();
+          $('#tab_data3').DataTable().ajax.reload();
           }, 2000);
           toastr.success('Pengajuan telah ditolak!', 'Success', {timeOut: 5000});
         }
       })
     }
   });
+
+  $(document).on('click', '.info', function(){
+      id = $(this).attr('id');
+      $('#submission_id').val(id);
+      $('#infoModal').modal('show');
+    });
+
+  $(document).on('click', '.lihatinfo',function(){
+         $('#lihatInfoModal .modal-body').load($(this).attr('url'));
+         $('#lihatInfoModal').modal('show');
+        });
 });
 </script>
 @stop

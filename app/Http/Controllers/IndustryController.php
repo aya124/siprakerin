@@ -103,7 +103,7 @@ class IndustryController extends Controller
         try {
             $data = $request->all();
             $data['status'] = $request->status ?: 'Belum disetujui';
-            $data['username'] = Auth::user()->id;
+            $data['user_id'] = Auth::user()->id;
             Industry::create($data);
             return response()->json(['success' => 'Data industri berhasil ditambah.']);
         } catch (\Throwable $th) {

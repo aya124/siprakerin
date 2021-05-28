@@ -3,13 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use PHPUnit\Framework\MockObject\Builder\Stub;
 
 class Submission extends Model
 {
     protected $fillable = [
-        'start_date', 'finish_date','year_id', 'username', 'industry_id', 'teacher_id', 'status_id', 'submit_type'
+        'start_date', 'finish_date','year_id', 'username', 'industry_id', 'teacher_id', 'status_id', 'submit_type', 'student_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 
     public function student()
     {
@@ -59,5 +63,10 @@ class Submission extends Model
     public function subdetail()
     {
         return $this->hasMany(SubmissionDetail::class, 'submission_id', 'id');
+    }
+
+    public function info()
+    {
+        return $this->hasMany(SubmissionSuggestion::class, 'submission_id', 'id');
     }
 }

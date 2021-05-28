@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SubmissionSuggestion extends Model
 {
     protected $fillable = [
-        'student_id', 'submission_id', 'suggestion', 'status',
+        'user_id', 'submission_id', 'info', 'status',
     ];
 
         /**
@@ -15,9 +15,9 @@ class SubmissionSuggestion extends Model
          *
          * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
          */
-        public function student()
+        public function user()
         {
-            return $this->belongsTo(Student::class, 'student_id', 'id');
+            return $this->belongsTo(User::class, 'user_id', 'id');
         }
 
         public function submission()

@@ -37,6 +37,52 @@
 </div>
 <!-- /.box -->
 
+<!-- Modal -->
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          <form method="post" id="tambahInfo" class="form-horizontal" enctype="multipart/form-data">
+          @csrf
+          <input type="hidden" name="submission_id" id="submission_id">
+        <div class="modal-body">
+        <div class="form-group ">
+          <textarea class="form-control" name="info" id="info" rows="3"></textarea>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="lihatInfoModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Lihat Info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <div id="createModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -227,13 +273,13 @@
     $('#finishdate').val("");
   });
 
-  $(document).on("change",".dateform",function() {
-    this.setAttribute(
-      "data-date",
-      moment(this.value, "YYYY-MM-DD")
-      .format(this.getAttribute("data-date-format"))
-    )
-  }).trigger("change")
+//   $(document).on("change",".dateform",function() {
+//     this.setAttribute(
+//       "data-date",
+//       moment(this.value, "YYYY-MM-DD")
+//       .format(this.getAttribute("data-date-format"))
+//     )
+//   }).trigger("change")
 
   $(document).on('click','.edit',function() {
     id_table = $(this).attr('id');
@@ -375,6 +421,52 @@
         }
       })
     });
+
+    $(document).on('click', '.info', function(){
+      id = $(this).attr('id');
+      $('#submission_id').val(id);
+      $('#infoModal').modal('show');
+    });
+
+      $('#tambahInfo').on('submit',function(event) {
+        $('.notifError').remove();
+        event.preventDefault();
+          $.ajax({
+              url:"{{route('info.add')}}",
+              method:"POST",
+              contentType: false,
+              cache:false,
+              processData: false,
+              dataType:"json",
+              data: new FormData(this),
+              success:function(data) {
+                console.log('success');
+                  setTimeout(function(){
+                    $('#infoModal').modal('hide');
+                    },1000);
+                    $('#tab_data').DataTable().ajax.reload();
+                    toastr.success('Info berhasil ditambahkan!', 'Success', {timeOut: 5000});
+                },
+                error:function(xhr) {
+                  console.log(xhr);
+                  $('#form_result').show();
+                  html = '<div class="alert alert-danger">';
+                  $.each(xhr.responseJSON.errors, function (key, item) {
+                    html+='<p>' +item+'</p>';
+                  });
+                  html += '</div>';
+                  $('#form_result').html(html);
+                    $.each(xhr.responseJSON.errors,function(field_name,error){
+                        $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                    });
+                }
+            });
+        });
+
+        $(document).on('click', '.lihatinfo',function(){
+         $('#lihatInfoModal .modal-body').load($(this).attr('url'));
+         $('#lihatInfoModal').modal('show');
+        });
 
     $('#add').on('submit',function(event) {
       $('.notifError').remove();

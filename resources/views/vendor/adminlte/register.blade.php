@@ -27,6 +27,16 @@
                         </span>
                     @endif
                 </div>
+                <div class="form-group has-feedback {{ $errors->has('username') ? 'has-error' : '' }}">
+                    <input type="text" name="username" class="form-control" value="{{ old('username') }}"
+                           placeholder="{{ trans('Username') }}">
+                    <span class="glyphicon glyphicon-star form-control-feedback"></span>
+                    @if ($errors->has('username'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('username') }}</strong>
+                        </span>
+                    @endif
+                </div>
                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                     <input type="email" name="email" class="form-control" value="{{ old('email') }}"
                            placeholder="{{ trans('adminlte::adminlte.email') }}">
@@ -34,6 +44,28 @@
                     @if ($errors->has('email'))
                         <span class="help-block">
                             <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                            <select class="form-control" name="gender">
+                                <option value="male" name="gender">Male</option>
+                                <option value="female" name="gender">Female</option>
+                            </select>
+                            @if ($errors->has('gender'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('gender') }}</strong>
+                                </span>
+                            @endif
+                </div>
+                <div class="form-group has-feedback {{ $errors->has('role') ? 'has-error' : '' }}">
+                    <input type="text" name="role" class="form-control" value="{{ old('role') }}"
+                           placeholder="{{ trans('Role') }}">
+                    <span class="glyphicon glyphicon-adjust form-control-feedback"></span>
+                    @if ($errors->has('role'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('role') }}</strong>
                         </span>
                     @endif
                 </div>

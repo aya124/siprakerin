@@ -47,6 +47,7 @@ Route::get('submission/destroy/{id}', 'SubmissionController@destroy');
 Route::post('submission/uploadprocess', 'SubmissionController@uploadprocess');
 // Route::post('submission/uploadprocess2', 'SubmissionController@uploadprocess2');
 Route::get('submission/print/{id}', 'SubmissionController@print_pdf');
+Route::get('submission/suggestion/{id}', 'SubmissionController@showInfo')->name('info.show');
 
 Route::post('admin/role/update', 'RoleController@update')->name('ro.update');
 Route::get('admin/role/destroy/{id}', 'RoleController@destroy');
@@ -74,8 +75,8 @@ Route::get('profile/change/{id}', 'UsersController@change');
 Route::post('profile/passchanged', 'ProfileController@passchanged')->name('pass.update');
 
 Route::resource('/report', 'ReportController');
-Route::get('score/progress', 'ReportController@progress');
-Route::get('score/recap/print', 'ReportController@recap_pdf')->name('report.recap');
+Route::get('report/progress/data', 'ReportController@progress');
+Route::get('report/recap/print', 'ReportController@recap_pdf')->name('report.recap');
 
 Route::resource('/score', 'ScoreController');
 Route::get('score/print/{id}', 'ScoreController@details_pdf');
@@ -88,4 +89,4 @@ Route::post('year/{id}/isactive','YearController@isActive')->name('year.isactive
 Route::resource('/class', 'StudentClassController');
 
 Route::post('add-suggestion', 'IndustryController@addSuggestion')->name('suggestion.add');
-// Route::post('add-detail', 'SubmissionController@addDetail')->name('detail.add');
+Route::post('add-info', 'SubmissionController@addInfo')->name('info.add');

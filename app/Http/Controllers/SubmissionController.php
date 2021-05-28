@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SubmissionRequest;
+use App\Student;
 use App\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
-use App\Industry;
 use App\SubmissionDetail;
-use Illuminate\Support\Facades\Storage;
 use PDF;
 use App\User;
 use App\Year;
-use App\AddConfig;
-use App\Team;
+use App\SubmissionSuggestion;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class SubmissionController extends Controller
 
@@ -42,13 +41,14 @@ class SubmissionController extends Controller
             ->join('statuses as st', 'st.id', '=', 'sub.status_id')
             ->select('sub.id','i.name','sub.start_date','sub.finish_date','sub.submit_type',
             DB::raw('st.name as status_name'))
-            ->where('sub.username',$user->username)
+            ->where('sub.username', $user->username)
             ->get();
 
             return datatables()->of($data)
                 ->addColumn('action', function($data){
 
                 if($data->status_name == 'Menunggu persetujuan'){
+
                     $button= '<button type="button" name="edit"
                     id="'.$data->id.'" class="edit btn btn-primary btn-sm">
                     <i class="fa fa-edit"></i> Edit</button>';
@@ -58,12 +58,25 @@ class SubmissionController extends Controller
                     <i class="fa fa-trash"></i> Hapus</button>';
                 }elseif ($data->status_name == 'Pengajuan disetujui') {
                     $button = '<button type="button"
+                    name="info" id="'.$data->id.'" class="info btn btn-warning btn-sm">
+                    <i class="fa fa-edit"></i> Info</button>';
+                    $button = '<button type="button"
+                    name="lihatinfo" url="'.route('info.show',$data->id).'" class="lihatinfo btn btn-info btn-sm">
+                    <i class="fa fa-eye"></i> Lihat Info</button>';
+                    $button = '&nbsp;&nbsp;';
+                    $button = '<button type="button"
                     id="'.$data->id.'" class="upload btn btn-default btn-sm">
                     <i class="fas fa-upload"></i> Upload Surat Pengantar</button>';
                     $button .= '&nbsp;&nbsp;';
                 }elseif ($data->status_name == 'Pengajuan ditolak') {
                     $button = '';
                 }else{
+                    $button = '<button type="button"
+                    name="info" id="'.$data->id.'" class="info btn btn-warning btn-sm">
+                    <i class="fa fa-edit"></i> Info</button>';
+                    $button = '<button type="button"
+                    name="lihatinfo" url="'.route('info.show',$data->id).'" class="lihatinfo btn btn-info btn-sm">
+                    <i class="fa fa-eye"></i> Lihat Info</button>';
                     $button = '<button type="button"
                     id="'.$data->id.'" class="upload btn btn-default btn-sm">
                     <i class="fas fa-upload"></i> Upload Surat Pengantar</button>';
@@ -72,11 +85,19 @@ class SubmissionController extends Controller
                     id="'.$data->id.'" class="upload2 btn btn-default btn-sm">
                     <i class="fas fa-upload"></i> Upload Surat Balasan</button>';
                 }
-                    $button .= '&nbsp;&nbsp;';
+
                     $button .= '<a href= "submission/print/'.$data->id.'"
                     target="_blank" type="button" name="print"
                     class="btn btn-default btn-sm">
                     <i class="fas fa-print"></i> Cetak Form Pengajuan</a>';
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button type="button"
+                    name="info" id="'.$data->id.'" class="info btn btn-warning btn-sm">
+                    <i class="fa fa-edit"></i> Info</button>';
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button type="button"
+                    name="lihatinfo" url="'.route('info.show',$data->id).'" class="lihatinfo btn btn-info btn-sm">
+                    <i class="fa fa-eye"></i> Lihat Info</button>';
                     return $button;
                 })
 
@@ -140,6 +161,24 @@ class SubmissionController extends Controller
         return response()->json(['success' => 'Pengajuan berhasil diperbarui.']);
     }
 
+    public function addInfo(Request $request)
+    {
+        $data = $request->all();
+        return DB::transaction(function () Use($data, $request){
+            $data['user_id']= Auth::user()->id;
+            SubmissionSuggestion::create($data);
+            $a = Submission::findOrFail($request->submission_id);
+            $a->check = true;
+            $a->save();
+            return response()->json('success', 200);
+        });
+    }
+
+    public function showInfo($id)
+    {
+        $data = SubmissionSuggestion::with('user')->where('submission_id', $id)->get();
+        return view('submission.info',compact('data'));
+    }
     /**
      * Display the specified resource.
      *
