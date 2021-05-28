@@ -56,6 +56,7 @@ class SubmissionController extends Controller
                     $button .= '<button type="button" name="delete"
                     id="'.$data->id.'" class="delete btn btn-danger btn-sm">
                     <i class="fa fa-trash"></i> Hapus</button>';
+                    $button .= '&nbsp;&nbsp;';
                 }elseif ($data->status_name == 'Pengajuan disetujui') {
                     $button = '<button type="button"
                     name="info" id="'.$data->id.'" class="info btn btn-warning btn-sm">
@@ -85,7 +86,6 @@ class SubmissionController extends Controller
                     id="'.$data->id.'" class="upload2 btn btn-default btn-sm">
                     <i class="fas fa-upload"></i> Upload Surat Balasan</button>';
                 }
-
                     $button .= '<a href= "submission/print/'.$data->id.'"
                     target="_blank" type="button" name="print"
                     class="btn btn-default btn-sm">

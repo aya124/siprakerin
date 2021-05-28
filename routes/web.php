@@ -90,3 +90,5 @@ Route::resource('/class', 'StudentClassController');
 
 Route::post('add-suggestion', 'IndustryController@addSuggestion')->name('suggestion.add');
 Route::post('add-info', 'SubmissionController@addInfo')->name('info.add');
+
+Route::post('user/unlock','UserController@isUnlocked')->name('user.unlock');

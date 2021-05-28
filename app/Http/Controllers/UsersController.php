@@ -10,9 +10,7 @@ use Hash;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use App\Role;
-use App\Permission;
 use App\Student;
-use App\Students;
 use App\Teacher;
 
 class UsersController extends Controller
@@ -37,7 +35,7 @@ class UsersController extends Controller
         $data = DB::table('users as u')
           ->join('role_user as ru', 'ru.user_id', '=', 'u.id')
           ->join('roles as r', 'r.id', '=', 'ru.role_id')
-          ->select('u.name', 'u.email','u.gender', 'u.username',
+          ->select('u.name', 'u.email','u.gender', 'u.username', 'u.submit_lock',
             DB:: raw('r.name as role'), 'u.id')
           ->get();
 
@@ -45,7 +43,14 @@ class UsersController extends Controller
             ->addColumn('action', function($data){
                 if(Auth::user()->id == $data->id){
 
-                }else{
+                }
+                // elseif ($data->submit_lock != 0) {
+                // $button = '&nbsp;&nbsp;';
+                // $button .= '<button type="button" url="'.route("user.unlock",$data->id).'"
+                // class="unlock btn btn-info btn-sm">
+                // <i class="fa fa-check"></i> Unlock</button>';
+                // }
+                else {
                 $button = '<button type="button" name="edit"
                 id="'.$data->id.'" class="edit btn btn-primary btn-sm">
                 <i class="fa fa-edit"></i> Edit</button>';
@@ -57,6 +62,10 @@ class UsersController extends Controller
                 $button .= '<button type="button" name="delete"
                 id="'.$data->id.'" class="delete btn btn-danger btn-sm">
                 <i class="fa fa-trash"></i> Hapus</button>';
+                $button .= '&nbsp;&nbsp;';
+                $button .= '<button type="button" url="'.route("user.unlock",$data->id).'"
+                class="unlock btn btn-info btn-sm">
+                <i class="fa fa-check"></i> Unlock</button>';
                 return $button;
             }
         })
@@ -198,15 +207,16 @@ class UsersController extends Controller
             ]);
     }
 
-    public function isLocked($id)
+    public function isUnlocked($id)
     {
         DB::transaction(function () use($id){
-            $before = User::where('submit_lock', 1)->first();
-            $before->submit_lock = 0;
-            $before->save();
-
-            
+            $$u = User::findOrFail($id);
+            $u->submit_lock = 0;
+            $u->save();
         });
+
+
+        return response()->json(['success' => 'Status berhasil diganti.']);
     }
 
     protected function ifNotTeachers($data)

@@ -183,12 +183,12 @@ return [
             'icon' => 'fa fa-print',
             'permission' => 'rekap-nilai',
         ],
-        // [
-        //     'text' => 'Data Pengajuan',
-        //     'url' => 'validation/year/data',
-        //     'icon' => 'fa fa-table',
-        //     'permission' => 'data-pengajuan',
-        // ],
+        [
+            'text' => 'Data Pengajuan',
+            'url' => 'validation/year/data',
+            'icon' => 'fa fa-table',
+            'permission' => 'data-pengajuan',
+        ],
 
         //[
         //    'text' => 'blog',
