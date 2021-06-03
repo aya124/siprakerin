@@ -44,9 +44,6 @@ class ValidationController extends Controller
 
       return datatables()->of($data)
         ->addColumn('action', function ($data) {
-          $button = '<button type="button"
-          name="lihatinfo" url="'.route('info.show',$data->id).'" class="lihatinfo btn btn-info btn-sm">
-          <i class="fa fa-eye"></i> Lihat Info</button>';
           $button = '<button type="button" name="setuju"
           id="' . $data->id . '" class="setuju btn btn-success btn-sm">
           <i class="fa fa-thumbs-up"></i> Setuju</button>';
@@ -228,8 +225,9 @@ class ValidationController extends Controller
       return datatables()->of($data)
         ->addColumn('action', function ($data) {
         $button = '<button type="button"
-        name="lihatinfo" url="'.route('info.show',$data->id).'" class="lihatinfo btn btn-info btn-sm">
-        <i class="fa fa-eye"></i> Lihat Info</button>';
+        name="lihatinfo" url="'.route('info.show',$data->id).'" 
+        class="lihatinfo btn btn-warning btn-sm">
+        <i class="fa fa-eye"></i> Lihat Feedback</button>';
         return $button;
         })
         ->addColumn('correspondence', function ($data) {
@@ -288,12 +286,6 @@ class ValidationController extends Controller
         ->get();
 
       return datatables()->of($data)
-        ->addColumn('action', function ($data) {
-        $button = '<button type="button"
-        name="lihatinfo" url="'.route('info.show',$data->id).'" class="lihatinfo btn btn-info btn-sm">
-        <i class="fa fa-eye"></i> Lihat Info</button>';
-            return $button;
-        })
         ->addColumn('correspondence', function ($data) {
            if ($data->status_name == 'Pengajuan ditolak') {
             $button = '<a href= "validation/print/' . $data->id . '"

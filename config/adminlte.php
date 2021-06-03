@@ -224,18 +224,18 @@ return [
         //     ],
         // ]
         ],
-        [
-            'text' => 'Kelas',
-            'url' => 'class',
-            'icon' => 'fa fa-users',
-            'permission' => 'menu-tahun',
-        ],
-        [
-            'text' => 'Tahun Pengajuan',
-            'url' => 'year',
-            'icon' => 'fa fa-list',
-            'permission' => 'menu-tahun',
-        ],
+        // [
+        //     'text' => 'Kelas',
+        //     'url' => 'class',
+        //     'icon' => 'fa fa-users',
+        //     'permission' => 'menu-tahun',
+        // ],
+        // [
+        //     'text' => 'Tahun Pengajuan',
+        //     'url' => 'year',
+        //     'icon' => 'fa fa-list',
+        //     'permission' => 'menu-tahun',
+        // ],
         [
             'text' => 'Status',
             'url' => 'status',

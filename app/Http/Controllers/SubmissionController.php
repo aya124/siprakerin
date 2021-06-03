@@ -16,7 +16,6 @@ use App\SubmissionSuggestion;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class SubmissionController extends Controller
-
 {
     public function __construct()
     {
@@ -46,9 +45,9 @@ class SubmissionController extends Controller
 
             return datatables()->of($data)
                 ->addColumn('action', function($data){
-
                 if($data->status_name == 'Menunggu persetujuan'){
-                    $button= '<button type="button" name="edit"
+                    
+                    $button = '<button type="button" name="edit"
                     id="'.$data->id.'" class="edit btn btn-primary btn-sm">
                     <i class="fa fa-edit"></i> Edit</button>';
                     $button .= '&nbsp;&nbsp;';
@@ -56,40 +55,57 @@ class SubmissionController extends Controller
                     id="'.$data->id.'" class="delete btn btn-danger btn-sm">
                     <i class="fa fa-trash"></i> Hapus</button>';
                     $button .= '&nbsp;&nbsp;';
+                    $button .= '<a href= "submission/print/'.$data->id.'"
+                    target="_blank" type="button" name="print"
+                    class="btn btn-default btn-sm">
+                    <i class="fas fa-print"></i> Cetak Form Pengajuan</a>';
+                    return $button;
                 }elseif ($data->status_name == 'Pengajuan disetujui') {
-                    $button = '&nbsp;&nbsp;';
-                    $button .= '<button type="button"
+                    $button = '<button type="button"
                     id="'.$data->id.'" class="upload btn btn-default btn-sm">
-                    <i class="fas fa-upload"></i> Upload Surat Pengantar</button>';
+                    <i class="fas fa-upload"></i> Unggah Surat Pengantar</button>';
                     $button .= '&nbsp;&nbsp;';
+                    $button .= '<a href= "submission/print/'.$data->id.'"
+                    target="_blank" type="button" name="print"
+                    class="btn btn-default btn-sm">
+                    <i class="fas fa-print"></i> Cetak Form Pengajuan</a>';
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button type="button"
+                    name="info" id="'.$data->id.'" 
+                    class="info btn btn-warning btn-sm">
+                    <i class="fa fa-edit"></i> Tambah Feedback</button>';
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button type="button"
+                    name="lihatinfo" url="'.route('info.show',$data->id).'" 
+                    class="lihatinfo btn btn-info btn-sm">
+                    <i class="fa fa-eye"></i> Lihat Feedback</button>';
                     return $button;
                 }elseif ($data->status_name == 'Pengajuan ditolak') {
                     $button = '';
                 }else{
                     $button = '<button type="button"
                     id="'.$data->id.'" class="upload btn btn-default btn-sm">
-                    <i class="fas fa-upload"></i> Upload Surat Pengantar</button>';
+                    <i class="fas fa-upload"></i> Unggah Surat Pengantar</button>';
+                    $button .= '&nbsp;&nbsp;';
                     $button .= '<button type="button"
                     id="'.$data->id.'" class="upload2 btn btn-default btn-sm">
-                    <i class="fas fa-upload"></i> Upload Surat Balasan</button>';
+                    <i class="fas fa-upload"></i> Unggah Surat Balasan</button>';
                     $button .= '&nbsp;&nbsp;';
-                    $button .= '<button type="button"
-                    name="info" id="'.$data->id.'" class="info btn btn-warning btn-sm">
-                    <i class="fa fa-edit"></i> Info</button>';
-                    if ($data->check == 1) {
-                    $button .= '<button type="button"
-                    name="lihatinfo" url="'.route('info.show',$data->id).'" 
-                    class="lihatinfo btn btn-info btn-sm">
-                    <i class="fa fa-eye"></i> Lihat Info</button>';
-                    $button .= '&nbsp;&nbsp;';
-                    }
-                }
                     $button .= '<a href= "submission/print/'.$data->id.'"
                     target="_blank" type="button" name="print"
                     class="btn btn-default btn-sm">
                     <i class="fas fa-print"></i> Cetak Form Pengajuan</a>';
-                    return $button;
-                })
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button type="button"
+                    name="info" id="'.$data->id.'" class="info btn btn-warning btn-sm">
+                    <i class="fa fa-edit"></i> Tambah Feedback</button>';
+                    $button .= '<button type="button"
+                    name="lihatinfo" url="'.route('info.show',$data->id).'" 
+                    class="lihatinfo btn btn-info btn-sm">
+                    <i class="fa fa-eye"></i> Lihat Feedback</button>';
+                  return $button;  
+                }
+            })
 
             //menampilkan format tanggal d-m-Y
             ->editColumn('start_date',function($data){

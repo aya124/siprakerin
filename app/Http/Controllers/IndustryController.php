@@ -30,9 +30,10 @@ class IndustryController extends Controller
         {
             return datatables()->of(Industry::latest()->get())
                 ->addColumn('action', function($data){
-                    if(Auth::user()->hasRole('admin', 'kps')) {
+                    if(Auth::user()->hasRole(['admin', 'kps'])) {
                         $button = '<button type="button"
-                        name="detail" id="'.$data->id.'" class="detail btn btn-success btn-sm">
+                        name="detail" id="'.$data->id.'" 
+                        class="detail btn btn-info btn-sm">
                         <i class="fa fa-info-circle"></i> Detail</button>';
                         $button .= '&nbsp;&nbsp;';
                         $button .= '<button type="button"
@@ -45,7 +46,8 @@ class IndustryController extends Controller
                         $button .= '&nbsp;&nbsp;';
                         if ($data->check == 1){
                         $button .= '<button type="button"
-                        name="lihatsaran" url="'.route('suggestion.show',$data->id).'" class="lihatsaran btn btn-info btn-sm">
+                        name="lihatsaran" url="'.route('suggestion.show',$data->id).'" 
+                        class="lihatsaran btn btn-warning btn-sm">
                         <i class="fa fa-eye"></i> Lihat Saran</button>';
                         $button .= '&nbsp;&nbsp;';
                         }

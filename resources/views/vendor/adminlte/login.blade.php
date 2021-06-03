@@ -1,5 +1,7 @@
 @extends('adminlte::master')
 
+@section('title', 'Sistem Informasi Prakerin')
+
 @section('adminlte_css')
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     @yield('css')

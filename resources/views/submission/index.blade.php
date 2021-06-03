@@ -14,10 +14,16 @@
 <div class="alert alert-{{ session('status.color') }}">{{ session('status.message') }}</div>
 @endif
 
+<div class="callout callout-info">
+  <h4>Info!</h4>
+  <b>Admin akan mengecek sistem setiap pukul 10:00 WIB dan 16:00 WIB.</b>
+        <!-- <a href="http://getbootstrap.com/javascript/#modals">Bootstrap documentation</a> -->
+</div>
 <div class="box">
   <div class="box-header">
       {{-- <h3 class="box-title">Pengajuan</h3> --}}
   </div>
+  
   <!-- /.box-header -->
   <div class="box-body">
     <table id="tab_data" class="table table-bordered table-striped">
@@ -42,7 +48,7 @@
     <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title">Info</h5>
+              <h5 class="modal-title">Tambah Feedback</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -69,7 +75,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title">Lihat Info</h5>
+              <h5 class="modal-title">Lihat Feedback</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -445,7 +451,7 @@
                     $('#infoModal').modal('hide');
                     },1000);
                     $('#tab_data').DataTable().ajax.reload();
-                    toastr.success('Info berhasil ditambahkan!', 'Success', {timeOut: 5000});
+                    toastr.success('Feedback berhasil ditambahkan!', 'Success', {timeOut: 5000});
                 },
                 error:function(xhr) {
                   console.log(xhr);

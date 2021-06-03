@@ -58,7 +58,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Ubah Nilai</h4>
+          <h4 class="modal-title">Input Nilai</h4>
         </div>
         <div class="modal-body">
           <span id="form_result"></span>
@@ -181,6 +181,122 @@
     </div>
   </div>
   @endrole
+
+  <div id="detailModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><b>Detail Nilai</b></h4>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <tbody>
+            @php
+            $i=0;
+            @endphp
+            <tr>
+              <th align="center" style="width: 30px;">A.</th>
+              <th align="center" style="width: 240px;">ASPEK TEKNIS</th>
+              <th align="center" style="width: 180px;">NILAI</th>
+            </tr>
+            <tr>
+              <td align="center">{{++$i}}.</td>
+              <td>Sistem Komputer</td>
+              <td id="score_1" align="center"></td>
+            </tr>
+            <tr>
+            <td align="center">{{++$i}}.</td>
+              <td>Komputer dan Jaringan</td>
+              <td id="score_2" align="center"></td>
+            </tr>
+            <tr>
+              <td align="center">{{++$i}}.</td>
+              <td>Pemrograman Dasar</td>
+              <td id="score_3" align="center"></td>
+            </tr>
+            <tr>
+              <td align="center">{{++$i}}.</td>
+              <td>Dasar Desain Grafis</td>
+              <td id="score_4" align="center"></td>
+            </tr>
+            <tr>
+              <td align="center">{{++$i}}.</td>
+              <td>Infrastruktur Komputasi Awan (IaaS)</td>
+              <td id="score_5" align="center"></td>
+            </tr>
+            <tr>
+              <td align="center">{{++$i}}.</td>
+              <td>Platform Komputasi Awan (PaaS)</td>
+              <td id="score_6" align="center"></td>
+            </tr>
+            <tr>
+              <td align="center">{{++$i}}.</td>
+              <td>Layanan Komputasi Awan (SaaS)</td>
+              <td id="score_7" align="center"></td>
+            </tr>
+            <tr>
+              <td align="center">{{++$i}}.</td>
+              <td>Sistem Internet of Things (SIoT)</td>
+              <td id="score_8" align="center"></td>
+            </tr>
+            <tr>
+              <td align="center">{{++$i}}.</td>
+              <td>Sistem Keamanan Jaringan</td>
+              <td id="score_9" align="center"></td>
+            </tr>
+            <tr>
+              <td>&nbsp;.</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <th align="center" style="width: 30px;">B.</th>
+              <th align="center" style="width: 240px;">ASPEK NONTEKNIS</th>
+              <th align="center" style="width: 180px;">KUALIFIKASI</th>
+            </tr>
+            <!-- <tr>
+              <th align="center" style="width: 20px;">NO.</th>
+              <th>ASPEK YANG DINILAI</th>
+              <th style="width: 120px;">KUALIFIKASI</th>
+            </tr> -->
+              @php
+              $i=0;
+              @endphp
+            <tr>
+              <td align="center">{{++$i}}.</td>
+              <td>Disiplin</td>
+              <td id="score_a" align="center"></td>
+            </tr>
+            <tr>
+              <td align="center">{{++$i}}.</td>
+              <td>Kerjasama</td>
+              <td id="score_b" align="center"></td>
+            </tr>
+            <tr>
+              <td align="center">{{++$i}}.</td>
+              <td>Inisiatif</td>
+              <td id="score_c" align="center"></td>
+            </tr>
+            <tr>
+              <td align="center">{{++$i}}.</td>
+              <td>Tanggung Jawab</td>
+              <td id="score_d" align="center"></td>
+            </tr>
+            <tr>
+              <td align="center">{{++$i}}.</td>
+              <td>Kebersihan</td>
+              <td id="score_e" align="center"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
 
   <div id="confirmModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -311,6 +427,7 @@
         $('#action').val("tambah");
       });
       @endrole
+
       let sub_id;
       $(document).on('click', '.edit', function() {
         sub_id = $(this).data('id');
@@ -337,7 +454,34 @@
           $('#score_e').val(html.data.score_e);
         }
       });
+     });
+
+      // let sub_id;
+      $(document).on('click','.detail',function(){
+      var id =$(this).attr('id');
+      // $('#submission').val(sub_id);
+      $('#detailModal').modal('show');
+      $.ajax({
+        url:"/score/"+id+"/edit",
+        dataType:"json",
+        success:function(html){
+          $('#score_1').val(html.data.score_1);
+          $('#score_2').val(html.data.score_2);
+          $('#score_3').val(html.data.score_3);
+          $('#score_4').val(html.data.score_4);
+          $('#score_5').val(html.data.score_5);
+          $('#score_6').val(html.data.score_6);
+          $('#score_7').val(html.data.score_7);
+          $('#score_8').val(html.data.score_8);
+          $('#score_9').val(html.data.score_9);
+          $('#score_a').val(html.data.score_a);
+          $('#score_b').val(html.data.score_b);
+          $('#score_c').val(html.data.score_c);
+          $('#score_d').val(html.data.score_d);
+          $('#score_e').val(html.data.score_e);
+        }
       });
+	  });
 
       $('#add').on('submit', function(event) {
         event.preventDefault();

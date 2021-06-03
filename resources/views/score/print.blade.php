@@ -153,6 +153,9 @@
                         <th>ASPEK YANG DINILAI</th>
                         <th style="width: 120px;">KUALIFIKASI</th>
                     </tr>
+                    @php
+                    $i=0;
+                    @endphp
                     <tr>
                         <td align="center">{{++$i}}.</td>
                         <td>Disiplin</td>
@@ -168,7 +171,7 @@
                         <td>Inisiatif</td>
                         <td align="center">{{$d->sc}}</td>
                     </tr>
-                        <tr>
+                    <tr>
                         <td align="center">{{++$i}}.</td>
                         <td>Tanggung Jawab</td>
                         <td align="center">{{$d->sd}}</td>

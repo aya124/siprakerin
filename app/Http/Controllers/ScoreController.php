@@ -64,20 +64,20 @@ class ScoreController extends Controller
                     }
                     if($data->status_name == 'Pengajuan ditolak') {
                         $button = '';
-                         $button = 'Pengajuan ditolak';
+                        $button = 'Pengajuan ditolak';
                         return $button;
                     }
                     if(Auth::user()->hasRole('siswa')) {
-                        $button = '';
-                        $button .= '<a href= "score/print/'.$data->id.'"
-                        target="_blank" type="button" name="print"
-                        class="btn btn-default btn-sm">
-                        <i class="fas fa-print"></i> Cetak Nilai</a>';
-                    return $button;
+                        $button = '<button data-id="'.$data->id.'" 
+                        class="btn btn btn-info btn-sm detail">
+                        <i class="fa fa-info-circle"></i> Detail</button>';
+                        $button .= '&nbsp;&nbsp;';
+                        return $button;
                     }
                     else {
                         $button = '';
-                        $button = '<button class="btn btn-default btn-sm edit" data-id="' . $data->id . '">
+                        $button = '<button class="btn btn-default btn-sm edit" 
+                        data-id="' . $data->id . '"> 
                         <i class="fas fa-file"></i> Ubah nilai</button>';
                         $button .= '<a href= "score/print/'.$data->id.'"
                         target="_blank" type="button" name="print"
@@ -101,15 +101,15 @@ class ScoreController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'score_1' => 'required|numeric|between:0,100',
-            'score_2' => 'required|numeric|between:0,100',
-            'score_3' => 'required|numeric|between:0,100',
-            'score_4' => 'required|numeric|between:0,100',
-            'score_5' => 'required|numeric|between:0,100',
-            'score_6' => 'required|numeric|between:0,100',
-            'score_7' => 'required|numeric|between:0,100',
-            'score_8' => 'required|numeric|between:0,100',
-            'score_9' => 'required|numeric|between:0,100',
+            'score_1' => 'numeric|between:0,100',
+            'score_2' => 'numeric|between:0,100',
+            'score_3' => 'numeric|between:0,100',
+            'score_4' => 'numeric|between:0,100',
+            'score_5' => 'numeric|between:0,100',
+            'score_6' => 'numeric|between:0,100',
+            'score_7' => 'numeric|between:0,100',
+            'score_8' => 'numeric|between:0,100',
+            'score_9' => 'numeric|between:0,100',
             'score_a' => 'required',
             'score_b' => 'required',
             'score_c' => 'required',

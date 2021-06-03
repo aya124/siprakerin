@@ -39,7 +39,7 @@
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Saran</h5>
+            <h5 class="modal-title">Tambah Saran</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -66,7 +66,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Lihat Saran</h5>
+            <h5 class="modal-title">Lihat Saran </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -116,12 +116,12 @@
 						</div>
                     </div>
                     <div class="form-group">
-						<label class="control-label col-md-4" >Link </label>
+						<label class="control-label col-md-4" >Link <small class="text-danger">*</small></label>
 						<div class="col-md-8">
 							<input type="text" name="detail" id="detail" class="form-control" rows="3"/>
 						</div>
-                    </div>
-                    @role('admin')
+                  </div>
+                    @role(['admin','kps'])
                     <div class="form-group">
                         <label class="control-label col-md-4" >Status </label>
                         <div class="col-md-8">
@@ -144,7 +144,7 @@
 	</div>
 </div>
 
-<div class="modal fade" id="detailModal" role="dialog">
+<div id="detailModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -174,7 +174,7 @@
               <th>Link</th>
               <td id="detail_detail"></td>
             </tr>
-            @role('admin', 'kps')
+            @role(['admin', 'kps'])
             <tr>
               <th>Status</th>
               <td id="status_detail"></td>
@@ -273,7 +273,7 @@
           $('#phone').val(html.data.phone);
           $('#detail').val(html.data.detail);
           $('#hidden_id').val(html.data.id);
-          @role('admin')
+          @role(['admin','kps'])
           $('#status').val(html.data.status);
           @endrole
         }
@@ -323,6 +323,7 @@
       id = $(this).attr('id');
       $('#industry_id').val(id);
       $('#saranModal').modal('show');
+      
     });
 
       $('#tambahSaran').on('submit',function(event) {
@@ -361,8 +362,13 @@
         });
 
         $(document).on('click', '.lihatsaran',function(){
-         $('#lihatSaranModal .modal-body').load($(this).attr('url'));
-         $('#lihatSaranModal').modal('show');
+          $('#lihatSaranModal .modal-body').load($(this).attr('url'));
+          $('#lihatSaranModal').modal('show');
+        //  $.ajax({
+        //     success:function(html){
+        //     $('#industry_name').text(html.data.name);
+        //     }
+        //   })
         });
 
     $('#add').on('submit',function(event) {

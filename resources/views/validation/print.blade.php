@@ -220,7 +220,7 @@
           <tr class="borderless">
             <td class="borderless" align="justify" style="width: 220px;"></td>
             <td class="borderless" style="width: 200px;"></td>
-            <td class="borderless" align="justify">NIP. {{$kepsek['user']->nip}}</td>
+            <td class="borderless" align="justify">NIP. {{$kepsek['teacher']->nip}}</td>
           </tr>
       </tbody>
       </table>

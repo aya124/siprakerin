@@ -1,22 +1,22 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>No.</th>
-            <th>Nama</th>
-            <th>Saran</th>
-            <th>Waktu</th>
+            <th style="width: 20px;" align="center">No.</th>
+            <th style="width: 210px;" align="center">Nama</th>
+            <th style="width: 300px;" align="center">Saran</th>
+            <th style="width: 180px;" align="center">Waktu</th>
         </tr>
     </thead>
     <tbody>
-    @php
+        @php
         $i=0;
-    @endphp
-    @foreach($data as $d)
+        @endphp
+        @foreach($data as $d)
         <tr>
-            <td>{{++$i}}.</td>
+            <td align="center">{{++$i}}.</td>
             <td>{{$d->user->name}}</td>
             <td>{{$d->saran}}</td>
-            <td>{{tgl(date_format($d->created_at,'Y-m-d'))}} {{date_format($d->created_at,'H:i')}}</td>
+            <td >{{tgl(date_format($d->created_at,'Y-m-d'))}} {{date_format($d->created_at,'H:i')}}</td>
         </tr>
     @endforeach
     </tbody>
