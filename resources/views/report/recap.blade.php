@@ -137,13 +137,13 @@
                       <tr class="borderless">
                         <td class="borderless"></td>
                         <td class="borderless" style="width: 200px;"></td>
-                        <td class="borderless">{{$kps['user']->name}}</td>
+                        <td class="borderless">________________________</td>
                       </tr>
-                      {{-- <tr class="borderless">
+                      <!-- {{-- <tr class="borderless">
                         <td class="borderless"></td>
                         <td class="borderless" style="width: 200px;"></td>
                         <td class="borderless">Pembina IV/a</td>
-                      </tr> --}}
+                      </tr> --}} -->
                       <tr class="borderless">
                         <td class="borderless" align="justify" style="width: 220px;"></td>
                         <td class="borderless" style="width: 200px;"></td>

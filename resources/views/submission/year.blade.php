@@ -135,7 +135,7 @@
       var method;
       $(document).on('click','.delete',function(){
 			  id_table = $(this).attr('url');
-              method ="DELETE";
+        method ="DELETE";
 			  $('#confirmModal .modal-title').html('Hapus data');
 			  $('#confirmModal .modal-body h4').html('Apakah anda yakin ingin menghapus data ini?');
 			  $('#confirmModal').modal('show');

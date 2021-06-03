@@ -26,11 +26,13 @@ class YearController extends Controller
                         <i class="fa fa-edit"></i> Edit</button>';
                         if($data->active != 1){
                             $button .= '&nbsp;&nbsp;';
-                            $button .= '<button type="button" url="'.route("year.isactive",$data->id).'" class="isactive btn btn-info btn-sm">
+                            $button .= '<button type="button" url="'.route("year.isactive",$data->id).'" 
+                            class="isactive btn btn-info btn-sm">
                             <i class="fa fa-check"></i> Active</button>';
                             if(YearSubmission($data->id)){
                                 $button .= '&nbsp;&nbsp;';
-                                $button .= '<button type="button" url="'.route("year.destroy",$data->id).'" class="delete btn btn-danger btn-sm">
+                                $button .= '<button type="button" url="'.route("year.destroy",$data->id).'" 
+                                class="delete btn btn-danger btn-sm">
                                 <i class="fa fa-trash"></i> Hapus</button>';
                             }
                         }

@@ -13,7 +13,7 @@
 
   <div class="box">
     <div class="box-header">
-      @role(['admin', 'wali-kelas', 'kepsek', 'wks'])
+      @role(['admin', 'wali-kelas', 'kepsek', 'wks', 'kps'])
       <h3 class="box-title">Data Nilai</h3>
       @endrole
       @role('siswa')
@@ -38,9 +38,12 @@
             <th>SaaS</th>
             <th>SIoT</th>
             <th>SKJ</th>
-            @role(['admin', 'wali-kelas'])
+            <!-- <th>Disiplin</th>
+            <th>Inisiatif</th>
+            <th>Kerjasama</th>
+            <th>Tanggung Jawab</th>
+            <th>Kebersihan</th> -->
             <th>Aksi</th>
-            @endrole
           </tr>
         </thead>
       </table>
@@ -114,6 +117,56 @@
               <div class="col-md-8">
                 <input class="form-control" id="score_9" name="score_9" type="number" min="0" max="100" />
               </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-4" >Nilai Disiplin <small class="text-danger">*</small></label>
+                  <div class="col-md-8">
+                    <select class="form-control" name="score_a" id="score_a">
+                      <option value="belum disetujui">Baik</option>
+                      <option value="disetujui">Amat Baik</option>
+                      <option value="tidak disetujui">Cukup</option>
+                    </select>
+                  </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-4" >Nilai Kerjasama <small class="text-danger">*</small></label>
+                  <div class="col-md-8">
+                    <select class="form-control" name="score_b" id="score_b">
+                      <option value="belum disetujui">Baik</option>
+                      <option value="disetujui">Amat Baik</option>
+                      <option value="tidak disetujui">Cukup</option>
+                    </select>
+                  </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-4" >Nilai Inisiatif <small class="text-danger">*</small></label>
+                  <div class="col-md-8">
+                    <select class="form-control" name="score_c" id="score_c">
+                      <option value="belum disetujui">Baik</option>
+                      <option value="disetujui">Amat Baik</option>
+                      <option value="tidak disetujui">Cukup</option>
+                    </select>
+                  </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-4" >Nilai Tanggung Jawab <small class="text-danger">*</small></label>
+                  <div class="col-md-8">
+                    <select class="form-control" name="score_d" id="score_d">
+                      <option value="belum disetujui">Baik</option>
+                      <option value="disetujui">Amat Baik</option>
+                      <option value="tidak disetujui">Cukup</option>
+                    </select>
+                  </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-4" >Nilai Kebersihan <small class="text-danger">*</small></label>
+                  <div class="col-md-8">
+                    <select class="form-control" name="score_e" id="score_e">
+                      <option value="belum disetujui">Baik</option>
+                      <option value="disetujui">Amat Baik</option>
+                      <option value="tidak disetujui">Cukup</option>
+                    </select>
+                  </div>
             </div>
 
             <div class="form-group" align="center">
@@ -241,12 +294,11 @@
               return h || 'Belum ada nilai'
             },
           },
-          @role(['admin', 'wali-kelas']) {
+          {
             data: 'action',
             name: 'action',
             orderable: false
           }
-          @endrole
         ]
       });
       // $('#nilai').dataTable();
@@ -278,6 +330,11 @@
           $('#score_7').val(html.data.score_7);
           $('#score_8').val(html.data.score_8);
           $('#score_9').val(html.data.score_9);
+          $('#score_a').val(html.data.score_a);
+          $('#score_b').val(html.data.score_b);
+          $('#score_c').val(html.data.score_c);
+          $('#score_d').val(html.data.score_d);
+          $('#score_e').val(html.data.score_e);
         }
       });
       });

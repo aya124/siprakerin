@@ -7,13 +7,14 @@
 @stop
 
 @section('content')
-    <p><h4> Selamat Datang di SIPRAKERIN!</h4></p>
-
+    <!-- <p><h4> Selamat Datang di SIPRAKERIN!</h4></p> -->
+    
+    <p><h4>Petunjuk Penggunaan SIPrakerin</h4></p>
     <div class="box box-widget">
         <div class="box-header with-border">
           <div class="user-block">
-            <span class="username">Petunjuk Penggunaan SIPRAKERIN</span>
-            <span class="description">by Admin</span>
+            <span class="username">Fitur Data Industri</span>
+            <!-- <span class="description">by Admin</span> -->
           </div>
           <!-- /.user-block -->
           <div class="box-tools">
@@ -27,9 +28,17 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <img class="img-responsive pad" src="../dist/img/photo2.png" alt="Photo">
-
-          <p>I took this photo this morning. What do you guys think?</p>
+        <p>Sebelum anda menggunakan fitur-fitur SIPrakerin, pastikan anda telah membaca dan memahami seluruh petunjuk di bawah ini.
+        Sebagai siswa, terdapat 4 fitur yang bisa anda akses. Diantaranya, Data Industri, Pengajuan Prakerin, Laporan dan Sertifikat
+        serta Nilai.</p>
+          <!-- <img class="img-responsive pad" src="../dist/img/photo2.png" alt="Photo"> -->
+          <p>Pada fitur ini, anda dapat memilih industri mana yang akan menjadi tempat anda dalam melaksanakan praktik kerja industri. 
+          Pastikan anda telah menghubungi pihak industri bahwa mereka menerima siswa praktik kerja industri. 
+          Perhatikan contoh di bawah ini.</p>
+          </p>Pilih industri yang anda inginkan.</p>
+          <!-- <img class="img-responsive pad" src="../dist/img/photo2.png" alt="Photo"> -->
+          <p>Jika data industri yang ada pilih tidak muncul, anda dapat menambah data industri sesuai dengan informasi yang anda ketahui.
+          Kemudian tunggu persetujuan dari Admin supaya data tersebut dapat anda pilih pada fitur Pengajuan Prakerin</p>
         </div>
         <!-- /.box-body -->
         <!-- /.box-footer -->

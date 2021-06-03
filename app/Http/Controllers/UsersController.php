@@ -43,14 +43,7 @@ class UsersController extends Controller
             ->addColumn('action', function($data){
                 if(Auth::user()->id == $data->id){
 
-                }
-                // elseif ($data->submit_lock != 0) {
-                // $button = '&nbsp;&nbsp;';
-                // $button .= '<button type="button" url="'.route("user.unlock",$data->id).'"
-                // class="unlock btn btn-info btn-sm">
-                // <i class="fa fa-check"></i> Unlock</button>';
-                // }
-                else {
+                }else {
                 $button = '<button type="button" name="edit"
                 id="'.$data->id.'" class="edit btn btn-primary btn-sm">
                 <i class="fa fa-edit"></i> Edit</button>';
@@ -63,9 +56,24 @@ class UsersController extends Controller
                 id="'.$data->id.'" class="delete btn btn-danger btn-sm">
                 <i class="fa fa-trash"></i> Hapus</button>';
                 $button .= '&nbsp;&nbsp;';
-                $button .= '<button type="button" url="'.route("user.unlock",$data->id).'"
-                class="unlock btn btn-info btn-sm">
-                <i class="fa fa-check"></i> Unlock</button>';
+                if ($data->submit_lock != 0) {
+                    $button = '<button type="button" name="edit"
+                    id="'.$data->id.'" class="edit btn btn-primary btn-sm">
+                    <i class="fa fa-edit"></i> Edit</button>';
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button type="button" name="change"
+                    id="'.$data->id.'" class="change btn btn-warning btn-sm">
+                    <i class="fa fa-key"></i> Ganti Password</button>';
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button type="button" name="delete"
+                    id="'.$data->id.'" class="delete btn btn-danger btn-sm">
+                    <i class="fa fa-trash"></i> Hapus</button>';
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button type="button" url="'.route("user.unlock",$data->id).'"
+                    class="unlock btn btn-info btn-sm">
+                    <i class="fa fa-check"></i> Unlock</button>';
+                    $button .= '&nbsp;&nbsp;';
+                    }
                 return $button;
             }
         })
@@ -207,16 +215,15 @@ class UsersController extends Controller
             ]);
     }
 
-    public function isUnlocked($id)
+    public function Unlock($id)
     {
         DB::transaction(function () use($id){
+
             $$u = User::findOrFail($id);
-            $u->submit_lock = 0;
+            $u->submit_lock = null;
             $u->save();
         });
-
-
-        return response()->json(['success' => 'Status berhasil diganti.']);
+        // return response()->json(['success' => 'Status berhasil diganti.']);
     }
 
     protected function ifNotTeachers($data)

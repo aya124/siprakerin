@@ -23,7 +23,9 @@
         <tr>
           <th style="width: 20%">Nama Industri</th>
           <th style="width: 30%">Alamat</th>
+          @role(['admin', 'wali-kelas', 'kps', 'kepsek', 'wks1', 'wks4'])
           <th style="width: 10%">Status</th>
+          @endrole
           <th style="width: 40%">Aksi</th>
         </tr>
       </thead>
@@ -172,10 +174,12 @@
               <th>Link</th>
               <td id="detail_detail"></td>
             </tr>
+            @role('admin', 'kps')
             <tr>
               <th>Status</th>
               <td id="status_detail"></td>
             </tr>
+            @endrole
           </tbody>
         </table>
       </div>
@@ -220,24 +224,25 @@
 				url: "{{ route('industry.index') }}",
 			},
 			columns:[
-
 			{
 				data: 'name',
 				name: 'name',
 			},
 			{
 				data: 'address',
-                name: 'address',
+        name: 'address',
 			},
+      @role(['admin', 'wali-kelas', 'kps', 'kepsek', 'wks1', 'wks4'])
 			{
-				data: 'status',
-                name: 'status',
+			 data: 'status',
+       name: 'status',
 			},
-            {
-                data: 'action',
+      @endrole
+      {
+        data: 'action',
 				name: 'action',
 				orderable: false
-            }
+       }
 			]
 		});
       // $('#industri').dataTable();

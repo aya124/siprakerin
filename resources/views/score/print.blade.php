@@ -95,64 +95,88 @@
                     $i=0;
                     @endphp
                     @foreach ($data as $d)
-                    {{-- <tr>
-                        <td align="center">A.</td>
+                    <tr>
+                        <td>A.</td>
                         <td colspan="2">ASPEK TEKNIS</td>
-                        {{-- <td align="center">&nbsp;</td> --}}
-                    {{-- </tr> --}}
+                    </tr>
                     <tr>
                         <td align="center">{{++$i}}.</td>
                         <td>Sistem Komputer</td>
                         <td align="center">{{$d->s1}}</td>
-                        {{-- <td>{{tgl($d->finish_date)}}</td> --}}
                     </tr>
                     <tr>
                         <td align="center">{{++$i}}.</td>
                         <td>Komputer dan Jaringan</td>
                         <td align="center">{{$d->s2}}</td>
-                        {{-- <td>{{tgl($d->finish_date)}}</td> --}}
                     </tr>
                     <tr>
                         <td align="center">{{++$i}}.</td>
                         <td>Pemrograman Dasar</td>
                         <td align="center">{{$d->s3}}</td>
-                        {{-- <td>{{tgl($d->finish_date)}}</td> --}}
                     </tr>
                     <tr>
                         <td align="center">{{++$i}}.</td>
                         <td>Dasar Desain Grafis</td>
                         <td align="center">{{$d->s4}}</td>
-                        {{-- <td>{{tgl($d->finish_date)}}</td> --}}
                     </tr>
                     <tr>
                         <td align="center">{{++$i}}.</td>
                         <td>Infrastruktur Komputasi Awan (IaaS)</td>
                         <td align="center">{{$d->s5}}</td>
-                        {{-- <td>{{tgl($d->finish_date)}}</td> --}}
                     </tr>
                     <tr>
                         <td align="center">{{++$i}}.</td>
                         <td>Platform Komputasi Awan (PaaS)</td>
                         <td align="center">{{$d->s6}}</td>
-                        {{-- <td>{{tgl($d->finish_date)}}</td> --}}
                     </tr>
                     <tr>
                         <td align="center">{{++$i}}.</td>
                         <td>Layanan Komputasi Awan (SaaS)</td>
                         <td align="center">{{$d->s7}}</td>
-                        {{-- <td>{{tgl($d->finish_date)}}</td> --}}
                     </tr>
                     <tr>
                         <td align="center">{{++$i}}.</td>
                         <td>Sistem Internet of Things (SIoT)</td>
                         <td align="center">{{$d->s8}}</td>
-                        {{-- <td>{{tgl($d->finish_date)}}</td> --}}
                     </tr>
                     <tr>
                         <td align="center">{{++$i}}.</td>
                         <td>Sistem Keamanan Jaringan</td>
                         <td align="center">{{$d->s9}}</td>
-                        {{-- <td>{{tgl($d->finish_date)}}</td> --}}
+                    </tr>
+                    <tr>
+                        <th>B.</th>
+                        <th colspan="2">ASPEK NONTEKNIS</th>
+                    </tr>
+                    <tr>
+                        <th>NO.</th>
+                        <th>ASPEK YANG DINILAI</th>
+                        <th style="width: 120px;">KUALIFIKASI</th>
+                    </tr>
+                    <tr>
+                        <td align="center">{{++$i}}.</td>
+                        <td>Disiplin</td>
+                        <td align="center">{{$d->sa}}</td>
+                    </tr>
+                    <tr>
+                        <td align="center">{{++$i}}.</td>
+                        <td>Kerjasama</td>
+                        <td align="center">{{$d->sb}}</td>
+                    </tr>
+                    <tr>
+                        <td align="center">{{++$i}}.</td>
+                        <td>Inisiatif</td>
+                        <td align="center">{{$d->sc}}</td>
+                    </tr>
+                        <tr>
+                        <td align="center">{{++$i}}.</td>
+                        <td>Tanggung Jawab</td>
+                        <td align="center">{{$d->sd}}</td>
+                    </tr>
+                    <tr>
+                        <td align="center">{{++$i}}.</td>
+                        <td>Kebersihan</td>
+                        <td align="center">{{$d->se}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -186,7 +210,7 @@
                       <tr class="borderless">
                         <td class="borderless"></td>
                         <td class="borderless" style="width: 200px;"></td>
-                        <td class="borderless" align="justify">{{$kps['user']->name}}</td>
+                        <td class="borderless" align="justify">_________________</td>
                       </tr>
                   </tbody>
                   </table>

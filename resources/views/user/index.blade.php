@@ -301,6 +301,7 @@
 
     var id_table;
     $(document).on('click','.delete',function(){
+      $('#action').val("delete");
       id_table = $(this).attr('id');
       //console.log(id_table);
       $('#confirmModal').modal('show');
@@ -308,33 +309,31 @@
     });
 
     $(document).on('click','.unlock',function(){
-		id_table = $(this).attr('url');
-        method = "POST";
-		$('#confirmModal .modal-title').html('Aktifkan User');
-		('#confirmModal .modal-body h4').html('Apakah anda yakin ingin mengaktifkan user ini?');
+		  id_table = $(this).attr('url');
+      method = "POST";
+		  $('#confirmModal .modal-title').html('Aktifkan User');
+		  $('#confirmModal .modal-body h4').html('Apakah anda yakin ingin mengaktifkan user ini?');
 	    $('#confirmModal').modal('show');
-		$('#ok_button').addClass('btn-info');
-        $('#ok_button').removeClass('btn-danger');
-		$('#ok_button').text('Aktifkan');
+		  $('#ok_button').addClass('btn-info');
+		  $('#ok_button').text('Aktifkan');
 		});
 
-          $('#ok_button').click(function(){
-		    $.ajax({
-				url:id_table,
-                method:"POST",
-                data:{
-                    _token:"{{csrf_token()}}",
-                    _method:method
-                },
-				beforeSend:function(){
-                    $('#ok_button').text('Loading...');
-				},
-				success:function(data) {
-					setTimeout(function(){
-						$('#confirmModal').modal('hide');
-						$('#tab_data').DataTable().ajax.reload();
-					}, 2000);
-						toastr.success('User berhasil diaktifkan!', 'Success', {timeOut: 5000});
+    $('#ok_button').click(function(){
+		  $.ajax({
+			url:id_table,
+      method:"POST",
+      data:{
+        _token:"{{csrf_token()}}",
+      },
+		  beforeSend:function(){
+        $('#ok_button').text('Loading...');
+		  },
+			success:function(data) {
+				setTimeout(function(){
+					$('#confirmModal').modal('hide');
+					$('#tab_data').DataTable().ajax.reload();
+			}, 2000);
+					toastr.success('User berhasil diaktifkan!', 'Success', {timeOut: 5000});
 				}
 			})
 		});

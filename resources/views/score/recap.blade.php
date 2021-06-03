@@ -161,7 +161,7 @@
                             <td class="borderless" style="width: 280px;">&nbsp;</td>
                             <td class="borderless">&nbsp;</td>
                             <td class="borderless">&nbsp;</td>
-                            <td class="borderless">{{$kps['user']->name}}</td>
+                            <td class="borderless">_____________________</td>
                           </tr>
                           <tr class="borderless">
                             <td class="borderless" style="width: 280px; height:10px;">Keterangan:</td>

@@ -63,15 +63,15 @@ class IndustryController extends Controller
                         }
                         else {
                             $button .= '<button type="button"
-                        name="saran" id="'.$data->id.'" class="saran btn btn-warning btn-sm">
-                        <i class="fa fa-edit"></i> Saran</button>';
-                        $button .= '&nbsp;&nbsp;';
+                            name="saran" id="'.$data->id.'" class="saran btn btn-warning btn-sm">
+                            <i class="fa fa-edit"></i> Saran</button>';
+                            $button .= '&nbsp;&nbsp;';
                         if ($data->check == 1) {
                             $button .= '<button type="button"
-                        name="lihatsaran" url="'.route('suggestion.show',$data->id).'" class="lihatsaran btn btn-info btn-sm">
-                        <i class="fa fa-eye"></i> Lihat Saran</button>';
-                        $button .= '&nbsp;&nbsp;';
-                        }
+                            name="lihatsaran" url="'.route('suggestion.show',$data->id).'" class="lihatsaran btn btn-info btn-sm">
+                            <i class="fa fa-eye"></i> Lihat Saran</button>';
+                            $button .= '&nbsp;&nbsp;';
+                            }
                         }
                         return $button;
                       }

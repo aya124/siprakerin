@@ -29,7 +29,8 @@ class ScoreController extends Controller
             $data = DB::table('submissions as s')
                 ->leftjoin('scores as sc', 'sc.id', '=', 's.score_id')
                 ->join('industries as i', 'i.id', '=', 's.industry_id')
-                ->join('users as u', 'u.username', '=', 's.username');
+                ->join('users as u', 'u.username', '=', 's.username')
+                ->join('statuses as st', 'st.id', '=', 's.status_id');
             $data->select(
                 's.id',
                 'sc.score_1',
@@ -41,6 +42,12 @@ class ScoreController extends Controller
                 'sc.score_7',
                 'sc.score_8',
                 'sc.score_9',
+                'sc.score_a',
+                'sc.score_b',
+                'sc.score_c',
+                'sc.score_d',
+                'sc.score_e',
+                DB::raw('st.name as status_name')
             );
             if (auth()->user()->hasRole('siswa')) {
                 $data->selectRaw('i.name as industry_name');
@@ -51,14 +58,33 @@ class ScoreController extends Controller
 
             return datatables()->of($data->get())
                 ->addColumn('action', function ($data) {
-                    $button = '';
-                    $button = '<button class="btn btn-default btn-sm edit" data-id="' . $data->id . '">
-                    <i class="fas fa-file"></i> Ubah nilai</button>';
-                    $button .= '<a href= "score/print/'.$data->id.'"
-                    target="_blank" type="button" name="print"
-                    class="btn btn-default btn-sm">
-                    <i class="fas fa-print"></i> Cetak Nilai</a>';
+                    if($data->status_name == 'Menunggu persetujuan') {
+                        $button = '';
+                        return $button;
+                    }
+                    if($data->status_name == 'Pengajuan ditolak') {
+                        $button = '';
+                         $button = 'Pengajuan ditolak';
+                        return $button;
+                    }
+                    if(Auth::user()->hasRole('siswa')) {
+                        $button = '';
+                        $button .= '<a href= "score/print/'.$data->id.'"
+                        target="_blank" type="button" name="print"
+                        class="btn btn-default btn-sm">
+                        <i class="fas fa-print"></i> Cetak Nilai</a>';
                     return $button;
+                    }
+                    else {
+                        $button = '';
+                        $button = '<button class="btn btn-default btn-sm edit" data-id="' . $data->id . '">
+                        <i class="fas fa-file"></i> Ubah nilai</button>';
+                        $button .= '<a href= "score/print/'.$data->id.'"
+                        target="_blank" type="button" name="print"
+                        class="btn btn-default btn-sm">
+                        <i class="fas fa-print"></i> Cetak Nilai</a>';
+                        return $button;
+                    }
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -84,6 +110,11 @@ class ScoreController extends Controller
             'score_7' => 'required|numeric|between:0,100',
             'score_8' => 'required|numeric|between:0,100',
             'score_9' => 'required|numeric|between:0,100',
+            'score_a' => 'required',
+            'score_b' => 'required',
+            'score_c' => 'required',
+            'score_d' => 'required',
+            'score_e' => 'required',
             'submission_id' => 'required',
         ]);
 
@@ -99,6 +130,11 @@ class ScoreController extends Controller
             $score->score_7 = $request->score_7;
             $score->score_8 = $request->score_8;
             $score->score_9 = $request->score_9;
+            $score->score_a = $request->score_a;
+            $score->score_b = $request->score_b;
+            $score->score_c = $request->score_c;
+            $score->score_d = $request->score_d;
+            $score->score_c = $request->score_e;
             $score->save();
         } else {
             $score = Score::create([
@@ -111,6 +147,11 @@ class ScoreController extends Controller
                 'score_7' => $request->score_7,
                 'score_8' => $request->score_8,
                 'score_9' => $request->score_9,
+                'score_a' => $request->score_a,
+                'score_b' => $request->score_b,
+                'score_c' => $request->score_c,
+                'score_d' => $request->score_d,
+                'score_e' => $request->score_e,
             ]);
             $submission->score_id = $score->id;
             $submission->save();
@@ -153,6 +194,11 @@ class ScoreController extends Controller
             'sc.score_7',
             'sc.score_8',
             'sc.score_9',
+            'sc.score_a',
+            'sc.score_b',
+            'sc.score_c',
+            'sc.score_d',
+            'sc.score_e',
         );
         $data->where('s.id', $submission_id);
 
@@ -188,7 +234,12 @@ class ScoreController extends Controller
                         'sc.score_6 as s6',
                         'sc.score_7 as s7',
                         'sc.score_8 as s8',
-                        'sc.score_9 as s9'
+                        'sc.score_9 as s9',
+                        'sc.score_a as sa',
+                        'sc.score_b as sb',
+                        'sc.score_c as sc',
+                        'sc.score_d as sd',
+                        'sc.score_e as se',
                         )
                         ->get();
 
@@ -215,7 +266,12 @@ class ScoreController extends Controller
                         'scores.score_6 as s6',
                         'scores.score_7 as s7',
                         'scores.score_8 as s8',
-                        'scores.score_9 as s9'
+                        'scores.score_9 as s9',
+                        'scores.score_a as sa',
+                        'scores.score_b as sb',
+                        'scores.score_c as sc',
+                        'scores.score_d as sd',
+                        'scores.score_e as se'
                         )
                         ->get();
 
