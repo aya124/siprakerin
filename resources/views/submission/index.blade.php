@@ -231,39 +231,39 @@
 		serverSide: true,
 		ajax:{
 		url: "{{ route('submission.index') }}",
-      },
+    },
       columns:[
-	    {
+	  {
 			data: 'name',
 			name: 'name',
 		},
 		{
 			data: 'start_date',
-            name: 'start_date',
+      name: 'start_date',
 		},
-        {
+    {
 			data: 'finish_date',
-            name: 'finish_date',
-        },
-        {
-            data: 'status_name',
+      name: 'finish_date',
+    },
+    {
+      data: 'status_name',
 			name: 'status_name',
-        },
-        {
-            data: 'submit_type',
-            render:function(data){
-                if (data == 1) {
-                    return 'Utama'
-                }else{
-                    return 'Alternatif'
-                }
-            }
-        },
-        {
-            data: 'action',
+    },
+    {
+      data: 'submit_type',
+      render:function(data){
+        if (data == 1) {
+          return 'Utama'
+        }else{
+          return 'Alternatif'
+        }
+      }
+    },
+    {
+      data: 'action',
 			name: 'action',
 			orderable: false
-        }
+    }
 	]
       // $('#pengajuan').dataTable();
   });
@@ -278,14 +278,6 @@
     $('#startdate').val("");
     $('#finishdate').val("");
   });
-
-//   $(document).on("change",".dateform",function() {
-//     this.setAttribute(
-//       "data-date",
-//       moment(this.value, "YYYY-MM-DD")
-//       .format(this.getAttribute("data-date-format"))
-//     )
-//   }).trigger("change")
 
   $(document).on('click','.edit',function() {
     id_table = $(this).attr('id');

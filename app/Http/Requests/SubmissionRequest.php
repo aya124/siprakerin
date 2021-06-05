@@ -25,8 +25,8 @@ class SubmissionRequest extends FormRequest
     {
         return [
             'name' => 'required|sometimes',
-            'startdate' => 'required|date|sometimes',
-            'finishdate' => 'required|date|after:startdate|sometimes',
+            'start_date' => 'required|date|sometimes',
+            'finish_date' => 'required|date|after:start_date|sometimes',
             'upload' => 'required|mimes:jpeg,jpg,png,pdf|max:2048|file|sometimes',
 
         ];

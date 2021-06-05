@@ -84,12 +84,12 @@ class SubmissionController extends Controller
                     $button = '';
                 }else{
                     $button = '<button type="button"
-                    id="'.$data->id.'" class="upload btn btn-default btn-sm">
-                    <i class="fas fa-upload"></i> Unggah Surat Pengantar</button>';
-                    $button .= '&nbsp;&nbsp;';
-                    $button .= '<button type="button"
                     id="'.$data->id.'" class="upload2 btn btn-default btn-sm">
                     <i class="fas fa-upload"></i> Unggah Surat Balasan</button>';
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button type="button"
+                    id="'.$data->id.'" class="upload btn btn-default btn-sm">
+                    <i class="fas fa-upload"></i> Unggah Surat Pengantar</button>';
                     $button .= '&nbsp;&nbsp;';
                     $button .= '<a href= "submission/print/'.$data->id.'"
                     target="_blank" type="button" name="print"
@@ -225,7 +225,6 @@ class SubmissionController extends Controller
     {
         $data = $request->all();
         $data['industry_id'] = $request->name;
-        // $data['username'] = Auth::user()->id;
         $submission = Submission::findOrFail($request->hidden_id);
         $submission->update($data);
         return response()->json(['success' => 'Pengajuan berhasil diperbarui.']);
@@ -241,7 +240,7 @@ class SubmissionController extends Controller
         // ->select(DB::raw('st.name as status_name'))
         ->whereIn('sub.status_id',[4,6,7])
         ->get();
-        $upload_dest = public_path().'/images';
+        $upload_dest = public_path().'/files';
         $loc1 = $upload_dest.'/suratpengantar/';
         $loc2 = $upload_dest.'/suratbalasan/';
 
@@ -282,19 +281,6 @@ class SubmissionController extends Controller
             ]);
             return response()->json(['success' => 'Surat Balasan berhasil di-upload.']);
             }
-        // }
-
-        // // nama file
-		// echo 'File Name: '.$file->getClientOriginalName();
-		// echo '<br>';
-
-      	// // real path
-		// echo 'File Real Path: '.$file->getRealPath();
-		// echo '<br>';
-
-      	// // ukuran file
-		// echo 'File Size: '.$file->getSize().' bytes';
-        // echo '<br>';
     }
 
     public function print_pdf($id)

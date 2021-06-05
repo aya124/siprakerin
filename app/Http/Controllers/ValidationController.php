@@ -54,32 +54,7 @@ class ValidationController extends Controller
           return $button;
         })
         ->addColumn('correspondence', function ($data) {
-          if ($data->status_name == 'Pengajuan disetujui') {
-            $button = '<span class="pengantar label label-danger">
-                  Surat Pengantar belum diunggah</span>';
-            $button .= '&nbsp;&nbsp;';
-            $button .= '<span class="balasan label label-danger">
-                  Surat Balasan belum diunggah</span>';
-          } elseif ($data->status_name == 'Menunggu persetujuan') {
-            $button = '';
-          } elseif ($data->status_name == 'Surat dari Industri belum diunggah') {
-            $button = '<a href="setuju/lihat1/' . $data->id . '"
-                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
-                  <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
-            $button .= '&nbsp;&nbsp;';
-            $button .= '<span class="balasan label label-danger">
-                  Surat Balasan belum diunggah</span>';
-          } else {
-            $button = '<a href="setuju/lihat1/' . $data->id . '"
-                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
-                  <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
-            $button .= '&nbsp;&nbsp;';
-            $button .= '<a href="setuju/lihat2/' . $data->id . '"
-                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
-                  <i class="fas fa-file-image"></i> Lihat Surat Balasan</a>';
-          }
-          $button .= '&nbsp;&nbsp;';
-          $button .= '<a href= "validation/print/' . $data->id . '"
+          $button = '<a href= "validation/print/' . $data->id . '"
                 target="_blank" type="button" name="print"
                 class="btn btn-default btn-sm">
                 <i class="fas fa-print"></i> Cetak Surat Pengantar</a>';
@@ -137,7 +112,8 @@ class ValidationController extends Controller
             $button = '';
           } elseif ($data->status_name == 'Surat dari Industri belum diunggah') {
             $button = '<a href="setuju/lihat1/' . $data->id . '"
-                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
+                  target="_blank" type="button" name="lihat" 
+                  class="btn btn-default btn-sm">
                   <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
             $button .= '&nbsp;&nbsp;';
             $button .= '<span class="balasan label label-danger">
@@ -149,11 +125,13 @@ class ValidationController extends Controller
             <i class="fas fa-print"></i> Cetak Surat Pengantar</a>';
            } else {
             $button = '<a href="setuju/lihat1/' . $data->id . '"
-                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
+                  target="_blank" type="button" name="lihat" 
+                  class="btn btn-default btn-sm">
                   <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
             $button .= '&nbsp;&nbsp;';
             $button .= '<a href="setuju/lihat2/' . $data->id . '"
-                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
+                  target="_blank" type="button" name="lihat" 
+                  class="btn btn-default btn-sm">
                   <i class="fas fa-file-image"></i> Lihat Surat Balasan</a>';
           }
           $button .= '&nbsp;&nbsp;';
@@ -239,17 +217,20 @@ class ValidationController extends Controller
                   Surat Balasan belum diunggah</span>';
           } elseif ($data->status_name == 'Surat dari Industri belum diunggah') {
             $button = '<a href="setuju/lihat1/' . $data->id . '"
-                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
+                  target="_blank" type="button" name="lihat" 
+                  class="btn btn-default btn-sm">
                   <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
             $button .= '&nbsp;&nbsp;';
             $button .= '<span class="balasan label label-danger">Surat Balasan belum diunggah</span>';
           } else {
             $button = '<a href="setuju/lihat1/' . $data->id . '"
-                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
+                  target="_blank" type="button" name="lihat" 
+                  class="btn btn-default btn-sm">
                   <i class="fas fa-file-image"></i> Lihat Surat Pengantar</a>';
             $button .= '&nbsp;&nbsp;';
             $button .= '<a href="setuju/lihat2/' . $data->id . '"
-                  target="_blank" type="button" name="lihat" class="btn btn-default btn-sm">
+                  target="_blank" type="button" name="lihat" 
+                  class="btn btn-default btn-sm">
                   <i class="fas fa-file-image"></i> Lihat Surat Balasan</a>';
           }
           $button .= '&nbsp;&nbsp;';
@@ -357,10 +338,7 @@ class ValidationController extends Controller
 
     if ($data) {
       // $file = asset(public_path().'/files_upload/'.$user->name.'/'.$data);
-      //adi_surat_pengantar.jpeg
-      //base_path().'/public/'.$user->name.'+'_surat_pengantar';
-      // $file = base_path().'/public/files_upload/'.$user->name.'/'.$data;
-      $file1 = base_path() . '/public/images/suratpengantar/' . $data;
+      $file1 = base_path() . '/public/files/suratpengantar/' . $data;
       if (file_exists($file1)) {
         $ext = File::extension($file1);
         if ($ext == 'pdf') {
@@ -405,8 +383,6 @@ class ValidationController extends Controller
     // ->get();
 
     if ($data) {
-      // $file = asset(public_path().'/files_upload/'.$user->name.'/'.$data);
-      //adi_surat_pengantar.jpeg
       //base_path().'/public/'.$user->name.'+'_surat_pengantar';
       // $file = base_path().'/public/files_upload/'.$user->name.'/'.$data;
       $file2 = base_path() . '/public/images/suratbalasan/' . $data;
