@@ -56,7 +56,7 @@ class UsersController extends Controller
                 id="'.$data->id.'" class="delete btn btn-danger btn-sm">
                 <i class="fa fa-trash"></i> Hapus</button>';
                 $button .= '&nbsp;&nbsp;';
-                if ($data->submit_lock != 0) {
+                if ($data->submit_lock != null) {
                     $button = '<button type="button" name="edit"
                     id="'.$data->id.'" class="edit btn btn-primary btn-sm">
                     <i class="fa fa-edit"></i> Edit</button>';
