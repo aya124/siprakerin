@@ -114,10 +114,10 @@
       <div class="modal-content">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h2 class="modal-title">Hapus data</h2>
+              <h2 class="modal-title">?</h2>
           </div>
           <div class="modal-body">
-              <h4 align="center" style="margin:0;">Apakah anda yakin ingin menghapus data ini?</h4>
+              <h4 align="center" style="margin:0;">?</h4>
           </div>
           <div class="modal-footer">
            <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
@@ -301,55 +301,39 @@
 
     var id_table;
     $(document).on('click','.delete',function(){
-      $('#action').val("delete");
       id_table = $(this).attr('id');
-      //console.log(id_table);
+	  $('#confirmModal .modal-title').html('Hapus User');
+	  $('#confirmModal .modal-body h4').html('Apakah anda yakin ingin menghapus data ini?');
+	  $('#ok_button').removeClass('btn-info');
+	  $('#ok_button').addClass('btn-danger');
       $('#confirmModal').modal('show');
       $('#ok_button').text('OK');
     });
 
     $(document).on('click','.unlock',function(){
 		  id_table = $(this).attr('url');
-      method = "POST";
 		  $('#confirmModal .modal-title').html('Aktifkan User');
 		  $('#confirmModal .modal-body h4').html('Apakah anda yakin ingin mengaktifkan user ini?');
-	    $('#confirmModal').modal('show');
+	      $('#confirmModal').modal('show');
+	      $('#ok_button').removeClass('btn-danger');
 		  $('#ok_button').addClass('btn-info');
 		  $('#ok_button').text('Aktifkan');
-		});
-
-    $('#ok_button').click(function(){
-		  $.ajax({
-			url:id_table,
-      method:"POST",
-      data:{
-        _token:"{{csrf_token()}}",
-      },
-		  beforeSend:function(){
-        $('#ok_button').text('Loading...');
-		  },
-			success:function(data) {
-				setTimeout(function(){
-					$('#confirmModal').modal('hide');
-					$('#tab_data').DataTable().ajax.reload();
-			}, 2000);
-					toastr.success('User berhasil diaktifkan!', 'Success', {timeOut: 5000});
-				}
-			})
-		});
+	});
 
     $('#ok_button').click(function(){
       $.ajax({
-        url:"user/destroy/"+id_table,
+        url:id_table,
         beforeSend:function(){
-          $('#ok_button').text('Deleting...');
+          $('#ok_button').attr('disabled','disabled');
+          $('#ok_button').html('<i class="fas fa-spinner fa-pulse"></i> Loading...');
         },
         success:function(data){
           setTimeout(function(){
             $('#confirmModal').modal('hide');
+            $('#ok_button').removeAttr('disabled');
+            toastr.success('Data berhasil diproses!', 'Success', {timeOut: 3000});
+            }, 1000);
             $('#tab_data').DataTable().ajax.reload();
-            }, 2000);
-            toastr.success('Data user berhasil dihapus!', 'Success', {timeOut: 5000});
         }
       })
     });

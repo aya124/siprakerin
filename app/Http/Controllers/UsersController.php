@@ -6,12 +6,12 @@ use App\Http\Requests\UserRequest;
 use App\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use Hash;
-use Auth;
 use Illuminate\Support\Facades\DB;
 use App\Role;
 use App\Student;
 use App\Teacher;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -53,7 +53,7 @@ class UsersController extends Controller
                 <i class="fa fa-key"></i> Ganti Password</button>';
                 $button .= '&nbsp;&nbsp;';
                 $button .= '<button type="button" name="delete"
-                id="'.$data->id.'" class="delete btn btn-danger btn-sm">
+                id="'. route("user.destroyer", $data->id).'" class="delete btn btn-danger btn-sm">
                 <i class="fa fa-trash"></i> Hapus</button>';
                 $button .= '&nbsp;&nbsp;';
                 if ($data->submit_lock != null) {
@@ -149,6 +149,7 @@ class UsersController extends Controller
         $data = $request->all();
         $user = User::findOrFail($request->hidden_id);
         $user->update($data);
+        $this->updateUserRole($user, $request->input('role'));
         $roles = $user->roles;
         foreach ($roles as $key => $value){
             $user->detachRole($value);
@@ -202,12 +203,7 @@ class UsersController extends Controller
                 'color' => 'danger'
             ]);
         }
-
-        if ($this->ifNotTeachers($user->roles[0]->display_name))
-            Student::where('user_id',$id)->first()->delete();
-        else
-            Teacher::where('user_id',$id)->first()->delete();
-
+            $this->deleteUserByRole($user);
             $user->delete();
         return redirect()->route('user.index')->withStatus([
             'message' => 'Data user berhasil dihapus',
@@ -218,8 +214,7 @@ class UsersController extends Controller
     public function Unlock($id)
     {
         DB::transaction(function () use($id){
-
-            $$u = User::findOrFail($id);
+            $u = User::findOrFail($id);
             $u->submit_lock = null;
             $u->save();
         });
@@ -239,5 +234,22 @@ class UsersController extends Controller
     protected function checkRole($id_role)
     {
         return Role::where('id',$id_role)->first()->display_name;
+    }
+
+    private function updateUserRole($user, $roleId)
+    {
+        $this->deleteUserByRole($user);
+        if ($roleId == 1 || $roleId == 3)
+            Student::create(['user_id' => $user->id,'name' => $user->name]);
+        else
+            Teacher::create(['user_id' => $user->id,'name' => $user->name]);
+    }
+
+    private function deleteUserByRole($user)
+    {
+        if ($this->ifNotTeachers($user->roles[0]->display_name))
+            Student::where('user_id', $user->id)->first()->delete();
+        else
+            Teacher::where('user_id', $user->id)->first()->delete();
     }
 }

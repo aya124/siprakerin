@@ -61,16 +61,6 @@
                                 </span>
                             @endif
                 </div>
-                <div class="form-group has-feedback {{ $errors->has('role') ? 'has-error' : '' }}">
-                    <input type="text" name="role" class="form-control" value="{{ old('role') }}"
-                           placeholder="{{ trans('Role') }}">
-                    <span class="glyphicon glyphicon-adjust form-control-feedback"></span>
-                    @if ($errors->has('role'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('role') }}</strong>
-                        </span>
-                    @endif
-                </div>
                 <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
                     <input type="password" name="password" class="form-control"
                            placeholder="{{ trans('adminlte::adminlte.password') }}">

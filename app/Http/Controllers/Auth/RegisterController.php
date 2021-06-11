@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
 use App\Role;
+use App\Student;
 
 class RegisterController extends Controller
 {
@@ -54,9 +55,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'username' => 'required|unique:users,username,'.\Request::instance()->hidden_id,
+            'username' => 'required|unique:users',
             'gender' => 'required|in:male,female',
-            'role' => 'required',
         ]);
     }
 
@@ -68,21 +68,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'username' => $data['username'],
-            'gender' => $data['gender'],
-        ]);
-        $data = DB::table('users as u')
-                ->join('role_user as ru', 'ru.user_id', '=', 'u.id')
-                ->join('roles as r', 'r.id', '=', 'ru.role_id')
-                ->select('u.name', 'u.email','u.gender','u.username',
-                    DB:: raw('r.name as role'), 'u.id')
-            ->get();
-
-        $user->attachRole($data->role);
+       return DB::transaction(function () use($data){
+            $data['password']= Hash::make($data['password']);
+            $user = User::create($data);
+            $user->attachRole(3);
+            $data['user_id'] = $user->id;
+            Student::create($data);
+            return $user;
+        });
     }
 }

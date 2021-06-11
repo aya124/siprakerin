@@ -24,7 +24,7 @@ Route::resource('/user', 'UsersController');
 Route::post('user/update', 'UsersController@update')->name('us.update');
 Route::get('user/change/{id}', 'UsersController@change');
 Route::post('user/passchanged', 'UsersController@passchanged')->name('uspass.update');
-Route::get('user/destroy/{id}', 'UsersController@destroy');
+Route::get('user/destroy/{id}', 'UsersController@destroy')->name('user.destroyer');
 
 Route::resource('/student', 'StudentController');
 
@@ -91,4 +91,4 @@ Route::resource('/class', 'StudentClassController');
 Route::post('add-suggestion', 'IndustryController@addSuggestion')->name('suggestion.add');
 Route::post('add-info', 'SubmissionController@addInfo')->name('info.add');
 
-Route::post('user/unlock','UserController@Unlock')->name('user.unlock');
+Route::get('user/unlock/{id}','UsersController@Unlock')->name('user.unlock');
