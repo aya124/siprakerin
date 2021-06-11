@@ -23,7 +23,7 @@
   <div class="box-header">
       {{-- <h3 class="box-title">Pengajuan</h3> --}}
   </div>
-  
+
   <!-- /.box-header -->
   <div class="box-body">
     <table id="tab_data" class="table table-bordered table-striped">
@@ -114,13 +114,13 @@
           <div class="form-group">
 						<label class="control-label col-md-4" >Tanggal Mulai Prakerin <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
-							<input type="date" name="startdate" id="startdate" class="dateform form-control" />
+							<input type="date" name="start_date" id="startdate" class="dateform form-control" />
 						</div>
           </div>
           <div class="form-group">
 						<label class="control-label col-md-4" >Tanggal Selesai Prakerin <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
-							<input type="date" name="finishdate" id="finishdate" class="dateform form-control" />
+							<input type="date" name="finish_date" id="finishdate" class="dateform form-control" />
 						</div>
           </div>
           <br />
