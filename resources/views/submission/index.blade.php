@@ -104,7 +104,7 @@
 			    <div class="form-group">
 					<label class="control-label col-md-4" >Nama Industri <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
-							<select class="form-control" id="name" name="name">
+							<select class="form-control" id="name" name="industry_id">
                         @foreach ($industry as $item)
 						<option value="{{$item->id}}">{{$item->name}}</option>
                         @endforeach
