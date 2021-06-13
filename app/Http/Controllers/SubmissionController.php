@@ -7,13 +7,12 @@ use App\Student;
 use App\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Auth;
 use App\SubmissionDetail;
 use PDF;
 use App\User;
 use App\Year;
 use App\SubmissionSuggestion;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\Auth;
 
 class SubmissionController extends Controller
 {
@@ -46,7 +45,7 @@ class SubmissionController extends Controller
             return datatables()->of($data)
                 ->addColumn('action', function($data){
                 if($data->status_name == 'Menunggu persetujuan'){
-                    
+
                     $button = '<button type="button" name="edit"
                     id="'.$data->id.'" class="edit btn btn-primary btn-sm">
                     <i class="fa fa-edit"></i> Edit</button>';
@@ -71,12 +70,12 @@ class SubmissionController extends Controller
                     <i class="fas fa-print"></i> Cetak Form Pengajuan</a>';
                     $button .= '&nbsp;&nbsp;';
                     $button .= '<button type="button"
-                    name="info" id="'.$data->id.'" 
+                    name="info" id="'.$data->id.'"
                     class="info btn btn-warning btn-sm">
                     <i class="fa fa-edit"></i> Tambah Feedback</button>';
                     $button .= '&nbsp;&nbsp;';
                     $button .= '<button type="button"
-                    name="lihatinfo" url="'.route('info.show',$data->id).'" 
+                    name="lihatinfo" url="'.route('info.show',$data->id).'"
                     class="lihatinfo btn btn-info btn-sm">
                     <i class="fa fa-eye"></i> Lihat Feedback</button>';
                     return $button;
@@ -100,10 +99,10 @@ class SubmissionController extends Controller
                     name="info" id="'.$data->id.'" class="info btn btn-warning btn-sm">
                     <i class="fa fa-edit"></i> Tambah Feedback</button>';
                     $button .= '<button type="button"
-                    name="lihatinfo" url="'.route('info.show',$data->id).'" 
+                    name="lihatinfo" url="'.route('info.show',$data->id).'"
                     class="lihatinfo btn btn-info btn-sm">
                     <i class="fa fa-eye"></i> Lihat Feedback</button>';
-                  return $button;  
+                  return $button;
                 }
             })
 
@@ -152,8 +151,6 @@ class SubmissionController extends Controller
         DB::transaction(function ()use($request, $check) {
             $data = $request->all();
             $data ['industry_id'] = $request->name;
-            $data ['start_date'] = $request->startdate;
-            $data ['finish_date'] = $request->finishdate;
             $data ['username'] = Auth::user()->username;
             $data ['status_id'] = $request->status ?: '1';
             $data ['year_id'] = Year::where('active',1)->first()->id;
@@ -224,7 +221,6 @@ class SubmissionController extends Controller
     public function update(SubmissionRequest $request)
     {
         $data = $request->all();
-        $data['industry_id'] = $request->name;
         $submission = Submission::findOrFail($request->hidden_id);
         $submission->update($data);
         return response()->json(['success' => 'Pengajuan berhasil diperbarui.']);

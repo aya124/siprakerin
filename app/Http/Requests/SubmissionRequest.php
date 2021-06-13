@@ -35,9 +35,9 @@ class SubmissionRequest extends FormRequest
     {
         return[
             'name.required'   => 'Kolom nama industri harus diisi!',
-            'startdate.required' => 'Kolom tanggal mulai harus diisi!',
-            'finishdate.required' => 'Kolom tanggal selesai harus diisi!',
-            'finishdate.after'  => 'Tanggal selesai tidak sesuai!',
+            'start_date.required' => 'Kolom tanggal mulai harus diisi!',
+            'finish_date.required' => 'Kolom tanggal selesai harus diisi!',
+            'finish_date.after'  => 'Tanggal selesai tidak sesuai!',
             'upload.required' => 'Wajib upload file!',
             'upload.mimes'    => 'Format file berupa jpeg/jpg/png/pdf',
             'upload.max'      => 'Ukuran file maksimal 2MB',
