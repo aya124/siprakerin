@@ -23,6 +23,7 @@
         <tr>
           <th style="width: 20%">Nama Industri</th>
           <th style="width: 30%">Alamat</th>
+          <th style="width: 10%">Kota</th>
           @role(['admin', 'wali-kelas', 'kps', 'kepsek', 'wks1', 'wks4'])
           <th style="width: 10%">Status</th>
           @endrole
@@ -90,7 +91,7 @@
 			<div class="modal-body">
 				<span id="form_result"></span>
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
-					@csrf
+					@cphpsrf
 					<div class="form-group">
 						<label class="control-label col-md-4" >Nama Industri <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
@@ -232,6 +233,10 @@
 				data: 'address',
         name: 'address',
 			},
+      {
+				data: 'city',
+        name: 'city',
+			},
       @role(['admin', 'wali-kelas', 'kps', 'kepsek', 'wks1', 'wks4'])
 			{
 			 data: 'status',
@@ -251,6 +256,10 @@
       $('.notifError').remove();
       $('#createModal').modal('show');
       $('#name').val("");
+      $('#address').val("");
+      $('#city').val("");
+      $('#phone').val("");
+      $('#detail').val("");
       $('#form_result').hide();
       $('#createModal .modal-title').text("Tambah Industri");
       $('#action').val("tambah");

@@ -28,23 +28,24 @@ class IndustryRequest extends FormRequest
             'address' => 'required|max:255',
             'city' => 'required||max:255',
             'phone' => 'required|numeric|digits_between:10,14',
-            'detail' => 'max:255',
+            'detail' => 'required|max:255',
         ];
     }
     public function messages()
     {
         return[
-            'name.required'         => '*Kolom nama wajib diisi',
-            'name.string'           => '*Kolom nama berisi teks',
-            'name.max'              => '*Kolom nama maks 255 karakter',
-            'address.required'      => '*Kolom alamat wajib diisi',
-            'address.max'           => '*Kolom alamat maks 255 karakter',
-            'city.required'         => '*Kolom kota wajib diisi',
-            'city.max'              => '*Kolom kota maks 255 karakter',
-            'phone.required'        => '*Kolom phone wajib diisi',
-            'phone.numeric'         => '*Kolom phone berisi angka',
-            'phone.digits_between'  => '*Kolom phone berisi 10-14 digit',
-            'detail'                => '*Kolom detail maks 255 karakter',
+            'name.required'         => '*Kolom nama wajib diisi!',
+            'name.string'           => '*Kolom nama berisi teks!',
+            'name.max'              => '*Maksimal 255 karakter!',
+            'address.required'      => '*Kolom alamat wajib diisi!',
+            'address.max'           => '*Maksimal 255 karakter!',
+            'city.required'         => '*Kolom kota wajib diisi!',
+            'city.max'              => '*Maksimal 255 karakter!',
+            'phone.required'        => '*Kolom phone wajib diisi!',
+            'phone.numeric'         => '*Hanya boleh diisi angka!',
+            'phone.digits_between'  => '*Kolom berisi 10-14 digit!',
+            'detail.required'       => '*Kolom link wajib diisi!',
+            'detail.max'            => '*Maksimal 255 karakter!',
         ];
     }
 }
