@@ -32,13 +32,13 @@ class RoleRequest extends FormRequest
     public function messages()
     {
         return[
-            'name.required'    => '*Kolom Role Name wajib diisi',
+            'name.required'    => '*Kolom Role Name wajib diisi!',
             'name.string'      => '*Kolom berisi teks',
-            'name.max'         => '*Kolom maks 255 karakter',
-            'display.required' => '*Kolom Display Name wajib diisi',
+            'name.max'         => '*Maksimal 255 karakter!',
+            'display.required' => '*Kolom Display Name wajib diisi!',
             'display.string'   => '*Kolom berisi teks',
-            'display.max'      => '*Kolom maks 255 karakter',
-            'p.required'       => '*Permission wajib dipilih',
+            'display.max'      => '*Maksimal 255 karakter!',
+            'p.required'       => '*Permission wajib dipilih!',
         ];
     }
 }

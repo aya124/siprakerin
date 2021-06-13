@@ -30,9 +30,9 @@ class PermissionRequest extends FormRequest
     public function messages()
     {
         return[
-            'name.required' => '*Kolom wajib diisi',
-            'name.string'   => '*Kolom berisi teks',
-            'name.max'      => '*Kolom maks 255 karakter',
+            'name.required' => '*Permission wajib diisi!',
+            'name.string'   => '*Kolom Permission berisi teks',
+            'name.max'      => '*Maksimal 255 karakter!',
         ];
     }
 }

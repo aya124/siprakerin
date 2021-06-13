@@ -30,9 +30,9 @@ class TeacherRequest extends FormRequest
     public function messages()
     {
         return[
-            'name.required'    => '*Kolom nama wajib diisi',
-            'name.string'      => '*Kolom berisi teks',
-            'name.max'         => '*Kolom maks 255 karakter',
+            'name.required'    => '*Nama wajib diisi!',
+            'name.string'      => '*Kolom Nama berisi teks',
+            'name.max'         => '*Maksimal 255 karakter!',
         ];
     }
 }

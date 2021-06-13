@@ -30,9 +30,9 @@ class StatusRequest extends FormRequest
     public function messages()
     {
         return[
-            'name.required'   => '*Kolom wajib diisi',
+            'name.required'   => '*Status wajib diisi!',
             'name.string'     => '*Kolom berisi teks',
-            'name.max'        => '*Kolom maksimal 255 karakter',
+            'name.max'        => '*Maksimal 255 karakter!',
         ];
     }
 }
