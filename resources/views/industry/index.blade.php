@@ -91,7 +91,7 @@
 			<div class="modal-body">
 				<span id="form_result"></span>
 				<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
-					@cphpsrf
+					@csrf
 					<div class="form-group">
 						<label class="control-label col-md-4" >Nama Industri <small class="text-danger">*</small> </label>
 						<div class="col-md-8">

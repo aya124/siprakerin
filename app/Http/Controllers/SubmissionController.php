@@ -150,7 +150,6 @@ class SubmissionController extends Controller
         $check = Submission::where('username',Auth::user()->username)->count();
         DB::transaction(function ()use($request, $check) {
             $data = $request->all();
-            $data ['industry_id'] = $request->name;
             $data ['username'] = Auth::user()->username;
             $data ['status_id'] = $request->status ?: '1';
             $data ['year_id'] = Year::where('active',1)->first()->id;
