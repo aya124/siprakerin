@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Student;
+use App\Http\Requests\StudentClassRequest;
 use App\StudentClass;
+use App\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -41,14 +42,14 @@ class StudentClassController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentClassRequest $request)
     {
         try{
             $data = $request->all();
             StudentClass::create($data);
             return response()->json(['success' => 'Kelas berhasil ditambah.']);
         } catch (\Throwable $th) {
-            return response()->json(['error' => ['input' =>'Gagal menambah data.'],500]);
+            return response()->json(['error' => ['input' =>'Gagal menambah data kelas.'],500]);
         }
     }
 
@@ -59,12 +60,12 @@ class StudentClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StudentClassRequest $request)
     {
         $data = $request->all();
-        $class = StudentClass::findOrFail($id);
+        $class = StudentClass::findOrFail($request->hidden_id);
         $class-> update($data);
-        return response()->json(['success' => 'Data berhasil diperbarui.']);
+        return response()->json(['success' => 'Data kelas berhasil diperbarui.']);
     }
 
     /**
@@ -77,7 +78,7 @@ class StudentClassController extends Controller
     {
         $data = StudentClass::findOrFail($id);
         $data->delete();
-        return response()->json(['success' => 'Data berhasil dihapus.']);
+        return response()->json(['success' => 'Data kelas berhasil dihapus.']);
 
     }
 
