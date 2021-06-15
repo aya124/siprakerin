@@ -143,14 +143,13 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <p>Pada menu Validasi Prakerin, anda dapat melakukan validasi pada pengajuan praktik kerja industri yang dibuat oleh siswa.</p>
-          <!-- Pastikan anda telah menghubungi pihak industri bahwa mereka menerima siswa praktik kerja industri. -->
-          </p>Terdapat 3 tab yang masing-masing memiliki fungsi berbeda. 
-          Tab pertama paling atas berupa tabel daftar pengajuan yang membutuhkan validasi.
-          Tab kedua berupa tabel daftar pengajuan yang telah disetujui. 
-          Sedangkan, tabel terakhir berupa tabel daftar pengajuan yang telah ditolak.</p>
+          <p>Pada menu Validasi Prakerin, anda dapat melakukan validasi pada pengajuan praktik kerja industri yang dibuat oleh siswa. 
+          Terdapat 3 tab dengan masing-masing fungsi yang berbeda.
+          <img class="img-responsive pad" src="../images/png/validation-view.png" alt="Validation-View">
+          <p>Tab pertama berupa tabel daftar pengajuan yang membutuhkan validasi.</p>
+          <p>Tab kedua berupa tabel daftar pengajuan yang telah disetujui.</p>
+          <p>Sedangkan, tabel terakhir berupa tabel daftar pengajuan yang telah ditolak.</p>
           <!-- <img class="img-responsive pad" src="../images/png/validasi.png" alt="Validasi-Pengajuan"> -->
-          <!-- <p>Tunggu persetujuan dari Admin supaya data tersebut dapat anda pilih pada fitur Pengajuan Prakerin</p> -->
         </div>
         <!-- /.box-body -->
         <!-- /.box-footer -->
