@@ -256,14 +256,14 @@ return [
         ],
 
         ['header' => 'account_settings',
-            'permission' => 'rekap-nilai','buat-pengajuan',
+            // 'permission' => 'rekap-nilai','buat-pengajuan',
         ],
 
         [
             'text' => 'profile',
             'url'  => 'profile',
             'icon' => 'fas fa-user-lock',
-            'permission' => 'rekap-nilai','buat-pengajuan',
+            // 'permission' => 'rekap-nilai','buat-pengajuan',
             // 'submenu' => [
             //     [
             //         'text' => 'change_password',
