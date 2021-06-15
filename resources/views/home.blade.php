@@ -52,11 +52,13 @@
           <p>Untuk memudahkan pencarian, anda dapat menggunakan fitur <b><i>Search</i></b>.</p>
           <img class="img-responsive pad" src="../images/png/industry-search.png" alt="Cari-Industri">
           <p>Anda dapat melihat masing-masing data industri lebih lengkap melalui tombol <b><i>Detail</i></b>.</p>
+          <img class="img-responsive pad" src="../images/png/industry-detail.png" alt="Detail-Industri">
           <p>Anda berhak menambah data industri sesuai dengan informasi yang anda ketahui melalui tombol <b><u>Tambah Industri</u></b>. <br />
           Pastikan data yang anda input benar-benar valid.</p>
           
           @role(['wali-kelas','siswa'])
           <p>Setelah menambah industri baru, anda masih bisa mengubah data industri melalui tombol <b><i>Edit</i></b>.</p>
+          <img class="img-responsive pad" src="../images/png/industry-edit.png" alt="Edit-Industri">
           <p>Jika tombol <b><i>Edit</i></b> tidak tersedia, maka anda bisa memberikan info mengenai industri melalui tombol <b><u>Saran</u></b>.</p>
           <p>Saran yang telah ditambahkan dapat anda baca melalui tombol <b><u>Lihat Saran</u></b>.</p>
           @endrole
