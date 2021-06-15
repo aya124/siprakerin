@@ -4,7 +4,7 @@
 
 @section('content_header')
 <h1>Industri <a id="btn_add"
-  class="btn btn-flat btn-primary">Tambah industri</a></h1>
+  class="btn btn-flat btn-primary">Tambah Industri</a></h1>
 @stop
 
 @section('content')
@@ -22,10 +22,10 @@
       <thead>
         <tr>
           <th style="width: 20%">Nama Industri</th>
-          <th style="width: 30%">Alamat</th>
-          <th style="width: 10%">Kota</th>
+          <th style="width: 28%">Alamat</th>
+          <th style="width: 12%">Kota</th>
           @role(['admin', 'wali-kelas', 'kps', 'kepsek', 'wks1', 'wks4'])
-          <th style="width: 10%">Status</th>
+          <th style="width: 8%">Status</th>
           @endrole
           <th style="width: 40%">Aksi</th>
         </tr>
@@ -267,7 +267,7 @@
 
     $(document).on('click','.edit',function(){
       $('.notifError').remove();
-      var x =$(this).attr('id');
+      var x = $(this).attr('id');
       $('#action').val("edit");
       $('#createModal').modal('show');
       $('#form_result').hide();
@@ -331,8 +331,7 @@
     $(document).on('click', '.saran', function(){
       id = $(this).attr('id');
       $('#industry_id').val(id);
-      $('#saranModal').modal('show');
-      
+      $('#saranModal').modal('show'); 
     });
 
       $('#tambahSaran').on('submit',function(event) {
@@ -412,9 +411,9 @@
                   });
                   html += '</div>';
                   $('#form_result').html(html);
-                    $.each(xhr.responseJSON.errors,function(field_name,error){
-                        $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
-                    });
+                  $.each(xhr.responseJSON.errors,function(field_name,error){
+                    $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                  });
                 }//end error
               });
             }else{

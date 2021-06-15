@@ -43,8 +43,8 @@ class IndustryRequest extends FormRequest
             'city.required'         => '*Kota wajib diisi!',
             'city.max'              => '*Maksimal 255 karakter!',
             'phone.required'        => '*Phone wajib diisi!',
-            'phone.numeric'         => '*Hanya boleh diisi angka!',
-            'phone.digits_between'  => '*Kolom Phone berisi 10-14 digit!',
+            'phone.numeric'         => '*Hanya boleh diisi angka dan tanpa spasi!',
+            'phone.digits_between'  => ' Kolom Phone hanya berisi angka!',
             'detail.required'       => '*Link wajib diisi!',
             'detail.max'            => '*Maksimal 255 karakter!',
     

@@ -70,7 +70,8 @@ class IndustryController extends Controller
                             $button .= '&nbsp;&nbsp;';
                         if ($data->check == 1) {
                             $button .= '<button type="button"
-                            name="lihatsaran" url="'.route('suggestion.show',$data->id).'" class="lihatsaran btn btn-info btn-sm">
+                            name="lihatsaran" url="'.route('suggestion.show',$data->id).'" 
+                            class="lihatsaran btn btn-info btn-sm">
                             <i class="fa fa-eye"></i> Lihat Saran</button>';
                             $button .= '&nbsp;&nbsp;';
                             }
