@@ -3,7 +3,7 @@
 @section('title', 'Profil User')
 
 @section('content_header')
-<h1> Halaman Profil </h1>
+<h1>Profil User</h1>
 @stop
 
 @section('content')
@@ -22,13 +22,17 @@
                 <th style="text-align: right;">Nama</th>
                 <th style="text-align: right;">Username</th>
                 <th style="text-align: right;">E-mail</th>
+				@role(['admin','kps','wali-kelas'])
                 <th style="text-align: right;">Role</th>
-                {{-- <th style="text-align: right;">No.Induk</th>
-                <th style="text-align: right;">Kelas</th> --}}
+                <!-- <th style="text-align: right;">No.Induk</th>
+                <th style="text-align: right;">Kelas</th> -->
+				@endrole
             </tr>
         </thead>
         </table>
+		@role(['admin','kps','wali-kelas'])
         <button type="button" name="edit_profil" id="edit_profil" class="btn btn-success btn-sm">Edit Profil</button>
+		@endrole
 	    <button type="button" name="change" id="change" class="btn btn-primary btn-sm">Ganti Password</button>
     </div>
     <!-- /.box-body -->
@@ -40,7 +44,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Edit profil</h4>
+				<h4 class="modal-title">Edit Profil</h4>
 			</div>
 			<div class="modal-body">
 				<span id="form_result"></span>
@@ -58,27 +62,13 @@
 							<input type="text" name="email" id="email" class="form-control"   />
 						</div>
 					</div>
-                    {{-- <div class="form-group">
-                        <label class="control-label col-md-3" >No. Induk <small class="text-danger">*</small> </label>
-                            <div class="col-md-8">
-                                <input type="text" name="ni" id="ni" class="form-control" />
-                            </div>
-                    </div>
-                    <div class="form-group">
-						<label class="control-label col-md-4">Kelas <small class="text-danger">*</small></label>
-						<div class="col-md-8">
-							<select class="form-control" id="kelas" name="kelas">
-                                {{-- <option value="">Pilih kelas</option>
-                                @for($i=0; $i<= count($kelas)-1;$i++)
-                                <option value="{{$kelas[$i]->id}}">{{$kelas[$i]->name}}</option>
-                                @endfor --}}
-                            </select>
-						</div>
-					</div> --}}
+                   
+					
+
 					<br />
 					<div class="form-group" align="center">
 						<input type="hidden" name="hidden_id" id="hidden_id" />
-						<input type="submit" name="action_button" id="action_button" class="btn btn-primary" value="submit" />
+						<input type="submit" name="action_button" id="action_button" class="btn btn-primary" value="Submit" />
 					</div>
 				</form>
 			</div>
@@ -98,21 +88,21 @@
 				<form method="post" id="changed" class="form-horizontal" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
-						<label class="control-label col-md-4">Input password baru : </label>
-						<div class="col-md-8">
-							<input type="password" name="input" id="input" class="form-control" placeholder="Masukkan Password baru"/>
+						<label class="control-label col-md-5">Input password baru <small class="text-danger">*</small></label>
+						<div class="col-md-7">
+							<input type="password" name="input" id="input" class="form-control" placeholder="Input password baru"/>
 						</div>
                     </div>
                     <div class="form-group">
-						<label class="control-label col-md-4">Input ulang password baru: </label>
-						<div class="col-md-8">
-							<input type="password" name="inputnew" id="inputnew" class="form-control" placeholder="Masukkan lagi password baru"/>
+						<label class="control-label col-md-5">Input ulang password baru <small class="text-danger">*</small></label>
+						<div class="col-md-7">
+							<input type="password" name="inputnew" id="inputnew" class="form-control" placeholder="Input ulang password baru"/>
 						</div>
 					</div>
 					<br />
 					<div class="form-group" align="center">
 						<input type="hidden" name="change_id" id="change_id" />
-						<input type="submit" name="change_button" id="change_button" class="btn btn-primary" value="submit" />
+						<input type="submit" name="change_button" id="change_button" class="btn btn-primary" value="Submit" />
 					</div>
 				</form>
 			</div>
@@ -133,7 +123,7 @@
 .table th,
 .table td {
   padding: 6px 10px;
-  border: 0.5px solid #d9d7ce;
+  border: 1px solid #d9d7ce;
 }
 
 .table-flip {
@@ -179,10 +169,12 @@
 				data: 'email',
 				name: 'email',
 			},
+			@role(['admin','kps','wali-kelas'])
 			{
 				data: 'role',
 				name: 'role',
 			}
+			@endrole
             // {
 			// 	data: 'nis',
 			// 	name: 'nis',
@@ -243,7 +235,7 @@
                                 $('#editModal').modal('hide');
                             },1000);
                             $('#tab_data').DataTable().ajax.reload();//ini yang penting karena tanpa reload page
-                            toastr.success('profil telah berhasil diedit!', 'Success', {timeOut: 5000});
+                            toastr.success('Profil telah berhasil diperbarui!', 'Success', {timeOut: 5000});
                         }
                     },
                 error:function(xhr) {

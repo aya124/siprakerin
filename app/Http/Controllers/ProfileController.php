@@ -143,7 +143,7 @@ class ProfileController extends Controller
             'name' => $request->name,
             'email' => $request->email,
         ]);
-        return response()->json(['success' => 'Profil user berhasil diperbarui.']);
+        return response()->json(['success' => 'Profil berhasil diperbarui.']);
     }
 
     public function change($id)
