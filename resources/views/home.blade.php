@@ -360,6 +360,11 @@
         <div class="box-body">
           <p>Pada bagian Management, anda berhak untuk melakukan manajemen (CRUD) pada menu User, Kelas, Status, Role, dan Permission.</p>
           <p>Pada menu User, anda dapat meng-input user baru dengan ketentuan yang lebih spesifik.</p>
+           <img class="img-responsive pad" src="../images/png/user-view.png" alt="User-View">
+          <p>Perhatikan tampilan berikut. Melalui menu ini, anda dapat mengaktifkan user dengan <i>Role</i> <b>"siswa"</b>.</p>
+          <img class="img-responsive pad" src="../images/jpg/unlocking-user.jpg" alt="User-Activation">
+          <p>Klik tombol <b><u>Aktifkan</u></b> agar user tersebut dapat membuat pengajuan lagi.</p>
+          <img class="img-responsive pad" src="../images/png/user-unlock.png" alt="User-Activation-Confirm">
           <p>Pada menu Kelas, anda dapat meng-input dan mengubah data kelas.</p>
           <p>Pada menu Status, anda dapat melakukan manajemen data status sebagai keterangan pada pengajuan prakerin.</p>
           <p>Pada menu Role, anda dapat melakukan manajemen data role atau peran sesuai dengan kebutuhan.</p>
