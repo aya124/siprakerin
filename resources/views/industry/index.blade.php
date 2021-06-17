@@ -22,7 +22,7 @@
       <thead>
         <tr>
           <th style="width: 20%">Nama Industri</th>
-          <th style="width: 28%">Alamat</th>
+          <th style="width: 30%">Alamat</th>
           <th style="width: 12%">Kota</th>
           @role(['admin', 'wali-kelas', 'kps', 'kepsek', 'wks1', 'wks4'])
           <th style="width: 8%">Status</th>
@@ -86,7 +86,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Data Industri</h4>
+				<h3 class="modal-title">Data Industri</h3>
 			</div>
 			<div class="modal-body">
 				<span id="form_result"></span>
@@ -150,7 +150,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h2 class="modal-title">Detail Industri</h2>
+        <h3 class="modal-title">Detail Industri</h3>
       </div>
       <div class="modal-body">
         <table class="table">
@@ -196,7 +196,7 @@
       <div class="modal-content">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h2 class="modal-title">Hapus Data</h2>
+              <h3 class="modal-title">Hapus Industri</h3>
           </div>
           <div class="modal-body">
               <h4 align="center" style="margin:0;">Apakah anda yakin ingin menghapus data ini?</h4>
