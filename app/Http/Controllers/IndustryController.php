@@ -32,21 +32,21 @@ class IndustryController extends Controller
                 ->addColumn('action', function($data){
                     if(Auth::user()->hasRole(['admin', 'kps'])) {
                         $button = '<button type="button"
-                        name="detail" id="'.$data->id.'" 
+                        id="'.$data->id.'"
                         class="detail btn btn-info btn-sm">
                         <i class="fa fa-info-circle"></i> Detail</button>';
                         $button .= '&nbsp;&nbsp;';
                         $button .= '<button type="button"
-                        name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">
+                        id="'.$data->id.'" class="edit btn btn-primary btn-sm">
                         <i class="fa fa-edit"></i> Edit</button>';
                         $button .= '&nbsp;&nbsp;';
                         $button .= '<button type="button"
-                        name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm">
+                        id="'.$data->id.'" class="delete btn btn-danger btn-sm">
                         <i class="fa fa-trash"></i> Hapus</button>';
                         $button .= '&nbsp;&nbsp;';
                         if ($data->check == 1){
                         $button .= '<button type="button"
-                        name="lihatsaran" url="'.route('suggestion.show',$data->id).'" 
+                        url="'.route('suggestion.show',$data->id).'"
                         class="lihatsaran btn btn-warning btn-sm">
                         <i class="fa fa-eye"></i> Lihat Saran</button>';
                         $button .= '&nbsp;&nbsp;';
@@ -54,23 +54,23 @@ class IndustryController extends Controller
                         return $button;
                       }else {
                         $button = '<button type="button"
-                        name="detail" id="'.$data->id.'" class="detail btn btn-success
+                        id="'.$data->id.'" class="detail btn btn-success
                         btn-sm"><i class="fa fa-info-circle"></i> Detail</button>';
                         $button .= '&nbsp;&nbsp;';
                         if($data->status!='disetujui'){
                             $button .= '<button type="button"
-                            name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">
+                            id="'.$data->id.'" class="edit btn btn-primary btn-sm">
                             <i class="fa fa-edit"></i> Edit</button>';
                             $button .= '&nbsp;&nbsp;';
                         }
                         else {
                             $button .= '<button type="button"
-                            name="saran" id="'.$data->id.'" class="saran btn btn-warning btn-sm">
+                            id="'.$data->id.'" class="saran btn btn-warning btn-sm">
                             <i class="fa fa-edit"></i> Saran</button>';
                             $button .= '&nbsp;&nbsp;';
                         if ($data->check == 1) {
                             $button .= '<button type="button"
-                            name="lihatsaran" url="'.route('suggestion.show',$data->id).'" 
+                            url="'.route('suggestion.show',$data->id).'"
                             class="lihatsaran btn btn-info btn-sm">
                             <i class="fa fa-eye"></i> Lihat Saran</button>';
                             $button .= '&nbsp;&nbsp;';
@@ -125,6 +125,14 @@ class IndustryController extends Controller
             $a->save();
             return response()->json('success', 200);
         });
+    }
+    private function deleteSuggestion($idIndustry)
+    {
+        try {
+            Suggestion::where('industry_id', $idIndustry)->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     public function showSuggestion($id)
@@ -183,7 +191,9 @@ class IndustryController extends Controller
     public function destroy($id)
     {
         $industry = Industry::findOrFail($id);
+        $this->deleteSuggestion($id);
         $industry->delete();
         return response()->json(['success' => 'Data industri berhasil dihapus.']);
     }
+
 }

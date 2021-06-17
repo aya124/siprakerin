@@ -226,8 +226,16 @@
 			},
 			columns:[
 			{
-				data: 'name',
-				name: 'name',
+                data: null,
+                render:function(data){
+                    if(data.status == "disetujui"){
+                        return data.name+' &nbsp;<i class="fa fa-check-circle text-success"  data-toggle="tooltip" title="Sudah disetujui" aria-hidden="true"></i>';
+                    }else if(data.status == "tidak disetujui"){
+                        return '<p class="text-warning" data-toggle="tooltip" title="'+data.status+'">'+data.name+'&nbsp;<i class="fas fa-times text-danger"></i></p>'
+                    }else{
+                        return data.name;
+                    }
+                }
 			},
 			{
 				data: 'address',
@@ -331,7 +339,7 @@
     $(document).on('click', '.saran', function(){
       id = $(this).attr('id');
       $('#industry_id').val(id);
-      $('#saranModal').modal('show'); 
+      $('#saranModal').modal('show');
     });
 
       $('#tambahSaran').on('submit',function(event) {
