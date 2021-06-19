@@ -21,7 +21,7 @@
 </div>
 <div class="box">
   <div class="box-header">
-      {{-- <h3 class="box-title">Pengajuan</h3> --}}
+      <h3 class="box-title">Pengajuan</h3>
   </div>
 
   <!-- /.box-header -->
@@ -29,12 +29,12 @@
     <table id="tab_data" class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>Nama Industri</th>
-          <th>Tanggal Mulai</th>
-          <th>Tanggal Selesai</th>
-          <th>Status</th>
-          <th>Pengajuan</th>
-          <th>Aksi</th>
+          <th style="width: 20%">Nama Industri</th>
+          <th style="width: 12%">Tanggal Mulai</th>
+          <th style="width: 13%">Tanggal Selesai</th>
+          <th style="width: 12%">Status</th>
+          <th style="width: 10%">Pengajuan</th>
+          <th style="width: 30%">Aksi</th>
         </tr>
       </thead>
     </table>
@@ -140,7 +140,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title"></h4>
+				<h3 class="modal-title"></h3>
 			</div>
 			<div class="modal-body">
         <span id="form_result"></span>
@@ -172,7 +172,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title"></h4>
+				<h3 class="modal-title"></h3>
 			</div>
 			<div class="modal-body">
         <span id="form_result"></span>
@@ -204,7 +204,7 @@
       <div class="modal-content">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h2 class="modal-title">Hapus data</h2>
+              <h3 class="modal-title">Hapus data</h3>
           </div>
           <div class="modal-body">
               <h4 align="center" style="margin:0;">Apakah anda yakin ingin menghapus data ini?</h4>
