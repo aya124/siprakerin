@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReportRequest;
 use App\Certificate;
 use App\Industry;
 use App\Report;
@@ -47,7 +48,8 @@ class ReportController extends Controller
                     <i class="fas fa-download"></i> Unduh Laporan</a>';
                     }
                     if (auth()->user()->hasRole('siswa')) {
-                        $html .= '<button name="report" class="btn btn-default btn-sm edit" data-id="' . $data->id . '">
+                        $html .= '<button name="report" 
+                        class="btn btn-default btn-sm edit" data-id="' . $data->id . '">
                     <i class="fas fa-upload"></i> Unggah Laporan</button>';
                     }
                     if ($data->status_id == 8) {
@@ -64,7 +66,8 @@ class ReportController extends Controller
                     <i class="fas fa-download"></i> Unduh Sertifikat</a>';
                     }
                     if (auth()->user()->hasRole('siswa')) {
-                        $html .= '<button name="report2" class="btn btn-default btn-sm editCertif" data-id="' . $data->id . '">
+                        $html .= '<button name="report2" 
+                        class="btn btn-default btn-sm editCertif" data-id="' . $data->id . '">
                     <i class="fas fa-upload"></i> Unggah Sertifikat</button>';
                     }
                     if ($data->status_id == 8) {
@@ -85,13 +88,14 @@ class ReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReportRequest $request)
     {
-        $request->validate([
-            'submission_id' => 'required|sometimes',
-            'report' => 'required|file|mimes:doc,docx,pdf|max:512|sometimes',
-            'report2' => 'required|file|mimes:jpeg,jpg,png,pdf|max:512|sometimes'
-        ]);
+        // $request->validate([
+        //     'submission_id' => 'required|sometimes',
+        //     'report' => 'required|file|mimes:doc,docx,pdf|max:512|sometimes',
+        //     'report2' => 'required|file|mimes:jpeg,jpg,png,pdf|max:512|sometimes'
+        // ]);
+        $data = $request->all();
 
         $original_name = $request->report->getClientOriginalName();
         $saved_name = 'file_laporan' . date('Ymd') . '_' . str_pad(Report::all()->count() + 1, 4, '0', STR_PAD_LEFT).'.'.$request->report->extension();
