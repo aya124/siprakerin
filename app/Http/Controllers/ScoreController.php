@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ScoreRequest;
 use App\Score;
 use App\Submission;
 use Illuminate\Http\Request;
@@ -74,6 +75,13 @@ class ScoreController extends Controller
                         $button .= '&nbsp;&nbsp;';
                         return $button;
                     }
+                    if (Auth::user()->hasRole(['admin','kps'])){
+                        $button = '<a href= "score/print/'.$data->id.'"
+                        target="_blank" type="button" name="print"
+                        class="btn btn-default btn-sm">
+                        <i class="fas fa-print"></i> Cetak Nilai</a>';
+                        return $button;
+                    }
                     else {
                         $button = '';
                         $button = '<button class="btn btn-default btn-sm edit" 
@@ -98,25 +106,26 @@ class ScoreController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ScoreRequest $request)
     {
-        $request->validate([
-            'score_1' => 'numeric|between:0,100',
-            'score_2' => 'numeric|between:0,100',
-            'score_3' => 'numeric|between:0,100',
-            'score_4' => 'numeric|between:0,100',
-            'score_5' => 'numeric|between:0,100',
-            'score_6' => 'numeric|between:0,100',
-            'score_7' => 'numeric|between:0,100',
-            'score_8' => 'numeric|between:0,100',
-            'score_9' => 'numeric|between:0,100',
-            'score_a' => 'required',
-            'score_b' => 'required',
-            'score_c' => 'required',
-            'score_d' => 'required',
-            'score_e' => 'required',
-            'submission_id' => 'required',
-        ]);
+        // $request->validate([
+        //     'score_1' => 'numeric|between:0,100',
+        //     'score_2' => 'numeric|between:0,100',
+        //     'score_3' => 'numeric|between:0,100',
+        //     'score_4' => 'numeric|between:0,100',
+        //     'score_5' => 'numeric|between:0,100',
+        //     'score_6' => 'numeric|between:0,100',
+        //     'score_7' => 'numeric|between:0,100',
+        //     'score_8' => 'numeric|between:0,100',
+        //     'score_9' => 'numeric|between:0,100',
+        //     'score_a' => 'required',
+        //     'score_b' => 'required',
+        //     'score_c' => 'required',
+        //     'score_d' => 'required',
+        //     'score_e' => 'required',
+        //     'submission_id' => 'required',
+        // ]);
+        $data = $request->all();
 
         $submission = Submission::find($request->submission_id);
         if ($submission->score_id) {
@@ -137,22 +146,7 @@ class ScoreController extends Controller
             $score->score_c = $request->score_e;
             $score->save();
         } else {
-            $score = Score::create([
-                'score_1' => $request->score_1,
-                'score_2' => $request->score_2,
-                'score_3' => $request->score_3,
-                'score_4' => $request->score_4,
-                'score_5' => $request->score_5,
-                'score_6' => $request->score_6,
-                'score_7' => $request->score_7,
-                'score_8' => $request->score_8,
-                'score_9' => $request->score_9,
-                'score_a' => $request->score_a,
-                'score_b' => $request->score_b,
-                'score_c' => $request->score_c,
-                'score_d' => $request->score_d,
-                'score_e' => $request->score_e,
-            ]);
+            $score = Score::create($data);
             $submission->score_id = $score->id;
             $submission->save();
         }

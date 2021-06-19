@@ -58,7 +58,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Input Nilai</h4>
+          <h3 class="modal-title">Input Nilai</h3>
         </div>
         <div class="modal-body">
           <span id="form_result"></span>
@@ -187,7 +187,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><b>Detail Nilai</b></h4>
+        <h3 class="modal-title">Detail Nilai</h3>
       </div>
       <div class="modal-body">
         <table class="table">
@@ -246,7 +246,7 @@
               <td id="score_9" align="center"></td>
             </tr>
             <tr>
-              <td>&nbsp;.</td>
+              <td>&nbsp;</td>
               <td>&nbsp;</td>
               <td>&nbsp;</td>
             </tr>
@@ -303,7 +303,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h2 class="modal-title">Hapus data</h2>
+          <h3 class="modal-title">Hapus data</h3>
         </div>
         <div class="modal-body">
           <h4 align="center" style="margin:0;">Apakah anda yakin ingin menghapus data ini?</h4>
@@ -421,6 +421,7 @@
 
       @role(['admin', 'wali-kelas'])
       $('#btn_add').click(function() {
+        $('.notifError').remove();
         $('#createModal').modal('show');
         $('#form_result').hide();
         $('#createModal .modal-title').text("Tambah Nilai");
@@ -432,6 +433,7 @@
       $(document).on('click', '.edit', function() {
         sub_id = $(this).data('id');
         $('#submission').val(sub_id);
+        $('.notifError').remove();
         $('#createModal').modal('show');
         $('#form_result').hide();
         $.ajax({
@@ -458,11 +460,12 @@
 
       // let sub_id;
       $(document).on('click','.detail',function(){
-      var id =$(this).attr('id');
-      // $('#submission').val(sub_id);
+      sub_id =$(this).attr('id');
+      $('#submission').val(sub_id);
+      $('.notifError').remove();
       $('#detailModal').modal('show');
       $.ajax({
-        url:"/score/"+id+"/edit",
+        url:"/score/"+sub_id+"/edit",
         dataType:"json",
         success:function(html){
           $('#score_1').val(html.data.score_1);
@@ -484,6 +487,7 @@
 	  });
 
       $('#add').on('submit', function(event) {
+        $('.notifError').remove();
         event.preventDefault();
         $.ajax({
           url: `/score`,
@@ -496,19 +500,26 @@
           success: function(data) {
             $('#form_result').hide();
             if (data.success) {
-              html = '<div class="alert alert-success">' + data.success +
-                '</div>';
+              html = '<div class="alert alert-success">' + data.success + '</div>';
               setTimeout(function() {
                 $('#createModal').modal('hide');
               }, 1000);
               $('#tab_data').DataTable().ajax.reload();
-              toastr.success('Nilai berhasil diperbarui!', 'Success', {
-                timeOut: 5000
-              });
+              toastr.success('Nilai berhasil diperbarui!', 'Success', {timeOut: 5000});
             }
           },
           error: function(xhr) {
             console.log(xhr);
+            $('#form_result').show();
+            html = '<div class="alert alert-danger">';
+            $.each(xhr.responseJSON.errors, function (key, item) {
+              html+='<p>' +item+'</p>';
+            });
+            html += '</div>';
+            $('#form_result').html(html);
+            $.each(xhr.responseJSON.errors,function(field_name,error){
+              $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+            });
           } //end error
         });
       });

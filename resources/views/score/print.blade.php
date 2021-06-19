@@ -96,8 +96,7 @@
                     @endphp
                     @foreach ($data as $d)
                     <tr>
-                        <td>A.</td>
-                        <td colspan="2">ASPEK TEKNIS</td>
+                        <th align="left" colspan="3">A. ASPEK TEKNIS</th>
                     </tr>
                     <tr>
                         <td align="center">{{++$i}}.</td>
@@ -145,8 +144,7 @@
                         <td align="center">{{$d->s9}}</td>
                     </tr>
                     <tr>
-                        <th>B.</th>
-                        <th colspan="2">ASPEK NONTEKNIS</th>
+                        <th align="left" colspan="3">B. ASPEK NONTEKNIS</th>
                     </tr>
                     <tr>
                         <th>NO.</th>
