@@ -22,14 +22,14 @@
       <table id="tab_data" class="table table-bordered table-striped" style="width:100%">
         <thead>
           <tr>
-            <th>Nama Siswa</th>
-            <th>Nama Industri</th>
-            <th>Tanggal Mulai</th>
-            <th>Tanggal Selesai</th>
-            <th>Status</th>
-            <th>Pengajuan</th>
-            <th>Persuratan</th>
-            <th>Aksi</th>
+            <th style="width: 15%">Nama Siswa</th>
+            <th style="width: 15%">Nama Industri</th>
+            <th style="width: 7%">Tanggal Mulai</th>
+            <th style="width: 8%">Tanggal Selesai</th>
+            <th style="width: 8%">Status</th>
+            <th style="width: 7%">Pengajuan</th>
+            <th style="width: 15%">Persuratan</th>
+            <th style="width: 15%">Aksi</th>
           </tr>
         </thead>
       </table>

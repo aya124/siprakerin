@@ -385,7 +385,7 @@ class ValidationController extends Controller
     if ($data) {
       //base_path().'/public/'.$user->name.'+'_surat_pengantar';
       // $file = base_path().'/public/files_upload/'.$user->name.'/'.$data;
-      $file2 = base_path() . '/public/images/suratbalasan/' . $data;
+      $file2 = base_path() . '/public/files/suratbalasan/' . $data;
       if (file_exists($file2)) {
         $ext = File::extension($file2);
         if ($ext == 'pdf') {
