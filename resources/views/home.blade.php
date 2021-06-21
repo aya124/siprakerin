@@ -176,7 +176,7 @@
       </div>
       @endrole
 
-      @role(['admin','kps','wali-kelas'])
+      @role(['kps','wali-kelas'])
       <div class="box box-widget">
         <div class="box-header with-border">
           <div class="user-block">
@@ -208,7 +208,7 @@
       </div>
       @endrole
 
-      @role(['admin','kps','wali-kelas','siswa'])
+      @role(['kps','wali-kelas','siswa'])
       <div class="box box-widget">
         <div class="box-header with-border">
           <div class="user-block">
@@ -251,7 +251,7 @@
       </div>
       @endrole
 
-       @role(['admin','kps','wali-kelas'])
+       @role(['kps','wali-kelas'])
        <div class="box box-widget">
         <div class="box-header with-border">
           <div class="user-block">
@@ -283,7 +283,7 @@
       </div>
       @endrole
 
-      @role(['admin','kps','wali-kelas','siswa'])
+      @role(['kps','wali-kelas','siswa'])
       <div class="box box-widget">
         <div class="box-header with-border">
           <div class="user-block">
@@ -327,7 +327,7 @@
       </div>
       @endrole
 
-       @role(['admin','kps','wali-kelas'])
+       @role(['kps','wali-kelas'])
        <div class="box box-widget">
         <div class="box-header with-border">
           <div class="user-block">
