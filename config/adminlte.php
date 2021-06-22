@@ -165,6 +165,7 @@ return [
             'text' => 'Laporan & Sertifikat',
             'url' => 'report',
             'icon' => 'fa fa-file',
+            'permission' => 'menu-laporan'
         ],
         [
             'text' => 'Rekap Laporan & Sertifikat',
@@ -176,6 +177,7 @@ return [
             'text' => 'Nilai',
             'url' => 'score',
             'icon' => 'fa fa-check-square',
+            'permission' => 'menu-nilai'
         ],
         [
             'text' => 'Rekap Nilai',
