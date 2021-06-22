@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileRequest;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
@@ -45,13 +46,13 @@ class ProfileController extends Controller
             // ->join('students as s','s.user_id','=','u.id')
             // ->join('student_classes as sc','sc.id','=','s.class_id')
             ->select(
-                    'u.name',
-                    'u.email',
-                    DB::raw('r.name as role'),
-                    // 's.nis',
-                    // DB::raw('sc.name as classname'),
-                    'u.id'
-                    )
+                'u.name',
+                'u.email',
+                DB::raw('r.name as role'),
+                // 's.nis',
+                // DB::raw('sc.name as classname'),
+                'u.id'
+                )
             ->where('u.id',$isLoggin->id)
             ->get();
         return view('profile.index',compact('data'));
@@ -95,12 +96,12 @@ class ProfileController extends Controller
             // ->join('students as s','s.user_id','=','u.id')
             // ->join('student_classes as sc','sc.id','=','s.class_id')
             ->select('u.name',
-                    'u.email',
-                    DB::raw('r.name as role'),
-                    // 's.nis',
-                    // DB::raw('sc.name as classname'),
-                    'u.id'
-                    )
+                'u.email',
+                DB::raw('r.name as role'),
+                // 's.nis',
+                // DB::raw('sc.name as classname'),
+                'u.id'
+            )
             ->where('u.id', $id)
             ->get();
         }
@@ -115,8 +116,7 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
-         if(request()->ajax())
+        if(request()->ajax())
         {
         $data = User::findOrFail($id);
             return response()->json(compact('data'));
@@ -130,19 +130,11 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(ProfileRequest $request)
     {
-        $request-> validate([
-            'name' => ['required', 'string', 'regex:/^[a-zA-Z ]+$/'],
-            'email' => ['required', 'email',
-        ],
-            'required' =>'Kolom :attribute tidak boleh kosong',
-        ]);
+        $data = $request->all();
         $user = User::findOrFail($request->hidden_id);
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
+        $user->update($data);
         return response()->json(['success' => 'Profil berhasil diperbarui.']);
     }
 
@@ -162,9 +154,9 @@ class ProfileController extends Controller
            'inputnew' => 'required|same:input'
         ];
         $msg = [
-            'input.required' => 'Password tidak boleh kosong',
-            'inputnew.required' => 'Password tidak boleh kosong',
-            'inputnew.same' => 'Password tidak sama',
+            'input.required' => 'Password tidak boleh kosong!',
+            'inputnew.required' => 'Password tidak boleh kosong!',
+            'inputnew.same' => 'Password harus sama!',
         ];
         $this->validate($request,$rules,$msg);
         $pass = User::findOrFail($request->change_id);

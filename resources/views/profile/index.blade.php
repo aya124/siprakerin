@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+ @extends('adminlte::page')
 
 @section('title', 'Profil User')
 
@@ -12,7 +12,7 @@
 @endif
 
 <div class="box box-primary">
-    <div class="box-header">
+	<div class="box-header">
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -44,7 +44,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Edit Profil</h4>
+				<h3 class="modal-title">Edit Profil</h3>
 			</div>
 			<div class="modal-body">
 				<span id="form_result"></span>
@@ -62,9 +62,6 @@
 							<input type="text" name="email" id="email" class="form-control"   />
 						</div>
 					</div>
-                   
-					
-
 					<br />
 					<div class="form-group" align="center">
 						<input type="hidden" name="hidden_id" id="hidden_id" />
@@ -81,7 +78,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Ganti Password</h4>
+				<h3 class="modal-title">Ganti Password</h3>
 			</div>
 			<div class="modal-body">
 				<span id="change_result"></span>
@@ -203,6 +200,7 @@
         });
 
         $(document).on('click','#edit_profil',function(){
+			$('.notifError').remove();
  			$('#editModal').modal('show');
  			$('#form_result').hide();
  			$.ajax({
@@ -217,6 +215,7 @@
         });
 
         $('#edit').on('submit',function(event){
+			$('.notifError').remove();
             event.preventDefault();
             $.ajax({
                 url:"{{route('prof.update')}}",
@@ -245,13 +244,17 @@
                      $.each(xhr.responseJSON.errors, function (key, item) {
                           html+='<p>' +item+'</p>';
                       });
-                         html += '</div>';
+                    	html += '</div>';
                         $('#form_result').html(html);
-                }//end error
+						$.each(xhr.responseJSON.errors,function(field_name,error){
+          					$(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+        				});
+                	}//end error
             });
         });//edit function
 
         $('#changed').on('submit',function(event){
+			$('.notifError').remove();
  			event.preventDefault();
  			$.ajax({
                 url:"{{route('pass.update')}}",
@@ -264,14 +267,6 @@
 				success:function(data) {
 					$('#change_result').show();
 					var html = '';
-						if(data.errors) {
-							html = '<div class="alert alert-danger">';
-							for(var count = 0; count < data.errors.length; count++) {
-								html += '<p>' + data.errors[count] + '</p>';
-							}
-							html += '</div>';
-							$('#change_result').html(html);
-						}
 						if(data.success) {
 							html = '<div class="alert alert-success">' + data.success + '</div>';
 							setTimeout(function(){
@@ -287,8 +282,11 @@
 					$.each(xhr.responseJSON.errors, function (key, item) {
 				        html+='<p>' +item+'</p>';
 				    });
-				 		html += '</div>';
-						$('#change_result').html(html);
+				 	html += '</div>';
+					$('#change_result').html(html);
+						$.each(xhr.responseJSON.errors,function(field_name,error){
+              		$(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+            });
 				}//end error
 			});
  		});//edit function
