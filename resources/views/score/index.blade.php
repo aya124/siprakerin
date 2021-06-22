@@ -122,9 +122,9 @@
               <label class="control-label col-md-4" >Nilai Disiplin <small class="text-danger">*</small></label>
                   <div class="col-md-8">
                     <select class="form-control" name="score_a" id="score_a">
-                      <option value="belum disetujui">Baik</option>
-                      <option value="disetujui">Amat Baik</option>
-                      <option value="tidak disetujui">Cukup</option>
+                      <option value="baik">Baik</option>
+                      <option value="amat baik">Amat Baik</option>
+                      <option value="cukup">Cukup</option>
                     </select>
                   </div>
             </div>
@@ -132,9 +132,9 @@
               <label class="control-label col-md-4" >Nilai Kerjasama <small class="text-danger">*</small></label>
                   <div class="col-md-8">
                     <select class="form-control" name="score_b" id="score_b">
-                      <option value="belum disetujui">Baik</option>
-                      <option value="disetujui">Amat Baik</option>
-                      <option value="tidak disetujui">Cukup</option>
+                      <option value="baik">Baik</option>
+                      <option value="amat baik">Amat Baik</option>
+                      <option value="cukup">Cukup</option>
                     </select>
                   </div>
             </div>
@@ -142,9 +142,9 @@
               <label class="control-label col-md-4" >Nilai Inisiatif <small class="text-danger">*</small></label>
                   <div class="col-md-8">
                     <select class="form-control" name="score_c" id="score_c">
-                      <option value="belum disetujui">Baik</option>
-                      <option value="disetujui">Amat Baik</option>
-                      <option value="tidak disetujui">Cukup</option>
+                      <option value="baik">Baik</option>
+                      <option value="amat baik">Amat Baik</option>
+                      <option value="cukup">Cukup</option>
                     </select>
                   </div>
             </div>
@@ -152,9 +152,9 @@
               <label class="control-label col-md-4" >Nilai Tanggung Jawab <small class="text-danger">*</small></label>
                   <div class="col-md-8">
                     <select class="form-control" name="score_d" id="score_d">
-                      <option value="belum disetujui">Baik</option>
-                      <option value="disetujui">Amat Baik</option>
-                      <option value="tidak disetujui">Cukup</option>
+                      <option value="baik">Baik</option>
+                      <option value="amat baik">Amat Baik</option>
+                      <option value="cukup">Cukup</option>
                     </select>
                   </div>
             </div>
@@ -162,9 +162,9 @@
               <label class="control-label col-md-4" >Nilai Kebersihan <small class="text-danger">*</small></label>
                   <div class="col-md-8">
                     <select class="form-control" name="score_e" id="score_e">
-                      <option value="belum disetujui">Baik</option>
-                      <option value="disetujui">Amat Baik</option>
-                      <option value="tidak disetujui">Cukup</option>
+                      <option value="baik">Baik</option>
+                      <option value="amat baik">Amat Baik</option>
+                      <option value="cukup">Cukup</option>
                     </select>
                   </div>
             </div>
@@ -197,53 +197,53 @@
             @endphp
             <tr>
               <th align="center" style="width: 30px;">A.</th>
-              <th align="center" style="width: 240px;">ASPEK TEKNIS</th>
-              <th align="center" style="width: 180px;">NILAI</th>
+              <th align="center" style="width: 250px;">ASPEK TEKNIS</th>
+              <th align="center" style="width: 100px;">NILAI</th>
             </tr>
             <tr>
               <td align="center">{{++$i}}.</td>
               <td>Sistem Komputer</td>
-              <td id="score_1" align="center"></td>
+              <td id="score_1_detail" ></td>
             </tr>
             <tr>
             <td align="center">{{++$i}}.</td>
               <td>Komputer dan Jaringan</td>
-              <td id="score_2" align="center"></td>
+              <td id="score_2_detail" ></td>
             </tr>
             <tr>
               <td align="center">{{++$i}}.</td>
               <td>Pemrograman Dasar</td>
-              <td id="score_3" align="center"></td>
+              <td id="score_3_detail" ></td>
             </tr>
             <tr>
               <td align="center">{{++$i}}.</td>
               <td>Dasar Desain Grafis</td>
-              <td id="score_4" align="center"></td>
+              <td id="score_4_detail" ></td>
             </tr>
             <tr>
               <td align="center">{{++$i}}.</td>
               <td>Infrastruktur Komputasi Awan (IaaS)</td>
-              <td id="score_5" align="center"></td>
+              <td id="score_5_detail" ></td>
             </tr>
             <tr>
               <td align="center">{{++$i}}.</td>
               <td>Platform Komputasi Awan (PaaS)</td>
-              <td id="score_6" align="center"></td>
+              <td id="score_6_detail" ></td>
             </tr>
             <tr>
               <td align="center">{{++$i}}.</td>
               <td>Layanan Komputasi Awan (SaaS)</td>
-              <td id="score_7" align="center"></td>
+              <td id="score_7_detail"></td>
             </tr>
             <tr>
               <td align="center">{{++$i}}.</td>
               <td>Sistem Internet of Things (SIoT)</td>
-              <td id="score_8" align="center"></td>
+              <td id="score_8_detail" ></td>
             </tr>
             <tr>
               <td align="center">{{++$i}}.</td>
               <td>Sistem Keamanan Jaringan</td>
-              <td id="score_9" align="center"></td>
+              <td id="score_9_detail" ></td>
             </tr>
             <tr>
               <td>&nbsp;</td>
@@ -253,7 +253,7 @@
             <tr>
               <th align="center" style="width: 30px;">B.</th>
               <th align="center" style="width: 240px;">ASPEK NONTEKNIS</th>
-              <th align="center" style="width: 180px;">KUALIFIKASI</th>
+              <th align="center" style="width: 100px;">KUALIFIKASI</th>
             </tr>
             <!-- <tr>
               <th align="center" style="width: 20px;">NO.</th>
@@ -266,27 +266,27 @@
             <tr>
               <td align="center">{{++$i}}.</td>
               <td>Disiplin</td>
-              <td id="score_a" align="center"></td>
+              <td id="score_a_detail"></td>
             </tr>
             <tr>
               <td align="center">{{++$i}}.</td>
               <td>Kerjasama</td>
-              <td id="score_b" align="center"></td>
+              <td id="score_b_detail"></td>
             </tr>
             <tr>
               <td align="center">{{++$i}}.</td>
               <td>Inisiatif</td>
-              <td id="score_c" align="center"></td>
+              <td id="score_c_detail"></td>
             </tr>
             <tr>
               <td align="center">{{++$i}}.</td>
               <td>Tanggung Jawab</td>
-              <td id="score_d" align="center"></td>
+              <td id="score_d_detail"></td>
             </tr>
             <tr>
               <td align="center">{{++$i}}.</td>
               <td>Kebersihan</td>
-              <td id="score_e" align="center"></td>
+              <td id="score_e_detail"></td>
             </tr>
           </tbody>
         </table>
@@ -432,8 +432,8 @@
       let sub_id;
       $(document).on('click', '.edit', function() {
         sub_id = $(this).data('id');
-        $('#submission').val(sub_id);
         $('.notifError').remove();
+        $('#submission').val(sub_id);
         $('#createModal').modal('show');
         $('#form_result').hide();
         $.ajax({
@@ -460,7 +460,7 @@
 
       // let sub_id;
       $(document).on('click','.detail',function(){
-      sub_id =$(this).attr('id');
+      sub_id =$(this).data('id');
       $('#submission').val(sub_id);
       $('.notifError').remove();
       $('#detailModal').modal('show');
@@ -468,20 +468,20 @@
         url:"/score/"+sub_id+"/edit",
         dataType:"json",
         success:function(html){
-          $('#score_1').val(html.data.score_1);
-          $('#score_2').val(html.data.score_2);
-          $('#score_3').val(html.data.score_3);
-          $('#score_4').val(html.data.score_4);
-          $('#score_5').val(html.data.score_5);
-          $('#score_6').val(html.data.score_6);
-          $('#score_7').val(html.data.score_7);
-          $('#score_8').val(html.data.score_8);
-          $('#score_9').val(html.data.score_9);
-          $('#score_a').val(html.data.score_a);
-          $('#score_b').val(html.data.score_b);
-          $('#score_c').val(html.data.score_c);
-          $('#score_d').val(html.data.score_d);
-          $('#score_e').val(html.data.score_e);
+          $('#score_1_detail').text(html.data.score_1);
+          $('#score_2_detail').text(html.data.score_2);
+          $('#score_3_detail').text(html.data.score_3);
+          $('#score_4_detail').text(html.data.score_4);
+          $('#score_5_detail').text(html.data.score_5);
+          $('#score_6_detail').text(html.data.score_6);
+          $('#score_7_detail').text(html.data.score_7);
+          $('#score_8_detail').text(html.data.score_8);
+          $('#score_9_detail').text(html.data.score_9);
+          $('#score_a_detail').text(html.data.score_a);
+          $('#score_b_detail').text(html.data.score_b);
+          $('#score_c_detail').text(html.data.score_c);
+          $('#score_d_detail').text(html.data.score_d);
+          $('#score_e_detail').text(html.data.score_e);
         }
       });
 	  });

@@ -108,23 +108,6 @@ class ScoreController extends Controller
      */
     public function store(ScoreRequest $request)
     {
-        // $request->validate([
-        //     'score_1' => 'numeric|between:0,100',
-        //     'score_2' => 'numeric|between:0,100',
-        //     'score_3' => 'numeric|between:0,100',
-        //     'score_4' => 'numeric|between:0,100',
-        //     'score_5' => 'numeric|between:0,100',
-        //     'score_6' => 'numeric|between:0,100',
-        //     'score_7' => 'numeric|between:0,100',
-        //     'score_8' => 'numeric|between:0,100',
-        //     'score_9' => 'numeric|between:0,100',
-        //     'score_a' => 'required',
-        //     'score_b' => 'required',
-        //     'score_c' => 'required',
-        //     'score_d' => 'required',
-        //     'score_e' => 'required',
-        //     'submission_id' => 'required',
-        // ]);
         $data = $request->all();
 
         $submission = Submission::find($request->submission_id);
