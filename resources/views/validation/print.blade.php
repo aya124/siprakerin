@@ -88,7 +88,7 @@
   <header>
   <div width="100%" style="text-align: center">
 
-    <img src="{{ ('images/png/Coat_of_arms_of_Yogyakarta_640x480.svg.png') }}" width="10%" alt="image" style="border:black; float: center; padding: 5px; padding-left: 50px; margin: -5px;"/>
+    <img src="{{ ('pictures/png/Coat_of_arms_of_Yogyakarta_640x480.svg.png') }}" width="10%" alt="image" style="border:black; float: center; padding: 5px; padding-left: 50px; margin: -5px;"/>
     <span class="header"><b>PEMERINTAH DAERAH DAERAH ISTIMEWA YOGYAKARTA</b></span><br>
     <span class="header"><b>DINAS PENDIDIKAN, PEMUDA, DAN OLAHRAGA</b></span><br>
     <span class="header"><b>SMK NEGERI 2 DEPOK</b></span><br>
