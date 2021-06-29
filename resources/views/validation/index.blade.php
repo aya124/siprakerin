@@ -72,7 +72,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title">Lihat Feedback</h5>
+              <h4 class="modal-title">Lihat Feedback</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -107,7 +107,7 @@
             <th>Status</th>
             <th>Pengajuan</th>
             <th>Persuratan</th>
-            {{-- <th>Aksi</th> --}}
+            <!-- <th>Aksi</th> -->
           </tr>
         </thead>
         </table>
@@ -121,7 +121,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title">Lihat Info</h5>
+              <h4 class="modal-title">Lihat Feedback</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -140,7 +140,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h2 class="modal-title">Hapus data</h2>
+                <h3 class="modal-title">Hapus data</h3>
             </div>
             <div class="modal-body">
                 <h4 align="center" style="margin:0;" class="set">Apakah anda yakin ingin menghapus data ini?</h4>
@@ -163,32 +163,32 @@
 
 <script>
 $(function() {
-    $('#tab_data').DataTable({
+  $('#tab_data').DataTable({
 		processing: true,
 		serverSide: true,
 		ajax:{
-		url: "{{ route('validation.index') }}",
-      },
+		  url: "{{ route('validation.index') }}",
+    },
       columns:[
-	  {
-		data: 'username',
-		name: 'username',
+	    {
+		    data: 'username',
+		    name: 'username',
       },
       {
-		data: 'name',
-		name: 'name',
-	  },
-	  {
-		data: 'start_date',
+		    data: 'name',
+		    name: 'name',
+	    },
+	    {
+		    data: 'start_date',
         name: 'start_date',
-	  },
+	    },
       {
-		data: 'finish_date',
+		    data: 'finish_date',
         name: 'finish_date',
       },
       {
         data: 'status_name',
-		name: 'status_name',
+		    name: 'status_name',
       },
       {
         data: 'submit_type',
@@ -203,12 +203,12 @@ $(function() {
       },
       {
         data: 'correspondence',
-		name: 'correspondence',
+		    name: 'correspondence',
       },
       {
         data: 'action',
-		name: 'action',
-		orderable: false
+		    name: 'action',
+		    orderable: false
       }
 	]
       // $('#validasi').dataTable();
@@ -219,7 +219,7 @@ $(function() {
 		serverSide: true,
 		ajax:{
 			url: "{{ route('tab.setuju') }}",
-      },
+    },
       columns:[
       {
 		    data: 'user_name',
@@ -227,19 +227,19 @@ $(function() {
       },
       {
 		    data: 'name',
-			name: 'name',
-	  },
-	  {
-		data: 'start_date',
+			  name: 'name',
+	    },
+	    {
+		    data: 'start_date',
         name: 'start_date',
-		},
+		  },
       {
-		data: 'finish_date',
+		    data: 'finish_date',
         name: 'finish_date',
       },
       {
         data: 'status_name',
-		name: 'status_name',
+		    name: 'status_name',
       },
       {
         data: 'submit_type',
@@ -254,14 +254,14 @@ $(function() {
       },
       {
         data: 'correspondence',
-		name: 'correspondence',
+		    name: 'correspondence',
       },
       {
         data: 'action',
-		name: 'action',
-		orderable: false
+		    name: 'action',
+		    orderable: false
       }
-	]
+	  ]
       // $('#validasi').dataTable();
   });
 
@@ -270,27 +270,27 @@ $(function() {
 		serverSide: true,
 		ajax:{
 		url: "{{ route('tab.tolak') }}",
-      },
+    },
       columns:[
-        {
-			data: 'user_name',
-			name: 'user_name',
+      {
+			  data: 'user_name',
+			  name: 'user_name',
       },
       {
-			data: 'name',
-			name: 'name',
-	  },
-	  {
-			data: 'start_date',
-            name: 'start_date',
-		},
+			  data: 'name',
+			  name: 'name',
+	    },
+	    {
+			  data: 'start_date',
+        name: 'start_date',
+		  },
       {
-			data: 'finish_date',
-            name: 'finish_date',
+			  data: 'finish_date',
+        name: 'finish_date',
       },
       {
-            data: 'status_name',
-			name: 'status_name',
+        data: 'status_name',
+			  name: 'status_name',
       },
       {
         data: 'submit_type',
@@ -304,15 +304,15 @@ $(function() {
         }
       },
       {
-            data: 'correspondence',
-			name: 'correspondence',
+        data: 'correspondence',
+			  name: 'correspondence',
       },
-    //   {
-    //     data: 'action',
-	// 	name: 'action',
-	// 	orderable: false
-    //   }
-	]
+      // {
+      //   data: 'action',
+		  //   name: 'action',
+		  //   orderable: false
+      // }
+	  ]
       // $('#validasi').dataTable();
   });
 
@@ -376,15 +376,15 @@ $(function() {
   });
 
   $(document).on('click', '.info', function(){
-      id = $(this).attr('id');
-      $('#submission_id').val(id);
-      $('#infoModal').modal('show');
-    });
+    id = $(this).attr('id');
+    $('#submission_id').val(id);
+    $('#infoModal').modal('show');
+  });
 
   $(document).on('click', '.lihatinfo',function(){
-         $('#lihatInfoModal .modal-body').load($(this).attr('url'));
-         $('#lihatInfoModal').modal('show');
-        });
+    $('#lihatInfoModal .modal-body').load($(this).attr('url'));
+    $('#lihatInfoModal').modal('show');
+  });
 });
 </script>
 @stop
