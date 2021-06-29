@@ -17,7 +17,7 @@
 <div class="callout callout-info">
   <h4>Info!</h4>
   <b>Admin akan mengecek sistem setiap pukul 10:00 WIB dan 16:00 WIB.</b>
-        <!-- <a href="http://getbootstrap.com/javascript/#modals">Bootstrap documentation</a> -->
+  <!-- <a href="http://getbootstrap.com/javascript/#modals">Bootstrap documentation</a> -->
 </div>
 <div class="box">
   <div class="box-header">
@@ -45,93 +45,91 @@
 
 <!-- Modal -->
 <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title">Tambah Feedback</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-          <form method="post" id="tambahInfo" class="form-horizontal" enctype="multipart/form-data">
-          @csrf
-          <input type="hidden" name="submission_id" id="submission_id">
-        <div class="modal-body">
-        <div class="form-group ">
-          <textarea class="form-control" name="info" id="info" rows="3"></textarea>
-        </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-        </form>
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Tambah Feedback</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
       </div>
+      <form method="post" id="tambahInfo" class="form-horizontal" enctype="multipart/form-data">
+      @csrf
+      <input type="hidden" name="submission_id" id="submission_id">
+      <div class="modal-body">
+      <div class="form-group ">
+        <textarea class="form-control" name="info" id="info" rows="3"></textarea>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+      </form>
     </div>
   </div>
+</div>
 
   <!-- Modal -->
-  <div class="modal fade" id="lihatInfoModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title">Lihat Feedback</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <div class="modal-body">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
+<div class="modal fade" id="lihatInfoModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Lihat Feedback</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
+</div>
 
 <div id="createModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Pengajuan </h4>
+				<h3 class="modal-title">Pengajuan </h3>
 			</div>
 			<div class="modal-body">
-
         <span id="form_result"></span>
 			<form method="post" id="add" class="form-horizontal" enctype="multipart/form-data">
 			@csrf
-			    <div class="form-group">
-					<label class="control-label col-md-4" >Nama Industri <small class="text-danger">*</small> </label>
-						<div class="col-md-8">
-							<select class="form-control" id="name" name="industry_id">
-                        @foreach ($industry as $item)
+			  <div class="form-group">
+				<label class="control-label col-md-4" >Nama Industri <small class="text-danger">*</small> </label>
+					<div class="col-md-8">
+						<select class="form-control" id="name" name="industry_id">
+            @foreach ($industry as $item)
 						<option value="{{$item->id}}">{{$item->name}}</option>
-                        @endforeach
-							</select>
-					    </div>
-          </div>
-          <div class="form-group">
-						<label class="control-label col-md-4" >Tanggal Mulai Prakerin <small class="text-danger">*</small> </label>
-						<div class="col-md-8">
-							<input type="date" name="start_date" id="startdate" class="dateform form-control" />
-						</div>
-          </div>
-          <div class="form-group">
-						<label class="control-label col-md-4" >Tanggal Selesai Prakerin <small class="text-danger">*</small> </label>
-						<div class="col-md-8">
-							<input type="date" name="finish_date" id="finishdate" class="dateform form-control" />
-						</div>
-          </div>
-          <br />
-					<div class="form-group" align="center">
-						<input type="hidden" name="action" id="action" />
-						<input type="hidden" name="hidden_id" id="hidden_id" />
-						<input type="submit" name="action_button" id="action_button" class="btn btn-primary" value="Submit" />
+            @endforeach
+						</select>
+				  </div>
+        </div>
+        <div class="form-group">
+					<label class="control-label col-md-4" >Tanggal Mulai Prakerin <small class="text-danger">*</small> </label>
+					<div class="col-md-8">
+						<input type="date" name="start_date" id="startdate" class="dateform form-control" />
 					</div>
-				</form>
-			</div>
-		</div>
+        </div>
+        <div class="form-group">
+					<label class="control-label col-md-4" >Tanggal Selesai Prakerin <small class="text-danger">*</small> </label>
+					<div class="col-md-8">
+						<input type="date" name="finish_date" id="finishdate" class="dateform form-control" />
+					</div>
+        </div><br />
+				<div class="form-group" align="center">
+					<input type="hidden" name="action" id="action" />
+					<input type="hidden" name="hidden_id" id="hidden_id" />
+					<input type="submit" name="action_button" id="action_button" class="btn btn-primary" value="Submit" />
+				</div>
+			</form>
+		  </div>
+	  </div>
 	</div>
 </div>
 
@@ -332,30 +330,30 @@
       success:function(data) {
         $('#form_result').hide();
         if (data.success) {
-            html = '<div class="alert alert-success">' + data.success + '</div>';
-            setTimeout(function() {
-              $('#createModalUpload').modal('hide');
-              $('#tab_data').DataTable().ajax.reload();
-            }, 2000);
-            toastr.success('File berhasil di-upload', 'Success', {timeOut: 5000}
-            );
-          }
-        },
-        error: function(xhr) {
-            console.log(xhr);
-            $('#form_result').show();
-            html = '<div class="alert alert-danger">';
-            $.each(xhr.responseJSON.errors, function (key, item) {
-              html+='<p>' +item+'</p>';
-            });
-              html += '</div>';
-              $('#form_result').html(html);
-              $.each(xhr.responseJSON.errors,function(field_name,error){
-              $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
-             });
-            }
-      });
+          html = '<div class="alert alert-success">' + data.success + '</div>';
+          setTimeout(function() {
+            $('#createModalUpload').modal('hide');
+            $('#tab_data').DataTable().ajax.reload();
+          }, 2000);
+          toastr.success('Berkas berhasil diunggah!', 'Success', {timeOut: 5000}
+          );
+        }
+      },
+      error: function(xhr) {
+        console.log(xhr);
+        $('#form_result').show();
+        html = '<div class="alert alert-danger">';
+        $.each(xhr.responseJSON.errors, function (key, item) {
+          html+='<p>' +item+'</p>';
+        });
+        html += '</div>';
+        $('#form_result').html(html);
+        $.each(xhr.responseJSON.errors,function(field_name,error){
+          $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+        });
+      }
     });
+  });
 
   $('#upss').on('submit',function(event){
     $('.notifError').remove();
@@ -369,30 +367,30 @@
       dataType:"json",
       data: new FormData(this),
       success:function(data) {
-          $('#form_result').show();
-          if(data.success) {
-            html = '<div class="alert alert-success">' + data.success + '</div>';
-            setTimeout(function(){
-              $('#createModalUpload2').modal('hide');
-              $('#tab_data').DataTable().ajax.reload();
-            }, 2000);
-              toastr.success('File berhasil di-upload', 'Success', {timeOut: 5000}
-              );
-            }
-          },
-          error:function(xhr) {
-            console.log(xhr);
-            $('#form_result').show();
-            html = '<div class="alert alert-danger">';
-            $.each(xhr.responseJSON.errors, function (key, item) {
-              html+='<p>' +item+'</p>';
-            });
-              html += '</div>';
-              $('#form_result').html(html);
-              $.each(xhr.responseJSON.errors,function(field_name,error){
-              $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
-            });//end error
+        $('#form_result').show();
+        if(data.success) {
+          html = '<div class="alert alert-success">' + data.success + '</div>';
+          setTimeout(function(){
+            $('#createModalUpload2').modal('hide');
+            $('#tab_data').DataTable().ajax.reload();
+          }, 2000);
+            toastr.success('Berkas berhasil diunggah!', 'Success', {timeOut: 5000}
+            );
           }
+        },
+        error:function(xhr) {
+          console.log(xhr);
+          $('#form_result').show();
+          html = '<div class="alert alert-danger">';
+          $.each(xhr.responseJSON.errors, function (key, item) {
+            html+='<p>' +item+'</p>';
+          });
+          html += '</div>';
+          $('#form_result').html(html);
+          $.each(xhr.responseJSON.errors,function(field_name,error){
+            $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+          });//end error
+        }
     });
   });
 
@@ -484,61 +482,61 @@
                 html = '<div class="alert alert-success">' + data.success + '</div>';
                 setTimeout(function(){
                   $('#createModal').modal('hide');
-                  },1000);
-                  $('#tab_data').DataTable().ajax.reload();
-                  $('#btn_add').hide();
-                  toastr.success('Pengajuan berhasil ditambahkan!', 'Success', {timeOut: 5000});
+                },1000);
+                $('#tab_data').DataTable().ajax.reload();
+                $('#btn_add').hide();
+                toastr.success('Pengajuan berhasil ditambahkan!', 'Success', {timeOut: 5000});
+              }
+            },
+            error:function(xhr) {
+              console.log(xhr);
+              $('#form_result').show();
+              html = '<div class="alert alert-danger">';
+              $.each(xhr.responseJSON.errors, function (key, item) {
+                html+='<p>' +item+'</p>';
+              });
+              html += '</div>';
+              $('#form_result').html(html);
+              $.each(xhr.responseJSON.errors,function(field_name,error){
+                $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+              });
+            }//end error
+          });
+        }else{
+          $.ajax({
+            url:"{{route('sub.update')}}",
+            method:"POST",
+            contentType: false,
+            cache:false,
+            processData: false,
+            dataType:"json",
+            data: new FormData(this),
+            success:function(data) {
+              $('#form_result').show();
+              if(data.success) {
+                html = '<div class="alert alert-success">' + data.success + '</div>';
+                setTimeout(function(){
+                  $('#createModal').modal('hide');
+                },1000);
+                $('#tab_data').DataTable().ajax.reload();
+                toastr.success('Pengajuan berhasil diperbarui!', 'Success', {timeOut: 5000});
                 }
               },
-                error:function(xhr) {
-                  console.log(xhr);
-                  $('#form_result').show();
-                  html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) {
-                    html+='<p>' +item+'</p>';
-                  });
-                  html += '</div>';
-                  $('#form_result').html(html);
-                  $.each(xhr.responseJSON.errors,function(field_name,error){
-                    $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
-                  });
-                }//end error
-              });
-            }else{
-              $.ajax({
-                url:"{{route('sub.update')}}",
-                method:"POST",
-                contentType: false,
-                cache:false,
-                processData: false,
-                dataType:"json",
-                data: new FormData(this),
-                success:function(data) {
-                  $('#form_result').show();
-                    if(data.success) {
-                      html = '<div class="alert alert-success">' + data.success + '</div>';
-                      setTimeout(function(){
-                        $('#createModal').modal('hide');
-                    },1000);
-                    $('#tab_data').DataTable().ajax.reload();
-                      toastr.success('Pengajuan berhasil diperbarui!', 'Success', {timeOut: 5000});
-                    }
-                },
-                error:function(xhr) {
-                  console.log(xhr);
-                  $('#form_result').show();
-                  html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) {
-                  	html+='<p>' +item+'</p>';
-                  });
-                  html += '</div>';
-                  $('#form_result').html(html);
-                  $.each(xhr.responseJSON.errors,function(field_name,error){
-                    $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
-                  });
-                }//end error
-              });
-            }
+              error:function(xhr) {
+                console.log(xhr);
+                $('#form_result').show();
+                html = '<div class="alert alert-danger">';
+                $.each(xhr.responseJSON.errors, function (key, item) {
+                  html+='<p>' +item+'</p>';
+                });
+                html += '</div>';
+                $('#form_result').html(html);
+                $.each(xhr.responseJSON.errors,function(field_name,error){
+                  $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+                });
+              }//end error
+            });
+          }
         });
     });
 
