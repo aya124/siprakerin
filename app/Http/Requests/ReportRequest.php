@@ -26,7 +26,7 @@ class ReportRequest extends FormRequest
         return [
             'submission_id' => 'required',
             'file_type' => 'required',
-            'report' => 'required|file|mimes:doc,docx,pdf|max:4096',
+            'report' => 'required|file|mimes:doc,docx,pdf|max:2048',
         ];
     }
     public function messages()
@@ -34,7 +34,7 @@ class ReportRequest extends FormRequest
         return[
             'report.required'  => 'Wajib upload file!',
             'report.mimes'     => 'Format file berupa doc/docx/pdf',
-            'report.max'       => 'Ukuran file maksimal 4MB',
+            'report.max'       => 'Ukuran file maksimal 2MB',
         ];
     }
 }
