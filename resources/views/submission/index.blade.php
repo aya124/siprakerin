@@ -21,7 +21,7 @@
 </div>
 <div class="box">
   <div class="box-header">
-      <h3 class="box-title">Pengajuan</h3>
+    <h3 class="box-title">Pengajuan</h3>
   </div>
 
   <!-- /.box-header -->
@@ -152,8 +152,7 @@
             </div>
             <small class="control-label col-md-8">Format file berupa jpg/png/pdf</small>
           </div>
-        </div>
-        <br />
+        </div><br />
 			        <div class="form-group" align="center">
 				        <input type="hidden" name="hidden_name" id="hidden_name" />
 				        <input type="hidden" name="hidden_id" id="hidden_id2" />
@@ -184,8 +183,7 @@
             </div>
             <small class="control-label col-md-8">Format file berupa jpg/png/pdf</small>
           </div>
-        </div>
-        <br />
+        </div><br />
 					<div class="form-group" align="center">
 						<input type="hidden" name="hidden_name2" id="hidden_name2" />
 						<input type="hidden" name="hidden_id" id="hidden_id3" />
@@ -298,22 +296,24 @@
 
   $(document).on('click','.upload',function() {
     id_table = $(this).attr('id');
+    $('.notifError').remove();
     $('#hidden_id2').val(id_table);
     $('#hidden_name').val('suratpengantar');
     $('#action').val("upload");
     $('#createModalUpload').modal('show');
     $('#form_result').hide();
-	  $('#createModalUpload .modal-title').text("Upload Surat Pengantar");
+	  $('#createModalUpload .modal-title').text("Unggah Surat Pengantar");
   });
 
   $(document).on('click','.upload2',function() {
     id_table = $(this).attr('id');
+    $('.notifError').remove();
     $('#hidden_id3').val(id_table);
     $('#hidden_name2').val('suratbalasan');
     $('#action').val("upload");
     $('#createModalUpload2').modal('show');
     $('#form_result').hide();
-	  $('#createModalUpload2 .modal-title').text("Upload Surat Balasan Industri");
+	  $('#createModalUpload2 .modal-title').text("Unggah Surat Balasan Industri");
   });
 
   $('#ups').on('submit',function(event) {
@@ -389,7 +389,7 @@
           $('#form_result').html(html);
           $.each(xhr.responseJSON.errors,function(field_name,error){
             $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
-          });//end error
+            });//end error
         }
     });
   });
