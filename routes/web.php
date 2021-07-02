@@ -77,6 +77,7 @@ Route::post('profile/passchanged', 'ProfileController@passchanged')->name('pass.
 Route::resource('/report', 'ReportController');
 Route::get('report/progress/data', 'ReportController@progress');
 Route::get('report/recap/print', 'ReportController@recap_pdf')->name('report.recap');
+Route::get('unduhfile/{id}', 'ReportController@unduhFile');
 
 Route::resource('/score', 'ScoreController');
 Route::get('score/print/{id}', 'ScoreController@details_pdf');

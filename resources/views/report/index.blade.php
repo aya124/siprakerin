@@ -64,7 +64,7 @@
             <div class="form-group" align="center">
               <input type="hidden" name="action" id="action" />
               <input type="hidden" name="submission_id" id="submission" />
-              <input type="hidden" id="file_type" />
+              <input type="hidden" name="file_type" id="file_type" />
               <input type="hidden" name="hidden_id" id="hidden_id" />
               <input type="submit" name="action_button" id="action_button" class="btn btn-primary" value="Submit" />
             </div>
@@ -184,45 +184,6 @@
         event.preventDefault();
         $.ajax({
           url: `/report`,
-          method: "POST",
-          contentType: false,
-          cache: false,
-          processData: false,
-          dataType: "json",
-          data: new FormData(this),
-          success: function(data) {
-            $('#form_result').hide();
-            if (data.success) {
-              html = '<div class="alert alert-success">' + data.success + '</div>';
-              setTimeout(function() {
-                $('#createModal').modal('hide');
-              }, 1000);
-              $('#tab_data').DataTable().ajax.reload();
-              toastr.success('Data berhasil diperbarui!', 'Success', {timeOut: 5000}
-              );
-            }
-          },
-          error: function(xhr) {
-            console.log(xhr);
-            $('#form_result').show();
-            html = '<div class="alert alert-danger">';
-            $.each(xhr.responseJSON.errors, function (key, item) {
-              html+='<p>' +item+'</p>';
-            });
-              html += '</div>';
-              $('#form_result').html(html);
-              $.each(xhr.responseJSON.errors,function(field_name,error){
-              $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
-                });
-          } //end error
-        });
-      });
-
-      $('#add2').on('submit', function(event) {
-        $('.notifError').remove();
-        event.preventDefault();
-        $.ajax({
-          url: `/report2`,
           method: "POST",
           contentType: false,
           cache: false,
