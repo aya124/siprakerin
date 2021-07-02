@@ -13,12 +13,12 @@
 @endif
 
 <div class="box">
-    <div class="box-header">
-        <h3 class="box-title">Industri</h3>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body">
-      <table id="tab_data" class="table table-bordered table-striped">
+  <div class="box-header">
+    <h3 class="box-title">Industri</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <table id="tab_data" class="table table-bordered table-striped">
       <thead>
         <tr>
           <th style="width: 20%">Nama Industri</th>
@@ -30,28 +30,28 @@
           <th style="width: 40%">Aksi</th>
         </tr>
       </thead>
-      </table>
-    </div>
-    <!-- /.box-body -->
+    </table>
+  </div>
+  <!-- /.box-body -->
 </div>
 <!-- /.box -->
 <!-- Modal -->
 <div class="modal fade" id="saranModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">Tambah Saran</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-        <form method="post" id="tambahSaran" class="form-horizontal" enctype="multipart/form-data">
-        @csrf
-        <input type="hidden" name="industry_id" id="industry_id">
-      <div class="modal-body">
-      <div class="form-group ">
-        <textarea class="form-control" name="saran" id="saran" rows="3"></textarea>
+      <div class="modal-header">
+        <h4 class="modal-title">Tambah Saran</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
       </div>
+      <form method="post" id="tambahSaran" class="form-horizontal" enctype="multipart/form-data">
+      @csrf
+      <input type="hidden" name="industry_id" id="industry_id">
+      <div class="modal-body">
+        <div class="form-group ">
+          <textarea class="form-control" name="saran" id="saran" rows="3"></textarea>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -66,12 +66,12 @@
 <div class="modal fade" id="lihatSaranModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">Lihat Saran </h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
+      <div class="modal-header">
+        <h4 class="modal-title">Lihat Saran </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
       <div class="modal-body">
       </div>
       <div class="modal-footer">
@@ -103,37 +103,37 @@
 						<div class="col-md-8">
 							<input type="text" name="address" id="address" class="form-control" />
 						</div>
-                    </div>
-                    <div class="form-group">
+          </div>
+          <div class="form-group">
 						<label class="control-label col-md-4" >Kota <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="city" id="city" class="form-control" />
 						</div>
-                    </div>
-                    <div class="form-group">
+          </div>
+          <div class="form-group">
 						<label class="control-label col-md-4" >Phone <small class="text-danger">*</small> </label>
 						<div class="col-md-8">
 							<input type="text" name="phone" id="phone" class="form-control" />
 						</div>
-                    </div>
-                    <div class="form-group">
+          </div>
+          <div class="form-group">
 						<label class="control-label col-md-4" >Link <small class="text-danger">*</small></label>
 						<div class="col-md-8">
 							<input type="text" name="detail" id="detail" class="form-control" rows="3"/>
-						</div>
-                  </div>
-                    @role(['admin','kps'])
-                    <div class="form-group">
-                        <label class="control-label col-md-4" >Status </label>
-                        <div class="col-md-8">
-                        <select class="form-control" name="status" id="status">
-                            <option value="belum disetujui">Belum disetujui</option>
-                            <option value="disetujui">Disetujui</option>
-                            <option value="tidak disetujui">Tidak disetujui</option>
-                        </select>
-                        </div>
-                    </div>
-                    @endrole <br />
+					  </div>
+          </div>
+          @role(['admin','kps'])
+          <div class="form-group">
+            <label class="control-label col-md-4" >Status </label>
+            <div class="col-md-8">
+              <select class="form-control" name="status" id="status">
+                <option value="belum disetujui">Belum disetujui</option>
+                <option value="disetujui">Disetujui</option>
+                <option value="tidak disetujui">Tidak disetujui</option>
+              </select>
+            </div>
+          </div>
+          @endrole <br />
 					<div class="form-group" align="center">
 						<input type="hidden" name="action" id="action" />
 						<input type="hidden" name="hidden_id" id="hidden_id" />
@@ -193,20 +193,20 @@
 
 <div id="confirmModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 class="modal-title">Hapus Industri</h3>
-          </div>
-          <div class="modal-body">
-              <h4 align="center" style="margin:0;">Apakah anda yakin ingin menghapus data ini?</h4>
-          </div>
-          <div class="modal-footer">
-           <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          </div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title">Hapus Industri</h3>
       </div>
+    <div class="modal-body">
+      <h4 align="center" style="margin:0;">Apakah anda yakin ingin menghapus data ini?</h4>
+    </div>
+    <div class="modal-footer">
+      <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+    </div>
   </div>
+</div>
 @stop
 
 @section('css')
@@ -226,16 +226,16 @@
 			},
 			columns:[
 			{
-                data: null,
-                render:function(data){
-                    if(data.status == "disetujui"){
-                        return data.name+' &nbsp;<i class="fa fa-check-circle text-success"  data-toggle="tooltip" title="Sudah disetujui" aria-hidden="true"></i>';
-                    }else if(data.status == "tidak disetujui"){
-                        return '<p class="text-warning" data-toggle="tooltip" title="'+data.status+'">'+data.name+'&nbsp;<i class="fas fa-times text-danger"></i></p>'
-                    }else{
-                        return data.name;
-                    }
-                }
+        data: null,
+        render:function(data){
+          if(data.status == "disetujui"){
+            return data.name+' &nbsp;<i class="fa fa-check-circle text-success" data-toggle="tooltip" title="Sudah disetujui" aria-hidden="true"></i>';
+            }else if(data.status == "tidak disetujui"){
+              return '<p class="text-warning" data-toggle="tooltip" title="'+data.status+'">'+data.name+'&nbsp;<i class="fas fa-times text-danger"></i></p>'
+              }else{
+                return data.name;
+              }
+            }
 			},
 			{
 				data: 'address',
@@ -247,17 +247,17 @@
 			},
       @role(['admin', 'wali-kelas', 'kps', 'kepsek', 'wks1', 'wks4'])
 			{
-			 data: 'status',
-       name: 'status',
+			  data: 'status',
+        name: 'status',
 			},
       @endrole
       {
         data: 'action',
 				name: 'action',
 				orderable: false
-       }
-			]
-		});
+      }
+		]
+	});
       // $('#industri').dataTable();
 
     $('#btn_add').click(function(){
@@ -342,123 +342,118 @@
       $('#saranModal').modal('show');
     });
 
-      $('#tambahSaran').on('submit',function(event) {
-        $('.notifError').remove();
-        event.preventDefault();
-          $.ajax({
-              url:"{{route('suggestion.add')}}",
-              method:"POST",
-              contentType: false,
-              cache:false,
-              processData: false,
-              dataType:"json",
-              data: new FormData(this),
-              success:function(data) {
-                console.log('success');
-                  setTimeout(function(){
-                    $('#saranModal').modal('hide');
-                    },1000);
-                    $('#tab_data').DataTable().ajax.reload();
-                    toastr.success('Saran berhasil ditambahkan!', 'Success', {timeOut: 5000});
-                },
-                error:function(xhr) {
-                  console.log(xhr);
-                  $('#form_result').show();
-                  html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) {
-                    html+='<p>' +item+'</p>';
-                  });
-                  html += '</div>';
-                  $('#form_result').html(html);
-                    $.each(xhr.responseJSON.errors,function(field_name,error){
-                        $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
-                    });
-                }
+    $('#tambahSaran').on('submit',function(event) {
+      $('.notifError').remove();
+      event.preventDefault();
+      $.ajax({
+        url:"{{route('suggestion.add')}}",
+        method:"POST",
+        contentType: false,
+        cache:false,
+        processData: false,
+        dataType:"json",
+        data: new FormData(this),
+        success:function(data) {
+          console.log('success');
+          setTimeout(function(){
+            $('#saranModal').modal('hide');
+            },1000);
+            $('#tab_data').DataTable().ajax.reload();
+            toastr.success('Saran berhasil ditambahkan!', 'Success', {timeOut: 5000});
+          },
+        error:function(xhr) {
+          console.log(xhr);
+          $('#form_result').show();
+          html = '<div class="alert alert-danger">';
+          $.each(xhr.responseJSON.errors, function (key, item) {
+            html+='<p>' +item+'</p>';
+          });
+          html += '</div>';
+          $('#form_result').html(html);
+          $.each(xhr.responseJSON.errors,function(field_name,error){
+            $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
             });
+          }
         });
+      });
 
-        $(document).on('click', '.lihatsaran',function(){
-          $('#lihatSaranModal .modal-body').load($(this).attr('url'));
-          $('#lihatSaranModal').modal('show');
-        //  $.ajax({
-        //     success:function(html){
-        //     $('#industry_name').text(html.data.name);
-        //     }
-        //   })
-        });
+      $(document).on('click', '.lihatsaran',function(){
+        $('#lihatSaranModal .modal-body').load($(this).attr('url'));
+        $('#lihatSaranModal').modal('show');
+      });
 
     $('#add').on('submit',function(event) {
-        $('.notifError').remove();
-        event.preventDefault();
-        if($('#action').val() == 'tambah'){
-            $.ajax({
-              url:"{{route('industry.store')}}",
-              method:"POST",
-              contentType: false,
-              cache:false,
-              processData: false,
-              dataType:"json",
-              data: new FormData(this),
-              success:function(data) {
-                $('#form_result').hide();
-                if(data.success) {
-                  html = '<div class="alert alert-success">' + data.success + '</div>';
-                  setTimeout(function(){
-                    $('#createModal').modal('hide');
-                    },1000);
-                    $('#tab_data').DataTable().ajax.reload();
-                    toastr.success('Industri berhasil ditambahkan!', 'Success', {timeOut: 5000});
-                  }
-                },
-                error:function(xhr) {
-                  console.log(xhr);
-                  $('#form_result').show();
-                  html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) {
-                    html+='<p>' +item+'</p>';
-                  });
-                  html += '</div>';
-                  $('#form_result').html(html);
-                  $.each(xhr.responseJSON.errors,function(field_name,error){
-                    $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
-                  });
-                }//end error
-              });
-            }else{
-              $.ajax({
-                url:"{{route('ind.update')}}",
-                method:"POST",
-                contentType: false,
-                cache:false,
-                processData: false,
-                dataType:"json",
-                data: new FormData(this),
-                success:function(data){
-                    if(data.success) {
-                      html = '<div class="alert alert-success">' + data.success + '</div>';
-                      setTimeout(function(){
-                        $('#createModal').modal('hide');
-                    },1000);
-                    $('#tab_data').DataTable().ajax.reload();
-                      toastr.success('Data industri berhasil diperbarui!', 'Success', {timeOut: 5000});
-                    }
-                },
-                error:function(xhr) {
-                  console.log(xhr);
-                  $('#form_result').show();
-                  html = '<div class="alert alert-danger">';
-                  $.each(xhr.responseJSON.errors, function (key, item) {
-                    html+='<p>' +item+'</p>';
-                  });
-                  html += '</div>';
-                  $('#form_result').html(html);
-                  $.each(xhr.responseJSON.errors,function(field_name,error){
-                    $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
-                  });
-                }//end error
-              });
+      $('.notifError').remove();
+      event.preventDefault();
+      if($('#action').val() == 'tambah'){
+        $.ajax({
+          url:"{{route('industry.store')}}",
+          method:"POST",
+          contentType: false,
+          cache:false,
+          processData: false,
+          dataType:"json",
+          data: new FormData(this),
+          success:function(data) {
+            $('#form_result').hide();
+            if(data.success) {
+              html = '<div class="alert alert-success">' + data.success + '</div>';
+              setTimeout(function(){
+                $('#createModal').modal('hide');
+              },1000);
+              $('#tab_data').DataTable().ajax.reload();
+              toastr.success('Industri berhasil ditambahkan!', 'Success', {timeOut: 5000});
             }
-        });
+          },
+        error:function(xhr) {
+          console.log(xhr);
+          $('#form_result').show();
+          html = '<div class="alert alert-danger">';
+          $.each(xhr.responseJSON.errors, function (key, item) {
+            html+='<p>' +item+'</p>';
+          });
+          html += '</div>';
+          $('#form_result').html(html);
+          $.each(xhr.responseJSON.errors,function(field_name,error){
+            $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+          });
+        }//end error
+      });
+    }else{
+      $.ajax({
+        url:"{{route('ind.update')}}",
+        method:"POST",
+        contentType: false,
+        cache:false,
+        processData: false,
+        dataType:"json",
+        data: new FormData(this),
+        success:function(data){
+          if(data.success) {
+            html = '<div class="alert alert-success">' + data.success + '</div>';
+            setTimeout(function(){
+              $('#createModal').modal('hide');
+            },1000);
+            $('#tab_data').DataTable().ajax.reload();
+            toastr.success('Data industri berhasil diperbarui!', 'Success', {timeOut: 5000});
+          }
+        },
+        error:function(xhr) {
+          console.log(xhr);
+          $('#form_result').show();
+          html = '<div class="alert alert-danger">';
+          $.each(xhr.responseJSON.errors, function (key, item) {
+            html+='<p>' +item+'</p>';
+          });
+          html += '</div>';
+          $('#form_result').html(html);
+          $.each(xhr.responseJSON.errors,function(field_name,error){
+            $(document).find('[name='+field_name+']').after('<span class="notifError text-strong text-danger"> <strong>' +error+ '</strong></span>');
+          });
+        }//end error
+      });
+    }
   });
+});
 </script>
 @stop
