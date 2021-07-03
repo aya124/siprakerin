@@ -47,7 +47,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title">Upload Laporan</h3>
+          <h3 class="modal-title">Unggah Laporan</h3>
         </div>
         <div class="modal-body">
           <span id="form_result"></span>
@@ -56,9 +56,9 @@
             <div class="form-group">
               <label class="control-label col-md-4 certif">File Laporan</label>
               <div class="col-md-8">
-                <input type="file" name="report" id="report" accept=".docx,.pdf" />
+                <input type="file" name="report" id="report" accept=".pdf,.jpg,.jpeg,.png" />
               </div>
-              <small class="control-label col-md-4 file-format" class="text-danger">Format file pdf/docx</small>
+              <small class="control-label col-md-4 file-format" class="text-danger">Format file .pdf</small>
             </div>
 
             <div class="form-group" align="center">
@@ -155,26 +155,28 @@
       let sub_id;
       $(document).on('click', '.edit', function() {
         sub_id = $(this).data('id');
+        $('.notifError').remove();
         $('#action').val("edit");
         $('#action2').val("edit");
         $('#file_type').val("report");
         $('#submission').val(sub_id);
-        $('#createModal .file-format').html('Format file pdf/docx');
+        $('#createModal .file-format').html('Format file pdf');
         $('#createModal .certif').html('File Laporan');
-        $('#createModal .modal-title').html('Upload Laporan');
+        $('#createModal .modal-title').html('Unggah Laporan');
         $('#createModal').modal('show');
         $('#form_result').hide();
       });
 
       $(document).on('click', '.editCertif', function() {
         sub_id = $(this).data('id');
+        $('.notifError').remove();
         $('#action').val("edit");
         $('#action2').val("edit");
         $('#file_type').val("certif");
         $('#submission').val(sub_id);
         $('#createModal .file-format').html('Format file pdf/jpg/png');
         $('#createModal .certif').html('File Sertifikat');
-        $('#createModal .modal-title').html('Upload Sertifikat');
+        $('#createModal .modal-title').html('Unggah Sertifikat');
         $('#createModal').modal('show');
         $('#form_result').hide();
       });
