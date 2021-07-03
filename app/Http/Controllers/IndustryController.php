@@ -86,16 +86,6 @@ class IndustryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -139,17 +129,6 @@ class IndustryController extends Controller
     {
         $data = Suggestion::with('user')->where('industry_id', $id)->get();
         return view('industry.saran',compact('data'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Industry $industry)
-    {
-       //
     }
 
     /**

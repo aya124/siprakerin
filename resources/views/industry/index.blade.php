@@ -227,6 +227,7 @@
 			columns:[
 			{
         data: null,
+        name:'name',
         render:function(data){
           if(data.status == "disetujui"){
             return data.name+' &nbsp;<i class="fa fa-check-circle text-success" data-toggle="tooltip" title="Sudah disetujui" aria-hidden="true"></i>';
