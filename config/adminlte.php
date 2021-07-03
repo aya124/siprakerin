@@ -206,7 +206,7 @@ return [
         //],
 
         ['header' => 'MANAGEMENT',
-            'permission' => 'menu-role-permission',
+            'permission' => 'menu-user',
         ],
         [
             'text' => 'User',
@@ -244,18 +244,18 @@ return [
             'icon' => 'fa fa-info-circle',
             'permission' => 'menu-status',
         ],
-        [
-            'text' => 'Role',
-            'url'  => 'admin/role',
-            'icon' => 'fas fa-fw fa-user-circle',
-            'permission' => 'menu-role-permission',
-        ],
-        [
-            'text' => 'Permission',
-            'url'  => 'admin/permission',
-            'icon' => 'fas fa-fw fa-user-circle',
-            'permission' => 'menu-role-permission',
-        ],
+        // [
+        //     'text' => 'Role',
+        //     'url'  => 'admin/role',
+        //     'icon' => 'fas fa-fw fa-user-circle',
+        //     'permission' => 'menu-role-permission',
+        // ],
+        // [
+        //     'text' => 'Permission',
+        //     'url'  => 'admin/permission',
+        //     'icon' => 'fas fa-fw fa-user-circle',
+        //     'permission' => 'menu-role-permission',
+        // ],
 
         ['header' => 'account_settings',
             // 'permission' => 'rekap-nilai','buat-pengajuan',
