@@ -160,7 +160,7 @@
         $('#action2').val("edit");
         $('#file_type').val("report");
         $('#submission').val(sub_id);
-        $('#createModal .file-format').html('Format file pdf');
+        $('#createModal .file-format').html('Format file pdf maks 2MB');
         $('#createModal .certif').html('File Laporan');
         $('#createModal .modal-title').html('Unggah Laporan');
         $('#createModal').modal('show');
@@ -174,7 +174,7 @@
         $('#action2').val("edit");
         $('#file_type').val("certif");
         $('#submission').val(sub_id);
-        $('#createModal .file-format').html('Format file pdf/jpg/png');
+        $('#createModal .file-format').html('Format file pdf/jpg/png maks 2MB');
         $('#createModal .certif').html('File Sertifikat');
         $('#createModal .modal-title').html('Unggah Sertifikat');
         $('#createModal').modal('show');
