@@ -338,7 +338,7 @@ class ValidationController extends Controller
 
     if ($data) {
       // $file = asset(public_path().'/files_upload/'.$user->name.'/'.$data);
-      $file1 = base_path() . '/public/files/suratpengantar/' . $data;
+      $file1 = base_path() . '/storage/app/files/suratpengantar/' . $data;
       if (file_exists($file1)) {
         $ext = File::extension($file1);
         if ($ext == 'pdf') {
@@ -385,7 +385,7 @@ class ValidationController extends Controller
     if ($data) {
       //base_path().'/public/'.$user->name.'+'_surat_pengantar';
       // $file = base_path().'/public/files_upload/'.$user->name.'/'.$data;
-      $file2 = base_path() . '/public/files/suratbalasan/' . $data;
+      $file2 = base_path().'/storage/app/files/suratbalasan/' . $data;
       if (file_exists($file2)) {
         $ext = File::extension($file2);
         if ($ext == 'pdf') {
