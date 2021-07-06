@@ -150,7 +150,9 @@
             <div class="file-preview">
               <input type="file" name="upload" id="upload" accept=".jpeg,.jpg,.png,.pdf" class="form-control" />
             </div>
-            <small class="control-label col-md-8">Format file berupa jpg/png/pdf</small>
+            <small class="control-label col-md-8">Format file berupa jpg/png/pdf maks. 2MB
+            Pastikan file yang dipilih sudah benar</small>
+            <!-- <small class="control-label col-md-8">Pastikan file yang dipilih sudah benar</small> -->
           </div>
         </div><br />
 			        <div class="form-group" align="center">
@@ -181,7 +183,8 @@
             <div class="file-preview">
               <input type="file" name="upload" id="upload2" accept=".jpeg,.jpg,.png,.pdf" class="form-control" />
             </div>
-            <small class="control-label col-md-8">Format file berupa jpg/png/pdf</small>
+            <small class="control-label col-md-8">Format file berupa jpg/png/pdf maks. 2MB
+            Pastikan file yang dipilih sudah benar</small>
           </div>
         </div><br />
 					<div class="form-group" align="center">
