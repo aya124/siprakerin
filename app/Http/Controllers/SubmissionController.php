@@ -235,7 +235,7 @@ class SubmissionController extends Controller
         // ->select(DB::raw('st.name as status_name'))
         ->whereIn('sub.status_id',[4,6,7])
         ->get();
-        $upload_dest = storage_path().'/app/files';
+        $upload_dest = storage_path().'/app/public';
         $loc1 = $upload_dest.'/suratpengantar/';
         $loc2 = $upload_dest.'/suratbalasan/';
 
